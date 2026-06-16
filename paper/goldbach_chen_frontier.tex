@@ -1388,36 +1388,72 @@ Hence $R_2(N)/R_1(N)=\widetilde W(N)\,(1+o(1))$ for all but a density-$o(1)$ set
 and therefore $\beta_2(N)\to1$ for almost all $N$.
 \end{proposition}
 
-\paragraph{What makes the variance small: the minor arcs.}
-This concentration is exactly the output a second-moment (circle-method) argument is
-designed to give. Writing $R_2(N)=\int_0^1 S_\PP(\alpha)S_{\SSemi}(\alpha)e(-N\alpha)\,d\alpha$
-with $S_\PP(\alpha)=\sum_{p\le N}e(p\alpha)$ and
-$S_{\SSemi}(\alpha)=\sum_{q\le N,\,q\in\SSemi}e(q\alpha)$, the major arcs reproduce the
-main term $\widetilde W(N)R_1(N)$ (Lemma~\ref{lem:sing}), while the variance over the
-window is controlled by the minor-arc mass
+\paragraph{The variance bound by the circle method.}
+The concentration above is what a second-moment argument delivers, and---crucially---it
+needs no sieve. Work on the dyadic window $N\in(X,2X]$ and set, with sums over
+$n\le2X$,
 \[
-  \sum_{N\in\mathcal N_X}\big|R_2(N)-\text{main}(N)\big|^2
-  \ll \int_{\mathfrak m}|S_\PP(\alpha)|^2|S_{\SSemi}(\alpha)|^2\,d\alpha .
+  S_\PP(\alpha)=\sum_{p}e(p\alpha),\qquad
+  S_{\SSemi}(\alpha)=\sum_{q\in\SSemi}e(q\alpha),\qquad
+  R_2(N)=\int_0^1 S_\PP(\alpha)S_{\SSemi}(\alpha)e(-N\alpha)\,d\alpha .
 \]
-The new ingredient relative to Goldbach is $S_{\SSemi}$. Because $q=p's$ is bilinear,
-$S_{\SSemi}$ is a Type~II (bilinear) sum, bounded on minor arcs by Vaughan's identity
-and the linear sieve---precisely the apparatus of Chen's theorem. The large sieve then
-gives $\int_{\mathfrak m}|S_\PP|^2|S_{\SSemi}|^2\ll X^{3}\log^{-A}X$ for every $A$,
-i.e.\ an exceptional set of size $O(X\log^{-A}X)$, matching the Montgomery--Vaughan
-bound for $R_1$. We do not carry out the estimate here; the point is that the variance
-input needed to upgrade Theorem~\ref{thm:fm} to a pointwise ``almost all'' statement is
-of \emph{exactly the type already available} (bilinear/sieve minor-arc bounds), and the
-data confirm it holds with large margin (Table~\ref{tab:conc}). Thus the chain
+Split $[0,1]$ into major arcs $\mathfrak M$ (denominators $q_0\le Q=(\log X)^{C}$) and
+minor arcs $\mathfrak m$, and let $\mathrm{main}(N)=\int_{\mathfrak M}S_\PP S_{\SSemi}\,e(-N\alpha)$.
+
+\begin{proposition}[Variance, unconditional]\label{prop:var}
 \[
-  \text{Bombieri--Vinogradov (Lemma~\ref{lem:fm})}
-  \ \Longrightarrow\ \beta_2^{(1)}\to1
-  \quad\text{and}\quad
-  \text{bilinear minor-arc bound}
-  \ \Longrightarrow\ \beta_2=\beta_2^{(1)}+o(1)
+  \sum_{X<N\le2X}\big|R_2(N)-\mathrm{main}(N)\big|^2
+  \ \le\ \int_{\mathfrak m}|S_\PP|^2|S_{\SSemi}|^2\,d\alpha
+  \ \le\ \Big(\sup_{\alpha\in\mathfrak m}|S_\PP(\alpha)|\Big)^2\,\#\SSemi(2X).
 \]
-yields $\beta_2(N)\to1$ for almost all $N$, conditional only on inputs of
-Bombieri--Vinogradov / Chen strength rather than on a pointwise Hardy--Littlewood
-asymptotic.
+With $Q=(\log X)^{2A+8}$, Vaughan's minor-arc bound
+$\sup_{\mathfrak m}|S_\PP|\ll X(\log X)^{-A}$ and the trivial Parseval identity
+$\int_0^1|S_{\SSemi}|^2=\#\SSemi(2X)\ll X\log\log X/\log X$ give
+\[
+  \sum_{X<N\le2X}\big|R_2(N)-\mathrm{main}(N)\big|^2\ \ll\ X^{3}\,\log\log X\,(\log X)^{-2A-1}.
+\]
+\end{proposition}
+
+\begin{proof}
+The first inequality is Bessel: $R_2(N)-\mathrm{main}(N)=\int_{\mathfrak m}S_\PP S_{\SSemi}e(-N\alpha)$
+are Fourier coefficients of $S_\PP S_{\SSemi}\mathbf 1_{\mathfrak m}$, so their $\ell^2$
+sum is at most $\int_{\mathfrak m}|S_\PP S_{\SSemi}|^2$. The second bounds one factor by
+its sup on $\mathfrak m$ and integrates the other; $\int_0^1|S_{\SSemi}|^2=\#\SSemi(2X)$
+since cross terms cancel. The displayed bound is Vaughan's estimate
+($\sup_{\mathfrak m}|S_\PP|\ll(X Q^{-1/2}+X^{4/5})(\log X)^4$) at $Q=(\log X)^{2A+8}$.
+\end{proof}
+
+The only arithmetic input is the \emph{classical} Vinogradov--Vaughan bound for the
+\emph{prime} sum; the semiprime sum enters through its $L^2$ norm alone---no bilinear
+or sieve estimate for $S_{\SSemi}$ is required.
+
+\begin{theorem}[$\beta_2\to1$ for almost all $N$]\label{thm:aa}
+Since a typical $\mathrm{main}(N)\asymp X\log\log X/\log^2 X$, Proposition~\ref{prop:var}
+gives, for $A\ge2$, a relative variance $\ll(\log X)^{3-2A}/\log\log X\to0$; by Chebyshev
+the set of $N\in(X,2X]$ with $|R_2(N)-\mathrm{main}(N)|>\varepsilon\,\mathrm{main}(N)$ has
+size $\ll_\varepsilon X(\log X)^{3-2A}=o(X)$. On the major arcs
+$\mathrm{main}(N)=\widetilde W(N)\,[2C_2\sing(N)I_1(N)]\,(1+o(1))$ by the equidistribution
+of primes and semiprimes in progressions of modulus $\le Q$ (Siegel--Walfisz and its
+semiprime convolution) together with Lemma~\ref{lem:sing}; and $R_1(N)=2C_2\sing(N)I_1(N)(1+o(1))$
+for all but $O(X^{1-\delta})$ even $N$ by Montgomery--Vaughan~\cite{montgomeryvaughan1975}.
+Hence $R_2(N)/R_1(N)=\widetilde W(N)(1+o(1))$, and therefore $\beta_2(N)\to1$, for almost
+all $N$.
+\end{theorem}
+
+\begin{remark}
+Theorem~\ref{thm:aa} is unconditional in outline: every ingredient---Vaughan's minor-arc
+bound, Siegel--Walfisz, Montgomery--Vaughan, and the Euler-product identity
+Lemma~\ref{lem:sing}---is classical. A fully written proof must still supply the routine
+major-arc computation for the semiprime sum (semiprimes in progressions of modulus
+$\le(\log X)^{C}$, which follow from the prime distribution by Selberg--Sath\'e
+convolution) and track the dependence on $A$. The genuinely \emph{new} content is the
+singular-series cancellation of Lemma~\ref{lem:sing} and the resulting first-moment law;
+the analytic machinery that turns it into an almost-all theorem is off the shelf. This is
+in sharp contrast to the pointwise Assumption~\ref{ass:HL}, which lies beyond current
+technology. The empirical concentration (Table~\ref{tab:conc}, exceptional set
+\emph{empty} at the $5\%$ level up to $5\cdot10^{8}$) confirms the bound with a large
+margin.
+\end{remark}
 
 
 \begin{thebibliography}{99}

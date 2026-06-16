@@ -121,5 +121,5 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 - [x] **Ley derivada $\beta_2=1-c/\langle R_2/R_1\rangle\to1$** (déficit $1/\log\log N$), validada al 1%.
 - [x] Transporte óptimo (colapso de reflexión −22%), TDA de valles (Chen no rellena), dinámica de $\theta$ (94% determinista).
 - [x] **Reducción rigurosa** (apéndice §A.5): $\beta_2\to1$ reducido de "HL puntual uniforme en $r$" a **Bombieri–Vinogradov + cota de conjunto excepcional para $R_2$** (à la Montgomery–Vaughan). Respuestas $A_\ell,B_\ell$ exactas (Lema 3).
-- [x] **Cota de 2º momento**: $R_2/R_1$ concentra en $\widetilde W$ (CV $<0.7\%$, conjunto excepcional vacío) → $\beta_2\to1$ c.t.p.; reducido al arco-menor bilineal (Chen).
+- [x] **Teorema casi-todo-$N$** (apéndice §A.6): $\beta_2(N)\to1$ para casi todo $N$, **incondicional en outline** (la varianza usa solo el arco-menor de primos de Vinogradov + $\int|S_{\mathcal S_2}|^2=\#\mathcal S_2$; sin criba). Conjunto excepcional vacío al 5%.
 - [ ] Column generation del MIP infinito (pricing real).

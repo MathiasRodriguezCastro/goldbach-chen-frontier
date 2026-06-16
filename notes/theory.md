@@ -323,14 +323,18 @@ lo hace para $R_1$), MUCHO más tratable que la HL puntual.
 concentración del cociente en la predicción de canales: $b(N)=(R_2/R_1)/\widetilde W(N)$.
 Resultado: **CV$(b)\le0.7\%$, decreciente, y el conjunto excepcional al 5% es VACÍO**
 (0 de $10^6$ N) hasta $5\cdot10^8$. Por Chebyshev, densidad excepcional $\le$CV$^2/\varepsilon^2\to0$,
-así $R_2/R_1=\widetilde W(N)$ c.t.p. y **$\beta_2(N)\to1$ para casi todo $N$**. El input
-riguroso que da esta varianza es la **cota de arcos menores de la suma exponencial de
-semiprimos** $S_{\mathcal S_2}(\alpha)$ — una suma bilineal (Tipo II) acotada por
-identidad de Vaughan + criba lineal, exactamente la maquinaria de Chen. Cadena final:
-$$\text{Bombieri–Vinogradov}\Rightarrow\beta_2^{(1)}\to1,\qquad
-\text{arcos menores bilineales (Chen)}\Rightarrow\beta_2=\beta_2^{(1)}+o(1),$$
-luego $\beta_2\to1$ c.t.p., **condicional solo a inputs de fuerza BV/Chen, no a la HL
-puntual**. `run_exceptional.py`.
+así $R_2/R_1=\widetilde W(N)$ c.t.p. y **$\beta_2(N)\to1$ para casi todo $N$**. **Simplificación clave (Prop 3 del apéndice):** la varianza **NO necesita criba**.
+Por Bessel + acotar un factor por su sup:
+$$\sum_N|R_2-\text{principal}|^2\le\int_{\mathfrak m}|S_\PP|^2|S_{\mathcal S_2}|^2
+\le\Big(\sup_{\mathfrak m}|S_\PP|\Big)^2\cdot\#\mathcal S_2(2X).$$
+Solo entra el **arco-menor de PRIMOS (Vinogradov–Vaughan, incondicional)**; el semiprimo
+entra por su norma $L^2=\#\mathcal S_2$ (Parseval, trivial). Con $Q=\log^{2A+8}X$ esto da
+varianza $\ll X^3\log\log X\,\log^{-2A-1}X$, luego conjunto excepcional $\ll X\log^{3-2A}X=o(X)$.
+**Teorema 3 (apéndice): $\beta_2(N)\to1$ para casi todo $N$, INCONDICIONAL en outline** —
+todos los ingredientes (Vaughan, Siegel–Walfisz, Montgomery–Vaughan para $R_1$, y la
+identidad de Euler del Lema 1) son clásicos; falta solo la cuenta de arco-mayor rutinaria
+para semiprimos en progresiones (Selberg–Sathé). El contenido NUEVO es la cancelación de
+la serie singular (Lema 1); la maquinaria analítica es estándar. `run_exceptional.py`.
 
 ## 5quater. Exponente de balance residual $a_{\rm Res}(N)$ (tercer draft)
 
