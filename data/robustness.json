@@ -1,0 +1,63 @@
+{
+  "window": [
+    1000000,
+    1030000
+  ],
+  "n_primes": 85714,
+  "kappa": 3963,
+  "kappa_frac": 0.04623515411718039,
+  "random_phi_0.97": 0.011788577329643722,
+  "modular": {
+    "mod3": {
+      "removed_frac": 0.4995449984833283,
+      "killed_frac": 0.5921605226318245,
+      "surviving_units": [
+        2
+      ],
+      "sumset": [
+        1
+      ],
+      "obstructed": [
+        0,
+        2
+      ]
+    },
+    "mod4": {
+      "removed_frac": 0.4995333317777726,
+      "killed_frac": 0.5000333311112592,
+      "surviving_units": [
+        3
+      ],
+      "sumset": [
+        2
+      ],
+      "obstructed": [
+        0,
+        1,
+        3
+      ]
+    },
+    "mod5": {
+      "removed_frac": 0.24990083300277668,
+      "killed_frac": 0.0,
+      "surviving_units": [
+        2,
+        3,
+        4
+      ],
+      "sumset": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "obstructed": []
+    }
+  },
+  "byclass_mod3": {
+    "0": 1.0,
+    "1": 0.0,
+    "2": 0.7766
+  }
+}

@@ -433,6 +433,24 @@ grafo (#2). Termodinámica vía $Z_N(\beta)=(f_\beta*f_\beta)(N)$, $f_\beta(n)=e
   fundamental. Goldbach = "todo $N$ par tiene energía de estado fundamental 2".
 `run_energy.py`, `src/energy.py`, `figures/17_energia.png`.
 
+## 5septies. Robustez adversarial del grafo de Goldbach (ideas #2 + #13)
+
+Grafo bipartito $N\sim p$ (arista si $N-p$ primo). ¿Cuán robusto es Goldbach a quitar
+primos? En una ventana de $1.5\cdot10^4$ N cerca de $10^6$:
+- **Aleatorio:** Goldbach sobrevive hasta $\phi\approx0.97$ — se puede quitar el **95% de
+  los primos al azar** y todo N sigue representable (redundancia enorme).
+- **Dirigido:** romper un N = corte de vértices de un emparejamiento = $R_1(N)/2$ primos;
+  el más barato (N más débil) cuesta $\kappa=4.6\%$ de los primos.
+- **Modular (el caso fuerte):** quitar la clase $1$ mod $3$ (¡la **mitad** de los primos!)
+  deja solo la clase $2$, cuyo sumset es $\{2+2\}=\{1\}$: **todo $N\equiv0,2$ mod 3 pierde
+  TODAS sus representaciones** → destruye 59% de los N. El mismo 50% de primos al azar no
+  destruye nada. El adversario **fabrica una obstrucción local** (justo lo que la serie
+  singular descarta para los primos). Solo $m=3,4$ funcionan ($m\ge5$ el sumset cubre todo).
+
+**Goldbach es robusto-al-azar pero frágil-a-la-estructura**: invulnerable a perder casi
+todos los primos por azar, pero destrozado al quitar una progresión aritmética. La
+redundancia de Goldbach es aritmética, no estadística. `run_robustness.py`, fig 18.
+
 ## 6. Direcciones del draft expandido: estado
 
 | dirección (draft expandido) | estado |

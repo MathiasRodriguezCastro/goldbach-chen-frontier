@@ -1113,6 +1113,53 @@ the melting temperature of Goldbach order. Right: $\beta^\star$ versus $\log\sin
 \label{fig:energy}
 \end{figure}
 
+\subsection{Adversarial robustness of the Goldbach graph}
+\label{sec:robust-emp}
+
+View the representations as a bipartite graph: even integers $N$ on one side, primes
+$p$ on the other, with an edge $N\!\sim\!p$ when $N-p$ is prime; the degree of $N$ is
+$R_1(N)/2$. How robust is Goldbach to deletion of primes? On a window of $1.5\cdot10^{4}$
+even integers near $10^{6}$ we compare three adversaries (Fig.~\ref{fig:robust}).
+
+\emph{Random deletion} is almost powerless: deleting each prime independently with
+probability $\phi$ leaves $N$ representable unless all its $\sim R_1(N)/2$ disjoint pairs
+are hit, an event of probability $(1-(1-\phi)^2)^{R_1(N)/2}$. Goldbach survives in the
+\emph{whole} window until $\phi\approx0.97$; one may delete $95\%$ of all primes at random
+and still represent every $N$.
+
+\emph{Targeted deletion} is efficient but local: since the pairs $\{p,N-p\}$ of a fixed
+$N$ are disjoint, breaking $N$ is a vertex cover of a matching, costing exactly
+$R_1(N)/2$ primes; the cheapest target is the lowest-degree $N$, giving
+$\kappa=\min_N R_1(N)/2$. In the window this is $4.6\%$ of the primes---an order of
+magnitude less than the random threshold, but aimed at a single $N$.
+
+\emph{Modular deletion} is the striking case. Delete the primes in one reduced class
+$a\bmod m$. The survivors lie in $(\mathbb Z/m)^\times\setminus\{a\}$, and an $N$ is
+destroyed when its class is missing from the survivors' sumset. For $m=3$, deleting the
+class $1$ (i.e.\ \emph{half} of all primes) leaves only the class $2$, whose sumset is
+$\{2+2\}=\{1\}$: every $N\equiv0,2\pmod3$ loses all its representations, destroying $59\%$
+of the window (Fig.~\ref{fig:robust}, right). The same $50\%$ of primes removed at random
+destroys nothing. Thus the adversary manufactures a \emph{local obstruction}---the exact
+mechanism the singular series rules out for the primes themselves. The effect is confined
+to the smallest moduli: $m=4$ deleting class $1$ kills $N\equiv0\bmod4$ ($50\%$), while for
+$m\ge5$ the surviving classes already sum onto everything and no $N$ is fully obstructed.
+
+In short, the Goldbach graph is \emph{random-robust but structure-fragile}: invulnerable to
+losing almost all primes by chance, yet shattered by removing one arithmetic progression.
+This is a network-science counterpart of the local--global theme: Goldbach's redundancy is
+enormous, but it is arithmetic, not statistical, redundancy.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{18_robustez.png}
+\caption{Robustness of the Goldbach graph. Left: fraction of window $N$ destroyed versus
+fraction of primes deleted---random deletion (curve) only bites near $\phi=1$, whereas the
+modular attacks at $\phi=0.5$ (mod $3,4$) destroy $50$--$60\%$, and the targeted cut needs
+only $\kappa=4.6\%$. Right: under the mod-$3$ attack, $N\equiv0$ and $N\equiv2$ are
+obstructed while $N\equiv1$ is untouched.}
+\label{fig:robust}
+\end{figure}
+
 \section{Conclusion}
 
 The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.

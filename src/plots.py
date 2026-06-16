@@ -266,6 +266,27 @@ def tda(thrs, n_gold, n_chen, a1, a2, corr, name="14_valles.png"):
     return _save(fig, name)
 
 
+def robustness(phis, rand_curve, modpts, kappa_frac, byclass3, name="18_robustez.png"):
+    """A: percolación aleatoria vs ataques modulares. B: obstrucción modular mod 3."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    ax[0].plot(phis, 100 * rand_curve, "-", color="#1f4fa0", lw=2.2, label="aleatorio")
+    for (x, y, lab, col) in modpts:
+        ax[0].scatter([x], [100 * y], s=90, color=col, zorder=3, label=lab)
+    ax[0].axvline(kappa_frac, color="#16a085", ls="--", lw=1.2,
+                  label=f"dirigido ($\\kappa$={100*kappa_frac:.1f}%)")
+    ax[0].set_xlabel("fracción de primos eliminados")
+    ax[0].set_ylabel("% de $N$ con Goldbach destruido")
+    ax[0].set_title("Robusto al azar, frágil a la estructura")
+    ax[0].legend(fontsize=8, loc="upper left")
+    cls = list(byclass3.keys())
+    ax[1].bar([f"$N\\equiv{c}$" for c in cls], [100 * byclass3[c] for c in cls],
+              color=["#c0392b", "#16a085", "#c0392b"])
+    ax[1].set_ylabel("% de $N$ destruidos (mod 3, quitar clase 1)")
+    ax[1].set_title("Obstrucción modular: sobrevivientes (clase 2) solo suman a $N\\equiv1$")
+    fig.tight_layout()
+    return _save(fig, name)
+
+
 def energy(specE, specN, betas, Ubar, Cbar, bstar_mean, logS, bstar, name="17_energia.png"):
     """A: espectro n_E(N). B: U(beta) y C(beta) (transición de fusión). C: beta* vs S."""
     fig, ax = plt.subplots(1, 3, figsize=(16, 4.7))
