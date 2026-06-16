@@ -27,6 +27,9 @@
 \newtheorem{question}{Question}
 \newtheorem{remark}{Remark}
 \newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{assumption}{Assumption}
 
 \newcommand{\PP}{\mathbb P}
 \newcommand{\NN}{\mathbb N}
@@ -36,6 +39,7 @@
 \newcommand{\ones}{\mathbf 1}
 \newcommand{\OmegaF}{\Omega}
 \newcommand{\sing}{\mathfrak S}
+\newcommand{\Var}{\operatorname{Var}}
 \newcommand{\TV}{\operatorname{TV}}
 \newcommand{\argmin}{\operatorname*{arg\,min}}
 
@@ -722,11 +726,12 @@ $R_2/R_1\propto\sing(N)^{-1/2}$: where Goldbach is locally rich (large $\sing$),
 prime channel dominates, whereas where Goldbach is \emph{fragile} (small $\sing$)
 the semiprime channel is proportionally most abundant. This is the Chen rescue
 effect of Conjecture~2, now sharpened into a power law. Heuristically the exponent
-drops below $1$ because writing $q=rs$ allows the semiprime to absorb a small prime
-divisor of $N$: for the small factor $r\mid N$ the local enhancement
-$(r-1)/(r-2)$ \emph{reverses} to $(r-2)/(r-1)$, partially neutralizing the singular
-series exactly when it is large. This explains the direction $\beta_2<1$; the
-precise value is not $1/2$, as the scaling analysis below shows.
+drops below $1$ because writing $q=rs$ couples the divisors of $N$ to the factor $r$:
+when a small prime $\ell\mid N$, the channel $r=\ell$ is \emph{blocked}
+(then $p=N-\ell s\equiv0\bmod\ell$ forces $p=\ell$), removing its term from the sum
+over channels precisely when $\sing(N)$ is large (Lemma~\ref{lem:sing}). This
+explains the direction $\beta_2<1$; the precise value is not $1/2$, as the scaling
+analysis below shows.
 
 \paragraph{Scaling to $10^9$: the exponent grows like $\log\log X$.}
 Measuring $\beta_2$ \emph{locally} in a window of $2\cdot10^{6}$ even integers
@@ -760,26 +765,27 @@ The drift is not arbitrary. Writing $q=N-p=rs$ and summing over the small factor
 $r$, each channel is a Goldbach count for the linear form $(s,N-rs)$, whose
 two-form singular series factorizes as
 \begin{equation}
-  \sing_2(r,N)=2C_2\,\sing(N)\,h_r(N),\qquad
-  h_r(N)=\begin{cases}(r-1)/(r-2),&r\nmid N,\\(r-2)/(r-1),&r\mid N.\end{cases}
+  \sing_2(r,N)=
+  \begin{cases}2C_2\,\sing(N)\,\dfrac{r-1}{r-2},&r\nmid N,\\[1mm]0,&r\mid N\end{cases}
   \label{eq:S2factor}
 \end{equation}
-Since $R_1=2C_2\sing(N)I_1$ and $R_2=2C_2\sing(N)\sum_r h_r(N)I_r$, the ratio
-\emph{cancels the singular series exactly},
+(Lemma~\ref{lem:sing}; the $r\mid N$ channel is identically blocked). Since
+$R_1=2C_2\sing(N)I_1$ and $R_2=2C_2\sing(N)\sum_{r\nmid N}\frac{r-1}{r-2}I_r$, the
+ratio \emph{cancels the singular series exactly},
 \begin{equation}
-  \frac{R_2(N)}{R_1(N)}=\widetilde W(N):=\sum_{3\le r\le\sqrt N}h_r(N)\,w_r(N),
+  \frac{R_2(N)}{R_1(N)}=\widetilde W(N):=\sum_{\substack{3\le r\le\sqrt N\\r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
   \qquad w_r=\frac1r\frac{\log N}{\log(N/r)} .
   \label{eq:Wtilde}
 \end{equation}
 Hence the measured exponent is a regression slope,
 $\beta_2-1=\operatorname{Cov}(\log\widetilde W,\log\sing)/\operatorname{Var}(\log\sing)$,
-and the only coupling to $\sing(N)$ comes from the factor flips $h_r$ at the small
-prime divisors of $N$. Modelling $\mathbf 1[\ell\mid N]$ as independent with
-probability $1/\ell$, $\operatorname{Var}(\log\sing)=:B$ is a convergent constant,
-while the flips contribute
+and the only coupling to $\sing(N)$ comes from the blocked channels $r\mid N$, each
+\emph{removed} from $\widetilde W$. Modelling $\mathbf 1[\ell\mid N]$ as independent
+with probability $1/\ell$, $\operatorname{Var}(\log\sing)=:B$ is a convergent constant,
+while the removed terms contribute
 $\operatorname{Cov}(\log\widetilde W,\log\sing)=-A/\widetilde W_0$ with $A>0$
 constant and $\widetilde W_0\approx\langle R_2/R_1\rangle\sim\log\log N$ the baseline
-sum. Therefore
+sum (Theorem~\ref{thm:beta}). Therefore
 \begin{equation}
   \beta_2(N)=1-\frac{c}{\langle R_2/R_1\rangle_N}+o\!\left(\frac1{\log\log N}\right),
   \qquad c=\tfrac{A}{B}\approx1.09 ,
@@ -1066,6 +1072,175 @@ the residual autocorrelation, small and non-white.}
 The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.
 
 This is not a proof of Goldbach. It is a research program that can produce reproducible computations, new empirical regularities, and potentially publishable questions at the boundary between additive number theory, computational experimentation, and discrete optimization.
+
+\appendix
+\section{Towards a proof that \texorpdfstring{$\beta_2\to1$}{beta2 to 1}}
+\label{app:rigorous}
+
+We make the law \eqref{eq:betalaw} precise. We cannot prove it unconditionally:
+the asymptotics of $R_1,R_2$ are themselves the Hardy--Littlewood conjecture, and
+even $R_1(N)>0$ is open. We therefore isolate what is unconditional (Lemmas
+\ref{lem:sing}--\ref{lem:moments}), prove the law \emph{conditionally} on a
+quantitative Hardy--Littlewood hypothesis (Theorem~\ref{thm:beta}), and note that it
+holds unconditionally in the Cram\'er random model.
+
+\subsection{Notation and the statistic}
+Fix a window $\mathcal N_X=\{N\equiv0\,(2):X\le N<X+H\}$ with $H=H(X)\to\infty$,
+$H=o(X)$. Write $\mathbb E_X,\Var_X,\operatorname{Cov}_X$ for empirical moments over
+$\mathcal N_X$, $g_\ell=\log\frac{\ell-1}{\ell-2}$, and define the local singular
+exponent through the (least-squares) regression slope
+\begin{equation}
+  \beta_2(X)-1:=\frac{\operatorname{Cov}_X\!\big(\log(R_2/R_1),\,\log\sing\big)}
+                     {\Var_X\!\big(\log\sing\big)} .
+  \label{eq:beta-def}
+\end{equation}
+
+\subsection{Unconditional lemmas}
+
+\begin{lemma}[Singular series of a channel]\label{lem:sing}
+Let $r$ be an odd prime and $N$ even. The singular series of the pair of linear
+forms $s\mapsto(s,\,N-rs)$ is
+\[
+  \sing_2(r,N)=\prod_{\ell}\frac{1-\nu_r(\ell)/\ell}{(1-1/\ell)^2},
+  \qquad \nu_r(\ell)=\#\{s\bmod\ell:\ s(N-rs)\equiv0\},
+\]
+and equals
+\[
+  \sing_2(r,N)=
+  \begin{cases}
+   2C_2\,\sing(N)\,\dfrac{r-1}{r-2}, & r\nmid N,\\[2mm]
+   0, & r\mid N,
+  \end{cases}
+  \qquad C_2=\prod_{p>2}\Big(1-\tfrac1{(p-1)^2}\Big).
+\]
+\end{lemma}
+
+\begin{proof}
+Compute $\nu_r(\ell)$. For $\ell=2$: as $s$ and $N-rs$ are both odd exactly when
+$s$ is odd, $\nu_r(2)=1$ and the factor is $(1-\tfrac12)/(1-\tfrac12)^2=2$. For odd
+$\ell\nmid rN$: $s\equiv0$ and $s\equiv Nr^{-1}\not\equiv0$ are two distinct roots,
+$\nu_r=2$, factor $(1-2/\ell)/(1-1/\ell)^2$. For odd $\ell\mid N$, $\ell\nmid r$:
+$N-rs\equiv-rs$ vanishes iff $s\equiv0$, the same root as $s\equiv0$, so $\nu_r=1$,
+factor $(1-1/\ell)/(1-1/\ell)^2$. For $\ell=r\nmid N$: $N-rs\equiv N\not\equiv0$, so
+only $s\equiv0$, $\nu_r=1$, same factor. Taking
+$\prod_{\ell>2}(1-2/\ell)/(1-1/\ell)^2=C_2$ as the base and converting each special
+factor relative to it multiplies by $(\ell-1)/(\ell-2)$; the special primes are
+exactly those dividing $N$ (giving $\prod_{\ell\mid N}=\sing(N)$ when $r\nmid N$)
+together with $\ell=r$ (giving $(r-1)/(r-2)$). This proves the first case. If
+$r\mid N$ then $N-rs\equiv0\bmod r$ for \emph{all} $s$, so $\nu_r(r)=r$, the factor
+$1-r/r=0$ vanishes, and $\sing_2(r,N)=0$: the channel is identically blocked because
+$p=N-rs\equiv0\bmod r$ forces $p=r$.
+\end{proof}
+
+\begin{lemma}[Moments of $\log\sing$]\label{lem:moments}
+For distinct odd primes $\ell_1,\dots,\ell_k$,
+$\#\{N\in\mathcal N_X:\ell_i\mid N\ \forall i\}=|\mathcal N_X|\prod_i\ell_i^{-1}+O(2^k)$.
+Consequently the indicators $e_\ell=\mathbf 1[\ell\mid N]$ are, as $X\to\infty$,
+independent Bernoulli$(1/\ell)$ in all joint moments, and for any weights $a_\ell$ with
+$\sum a_\ell^2/\ell<\infty$,
+\[
+  \mathbb E_X\Big[\textstyle\sum_\ell a_\ell e_\ell\Big]\to\sum_\ell\frac{a_\ell}{\ell},
+  \qquad
+  \Var_X\Big[\textstyle\sum_\ell a_\ell e_\ell\Big]\to
+  \sum_\ell a_\ell^2\,\frac1\ell\Big(1-\frac1\ell\Big).
+\]
+In particular $\Var_X(\log\sing)\to B:=\sum_{\ell>2}g_\ell^2\,\ell^{-1}(1-\ell^{-1})$.
+\end{lemma}
+
+\begin{proof}
+The count is inclusion of the arithmetic progression $0\bmod\prod\ell_i$ in an
+interval of $\tfrac12|\mathcal N_X|$ even integers, giving the stated main term and
+$O(2^k)$ boundary error. Hence joint factorial moments of the $e_\ell$ converge to
+those of independent Bernoulli$(1/\ell)$, and the moment formulas follow by the
+dominated convergence afforded by $\sum a_\ell^2/\ell<\infty$ (here
+$a_\ell=g_\ell\asymp1/\ell$).
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:moments} is sharp numerically: at $X=10^{8}$, $H=2\cdot10^{6}$ one
+finds $\Var_X(\log\sing)=0.12620$ against $B=0.12620$, and
+$\mathbb E_X[\log\sing]=0.34842=\sum_\ell g_\ell/\ell$ to five places.
+\end{remark}
+
+\subsection{The conditional theorem}
+
+\begin{assumption}[Quantitative Hardy--Littlewood]\label{ass:HL}
+There is $\delta>0$ such that, uniformly for odd primes $r\le\sqrt N$ with $r\nmid N$,
+\[
+  C_r'(N):=\#\{p,s\in\PP:\,p+rs=N,\ s\ge r\}
+  =\sing_2(r,N)\,I_r(N)\big(1+O(\log^{-\delta}N)\big),
+\]
+with $I_r(N)=\int_{2}^{N/r}\frac{dt}{\log t\,\log(N-rt)}$, and the same for
+$R_1(N)=2C_2\sing(N)I_1(N)(1+O(\log^{-\delta}N))$, $I_1(N)=\int_2^{N}\frac{dt}{\log t\,\log(N-t)}$.
+\end{assumption}
+
+This is the standard prime $k$-tuple heuristic made quantitative and \emph{uniform in
+the coefficient $r$}; the uniformity is the genuine analytic difficulty (it is the
+arena of the sieve work surrounding Proposition $(1+a)$).
+
+\begin{theorem}[$\beta_2\to1$, conditional on Assumption~\ref{ass:HL}]\label{thm:beta}
+Under Assumption~\ref{ass:HL}, for $N\in\mathcal N_X$,
+\[
+  \frac{R_2(N)}{R_1(N)}=\widetilde W(N)\big(1+o(1)\big),\qquad
+  \widetilde W(N)=\sum_{\substack{3\le r\le\sqrt N\\ r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
+  \quad w_r=\frac{I_r}{I_1}=\frac1r\frac{\log N}{\log(N/r)}\big(1+o(1)\big),
+\]
+the Goldbach singular series $\sing(N)$ cancelling by Lemma~\ref{lem:sing}.
+Writing $\widetilde W_0(X)=\mathbb E_X[\widetilde W]\sim\log\log X$ and linearising
+$\log\widetilde W$ about $\widetilde W_0$,
+\[
+  \beta_2(X)-1=-\frac{c(X)}{\widetilde W_0(X)}+O\!\big(\widetilde W_0^{-2}\big),
+  \qquad
+  c(X)=\frac{A(X)}{B},\quad
+  A(X)=\sum_{r>2}\frac{r-1}{r-2}\,w_r(X)\,g_r\,\frac1r\Big(1-\frac1r\Big),
+\]
+both $A(X)$ and $B$ being absolutely convergent. Hence $c(X)\to c_0$ with
+$c_0\in[1.02,1.05]$ and
+\[
+  \boxed{\ \beta_2(X)=1-\frac{c_0+o(1)}{\langle R_2/R_1\rangle_X}\ \longrightarrow\ 1,\qquad
+  1-\beta_2(X)\asymp\frac{1}{\log\log X}.\ }
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+By Lemma~\ref{lem:sing}, $R_2=\sum_{r\nmid N}\sing_2(r,N)I_r=2C_2\sing(N)\sum_{r\nmid N}\frac{r-1}{r-2}I_r$
+and $R_1=2C_2\sing(N)I_1$, so under Assumption~\ref{ass:HL} the ratio is
+$\widetilde W(N)(1+O(\log^{-\delta}N))$ and $\sing(N)$ cancels. Only the channels
+$r\mid N$ are special, each \emph{removed} from $\widetilde W$ (not merely
+reweighted); thus $\widetilde W(N)=\widetilde W_0-\sum_{r}\frac{r-1}{r-2}w_r e_r$ up
+to the slow variation of $w_r$. Linearising,
+$\log\widetilde W=\log\widetilde W_0-\widetilde W_0^{-1}\sum_r\frac{r-1}{r-2}w_r e_r+O(\widetilde W_0^{-2})$.
+Insert into \eqref{eq:beta-def}: with $\log\sing=\sum_\ell g_\ell e_\ell$ and the
+asymptotic independence of Lemma~\ref{lem:moments}, only the diagonal $r=\ell$ terms
+survive, giving $\operatorname{Cov}_X=-\widetilde W_0^{-1}A(X)$ and
+$\Var_X=B$, whence the displayed slope. Finally $\widetilde W_0(X)=\mathbb E_X[\widetilde W]
+=\sum_{3\le r\le\sqrt X}\frac{r-1}{r-2}\frac1r\frac{\log X}{\log(X/r)}(1-1/r)
+=\log\log X+O(1)$ by Mertens, and equals $\langle R_2/R_1\rangle_X$ up to $o(1)$.
+\end{proof}
+
+\subsection{Confirmation and the unconditional model}
+Numerically (Fig.~\ref{fig:betalaw}; \texttt{run\_betalaw.py}): the prediction
+$\widetilde W(N)$ regressed against $\log\sing$ reproduces the measured $\beta_2$ with
+the correct drift ($0.554,0.583,0.602$ at $X=2\!\cdot\!10^{6},2\!\cdot\!10^{7},10^{8}$
+versus measured $0.531,0.567,0.589$), and the explicit constant
+$c(X)=A/B=1.045,1.032,1.025$ matches the measured
+$(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to within a few percent (the gap being
+the linearisation remainder and HL error, both $o(1)$). In the Cram\'er model, where
+$\mathbf1_\PP,\mathbf1_{\SSemi}$ are replaced by independent variables with the
+correct local densities and divisibility, Assumption~\ref{ass:HL} holds by
+construction and Theorem~\ref{thm:beta} is unconditional.
+
+\begin{remark}[What is missing for a full proof]
+Three gaps separate Theorem~\ref{thm:beta} from an unconditional statement: (i) the
+uniform Hardy--Littlewood Assumption~\ref{ass:HL}, in particular uniformity in the
+coefficient $r$ up to $\sqrt N$ (a Bombieri--Vinogradov-type input); (ii) a rigorous
+bound on the correlation between the HL error terms and $\log\sing$, currently
+absorbed into the $o(1)$; (iii) control of the linearisation remainder, which is
+genuinely $O(\widetilde W_0^{-2})$ by the absolute convergence of $A,B$ but requires
+the tail of $\widetilde W$. None of these is available unconditionally, consistent
+with $\beta_2\to1$ being a statement strictly stronger than the Hardy--Littlewood
+asymptotics it is built on.
+\end{remark}
 
 
 \begin{thebibliography}{99}

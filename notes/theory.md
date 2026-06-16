@@ -90,25 +90,20 @@ factor pequeño $r$:
 $$R_2(N)=\sum_{r}\#\{s:\,N-rs\ \text{primo}\}
 \approx \frac{N}{\log^2N}\sum_{3\le r\le\sqrt N}\frac{\mathfrak S_2(r,N)}{r}\,
 \frac{\log N}{\log(N/r)}.$$
-La serie singular de las dos formas $(s,\,N-rs)$ factoriza como
-$$\mathfrak S_2(r,N)=2C_2\cdot
-\begin{cases}\mathfrak S(N)\,\dfrac{r-1}{r-2}, & r\nmid N,\\[1mm]
-\mathfrak S(N)\,\dfrac{r-2}{r-1}, & r\mid N.\end{cases}$$
-La clave: cuando el factor pequeño $r$ **divide** a $N$, el realce
-$(r-1)/(r-2)$ del primo $r$ se **invierte** a $(r-2)/(r-1)<1$ — porque permitir
-que $q$ sea divisible por $r$ *neutraliza* la condición local que enriquecía a
-Goldbach. Esa supresión ocurre justo cuando $\mathfrak S(N)$ es grande, y reduce el
-exponente efectivo por debajo de 1.
+La serie singular de las dos formas $(s,\,N-rs)$ factoriza como (Lema 1 del apéndice
+riguroso del paper)
+$$\mathfrak S_2(r,N)=\begin{cases}2C_2\,\mathfrak S(N)\,\dfrac{r-1}{r-2}, & r\nmid N,\\[1mm]
+0, & r\mid N\ \text{(canal bloqueado: }p=N-rs\equiv0\bmod r\Rightarrow p=r).\end{cases}$$
+La clave: cuando el factor pequeño $r$ **divide** a $N$, el canal $r$ se **bloquea**
+(su término se quita de la suma), justo cuando $\mathfrak S(N)$ es grande. Esto reduce
+el exponente efectivo por debajo de 1.
 
-Esto explica **la dirección** ($\beta<1$) pero, cuantitativamente, el modelo con
-la corrección $r\mid N$ deja un exponente residual $\approx0.78$, no $0.5$: la
-neutralización va más allá de los términos $r\mid N$. El valor empírico
-$\beta\approx1/2$ (con deriva lenta tipo $\log\log$) es por ahora una **regularidad
-abierta** — el candidato natural a teorema/conjetura de este proyecto.
-
-> **Conjetura (media potencia singular).** Para $X\to\infty$,
-> $\displaystyle\frac{\sum_{N\le X}\log(R_2/R_1)\,\log\mathfrak S(N)}{\sum_{N\le X}\log^2\mathfrak S(N)}\to -\tfrac12$,
-> es decir $R_2/R_1\asymp\mathfrak S(N)^{-1/2}$ en media logarítmica.
+**Nota (corrección).** Una versión anterior de estas notas usaba erróneamente
+$\mathfrak S_2(r,N)\propto(r-2)/(r-1)$ para $r\mid N$ (un "flip"), y conjeturaba una
+media potencia fija $\beta_2\to1/2$. El Lema 1 corrige esto: el canal se **anula**.
+La derivación correcta y su demostración (condicional a Hardy–Littlewood) están en
+**§5ter** y en el **apéndice del paper** (Teorema 1): $\beta_2\to1$ con déficit
+$\sim1/\log\log N$. El "$1/2$" es solo el valor local cerca de $10^6$.
 
 ---
 
@@ -269,11 +264,11 @@ asintóticamente la serie singular COMPLETA, con déficit $\Theta(1/\log\log N)$
 **Paso 1 — cancelación exacta de 𝔖.** Escribiendo $q=N-p=rs$ y sumando sobre el
 factor pequeño $r$, cada canal es un conteo de Goldbach de la forma lineal
 $(s,N-rs)$ con serie singular de dos formas
-$$\mathfrak S_2(r,N)=2C_2\,\mathfrak S(N)\,h_r(N),\qquad
-  h_r(N)=\begin{cases}(r-1)/(r-2),&r\nmid N\\ (r-2)/(r-1),&r\mid N.\end{cases}$$
-Como $R_1(N)=2C_2\,\mathfrak S(N)\,I_1(N)$ (Hardy–Littlewood) y
-$R_2(N)=2C_2\,\mathfrak S(N)\sum_r h_r(N) I_r(N)$, el cociente **cancela 𝔖**:
-$$\frac{R_2(N)}{R_1(N)}=\widetilde W(N):=\sum_{3\le r\le\sqrt N} h_r(N)\,w_r(N),
+$$\mathfrak S_2(r,N)=\begin{cases}2C_2\,\mathfrak S(N)\,(r-1)/(r-2),&r\nmid N\\ 0,&r\mid N\end{cases}$$
+(el canal $r\mid N$ está **bloqueado**: $p=N-rs\equiv0\bmod r\Rightarrow p=r$). Como
+$R_1(N)=2C_2\,\mathfrak S(N)\,I_1(N)$ (Hardy–Littlewood) y
+$R_2(N)=2C_2\,\mathfrak S(N)\sum_{r\nmid N}\frac{r-1}{r-2} I_r(N)$, el cociente **cancela 𝔖**:
+$$\frac{R_2(N)}{R_1(N)}=\widetilde W(N):=\sum_{3\le r\le\sqrt N,\,r\nmid N} \frac{r-1}{r-2}\,w_r(N),
   \qquad w_r=\frac{I_r}{I_1}=\frac1r\frac{\log N}{\log(N/r)}.$$
 
 **Paso 2 — de dónde sale el exponente.** El exponente medido es la pendiente de
@@ -281,8 +276,8 @@ regresión $\beta_2-1=\mathrm{Cov}(\log\widetilde W,\log\mathfrak S)/\mathrm{Var
 Con $e_\ell=\mathbf 1[\ell\mid N]$ (independientes, $P=1/\ell$):
 $\log\mathfrak S=\sum_\ell g_\ell e_\ell$, $g_\ell=\log\frac{\ell-1}{\ell-2}$, así
 $\mathrm{Var}(\log\mathfrak S)=\sum_\ell g_\ell^2\frac1\ell(1-\frac1\ell)=:B$ **(constante**,
-dominada por $\ell=3,5$). Para $\widetilde W$, el flip $h_r$ al dividir $N$ cambia el
-término $r$ en $\delta_r=[(r-2)/(r-1)-(r-1)/(r-2)]w_r<0$; linealizando
+dominada por $\ell=3,5$). Para $\widetilde W$, bloquear el canal $r$ al dividir $N$
+**quita** el término $r$: $\delta_r=-\frac{r-1}{r-2}w_r<0$; linealizando
 $\log\widetilde W\approx\log\widetilde W_0+\widetilde W_0^{-1}\sum_r\delta_r e_r$. Por
 independencia solo sobreviven los términos $r=\ell$:
 $$\mathrm{Cov}(\log\widetilde W,\log\mathfrak S)
