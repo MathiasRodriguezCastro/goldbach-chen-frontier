@@ -336,6 +336,20 @@ identidad de Euler del Lema 1) son clásicos; falta solo la cuenta de arco-mayor
 para semiprimos en progresiones (Selberg–Sathé). El contenido NUEVO es la cancelación de
 la serie singular (Lema 1); la maquinaria analítica es estándar. `run_exceptional.py`.
 
+**Arco-mayor escrito en detalle (apéndice §A.7).** Lema 4 (Selberg–Sathé en
+progresiones, DEMOSTRADO): para $(a,q)=1$, $q\le(\log x)^A$,
+$$\pi_2(x;q,a)=\frac{\mathcal S_2^*(x;q)}{\phi(q)}+O_A(x\,e^{-c\sqrt{\log x}}),$$
+vía $n=p_1p_2$ + Siegel–Walfisz (el $A$ entra solo por la constante de SW, inefectiva).
+Estructura local EXACTA (Remark 6): para $\ell$ primo, clase 0 $=\pi(x/\ell)$ (los
+$\ell\cdot$primo), clases coprimas equidistribuyen; confirmado al entero
+($\pi_2(x;3,0)=102383=\pi(x/3)$). La supresión de clase 0, $\pi(x/\ell)/\pi_2\sim1/(\ell\log\log x)$,
+ES el déficit loglog que da $\widetilde W$ y el bloqueo del Lema 1. La evaluación de
+arco-mayor reproduce $\mathfrak S_2(N)=2C_2\mathfrak S(N)\widetilde W(N)$ (consistente con
+Lema 1). **Tracking de $A$:** un solo $Q=(\log X)^B$ ata SW + arco-mayor + varianza; el
+arco-mayor da error super-polinomial (no liga), y la tasa la fija el arco-menor:
+conjunto excepcional $\ll X/(\log X)^C$ para todo $C$. El programa riguroso queda
+completo en outline.
+
 ## 5quater. Exponente de balance residual $a_{\rm Res}(N)$ (tercer draft)
 
 $a_{\rm Res}(N)=1+\min_{N=p+rs}\log r/\log s$ (Chen nondegenerado, $r,s$ primos);

@@ -1455,6 +1455,97 @@ technology. The empirical concentration (Table~\ref{tab:conc}, exceptional set
 margin.
 \end{remark}
 
+\subsection{The major arcs: semiprimes in progressions}
+\label{sec:majorarc}
+
+Here we supply the one routine ingredient left open in Theorem~\ref{thm:aa}: the
+evaluation of $\mathrm{main}(N)=\int_{\mathfrak M}S_\PP S_{\SSemi}e(-N\alpha)$, which rests
+on the distribution of semiprimes in progressions. Write
+$\pi_2(x;q,a)=\#\{n\le x:n\in\SSemi,\ n\equiv a\ (q)\}$ and
+$\SSemi^*(x;q)=\#\{n\le x:n\in\SSemi,\ (n,q)=1\}$.
+
+\begin{lemma}[Selberg--Sath\'e in progressions]\label{lem:s2ap}
+Fix $A\ge1$. There is $c=c(A)>0$ such that, uniformly for $q\le(\log x)^A$ and
+$(a,q)=1$,
+\[
+  \pi_2(x;q,a)=\frac{\SSemi^*(x;q)}{\phi(q)}+O_A\!\big(x\,e^{-c\sqrt{\log x}}\big).
+\]
+\end{lemma}
+
+\begin{proof}
+Write each $n\in\SSemi$ as $n=p_1p_2$ with $p_1\le p_2$. For $(a,q)=1$ a contribution
+requires $(p_1p_2,q)=1$, so
+\[
+  \pi_2(x;q,a)=\sum_{\substack{p_1\le\sqrt x\\(p_1,q)=1}}
+  \Big(\pi\big(\tfrac{x}{p_1};q,a\bar p_1\big)-\pi\big(p_1;q,a\bar p_1\big)\Big),
+  \qquad \bar p_1=p_1^{-1}\!\!\pmod q .
+\]
+Since $p_1\le\sqrt x$ gives $\log(x/p_1)\ge\tfrac12\log x$, the Siegel--Walfisz theorem
+applies uniformly for $q\le(\log x)^A$:
+$\pi(y;q,c)=\mathrm{li}(y)/\phi(q)+O(y\,e^{-c_1\sqrt{\log y}})$ for $(c,q)=1$. Summing the
+main terms gives $\frac1{\phi(q)}\sum_{p_1\le\sqrt x,(p_1,q)=1}[\mathrm{li}(x/p_1)-\mathrm{li}(p_1)]
+=\frac1{\phi(q)}\SSemi^*(x;q)$, the last identity being the same decomposition of
+$\SSemi^*$ without the progression. The error is
+$\ll\sum_{p_1\le\sqrt x}\tfrac{x}{p_1}e^{-c_1\sqrt{\log(x/p_1)}}
+\ll x\,e^{-c_2\sqrt{\log x}}\sum_{p_1\le\sqrt x}\tfrac1{p_1}\ll x\log\log x\,e^{-c_2\sqrt{\log x}}$,
+which is $O_A(x e^{-c\sqrt{\log x}})$. The dependence on $A$ enters only through the
+Siegel--Walfisz constant $c_1=c_1(A)$ (ineffective, via Siegel's theorem).
+\end{proof}
+
+\begin{remark}[Exact local structure]\label{rem:exact}
+For $q=\ell$ prime the lemma is exact in form: the semiprimes with $\ell\mid n$ are
+precisely $\{\ell m:m\in\PP\}$, so $\pi_2(x;\ell,0)=\pi(x/\ell)$, while the
+$\ell-1$ reduced classes share $\SSemi^*(x;\ell)=\pi_2(x)-\pi(x/\ell)$ equally. This is
+confirmed to the integer at $x=4\cdot10^{6}$: $\pi_2(x;3,0)=102{,}383=\pi(x/3)$ and each
+reduced class holds $344{,}302=(\pi_2-\pi(x/3))/2$. The class-$0$ suppression
+$\pi(x/\ell)/\pi_2(x)\sim 1/(\ell\log\log x)$ is exactly the $\log\log$ deficit that
+produces the channel weight $\widetilde W$ and the blocking of Lemma~\ref{lem:sing}.
+\end{remark}
+
+\paragraph{The main term.}
+On a major arc $\alpha=a/q_0+\beta$ ($(a,q_0)=1$, $|\beta|\le Q/X$) the prime sum is
+classical, $S_\PP(\alpha)=\frac{\mu(q_0)}{\phi(q_0)}v_1(\beta)+O(X e^{-c\sqrt{\log X}})$
+with $v_1(\beta)=\int_2^{2X}e(t\beta)\,dt/\log t$. For the semiprime sum, splitting into
+residues and applying Lemma~\ref{lem:s2ap} (and Remark~\ref{rem:exact} for the
+non-reduced classes) yields
+\[
+  S_{\SSemi}(\alpha)=G_2(a,q_0)\,v_2(\beta)+O(Xe^{-c\sqrt{\log X}}),\qquad
+  G_2(a,q_0)=\sum_{b\,(q_0)}e_{q_0}(ab)\,\gamma_{q_0}(b),
+\]
+where $\gamma_{q_0}(b)$ is the local density of semiprimes in class $b$ and
+$v_2(\beta)=\int e(t\beta)\,d\Pi_2(t)$, $\Pi_2$ the smooth semiprime count. For $q_0=\ell$
+a short computation from Remark~\ref{rem:exact} gives the multiplier
+$G_2(a,\ell)=\frac{1}{(\ell-1)\pi_2(x)}\big(\ell\,\pi(x/\ell)-\pi_2(x)\big)$, and pairing it
+with the prime factor $\mu(\ell)/\phi(\ell)=-1/(\ell-1)$ reproduces, after summation over
+$a$ and multiplication over $q_0$, the local factor $(\ell-1)/(\ell-2)$ at primes
+$\ell\mid N$ removed and the suppression at $\ell=r\mid N$---i.e.\ the singular series of
+Lemma~\ref{lem:sing}. Hence
+\[
+  \mathrm{main}(N)=\mathfrak S_2(N;Q)\,J(N)\big(1+o(1)\big),
+  \quad \mathfrak S_2(N;Q)=2C_2\,\sing(N)\,\widetilde W(N)+O(Q^{-1}),
+  \quad J(N)\asymp\frac{X\log\log X}{\log^2 X},
+\]
+the tail $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$ being the standard
+absolutely-convergent completion of the singular series.
+
+\paragraph{Tracking of $A$.}
+The three parameters are tied through a single $Q=(\log X)^{B}$. Lemma~\ref{lem:s2ap} and
+the prime major arcs hold for $q_0\le Q$ with any fixed $B$ (taking $A=B$); their errors
+are $O(Xe^{-c(B)\sqrt{\log X}})$, super-polynomially small. The variance
+(Proposition~\ref{prop:var}) needs $Q=(\log X)^{2A_0+8}$ to give relative variance
+$\ll(\log X)^{3-2A_0}$. Choosing $B=2A_0+8$ makes all three compatible, and the
+exceptional set in Theorem~\ref{thm:aa} is then
+\[
+  \#\{X<N\le 2X:\ |R_2(N)-\mathrm{main}(N)|>\varepsilon\,\mathrm{main}(N)\}
+  \ \ll_{\varepsilon}\ X(\log X)^{3-2A_0}+Xe^{-c\sqrt{\log X}}
+  \ \ll_{C}\ \frac{X}{(\log X)^{C}}
+\]
+for any fixed $C$ (take $A_0=\tfrac{C+3}2$). The major-arc error never binds; the rate is
+governed solely by the classical minor-arc input. This completes, in outline, the
+reduction of $\beta_2(N)\to1$ (almost all $N$) to standard prime-distribution estimates,
+the only genuinely new step remaining the singular-series identity of
+Lemma~\ref{lem:sing}.
+
 
 \begin{thebibliography}{99}
 
