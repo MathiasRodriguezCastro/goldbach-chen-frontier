@@ -266,6 +266,35 @@ def tda(thrs, n_gold, n_chen, a1, a2, corr, name="14_valles.png"):
     return _save(fig, name)
 
 
+def energy(specE, specN, betas, Ubar, Cbar, bstar_mean, logS, bstar, name="17_energia.png"):
+    """A: espectro n_E(N). B: U(beta) y C(beta) (transición de fusión). C: beta* vs S."""
+    fig, ax = plt.subplots(1, 3, figsize=(16, 4.7))
+    ax[0].bar(specE, specN, color="#2e86c1", alpha=0.85)
+    ax[0].bar([2], [specN[specE == 2][0]], color="#c0392b", label="fundamental $E=2$ (Goldbach)")
+    ax[0].set_xlabel(r"energía $E=\Omega(a)+\Omega(b)$"); ax[0].set_ylabel("degeneración $n_E(N)$")
+    ax[0].set_title("Espectro de energía aritmética de $N$"); ax[0].legend(fontsize=8)
+    ax2 = ax[1].twinx()
+    ax[1].plot(betas, Ubar, "-", color="#1f4fa0", lw=2, label=r"energía media $U(\beta)$")
+    ax2.plot(betas, Cbar, "-", color="#c0392b", lw=1.8, label=r"calor específico $C(\beta)$")
+    ax[1].axvline(bstar_mean, color="0.5", ls="--", lw=1)
+    ax[1].axhline(2, color="0.7", ls=":", lw=1)
+    ax[1].set_xlabel(r"$\beta$ (inversa de temperatura)")
+    ax[1].set_ylabel(r"$U(\beta)$", color="#1f4fa0"); ax2.set_ylabel(r"$C(\beta)$", color="#c0392b")
+    ax[1].set_title(fr"Fusión del orden de Goldbach ($\beta^*\approx{bstar_mean:.2f}$)")
+    ax[1].legend(loc="upper right", fontsize=8)
+    nb = 50
+    e = np.linspace(logS.min(), logS.max(), nb + 1); idx = np.clip(np.digitize(logS, e) - 1, 0, nb - 1)
+    cen = 0.5 * (e[:-1] + e[1:])
+    mb = np.array([bstar[idx == i].mean() if np.any(idx == i) else np.nan for i in range(nb)])
+    ax[2].scatter(logS[::40], bstar[::40], s=2, c="#aab7b8", alpha=0.3, linewidths=0)
+    ax[2].plot(cen, mb, "-", color="#6c3483", lw=2.2, label="media por bin")
+    cc = np.corrcoef(logS, bstar)[0, 1]
+    ax[2].set_xlabel(r"$\log\mathfrak{S}(N)$"); ax[2].set_ylabel(r"$\beta^*(N)$")
+    ax[2].set_title(fr"Temperatura de fusión vs serie singular (corr$={cc:+.2f}$)"); ax[2].legend(fontsize=8)
+    fig.tight_layout()
+    return _save(fig, name)
+
+
 def layers(ks, shares, betas, betas_r2, name="10_capas.png"):
     """Panel A: perfil de capas rho(k). Panel B: exponente singular beta_k vs k."""
     fig, ax = plt.subplots(1, 2, figsize=(13, 5))

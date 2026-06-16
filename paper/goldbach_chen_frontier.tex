@@ -1067,6 +1067,52 @@ the residual autocorrelation, small and non-white.}
 \label{fig:dynamics}
 \end{figure}
 
+\subsection{Goldbach as arithmetic ground-state energy}
+\label{sec:energy-emp}
+
+A single reformulation subsumes the counts $R_1,R_2$, the layers $\OmegaF(q)=k$, and
+the partition-function viewpoint. Assign to each decomposition $a+b=N$ ($a,b\ge2$) the
+\emph{arithmetic energy} $H(a,b)=\OmegaF(a)+\OmegaF(b)$, and define the ground-state
+energy and level spectrum
+\[
+  E(N)=\min_{a+b=N}H(a,b),\qquad
+  n_E(N)=\#\{a+b=N:\ \OmegaF(a)+\OmegaF(b)=E\}.
+\]
+Then $E(N)=2$ \emph{iff} Goldbach holds for $N$; the ground-state degeneracy is
+$n_2(N)=R_1(N)$, and the first excited level is $n_3(N)=2R_2(N)$ (prime$+$semiprime,
+Chen). The spectrum (Fig.~\ref{fig:energy}, left) is a hump peaked at the typical energy
+$\langle H\rangle\sim2\log\log N$, with the Goldbach ground state sitting in its
+low-energy tail; the gap $\langle H\rangle-E(N)\sim2\log\log N-2$ diverges.
+
+The thermodynamics is computable for all $N$ at once, since the partition function is a
+self-convolution,
+\[
+  Z_N(\beta)=\sum_{a+b=N}e^{-\beta H(a,b)}=(f_\beta*f_\beta)(N),\qquad f_\beta(n)=e^{-\beta\OmegaF(n)},
+\]
+so one FFT per $\beta$ yields $Z_N$, the mean energy $U_N(\beta)=-\partial_\beta\log Z_N$,
+and the specific heat $C_N(\beta)=\beta^2\Var_\beta(H)$. As $\beta$ increases past a
+``melting'' point $\beta^\star(N)$, the system localises onto the Goldbach ground state:
+$U_N$ drops from $\sim2\log\log N$ to $2$ and $C_N(\beta)$ peaks at $\beta^\star$
+(Fig.~\ref{fig:energy}, centre; mean $\beta^\star\approx2.1$). Strikingly, this melting
+temperature is almost a deterministic function of the singular series:
+$\operatorname{corr}(\beta^\star,\log\sing)=-0.92$ (Fig.~\ref{fig:energy}, right). Where
+$\sing(N)$ is large the ground state is highly degenerate ($R_1\propto\sing$) and
+entropically favoured, so Goldbach order melts at a \emph{lower} $\beta$. Thus the same
+singular series that governs $R_1$, $\beta_2$ and the balance exponent also governs the
+thermodynamic stability of the Goldbach ground state---a unified statistical-mechanical
+picture in which Goldbach is the statement ``every even $N$ has ground-state energy $2$''.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{17_energia.png}
+\caption{Arithmetic ground-state energy. Left: the energy spectrum $n_E(N)$, a hump at
+$\sim2\log\log N$ with the Goldbach ground state $E=2$ (red) in its tail. Centre: mean
+energy $U(\beta)\to2$ and specific heat $C(\beta)$, whose peak $\beta^\star\approx2.1$ is
+the melting temperature of Goldbach order. Right: $\beta^\star$ versus $\log\sing(N)$
+(correlation $-0.92$).}
+\label{fig:energy}
+\end{figure}
+
 \section{Conclusion}
 
 The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.

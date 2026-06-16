@@ -48,6 +48,7 @@ proyectoGoldbach/
 │   ├── transport.py    ← defecto de reflexión / transporte óptimo (Wasserstein)
 │   ├── tda.py          ← persistencia 0-dim de valles del cometa
 │   ├── dynamics.py     ← descomposición de varianza de theta(N)
+│   ├── energy.py       ← energía de estado fundamental Ω(a)+Ω(b), termodinámica (Z, U, C, β*)
 │   ├── diagnostics.py  ← theta, C(N), fragilidad, B(q), rescate L1/L2
 │   ├── mip.py          ← MIP de selección (Gurobi): variación / rescate
 │   └── plots.py        ← figuras
@@ -63,7 +64,8 @@ proyectoGoldbach/
 │   ├── run_exceptional.py← cota de 2º momento: concentración de R2/R1 en W~ (conjunto excepcional)
 │   ├── run_transport.py← transporte óptimo / colapso de reflexión
 │   ├── run_tda.py      ← persistencia de valles (Goldbach vs Chen)
-│   └── run_dynamics.py ← dinámica estadística de θ(N)
+│   ├── run_dynamics.py ← dinámica estadística de θ(N)
+│   └── run_energy.py   ← energía de estado fundamental aritmética + termodinámica
 ├── notes/theory.md     ← hallazgos teóricos y experimentales
 ├── data/   (arrays .npz y summary.json — generados)
 └── figures/(PNG — generados)

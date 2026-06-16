@@ -416,6 +416,23 @@ Las tres vuelven a la serie singular.
   blanco (autocorr lag-1 $-0.21$ tras destendenciar): la frontera casi no tiene
   aleatoriedad irreducible — la gobierna la aritmética local de N.
 
+## 5sexies. Energía de estado fundamental aritmética (reformulación unificadora)
+
+$E(N)=\min_{a+b=N}(\Omega(a)+\Omega(b))$, Goldbach $\iff E(N)=2$. Espectro de niveles
+$n_E(N)$: **$n_2=R_1$** (degeneración del fundamental = Goldbach), **$n_3=2R_2$** (primer
+excitado = Chen). Subsume capas, función de partición (#7), semianillos (#12) y grado del
+grafo (#2). Termodinámica vía $Z_N(\beta)=(f_\beta*f_\beta)(N)$, $f_\beta(n)=e^{-\beta\Omega(n)}$
+(una FFT por $\beta$ da $Z$ para todo $N$):
+- Espectro = **joroba** en la energía típica $\sim2\log\log N$, con el fundamental $E=2$ en
+  la cola; gap típico→fundamental $\sim2\log\log N-2$ diverge.
+- Energía media $U(\beta)\to2$; calor específico $C(\beta)$ con pico en $\beta^*\approx2.1$ =
+  **"temperatura de fusión"** del orden de Goldbach.
+- **corr$(\beta^*,\log\mathfrak S)=-0.92$**: donde $\mathfrak S$ grande (más estados
+  fundamentales, $R_1\propto\mathfrak S$), el orden funde a $\beta$ menor. La MISMA serie
+  singular que gobierna $R_1,\beta_2$ y el balance gobierna la estabilidad termodinámica del
+  fundamental. Goldbach = "todo $N$ par tiene energía de estado fundamental 2".
+`run_energy.py`, `src/energy.py`, `figures/17_energia.png`.
+
 ## 6. Direcciones del draft expandido: estado
 
 | dirección (draft expandido) | estado |
