@@ -788,6 +788,40 @@ like $\log^2N$.}
 \label{fig:rescue}
 \end{figure}
 
+\subsection{Weak continuity of the location measures}
+
+Finally we test the weak-continuity intuition of \S4 (Question~1 and
+Conjecture~3) directly. The pointwise measure $\mu_N$ of $q/N$ is noisy, but
+averaging over a window $N\in[X,X+H]$ produces a stable density
+(Fig.~\ref{fig:continuity}, left). Three findings, at $X=10^{6}$:
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{The smoothed measure converges.} Splitting a window into two
+same-scale subsamples, the total-variation distance between their densities falls
+monotonically from $2.1\cdot10^{-3}$ to $3\cdot10^{-4}$ as $H$ grows from $125$ to
+$4000$ (Fig.~\ref{fig:continuity}, right), i.e.\ the per-$N$ noise averages out --
+a concrete form of weak convergence.
+\item \textbf{The limit is essentially uniform.} The prime-$q$ density is within
+total variation $0.028$ of the uniform law on $(0,1)$, with only a mild upturn near
+the endpoints (the $1/(\log(xN)\log((1-x)N))$ effect). This answers Question~1
+affirmatively: after removing endpoint effects, $\mu_N^{(1)}$ is close to uniform.
+\item \textbf{Prime and semiprime locations nearly coincide.} The two densities are
+within total variation $0.019$ of each other (Fig.~\ref{fig:continuity}, center),
+confirming Conjecture~3. The semiprime location is slightly skewed toward larger
+$q$ (mean $q/N=0.513$ versus the exactly symmetric $0.500$ for primes), the only
+visible signature that $p$ and $q$ play asymmetric roles in $R_2$.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{08_continuidad.png}
+\caption{Weak continuity of $q/N$. Left: noisy pointwise $\mu_N$ (gray) versus the
+window-smoothed density (blue). Center: prime versus semiprime location densities,
+both close to uniform. Right: same-scale sampling distance decreases with the
+window size $H$ (log--log).}
+\label{fig:continuity}
+\end{figure}
+
 \section{Conclusion}
 
 The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.

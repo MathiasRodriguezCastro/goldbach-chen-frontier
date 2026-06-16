@@ -62,6 +62,9 @@ python3 experiments/run_counts.py 2000000
 # experimentos de optimización (rescate de Chen + rama MIP)
 python3 experiments/run_mip.py
 
+# continuidad débil de las medidas de q/N
+python3 experiments/run_continuity.py
+
 # tests rápidos de cada módulo
 python3 src/sieve.py && python3 src/counts.py && python3 src/heuristics.py
 ```
@@ -80,6 +83,7 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 | `05_balance.png` | geometría de factores $B(q)$ de los semiprimos de Chen |
 | `06_rescate.png` | umbral de rescate de Chen bajo restricción de balance |
 | `07_rama_mip.png` | rama de mínima variación: suave en $s_N$, alterna de tipo |
+| `08_continuidad.png` | continuidad débil de $q/N$: $\mu_N$ se estabiliza al suavizar; primo≈semiprimo≈uniforme |
 
 ## Estado
 
@@ -87,6 +91,7 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 - [x] Serie singular: $\beta_1=1$ (control HL), $\beta_2\approx1/2$ (nuevo).
 - [x] Diagnósticos: $\theta$, $C$, fragilidad, $B(q)$, rescate.
 - [x] MIP: rama de mínima variación + umbral de rescate de Chen.
+- [x] Continuidad débil de $\mu_N^{(t)}$: se estabiliza al suavizar; $q/N$ ≈ uniforme.
 - [ ] Demostrar/refutar la media potencia singular (ver `notes/theory.md` §5).
 - [ ] Escalar a $X\gtrsim10^9$ (criba segmentada) para fijar la deriva de $\beta$.
-- [ ] Continuidad débil de $\mu_N^{(t)}$; column generation del MIP infinito.
+- [ ] Column generation del MIP infinito (pricing real).

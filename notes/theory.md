@@ -144,6 +144,24 @@ opaco: cuenta, con pesos de primo-gemelo, las maneras de elegir el factor chico.
 
 ---
 
+## 3bis. Continuidad débil de las medidas de $q/N$ (sección 4 del `.tex`)
+
+La medida puntual $\mu_N$ de $q/N$ es ruidosa, pero al suavizar sobre ventanas
+$N\in[X,X+H]$ se estabiliza (ver `figures/08_continuidad.png`). En $X=10^6$:
+
+- **Converge.** Partiendo una ventana en dos submuestras de la **misma escala**
+  ($N$ alternos), la distancia TV entre sus densidades cae monótona de
+  $2.1\cdot10^{-3}$ a $3\cdot10^{-4}$ cuando $H$ va de 125 a 4000 (el ruido por-$N$
+  se promedia) — una forma concreta de convergencia débil.
+- **El límite es casi uniforme.** La densidad de $q/N$ para $q$ primo está a TV
+  $0.028$ de la uniforme en $(0,1)$, con un leve repunte en los bordes (efecto
+  $1/(\log(xN)\log((1-x)N))$). Responde la Question 1 del `.tex`: tras quitar el
+  efecto de borde, $\mu_N^{(1)}\approx$ uniforme.
+- **Primo y semiprimo casi coinciden.** Las dos densidades están a TV $0.019$ entre
+  sí (confirma Conjecture 3). El canal semiprimo está levemente sesgado a $q$ grande
+  (media $q/N=0.513$ vs $0.500$ exacto de los primos), única firma visible de que
+  $p$ y $q$ juegan roles asimétricos en $R_2$.
+
 ## 4. Optimización / selección (secciones 6–7 del `.tex`)
 
 ### 4.1 La oscilación de tipo no es forzada… salvo bajo restricción

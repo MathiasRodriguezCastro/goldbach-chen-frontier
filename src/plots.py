@@ -136,6 +136,33 @@ def rescue_threshold(ks, fracs_by_scale, name="06_rescate.png"):
     return _save(fig, name)
 
 
+def continuity(centers, dens_p, dens_s, indiv, tv_ps, tv_stab, Hs, name="08_continuidad.png"):
+    """
+    Panel A: medidas μ_N individuales (ruidosas) vs densidad suavizada en ventana.
+    Panel B: densidad de q/N para q primo vs q semiprimo + referencia uniforme.
+    Panel C: distancia TV entre ventanas adyacentes vs tamaño de ventana H.
+    """
+    fig, ax = plt.subplots(1, 3, figsize=(16, 4.6))
+    for x, d in indiv:
+        ax[0].plot(x, d, color="0.75", lw=0.8, drawstyle="steps-mid")
+    ax[0].plot(centers, dens_p, "b-", lw=2.2, label="suavizada en ventana")
+    ax[0].plot([], [], color="0.75", lw=0.8, label=r"$\mu_N$ individual (ruidosa)")
+    ax[0].set_title(r"Continuidad tras suavizar: $q/N$, $q$ primo")
+    ax[0].set_xlabel("$q/N$"); ax[0].set_ylabel("densidad"); ax[0].legend(fontsize=8)
+
+    ax[1].plot(centers, dens_p, "b-", lw=2, label="$q$ primo")
+    ax[1].plot(centers, dens_s, "r-", lw=2, label="$q$ semiprimo")
+    ax[1].axhline(1.0, color="k", ls="--", lw=1, label="uniforme")
+    ax[1].set_title(fr"Tipos comparados (TV$={tv_ps:.3f}$)")
+    ax[1].set_xlabel("$q/N$"); ax[1].set_ylabel("densidad"); ax[1].legend(fontsize=8)
+
+    ax[2].loglog(Hs, tv_stab, "o-", color="#117a65")
+    ax[2].set_title("Estabilidad: TV entre ventanas adyacentes")
+    ax[2].set_xlabel("tamaño de ventana $H$ (nº de $N$)"); ax[2].set_ylabel("distancia TV")
+    fig.tight_layout()
+    return _save(fig, name)
+
+
 def mip_branch(Ns, ss, types, name="07_rama_mip.png"):
     fig, ax = plt.subplots(figsize=(11, 4.5))
     Ns = np.array(Ns); ss = np.array(ss); types = np.array(types)
