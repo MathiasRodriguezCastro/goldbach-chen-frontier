@@ -61,7 +61,7 @@
 \begin{abstract}
 The binary Goldbach conjecture asks whether every even integer $N>2$ can be represented as $N=p+q$ with $p,q$ prime. Chen's theorem proves the nearby statement that every sufficiently large even integer is $p+q$ where $p$ is prime and $q$ is either prime or the product of at most two primes. This note studies the \emph{Goldbach--Chen frontier}: the empirical boundary between prime--prime and prime--semiprime representations. Separating the representation counts $R_1$ (prime $q$) and $R_2$ (semiprime $q$), our central finding is about how each responds to the Hardy--Littlewood singular series $\sing(N)$. Writing $R_i\propto\sing(N)^{\beta_i}$, the prime channel has $\beta_1=1$ (Hardy--Littlewood, recovered as a control), whereas the semiprime channel has a singular exponent that is \emph{not} fixed: measured locally in sieve windows up to $X=10^{9}$ it rises from $0.55$ to $0.61$, and both a derivation and the data give
 \[
-  \beta_2(N)=1-\frac{c}{\langle R_2/R_1\rangle_N}+o(\cdot),\qquad \langle R_2/R_1\rangle\sim\log\log N,\ c\approx1.09,
+  \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o(\cdot),\qquad \langle R_2/R_1\rangle\sim\log\log N,\ c(N)=O(1),
 \]
 so that $\beta_2\to1$ with a deficit of order $1/\log\log N$: the apparent ``half power'' near $X\sim10^{6}$ is a finite-range artefact, and $R_2$ asymptotically inherits the \emph{full} Goldbach singular series. Extending to layers $\OmegaF(q)=k$, the singular exponent $\beta_k$ decreases through $1,\tfrac12,\dots$ and turns negative for $k\ge3$, so the singular series enhances low-complexity and suppresses high-complexity channels. We complement this with reproducible diagnostics (Chen surplus, fragility, factor geometry), weak-continuity tests for the location measures of $q/N$, mixed-integer formulations whose minimum-variation solutions expose a Pareto trade-off between geometric and type smoothness, a unimodal Chen-rescue threshold under a balance constraint, and a residual balance exponent $a_{\rm Res}(N)$ in the spirit of the recent $(1+a)$ interpolation, whose obstructions correlate positively with $\sing(N)$. The goal is not a proof of Goldbach, but reproducible evidence and new regularities at the boundary between additive number theory, computational experimentation, and discrete optimization.
 \end{abstract}
@@ -787,8 +787,8 @@ $\operatorname{Cov}(\log\widetilde W,\log\sing)=-A/\widetilde W_0$ with $A>0$
 constant and $\widetilde W_0\approx\langle R_2/R_1\rangle\sim\log\log N$ the baseline
 sum (Theorem~\ref{thm:beta}). Therefore
 \begin{equation}
-  \beta_2(N)=1-\frac{c}{\langle R_2/R_1\rangle_N}+o\!\left(\frac1{\log\log N}\right),
-  \qquad c=\tfrac{A}{B}\approx1.09 ,
+  \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o\!\left(\frac1{\log\log N}\right),
+  \qquad c(N)=\tfrac{A}{B}=O(1)\ (\approx1.1\text{ in range; Fig.~\ref{fig:constant}}),
   \label{eq:betalaw}
 \end{equation}
 so $\beta_2\to1$: \emph{$R_2$ asymptotically inherits the full Goldbach singular
@@ -1235,6 +1235,33 @@ Cram\'er model, where
 $\mathbf1_\PP,\mathbf1_{\SSemi}$ are replaced by independent variables with the
 correct local densities and divisibility, Assumption~\ref{ass:HL} holds by
 construction and Theorem~\ref{thm:beta} is unconditional.
+
+\paragraph{The rate constant is not cleanly determined.}
+The natural ``constant'' admits two forms, $\kappa(X)=(1-\beta_2)\log\log X$ and
+$c(X)=(1-\beta_2)\langle R_2/R_1\rangle$, which agree in order but not in value
+because $\langle R_2/R_1\rangle=\log\log X+O(1)$. Both \emph{decrease} over the
+computed range (Fig.~\ref{fig:constant}): $\kappa=1.25,1.22,1.20,1.18$ and
+$c=1.12,1.10,1.09,1.08$ at $X=2\cdot10^{6},2\cdot10^{7},10^{8},5\cdot10^{8}$.
+A linear fit in $1/\log\log X$ extrapolates to $\kappa_\infty\approx0.54$ and
+$c_\infty\approx0.73$---with a correction term of slope $\approx1.9$, larger than
+the limit itself. Two conclusions follow. First, the limiting constant is
+\emph{normalisation-dependent} ($0.54$ versus $0.73$), so no single number is
+canonical. Second, the approach is correction-dominated: the finite-range value
+$\approx1.1$ is mostly the $1/\log\log X$ term, and the true limit ($\approx0.5$--$0.7$,
+itself uncertain) lies far below it and is \emph{not reliably determinable} from data
+up to $10^{9}$. (Our two back-of-envelope analytic estimates, $1.0$ and $1.8$, bracket
+the difficulty rather than resolve it.) Only the order $1-\beta_2\asymp1/\log\log X$,
+and hence $\beta_2\to1$, is robust---which is all Theorem~\ref{thm:beta} asserts.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.66\linewidth]{16_constante.png}
+\caption{The rate constant versus $1/\log\log X$. Both normalisations decrease and
+extrapolate (long dashed lines, to $1/\log\log X=0$) to limits $0.54$ and $0.73$; the
+slope $\approx1.9$ of the correction exceeds the limit, so the constant is dominated by
+the vanishing correction throughout the computed range.}
+\label{fig:constant}
+\end{figure}
 
 \begin{remark}[What is missing for a full proof]
 Three gaps separate Theorem~\ref{thm:beta} from an unconditional statement: (i) the

@@ -312,6 +312,20 @@ de promediado: media-de-cocientes vs cociente-de-sumas). Lo robusto e incondicio
 el ORDEN: $c(X)\asymp1$, $1-\beta_2\asymp1/\log\log X$, $\beta_2\to1$. El valor preciso
 de $c$ NO afecta el teorema.
 
+**Ataque al límite exacto $c_\infty$ (resultado honesto).** Medí dos normalizaciones a
+4 escalas (hasta $5\cdot10^8$): $\kappa(X)=(1-\beta_2)\log\log X$ y
+$c(X)=(1-\beta_2)\langle R_2/R_1\rangle$. **Ambas DECRECEN** ($\kappa$: 1.25→1.18; $c$:
+1.12→1.08). El ajuste lineal en $1/\log\log X$ extrapola a $\kappa_\infty\approx0.54$,
+$c_\infty\approx0.73$ — con pendiente de corrección $\approx1.9$, **mayor que el límite**.
+Conclusiones: (1) el límite es **dependiente de la convención** (0.54 vs 0.73), no hay un
+número canónico; (2) es **corrección-dominado**: el valor finito ~1.1 es casi todo la
+corrección $1/\log\log X$, el límite real (~0.5-0.7) está lejos y **NO es determinable con
+confianza hasta $10^9$**. Mis dos estimaciones analíticas (1.0 y 1.8) acotan la dificultad,
+no la resuelven. Solo el ORDEN $1/\log\log X$ es robusto. `run_constant.py`, `figures/16_constante.png`.
+NOTA técnica resuelta de paso: con el integral arquimediano EXACTO $I_r$, $R_1=2C_2\mathfrak S I_1(0.999)$
+y $C_r'=2C_2\mathfrak S\frac{r-1}{r-2}I_r(0.996)$ (el "1.17" de antes era $N/\log^2N$ vs $I_1$); el peso
+crudo $w_r$ y el choque media-de-cocientes/cociente-de-sumas eran las fuentes de mis líos previos.
+
 ### Reducción rigurosa: de HL puntual a Bombieri–Vinogradov + conjunto excepcional
 
 El Teorema condicional del apéndice pide HL **puntual** uniforme en $r$ — tan difícil
