@@ -244,6 +244,39 @@ de sensibilidad a coeficientes*:
 
 ---
 
+## 5ter. Escalamiento de β₂ hasta 10⁹: ley loglog (pregunta central RESUELTA)
+
+Midiendo β₂ **localmente** en ventanas de $2\cdot10^6$ centradas en $X$ (criba por
+convolución de bloques, `src/segmented.py`, para llegar a $X=10^9$ sin FFT global),
+β₂ **no se estabiliza en ½**: sube monótono. Los 8 puntos ($6\cdot10^6$ a $10^9$)
+ajustan a $0.0013$ con
+$$\beta_2(X)\approx -0.094 + 0.234\,\log\log X\qquad(R^2=0.9987).$$
+- β₂ medido: 0.55 ($6\cdot10^6$) → **0.614** ($10^9$).
+- Extrapola a ≈0.79 en $4\cdot10^{18}$ (rango verificado de Goldbach); β₂=1 recién en
+  $X\sim10^{46}$.
+- **El "½" es solo el valor local cerca de $10^6$.** No hay potencia singular fija
+  para $R_2/R_1$: el exponente crece como $\log\log X$ (coef ≈0.23, cercano a ¼).
+- Validación: la convolución por bloques coincide EXACTO con la FFT global; serie
+  singular en ventana exacta (cofactor primo grande recuperado). Ver
+  `figures/09_beta_scaling.png`.
+
+## 5quater. Exponente de balance residual $a_{\rm Res}(N)$ (tercer draft)
+
+$a_{\rm Res}(N)=1+\min_{N=p+rs}\log r/\log s$ (Chen nondegenerado, $r,s$ primos);
+$r_\star(N)$ = menor multiplicador primo que sirve. Calculados exactos hasta
+$2\cdot10^6$ ($r_\star$ por cobertura FFT, $a_{\rm Res}$ por barrido small-$p$,
+validado a error 0). En $N\ge1000$:
+- **Colapso residual típico:** mediana $a_{\rm Res}$ baja con $X$ (1.115→1.099→1.088),
+  $p_{99}=1.182$, max=1.385 — muy por debajo del umbral Li–Liu 1.9.
+- **Multiplicador minimal diminuto:** $r_\star=3$ en 68% de los $N$; diccionario
+  $\{2,3,5,7\}$ cubre 99.7%, $\{2..11\}$ cubre 99.99% (responde Q6).
+- **Obstrucción local:** si $3\mid N$, el canal $r=3$ se bloquea → $r_\star$ medio 4.59
+  vs 2.94 (responde Q2).
+- **Conexión con la serie singular (Q4):** corr$(a_{\rm Res}, \log\mathfrak S)=+0.59$.
+  La misma divisibilidad de $N$ que agranda $\mathfrak S$ (realza Goldbach) bloquea los
+  canales de $r$ chico → el balance residual es **peor justo donde Goldbach es rico**.
+  Ata el tercer draft a mi tema central. Ver `figures/11_balance.png`.
+
 ## 6. Direcciones del draft expandido: estado
 
 | dirección (draft expandido) | estado |

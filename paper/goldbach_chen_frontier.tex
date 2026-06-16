@@ -713,16 +713,39 @@ drops below $1$ because writing $q=rs$ allows the semiprime to absorb a small pr
 divisor of $N$: for the small factor $r\mid N$ the local enhancement
 $(r-1)/(r-2)$ \emph{reverses} to $(r-2)/(r-1)$, partially neutralizing the singular
 series exactly when it is large. This explains the direction $\beta_2<1$; the
-precise value $1/2$ (with a slow upward drift, Table~\ref{tab:beta}) is left as the
-central open problem of the project.
+precise value is not $1/2$, as the scaling analysis below shows.
 
-\begin{conjecture}[Half-power singular law]
-As $X\to\infty$,
-\[
-  \frac{\sum_{N\le X}\log\!\big(R_2/R_1\big)\,\log\sing(N)}
-       {\sum_{N\le X}\log^2\sing(N)}\ \longrightarrow\ -\tfrac12 ,
-\]
-i.e.\ $R_2(N)/R_1(N)\asymp\sing(N)^{-1/2}$ in logarithmic mean.
+\paragraph{Scaling to $10^9$: the exponent grows like $\log\log X$.}
+Measuring $\beta_2$ \emph{locally} in a window of $2\cdot10^{6}$ even integers
+centred at $X$ (computed by a block-convolution sieve, so that $X$ can reach
+$10^{9}$ while only the window is held in memory), the exponent does \emph{not}
+settle at $1/2$: it rises monotonically (Fig.~\ref{fig:scaling}). Eight windows
+from $6\cdot10^{6}$ to $10^{9}$ are fit to within $0.0013$ by
+\begin{equation}
+  \beta_2(X)\ \approx\ -0.094+0.234\,\log\log X
+  \qquad (R^2=0.9987).
+  \label{eq:beta-loglog}
+\end{equation}
+Thus the half-power $\beta_2\approx\tfrac12$ is only the \emph{local} value near
+$X\sim10^{6}$. The fit reaches $\beta_2\approx0.61$ at $10^{9}$ (measured),
+extrapolates to $\approx0.79$ at the Goldbach-verified bound $4\cdot10^{18}$, and
+attains $\beta_2=1$ only near $X\sim10^{46}$. The regression quality stays high
+throughout ($R^2\approx0.997$, $\mathrm{CV}$ of the half-power normalization
+$\lesssim0.04$).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.82\linewidth]{09_beta_scaling.png}
+\caption{Local singular exponent $\beta_2(X)$ for windows up to $10^{9}$, with the
+$\log\log X$ fit \eqref{eq:beta-loglog} extrapolated to the Goldbach-verified bound.
+The exponent drifts steadily above $1/2$ without sign of leveling off.}
+\label{fig:scaling}
+\end{figure}
+
+\begin{conjecture}[Slow singular drift]
+The local singular exponent of $R_2$ satisfies $\beta_2(X)\to\infty$, growing like
+$c\log\log X$ for some $c\in(0,\tfrac14]$; in particular $R_2/R_1$ has no fixed
+singular-series power, and the apparent half-power is a finite-range artefact.
 \end{conjecture}
 
 \subsection{The singular exponent across arithmetic-complexity layers}
@@ -872,6 +895,52 @@ window-smoothed density (blue). Center: prime versus semiprime location densitie
 both close to uniform. Right: same-scale sampling distance decreases with the
 window size $H$ (log--log).}
 \label{fig:continuity}
+\end{figure}
+
+\subsection{The residual Goldbach--Chen balance exponent}
+\label{sec:balance-emp}
+
+Inspired by the $(1+a)$ interpolation of Li and Liu (every large even $N$ is
+$p+rq$ with $r\le q^{a-1}$, so that $(1+1)$ is Goldbach and $(1+2)$ is Chen), one
+can ask not whether a \emph{fixed} exponent works, but the smallest exponent
+\emph{needed} for each $N$. For the nondegenerate Chen layer $N=p+rs$ ($p,r,s$
+prime, $r\le s$), define the residual balance exponent and minimal multiplier
+\[
+  a_{\rm Res}(N)=1+\min_{N=p+rs}\frac{\log r}{\log s},
+  \qquad
+  r_\star(N)=\min\{r\in\PP:\exists\,p,s\in\PP,\ N=p+rs\}.
+\]
+We compute both exactly for all even $N\le2\cdot10^{6}$ ($r_\star$ by FFT channel
+coverage; $a_{\rm Res}$ by a small-$p$ scan, validated against full enumeration to
+$0$ error). Findings (Fig.~\ref{fig:balexp}, $N\ge1000$):
+
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Typical residual collapse.} The median $a_{\rm Res}$ \emph{decreases}
+with $X$ ($1.115\to1.099\to1.088$ at $X=10^5,5\cdot10^5,2\cdot10^6$), with
+$p_{99}=1.182$ and a finite-range maximum of $1.385$ -- far below the Li--Liu
+threshold $1.9$. The worst case is pinned by a few small ``hard'' $N$.
+\item \textbf{The minimal multiplier is tiny.} $r_\star=3$ for $68\%$ of $N$ and the
+dictionary $\{2,3,5,7\}$ already covers $99.7\%$; $\{2,\dots,11\}$ covers
+$99.99\%$. This settles the multiplier-dictionary question empirically.
+\item \textbf{Local obstruction.} $r_\star$ jumps when a small prime divides $N$: if
+$3\mid N$ the channel $r=3$ is blocked (then $p=N-3s\equiv0\bmod3$), and indeed the
+mean $r_\star$ is $4.59$ for $3\mid N$ versus $2.94$ otherwise.
+\item \textbf{Link to the singular series.} $a_{\rm Res}$ correlates
+\emph{positively} with $\log\sing(N)$ (correlation $+0.59$). The very divisibility
+of $N$ by small primes that enlarges $\sing(N)$ (boosting Goldbach) also blocks the
+small-$r$ Chen channels, so the residual balance is \emph{worst exactly where
+Goldbach is locally richest}. This ties the balance exponent to the singular-series
+theme of \S\ref{sec:layers-emp}.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{11_balance.png}
+\caption{Left: percentile envelope of $\lambda_{\rm Res}=a_{\rm Res}-1$ versus $N$,
+far below the Li--Liu line $0.9$. Centre: the minimal multiplier $r_\star$ ($r=3$
+dominates). Right: $\lambda_{\rm Res}$ rises with the Goldbach singular series
+$\sing(N)$ (positive correlation).}
+\label{fig:balexp}
 \end{figure}
 
 \section{Conclusion}

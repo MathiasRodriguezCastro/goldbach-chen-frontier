@@ -163,6 +163,47 @@ def continuity(centers, dens_p, dens_s, indiv, tv_ps, tv_stab, Hs, name="08_cont
     return _save(fig, name)
 
 
+def balance_exponent(N, lam, rstar, logS, name="11_balance.png"):
+    """Panel A: envolvente de percentiles de lambda_Res vs N. Panel B: histograma
+    de r_star. Panel C: lambda_Res vs serie singular (correlación positiva)."""
+    fig, ax = plt.subplots(1, 3, figsize=(16, 4.6))
+    ok = np.isfinite(lam) & (N >= 1000)
+    Nf = N[ok].astype(float); lamf = lam[ok]
+    nb = 120
+    edges = np.linspace(Nf.min(), Nf.max(), nb + 1)
+    idx = np.clip(np.digitize(Nf, edges) - 1, 0, nb - 1)
+    cen = 0.5 * (edges[:-1] + edges[1:])
+    for q, lab, c in [(50, "mediana", "#1f4fa0"), (90, "p90", "#16a085"),
+                      (99, "p99", "#e67e22"), (100, "máx", "#c0392b")]:
+        curve = np.array([np.percentile(lamf[idx == i], q) if np.any(idx == i) else np.nan
+                          for i in range(nb)])
+        ax[0].plot(cen, curve, "-", color=c, lw=1.6, label=lab)
+    ax[0].axhline(0.9, color="k", ls="--", lw=1, label="Li–Liu $\\lambda=0.9$")
+    ax[0].set_xlabel("$N$"); ax[0].set_ylabel(r"$\lambda_{\rm Res}(N)=a_{\rm Res}-1$")
+    ax[0].set_title("Envolvente del exponente de balance residual"); ax[0].legend(fontsize=8)
+
+    vals, cnts = np.unique(rstar[rstar >= 2], return_counts=True)
+    keep = vals <= 13
+    ax[1].bar([str(v) for v in vals[keep]], 100 * cnts[keep] / len(N), color="#2e86c1")
+    ax[1].set_xlabel(r"$r_\star(N)$ (multiplicador minimal)")
+    ax[1].set_ylabel("share (%)"); ax[1].set_title("Multiplicador residual minimal")
+
+    m = ok & (N >= 20000)
+    xb = logS[N[m]]; yb = lam[m]
+    nb2 = 40
+    e2 = np.linspace(xb.min(), xb.max(), nb2 + 1)
+    i2 = np.clip(np.digitize(xb, e2) - 1, 0, nb2 - 1)
+    c2 = 0.5 * (e2[:-1] + e2[1:])
+    mean_lam = np.array([yb[i2 == i].mean() if np.any(i2 == i) else np.nan for i in range(nb2)])
+    ax[2].scatter(xb[::50], yb[::50], s=2, c="#aab7b8", alpha=0.3, linewidths=0)
+    ax[2].plot(c2, mean_lam, "-", color="#c0392b", lw=2.2, label="media por bin")
+    cc = np.corrcoef(xb, yb)[0, 1]
+    ax[2].set_xlabel(r"$\log\mathfrak{S}(N)$"); ax[2].set_ylabel(r"$\lambda_{\rm Res}(N)$")
+    ax[2].set_title(fr"Balance vs serie singular (corr$={cc:+.2f}$)"); ax[2].legend(fontsize=8)
+    fig.tight_layout()
+    return _save(fig, name)
+
+
 def layers(ks, shares, betas, betas_r2, name="10_capas.png"):
     """Panel A: perfil de capas rho(k). Panel B: exponente singular beta_k vs k."""
     fig, ax = plt.subplots(1, 2, figsize=(13, 5))
@@ -181,13 +222,24 @@ def layers(ks, shares, betas, betas_r2, name="10_capas.png"):
 
 
 def beta_scaling(Xs, betas, name="09_beta_scaling.png"):
-    fig, ax = plt.subplots(figsize=(7.5, 5))
-    ax.semilogx(Xs, betas, "o-", ms=6, color="#c0392b", label=r"$\beta_{2,\rm local}(X)$")
-    ax.axhline(0.5, color="k", ls="--", lw=1, label=r"$\beta=1/2$")
+    Xs = np.asarray(Xs, float); betas = np.asarray(betas, float)
+    # ajuste loglog: beta = a + b·loglog X
+    A = np.c_[np.ones_like(Xs), np.log(np.log(Xs))]
+    c, *_ = np.linalg.lstsq(A, betas, rcond=None)
+    xx = np.logspace(np.log10(Xs.min()), np.log10(4e18), 200)
+    fit = c[0] + c[1] * np.log(np.log(xx))
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.semilogx(xx, fit, "-", color="#e67e22", lw=1.5,
+                label=fr"ajuste $\beta_2={c[0]:.2f}+{c[1]:.2f}\,\log\log X$")
+    ax.semilogx(Xs, betas, "o", ms=7, color="#c0392b", label=r"$\beta_2$ medido (ventana $2\cdot10^6$)")
+    ax.axhline(0.5, color="0.4", ls="--", lw=1, label=r"$\beta=1/2$ (valor local en $X\sim10^6$)")
+    ax.axhline(1.0, color="0.4", ls=":", lw=1, label=r"$\beta=1$ (herencia total)")
+    ax.axvline(4e18, color="0.7", ls="-.", lw=1)
+    ax.text(4e18, 0.52, "  Goldbach\n  verif.", fontsize=7, va="bottom")
     ax.set_xlabel("$X$ (centro de la ventana)")
     ax.set_ylabel(r"exponente singular local $\beta_2$")
-    ax.set_title(r"$\beta_2$ deriva por encima de $1/2$ al crecer $X$")
-    ax.legend()
+    ax.set_title(r"$\beta_2(X)$ crece como $\log\log X$ — el ``$1/2$'' es solo local")
+    ax.legend(fontsize=8, loc="upper left")
     return _save(fig, name)
 
 

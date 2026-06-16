@@ -42,12 +42,19 @@ proyectoGoldbach/
 │   ├── sieve.py        ← cribas: primos, Omega, spf, semiprimos
 │   ├── counts.py       ← R1, R2 por convolución FFT (validados vs fuerza bruta)
 │   ├── heuristics.py   ← serie singular, peso de Mertens W(N), exponente de R2
+│   ├── segmented.py    ← conteos por bloques a escala 10^9 (sin FFT global)
+│   ├── layers.py       ← capas Ω(q)=k, R_cc, formas lineales N=m1·p+q
+│   ├── balance.py      ← exponente de balance residual a_Res(N), r_star(N)
 │   ├── diagnostics.py  ← theta, C(N), fragilidad, B(q), rescate L1/L2
 │   ├── mip.py          ← MIP de selección (Gurobi): variación / rescate
 │   └── plots.py        ← figuras
 ├── experiments/
 │   ├── run_counts.py   ← driver: cribas→conteos→diagnósticos→figuras→summary.json
-│   └── run_mip.py      ← umbral de rescate + rama de mínima variación
+│   ├── run_mip.py      ← umbral de rescate + rama de mínima variación
+│   ├── run_continuity.py ← continuidad débil de q/N
+│   ├── run_scaling.py  ← β_2(X) hasta 10^9 (criba segmentada)
+│   ├── run_layers.py   ← capas Ω(q)=k y exponente β_k
+│   └── run_balance.py  ← exponente de balance residual
 ├── notes/theory.md     ← hallazgos teóricos y experimentales
 ├── data/   (arrays .npz y summary.json — generados)
 └── figures/(PNG — generados)
@@ -84,6 +91,9 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 | `06_rescate.png` | umbral de rescate de Chen bajo restricción de balance |
 | `07_rama_mip.png` | rama de mínima variación: suave en $s_N$, alterna de tipo |
 | `08_continuidad.png` | continuidad débil de $q/N$: $\mu_N$ se estabiliza al suavizar; primo≈semiprimo≈uniforme |
+| `09_beta_scaling.png` | **escalamiento a $10^9$**: $\beta_2(X)\approx-0.094+0.234\log\log X$ (el ½ es solo local) |
+| `10_capas.png` | capas $\Omega(q)=k$: perfil $\rho(k)$ y exponente singular $\beta_k$ (cambia de signo) |
+| `11_balance.png` | exponente de balance residual $a_{\rm Res}(N)$, $r_\star(N)$, correlación con $\mathfrak S(N)$ |
 
 ## Estado
 
@@ -92,6 +102,9 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 - [x] Diagnósticos: $\theta$, $C$, fragilidad, $B(q)$, rescate.
 - [x] MIP: rama de mínima variación + umbral de rescate de Chen.
 - [x] Continuidad débil de $\mu_N^{(t)}$: se estabiliza al suavizar; $q/N$ ≈ uniforme.
-- [ ] Demostrar/refutar la media potencia singular (ver `notes/theory.md` §5).
-- [ ] Escalar a $X\gtrsim10^9$ (criba segmentada) para fijar la deriva de $\beta$.
+- [x] **Escalamiento a $10^9$** (criba segmentada): $\beta_2\approx-0.094+0.234\log\log X$.
+- [x] Capas $\Omega(q)=k$: $\beta_k$ cambia de signo (realce $k\le2$, supresión $k\ge3$).
+- [x] Exponente de balance residual $a_{\rm Res}(N)$: colapso típico + obstrucción local.
+- [ ] Demostrar la ley $\beta_2\sim c\log\log X$ (constante $c\approx0.23$).
+- [ ] Direcciones pendientes del draft expandido: transporte óptimo, TDA, dinámica.
 - [ ] Column generation del MIP infinito (pricing real).
