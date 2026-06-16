@@ -725,6 +725,58 @@ As $X\to\infty$,
 i.e.\ $R_2(N)/R_1(N)\asymp\sing(N)^{-1/2}$ in logarithmic mean.
 \end{conjecture}
 
+\subsection{The singular exponent across arithmetic-complexity layers}
+\label{sec:layers-emp}
+
+The decomposition $R_1,R_2$ extends to layers $R_k(N)=\#\{p<N:\OmegaF(N-p)=k\}$,
+counting representations whose second summand has exactly $k$ prime factors
+(Goldbach is $k=1$, Chen's semiprime channel is $k=2$). Measuring the singular
+exponent $\beta_k$ of each layer -- the slope of $\log(R_k/R_1)$ against
+$\log\sing(N)$, plus one -- reveals a clean pattern (Table~\ref{tab:layers},
+Fig.~\ref{fig:layers}):
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccccccc}
+\toprule
+$k$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$\\
+\midrule
+share $\rho(k)$ & $15.5\%$ & $33.5\%$ & $28.7\%$ & $14.6\%$ & $5.5\%$ & $1.8\%$\\
+$\beta_k$ & $1.00$ & $0.50$ & $-0.30$ & $-1.38$ & $-2.73$ & $-4.04$\\
+\bottomrule
+\end{tabular}
+\caption{Layer profile and singular exponent at $X=2\cdot10^{6}$ (each regression has
+$R^2\approx0.92$). The exponent decreases monotonically and crosses zero between
+$k=2$ and $k=3$; it is \emph{not} $1/k$.}
+\label{tab:layers}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{10_capas.png}
+\caption{Left: the arithmetic-complexity profile $\rho(k)$ peaks at $k=2$. Right:
+the singular exponent $\beta_k$ decreases through $1,\tfrac12,\dots$ and becomes
+negative for $k\ge3$, diverging from the naive $1/k$ reference.}
+\label{fig:layers}
+\end{figure}
+
+\paragraph{Sign reversal of the singular response.}
+The Goldbach singular series \emph{enhances} the low-complexity channels
+($\beta_1=1$, $\beta_2\approx\tfrac12>0$) but \emph{suppresses} the high-complexity
+ones ($\beta_k<0$ for $k\ge3$): where $\sing(N)$ is large, representations with a
+many-factored $q$ become rarer. The mechanism is the same divisor effect seen for
+$R_2$, now run in reverse. When $\sing(N)$ is large, $N$ is divisible by many small
+primes; the admissible $p$ avoid those residues, which forces $q=N-p$ to also avoid
+small prime factors, so $q$ tends to have \emph{fewer} prime factors. Thus a large
+singular series biases $q$ toward low arithmetic complexity. All $\beta_k$ drift
+upward with $X$ at the same slow rate as $\beta_2$ (e.g.\ $\beta_3$ moves from
+$-0.30$ at $2\cdot10^{6}$ to $-0.20$ at $8\cdot10^{6}$), so the crossing point of
+$\beta_k=0$ moves slowly to the right. We also find that the strongest
+``rescue'' channel, $q=$ composite$\times$composite (both factors composite), is
+available for \emph{every} even $N$ in the range with on average $\sim1.8\cdot10^{4}$
+representations: the additive hierarchy is extremely redundant below the prime
+layer.
+
 \subsection{Diagnostics}
 
 The prime share has mean $\bar\theta=0.311$ and decreases slowly with $N$ (the

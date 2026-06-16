@@ -163,6 +163,34 @@ def continuity(centers, dens_p, dens_s, indiv, tv_ps, tv_stab, Hs, name="08_cont
     return _save(fig, name)
 
 
+def layers(ks, shares, betas, betas_r2, name="10_capas.png"):
+    """Panel A: perfil de capas rho(k). Panel B: exponente singular beta_k vs k."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    ax[0].bar(ks, shares, color="#2e86c1", alpha=0.85)
+    ax[0].set_xlabel(r"capa $k=\Omega(q)$"); ax[0].set_ylabel("share (%)")
+    ax[0].set_title(r"Perfil de complejidad aritmética $\rho(k)$")
+    ax[1].axhline(0, color="0.6", lw=0.8)
+    ax[1].plot(ks, betas, "o-", color="#c0392b", ms=7, label=r"$\beta_k$ medido")
+    ax[1].plot(ks, [1.0 / k for k in ks], "s--", color="0.5", ms=5, label=r"$1/k$ (referencia)")
+    ax[1].set_xlabel(r"capa $k=\Omega(q)$")
+    ax[1].set_ylabel(r"exponente singular $\beta_k$")
+    ax[1].set_title(r"$R_k\propto\mathfrak{S}(N)^{\beta_k}$: realce ($k\leq2$) vs supresión ($k\geq3$)")
+    ax[1].legend()
+    fig.tight_layout()
+    return _save(fig, name)
+
+
+def beta_scaling(Xs, betas, name="09_beta_scaling.png"):
+    fig, ax = plt.subplots(figsize=(7.5, 5))
+    ax.semilogx(Xs, betas, "o-", ms=6, color="#c0392b", label=r"$\beta_{2,\rm local}(X)$")
+    ax.axhline(0.5, color="k", ls="--", lw=1, label=r"$\beta=1/2$")
+    ax.set_xlabel("$X$ (centro de la ventana)")
+    ax.set_ylabel(r"exponente singular local $\beta_2$")
+    ax.set_title(r"$\beta_2$ deriva por encima de $1/2$ al crecer $X$")
+    ax.legend()
+    return _save(fig, name)
+
+
 def mip_branch(Ns, ss, types, name="07_rama_mip.png"):
     fig, ax = plt.subplots(figsize=(11, 4.5))
     Ns = np.array(Ns); ss = np.array(ss); types = np.array(types)

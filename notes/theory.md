@@ -112,6 +112,29 @@ abierta** — el candidato natural a teorema/conjetura de este proyecto.
 
 ---
 
+## 1ter. Capas $\Omega(q)=k$: el exponente singular cambia de signo
+
+Generalizando $R_1,R_2$ a $R_k(N)=\#\{p<N:\Omega(N-p)=k\}$ y midiendo el exponente
+singular $\beta_k$ de cada capa (mismo método model-light), aparece un patrón limpio
+(`figures/10_capas.png`), en $X=2\cdot10^6$:
+
+| $k$ | 1 | 2 | 3 | 4 | 5 | 6 |
+|-----|---|---|---|---|---|---|
+| share $\rho(k)$ | 15.5% | 33.5% | 28.7% | 14.6% | 5.5% | 1.8% |
+| $\beta_k$ | 1.00 | 0.50 | −0.30 | −1.38 | −2.73 | −4.04 |
+
+- **No es $1/k$.** $\beta_k$ decrece monótono y se vuelve **negativo** para $k\ge3$.
+- **La serie singular cambia de signo de efecto:** realza las capas bajas
+  ($k\le2$, $\beta>0$) y **suprime** las altas ($k\ge3$, $\beta<0$). Donde $\sigma(N)$
+  es grande ($N$ con muchos primos chicos), $q=N-p$ se ve forzado a evitar primos
+  pequeños $\Rightarrow$ $q$ tiene **menos** factores $\Rightarrow$ menor $\Omega$.
+  Es el mismo mecanismo de $R_2$, llevado al extremo.
+- Todos los $\beta_k$ derivan hacia arriba con $X$ (igual que $\beta_2$): el cruce
+  $\beta_k=0$ se mueve lentamente a la derecha.
+- **Rescate compuesto×compuesto** ($q=ab$, $a,b$ ambos compuestos): existe para
+  **todo** $N$ par del rango, con media $\sim1.8\cdot10^4$ representaciones. La
+  jerarquía aditiva por debajo de la capa prima es enormemente redundante.
+
 ## 2. El factor $\log\log N$ es una suma de Mertens
 
 El `.tex` escribe $R_2\sim K_2(N)\,N\log\log N/\log^2N$ con $K_2$ sin especificar.
