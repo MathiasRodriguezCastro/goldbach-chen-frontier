@@ -204,6 +204,68 @@ def balance_exponent(N, lam, rstar, logS, name="11_balance.png"):
     return _save(fig, name)
 
 
+def transport(mid, alpha, refl_p, refl_s2, defects, name="13_transporte.png"):
+    """Panel A: densidad de primos vs reflejadas (primo/semiprimo). Panel B: defectos."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    ax[0].plot(mid, alpha, "-", color="#1f4fa0", lw=2, label=r"$\alpha$ (primos $p/N$)")
+    ax[0].plot(mid, refl_p, "--", color="#16a085", lw=1.6, label=r"$T_\#\beta_1$ (primo reflejado)")
+    ax[0].plot(mid, refl_s2, "-", color="#c0392b", lw=1.8, label=r"$T_\#\beta_2$ (semiprimo reflejado)")
+    ax[0].set_xlabel("$x$"); ax[0].set_ylabel("densidad")
+    ax[0].set_title(r"Bajo reflexión $T(x)=1-x$: $\beta_2$ matchea mejor a $\alpha$")
+    ax[0].legend(fontsize=8)
+    labels = [r"$\Delta_1$", r"$\Delta_2$", r"$\Delta_{\leq2}$",
+              r"$\Delta_2$ fact.chico", r"$\Delta_2$ balanc."]
+    vals = [defects["Delta_1"], defects["Delta_2"], defects["Delta_le2"],
+            defects["Delta_2_smallfactor"], defects["Delta_2_balanced"]]
+    cols = ["#1f4fa0", "#c0392b", "#6c3483", "#e67e22", "#7f8c8d"]
+    ax[1].bar(labels, vals, color=cols)
+    ax[1].set_ylabel(r"defecto de reflexión $W_1$")
+    ax[1].set_title(r"Colapso de transporte: $\Delta_{\leq2}$ es "
+                    + f"{defects['reduction_pct']:.0f}% menor que " + r"$\Delta_1$")
+    fig.tight_layout()
+    return _save(fig, name)
+
+
+def dynamics(seg_N, seg_theta, seg_pred, lags, acf, r2_theta, r2_dtheta, name="15_dinamica.png"):
+    """Panel A: theta(N) vs predicción por 𝔖 en un segmento. Panel B: ACF del residuo."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    ax[0].plot(seg_N, seg_theta, "o-", ms=3, color="#1f4fa0", lw=0.8, label=r"$\theta(N)$ observado")
+    ax[0].plot(seg_N, seg_pred, "-", color="#e67e22", lw=1.8, label=r"predicción por $\mathfrak{S}(N)$")
+    ax[0].set_xlabel("$N$"); ax[0].set_ylabel(r"cuota prima $\theta(N)$")
+    ax[0].set_title(fr"$\theta$ casi determinista en $\mathfrak{{S}}(N)$ ($R^2={r2_theta:.2f}$, $\Delta\theta$: {r2_dtheta:.2f})")
+    ax[0].legend(fontsize=8)
+    ax[1].stem(lags, acf, basefmt=" ")
+    ax[1].axhline(0, color="k", lw=0.6)
+    ax[1].set_xlabel("lag"); ax[1].set_ylabel("autocorrelación del residuo")
+    ax[1].set_title("El residuo NO es ruido blanco (anomalía suave)")
+    fig.tight_layout()
+    return _save(fig, name)
+
+
+def tda(thrs, n_gold, n_chen, a1, a2, corr, name="14_valles.png"):
+    """Panel A: nº de valles vs prominencia (Goldbach vs Chen). Panel B: correlación
+    de anomalías a1 vs a<=2 (los valles coinciden)."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    ax[0].semilogy(thrs, n_gold, "o-", color="#1f4fa0", label="Goldbach $R_1$")
+    ax[0].semilogy(thrs, n_chen, "s-", color="#c0392b", label=r"Chen $R_{\leq2}$")
+    ax[0].set_xlabel("prominencia del valle (umbral)")
+    ax[0].set_ylabel("nº de valles con prominencia mayor")
+    ax[0].set_title("Persistencia de valles: Chen casi NO los rellena")
+    ax[0].legend()
+    m = np.isfinite(a1) & np.isfinite(a2)
+    a1m, a2m = a1[m], a2[m]
+    idx = np.linspace(0, len(a1m) - 1, 30000).astype(int)
+    ax[1].scatter(a1m[idx], a2m[idx], s=2, c="#7f8c8d", alpha=0.25, linewidths=0)
+    lim = [min(a1m.min(), a2m.min()), max(a1m.max(), a2m.max())]
+    ax[1].plot(lim, lim, "k--", lw=1, label="diagonal")
+    ax[1].set_xlabel("anomalía de Goldbach $R_1/\\mathfrak{S}$ (norm.)")
+    ax[1].set_ylabel(r"anomalía de Chen $R_{\leq2}/E_{\leq2}$ (norm.)")
+    ax[1].set_title(fr"Las anomalías COINCIDEN (corr$={corr:+.2f}$)")
+    ax[1].legend()
+    fig.tight_layout()
+    return _save(fig, name)
+
+
 def layers(ks, shares, betas, betas_r2, name="10_capas.png"):
     """Panel A: perfil de capas rho(k). Panel B: exponente singular beta_k vs k."""
     fig, ax = plt.subplots(1, 2, figsize=(13, 5))

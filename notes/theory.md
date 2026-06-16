@@ -322,6 +322,29 @@ validado a error 0). En $N\ge1000$:
   canales de $r$ chico → el balance residual es **peor justo donde Goldbach es rico**.
   Ata el tercer draft a mi tema central. Ver `figures/11_balance.png`.
 
+## 5quinquies. Tres sondas más (transporte, topología, dinámica)
+
+Las tres vuelven a la serie singular.
+
+- **Transporte óptimo (fig 13).** Bajo la reflexión $T(x)=1-x$: defectos $W_1$
+  $\Delta_1=0.040$ (primo vs primo reflejado), $\Delta_2=0.032$ (primo vs semiprimo
+  reflejado); la mezcla óptima de Chen da $\Delta_{\le2}=0.032$ en $\lambda^\star=0$.
+  La nube semiprima reflejada matchea a los primos MEJOR que la prima reflejada:
+  "colapso de transporte" del 22% (estable en X), dominado por semiprimos de factor
+  chico. Responde la Transport-collapse del draft: SÍ.
+- **Topología de valles (fig 14).** Normalizando cada canal por su factor singular
+  ($R_1/\mathfrak S$, $R_{\le2}/(\mathfrak S+\mathfrak S^{1/2}W)$) y midiendo la
+  persistencia 0-dim sublevel: los valles de Goldbach y Chen COINCIDEN (corr de
+  anomalías $+0.64$; en los 200 N más frágiles la anomalía de Chen, 0.29, es tan
+  honda como la de Goldbach, 0.30). **Chen NO rellena los valles** (solo ablanda el
+  30% más hondo). El rescate es de magnitud, no de estructura: ambos canales
+  comparten la restricción "$p$ primo".
+- **Dinámica estadística (fig 15).** $\theta(N)$ está 94% explicado por $\mathfrak S(N)$
+  (N mod 30 no agrega nada); $\Delta\theta_N$ está 98% explicado por el salto
+  $\mathfrak S(N)\to\mathfrak S(N+2)$. El residuo (25% de la dispersión) NO es ruido
+  blanco (autocorr lag-1 $-0.21$ tras destendenciar): la frontera casi no tiene
+  aleatoriedad irreducible — la gobierna la aritmética local de N.
+
 ## 6. Direcciones del draft expandido: estado
 
 | dirección (draft expandido) | estado |
@@ -332,9 +355,9 @@ validado a error 0). En $N\ge1000$:
 | Geometría de factores $B(q)$ | **hecho** (§3, fig 05) |
 | MIP multiobjetivo / mínima oscilación | **hecho** (§4, fig 06–07) |
 | Formas lineales $N=m_1p+m_2q$ | **hecho** (§5bis) |
-| Transporte óptimo (defecto de reflexión $\Delta_k$) | pendiente |
-| Persistencia topológica de valles (TDA) | pendiente |
-| Dinámica estadística de $X_N$ | pendiente |
+| Transporte óptimo (defecto de reflexión $\Delta_k$) | **hecho** (§5quinquies, fig 13) |
+| Persistencia topológica de valles (TDA) | **hecho** (§5quinquies, fig 14) |
+| Dinámica estadística de $X_N$ | **hecho** (§5quinquies, fig 15) |
 
 ## 7. Preguntas abiertas / próximos pasos
 

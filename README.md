@@ -45,6 +45,9 @@ proyectoGoldbach/
 │   ├── segmented.py    ← conteos por bloques a escala 10^9 (sin FFT global)
 │   ├── layers.py       ← capas Ω(q)=k, R_cc, formas lineales N=m1·p+q
 │   ├── balance.py      ← exponente de balance residual a_Res(N), r_star(N)
+│   ├── transport.py    ← defecto de reflexión / transporte óptimo (Wasserstein)
+│   ├── tda.py          ← persistencia 0-dim de valles del cometa
+│   ├── dynamics.py     ← descomposición de varianza de theta(N)
 │   ├── diagnostics.py  ← theta, C(N), fragilidad, B(q), rescate L1/L2
 │   ├── mip.py          ← MIP de selección (Gurobi): variación / rescate
 │   └── plots.py        ← figuras
@@ -54,7 +57,11 @@ proyectoGoldbach/
 │   ├── run_continuity.py ← continuidad débil de q/N
 │   ├── run_scaling.py  ← β_2(X) hasta 10^9 (criba segmentada)
 │   ├── run_layers.py   ← capas Ω(q)=k y exponente β_k
-│   └── run_balance.py  ← exponente de balance residual
+│   ├── run_balance.py  ← exponente de balance residual
+│   ├── run_betalaw.py  ← validación de la ley β_2=1-c/⟨R2/R1⟩
+│   ├── run_transport.py← transporte óptimo / colapso de reflexión
+│   ├── run_tda.py      ← persistencia de valles (Goldbach vs Chen)
+│   └── run_dynamics.py ← dinámica estadística de θ(N)
 ├── notes/theory.md     ← hallazgos teóricos y experimentales
 ├── data/   (arrays .npz y summary.json — generados)
 └── figures/(PNG — generados)
@@ -94,6 +101,10 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 | `09_beta_scaling.png` | **escalamiento a $10^9$**: $\beta_2(X)\approx-0.094+0.234\log\log X$ (el ½ es solo local) |
 | `10_capas.png` | capas $\Omega(q)=k$: perfil $\rho(k)$ y exponente singular $\beta_k$ (cambia de signo) |
 | `11_balance.png` | exponente de balance residual $a_{\rm Res}(N)$, $r_\star(N)$, correlación con $\mathfrak S(N)$ |
+| `12_betalaw.png` | ley derivada $\beta_2=1-c/\langle R_2/R_1\rangle\to1$ (déficit $1/\log\log N$) |
+| `13_transporte.png` | colapso de transporte: semiprimos reflejados matchean mejor a los primos (−22%) |
+| `14_valles.png` | persistencia de valles: Chen NO rellena los valles de Goldbach (anomalías corr +0.64) |
+| `15_dinamica.png` | $\theta(N)$ 94% determinista en $\mathfrak S(N)$; residuo no-blanco |
 
 ## Estado
 
@@ -105,6 +116,7 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 - [x] **Escalamiento a $10^9$** (criba segmentada): $\beta_2\approx-0.094+0.234\log\log X$.
 - [x] Capas $\Omega(q)=k$: $\beta_k$ cambia de signo (realce $k\le2$, supresión $k\ge3$).
 - [x] Exponente de balance residual $a_{\rm Res}(N)$: colapso típico + obstrucción local.
-- [ ] Demostrar la ley $\beta_2\sim c\log\log X$ (constante $c\approx0.23$).
-- [ ] Direcciones pendientes del draft expandido: transporte óptimo, TDA, dinámica.
+- [x] **Ley derivada $\beta_2=1-c/\langle R_2/R_1\rangle\to1$** (déficit $1/\log\log N$), validada al 1%.
+- [x] Transporte óptimo (colapso de reflexión −22%), TDA de valles (Chen no rellena), dinámica de $\theta$ (94% determinista).
+- [ ] Demostración rigurosa (no heurística) de la ley $\beta_2\to1$ y del valor de $c$.
 - [ ] Column generation del MIP infinito (pricing real).

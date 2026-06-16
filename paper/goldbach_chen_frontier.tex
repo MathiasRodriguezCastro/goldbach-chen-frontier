@@ -1002,6 +1002,65 @@ $\sing(N)$ (positive correlation).}
 \label{fig:balexp}
 \end{figure}
 
+\subsection{Three further probes: transport, topology, dynamics}
+\label{sec:further-emp}
+
+We close with three geometric and statistical probes of the frontier; each, perhaps
+surprisingly, returns to the singular series.
+
+\paragraph{Optimal transport (reflection defect).}
+Under the reflection $T(x)=1-x$ (which sends $p/N$ to $q/N$), compare the prime
+location law $\alpha$ (density of $p/N$) with the reflected layer laws
+$T_\#\beta_k$. The reflection defects in $W_1$ are
+$\Delta_1=W_1(\alpha,T_\#\beta_1)=0.040$ and $\Delta_2=W_1(\alpha,T_\#\beta_2)=0.032$,
+and the optimal Chen mixture attains $\Delta_{\le2}=0.032$ at $\lambda^\star=0$: the
+reflected \emph{semiprime} cloud matches the primes \emph{better} than the reflected
+primes do, a $22\%$ ``transport collapse'' (stable in $X$), driven by unbalanced
+semiprimes with a small factor (Fig.~\ref{fig:transport}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{13_transporte.png}
+\caption{Reflection transport. Left: prime law $\alpha$ and the reflected prime and
+semiprime laws. Right: admitting semiprimes lowers the reflection defect by $22\%$.}
+\label{fig:transport}
+\end{figure}
+
+\paragraph{Topology of valleys.}
+Normalising each count by its own singular factor ($R_1/\sing$, $R_{\le2}/(\sing+\sing^{1/2}W)$)
+and computing the $0$-dimensional sublevel persistence of the detrended sequences,
+the valleys of the Goldbach and Chen comets largely \emph{coincide}: the anomalies
+correlate at $+0.64$, and at the $200$ most fragile $N$ the Chen anomaly ($0.29$) is
+as deep as the Goldbach one ($0.30$). Chen does \emph{not} topologically fill the
+Goldbach valleys (only the deepest $30\%$ are softened, Fig.~\ref{fig:tda}); the
+rescue is one of magnitude, not of valley structure, because both channels share the
+constraint that $p$ be prime.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{14_valles.png}
+\caption{Valley persistence. Left: Chen has nearly as many valleys as Goldbach
+(slightly fewer deep ones). Right: the normalised anomalies coincide ($+0.64$).}
+\label{fig:tda}
+\end{figure}
+
+\paragraph{Statistical dynamics of the frontier.}
+The prime share is almost a deterministic function of the singular series:
+$\theta(N)$ is $94\%$ explained by $\sing(N)$ alone (adding $N\bmod30$ contributes
+nothing further), and the increment $\Delta\theta_N$ is $98\%$ explained by the jump
+$\sing(N)\to\sing(N+2)$. The residual is small ($25\%$ of the spread of $\theta$) and
+is \emph{not} white noise (short-range lag-$1$ autocorrelation $-0.21$ after
+detrending): the Goldbach--Chen frontier carries little irreducible randomness, being
+governed by the local arithmetic of $N$ (Fig.~\ref{fig:dynamics}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{15_dinamica.png}
+\caption{Dynamics. Left: $\theta(N)$ tracks its singular-series prediction. Right:
+the residual autocorrelation, small and non-white.}
+\label{fig:dynamics}
+\end{figure}
+
 \section{Conclusion}
 
 The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.
