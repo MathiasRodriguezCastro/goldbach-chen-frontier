@@ -61,6 +61,24 @@ def composite_composite_count(T: Tables):
     return N, np.rint(conv[N]).astype(np.int64)
 
 
+def generalized_form_counts(T: Tables, m1: int = 1, Kmax: int = 2):
+    """
+    R_k para la forma N = m1·p + q, q en capa k (draft expandido §13).
+    Convoluciona el indicador de primos DILATADO {m1·p} con cada capa.
+    Devuelve (N_par, {k: R_k}). m1=1 recupera Goldbach/Chen estándar.
+    """
+    X = T.X
+    b = np.zeros(X + 1, dtype=np.float64)
+    idx = T.primes * m1
+    b[idx[idx <= X]] = 1.0
+    N = np.arange(4, X + 1, 2)
+    out = {}
+    for k in range(1, Kmax + 1):
+        mask = (T.Omega == k).astype(np.float64)
+        out[k] = np.rint(fftconvolve(b, mask)[N]).astype(np.int64)
+    return N, out
+
+
 def singular_exponent_layer(N, Rk, R1, S, Nmin=20000):
     """beta_k model-light: pendiente de log(R_k/R_1) vs log S(N), +1."""
     m = (N >= Nmin) & (Rk > 0) & (R1 > 0)

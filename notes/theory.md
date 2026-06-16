@@ -226,22 +226,46 @@ una transición tipo Poisson. Realiza el *phase diagram* / valor crítico
 $a_X^*(N)$ del `.tex`: la flexibilidad semiprima de Chen se vuelve **necesaria** al
 exigir balance casi perfecto.
 
-Esto realiza la idea de *phase diagram* / valor crítico $a_X^*(N)$ del `.tex`: la
-flexibilidad semiprima de Chen se vuelve **necesaria** exactamente al exigir
-balance casi perfecto.
+---
+
+## 5bis. Formas lineales generalizadas $N=m_1p+q$ (draft expandido §13)
+
+Convolucionando el indicador de primos **dilatado** $\{m_1p\}$ con cada capa
+($X=2\cdot10^6$), aparecen obstrucciones de congruencia que responden la *Question
+de sensibilidad a coeficientes*:
+
+- $m_1$ **par** (2, 4): destruye el canal primo–primo por paridad ($q=N-m_1p$ es
+  par $\Rightarrow$ solo $q=2$); $\max R_1=1$, $\theta\approx0$.
+- $m_1=3$: el enunciado tipo Goldbach **falla para el ~28 % de los $N$**
+  ($N=3p+q$ sin $q$ primo). Genuinamente frágil.
+- $m_1=1$ es **especial**: el único sin obstrucción local. Confirma que la elección
+  de coeficientes controla la fragilidad; los $\beta$ para $m_1\neq1$ no son
+  interpretables (dominan las congruencias, no la serie singular).
 
 ---
 
-## 5. Preguntas abiertas / próximos pasos
+## 6. Direcciones del draft expandido: estado
+
+| dirección (draft expandido) | estado |
+|---|---|
+| Capas $\Omega(q)=k$, perfil $\rho(k)$, $\beta_k$ | **hecho** (§1ter, fig 10) |
+| Rescate compuesto×compuesto $R_{cc}$ | **hecho** (existe para todo $N$) |
+| Continuidad débil de $\nu_N$ | **hecho** (§3bis, fig 08) |
+| Geometría de factores $B(q)$ | **hecho** (§3, fig 05) |
+| MIP multiobjetivo / mínima oscilación | **hecho** (§4, fig 06–07) |
+| Formas lineales $N=m_1p+m_2q$ | **hecho** (§5bis) |
+| Transporte óptimo (defecto de reflexión $\Delta_k$) | pendiente |
+| Persistencia topológica de valles (TDA) | pendiente |
+| Dinámica estadística de $X_N$ | pendiente |
+
+## 7. Preguntas abiertas / próximos pasos
 
 1. **Demostrar (o refutar) la media potencia singular** $R_2/R_1\asymp\mathfrak S^{-1/2}$.
-   Requiere tratar con cuidado el rango completo del factor $r$ y la deriva
-   $\log\log$ de $\beta$. Es el resultado “publicable” del programa.
-2. **Cuantificar la deriva de $\beta$**: ¿$\beta\to1/2$, o $\beta\to$ otro límite, o
-   crece como $1/2+c/\log\log N$? Necesita $X\gtrsim10^9$ (segmentar la criba).
-3. **Serie singular de $R_2$ exacta**: medir $\mathfrak S_2$ por clases de
-   congruencia y comparar con el producto de dos formas.
-4. **Continuidad débil** (medidas $\mu_N^{(t)}$ de $q/N$): falta el experimento de
-   convergencia débil suavizando en ventanas $[X,X+H]$.
-5. **Generación de columnas real**: resolver el MIP infinito truncado por
+   OJO: el experimento de escalamiento (§ siguiente) muestra que $\beta_2$ **no se
+   queda en $1/2$**: deriva hacia arriba con $X$. El resultado “publicable” es más
+   bien *caracterizar la función $\beta_2(X)$*, no un valor fijo.
+2. **Serie singular de $R_2$ exacta**: medir $\mathfrak S_2$ por clases de
+   congruencia y comparar con el producto de dos formas lineales.
+3. **Transporte / TDA / dinámica**: las tres direcciones pendientes del draft.
+4. **Generación de columnas real**: resolver el MIP infinito truncado por
    pricing/CG (paralelo conceptual con el resto de la tesis de despacho).
