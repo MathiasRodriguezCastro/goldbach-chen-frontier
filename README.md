@@ -50,6 +50,8 @@ proyectoGoldbach/
 │   ├── dynamics.py     ← descomposición de varianza de theta(N)
 │   ├── energy.py       ← energía de estado fundamental Ω(a)+Ω(b), termodinámica (Z, U, C, β*)
 │   ├── robustness.py   ← robustez del grafo de Goldbach (ataques aleatorio/dirigido/modular)
+│   ├── market.py       ← Goldbach como mercado: liquidez, spread de Chen, shocks de oferta
+│   ├── control.py      ← Goldbach como control: políticas conscientes de residuos
 │   ├── diagnostics.py  ← theta, C(N), fragilidad, B(q), rescate L1/L2
 │   ├── mip.py          ← MIP de selección (Gurobi): variación / rescate
 │   └── plots.py        ← figuras
@@ -67,7 +69,9 @@ proyectoGoldbach/
 │   ├── run_tda.py      ← persistencia de valles (Goldbach vs Chen)
 │   ├── run_dynamics.py ← dinámica estadística de θ(N)
 │   ├── run_energy.py   ← energía de estado fundamental aritmética + termodinámica
-│   └── run_robustness.py← robustez adversarial del grafo de Goldbach
+│   ├── run_robustness.py← robustez adversarial del grafo de Goldbach
+│   ├── run_market.py   ← liquidez y resiliencia (Goldbach vs Chen)
+│   └── run_control.py  ← valor de la información aritmética para el controlador
 ├── notes/theory.md     ← hallazgos teóricos y experimentales
 ├── data/   (arrays .npz y summary.json — generados)
 └── figures/(PNG — generados)

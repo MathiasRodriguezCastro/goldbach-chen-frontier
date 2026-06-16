@@ -451,6 +451,28 @@ primos? En una ventana de $1.5\cdot10^4$ N cerca de $10^6$:
 todos los primos por azar, pero destrozado al quitar una progresión aritmética. La
 redundancia de Goldbach es aritmética, no estadística. `run_robustness.py`, fig 18.
 
+## 5octies. Tres reformulaciones más (económica, topológica, control)
+
+- **Mercado / liquidez (#5/#6, fig 19).** Cada N par = mercado que necesita 2 insumos
+  primos. Liquidez $L_G=R_1$, $L_C=R_1+R_2$, spread de Chen $S_C=R_2/R_1\approx2.3$ (Chen
+  3× más líquido en normalidad). Bajo shock de oferta (quitar fracción $\phi$ de primos),
+  un match de Goldbach sobrevive con $(1-\phi)^2$ pero uno de Chen con $(1-\phi)^3$ (el
+  semiprimo $q=rs$ necesita p,r,s). Resultado: **el sustituto de Chen NO da prima de
+  resiliencia** ($\phi_C-\phi_G\approx2\cdot10^{-4}$); $S_C(\phi)=S_C(0)(1-\phi)\to0$. Chen
+  es **liquidez de buen tiempo**: vale menos justo cuando los primos escasean.
+- **Topología persistente (#8, resultado NEGATIVO).** Filtrar descomposiciones por
+  complejidad $\Omega(a)+\Omega(b)$: en el binario es un **matching** (cada $a$ en un solo
+  par) → persistencia 0-dim = el espectro de energía, homología superior nula. Topología
+  rica solo en el ternario (grafo $p\sim q$ si $N-p-q$ primo, denso, conexo = Helfgott por
+  vértice, pero **anti-clustered**). No hay estructura topológica nueva que descubrir.
+- **Control / valor de la información (#11, fig 20).** Controlador elige $\pi(N)=p$,
+  aclara si $N-p$ primo. Política **consciente de residuos** (usa $N$ mod primos $\le B$
+  para evitar $q$ divisible por chicos): éxito single-shot **18%→39%** (B=13), costo
+  secuencial **5.5→2.5 intentos (−55%)**. La ganancia por primo sigue el factor
+  $(\ell-1)/(\ell-2)$ — la serie singular hecha **accionable**. Conocer $N$ mod primos
+  chicos aclara el mercado ~2× más eficiente.
+`run_market.py`, `run_control.py`.
+
 ## 6. Direcciones del draft expandido: estado
 
 | dirección (draft expandido) | estado |

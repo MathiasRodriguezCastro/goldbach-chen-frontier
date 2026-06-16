@@ -1160,6 +1160,91 @@ obstructed while $N\equiv1$ is untouched.}
 \label{fig:robust}
 \end{figure}
 
+\subsection{Goldbach as a market: liquidity and the fair-weather substitute}
+\label{sec:market-emp}
+
+Read each even $N$ as a market that must clear by hiring two prime inputs $p+q=N$; the
+liquidity is the number of matches, $L_G(N)=R_1(N)$. Chen lets one input be a
+\emph{minimally composite substitute} (a semiprime), giving $L_C(N)=R_1(N)+R_2(N)$ and a
+substitute spread $S_C(N)=R_2/R_1\approx2.3$: in normal times the Chen market is three
+times more liquid. We ask whether the substitute also provides \emph{resilience} under a
+supply shock that removes each prime with probability $\phi$. A Goldbach match survives
+with probability $(1-\phi)^2$ (two primes), but a Chen match only with $(1-\phi)^3$,
+because the semiprime $q=rs$ needs its two factors $r,s$ to survive as well. Hence the
+expected surviving liquidities are $L_G(\phi)=R_1(1-\phi)^2$ and
+$L_C(\phi)=L_G(\phi)+R_2(1-\phi)^3$, and the substitute spread \emph{decays linearly},
+\[
+  S_C(\phi)=\frac{L_C(\phi)-L_G(\phi)}{L_G(\phi)}=S_C(0)\,(1-\phi)\ \longrightarrow\ 0 .
+\]
+Solving $L(\phi)=1$ for the illiquidity threshold, both markets collapse at essentially the
+same point, $\phi_G\approx\phi_C\approx0.989$, and the resilience premium
+$\phi_C-\phi_G\approx2\cdot10^{-4}$ is negligible (Fig.~\ref{fig:market}). The economic
+reading is clean and a little counter-intuitive: the Chen channel is \emph{fair-weather
+liquidity}---abundant when primes are plentiful, but worth ever less precisely as they
+become scarce, because the composite good carries a higher assembly cost. The semiprime
+substitute deepens the market in calm times; it does not hedge the crisis.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{19_mercado.png}
+\caption{Goldbach as a market under a prime supply shock $\phi$. Left: expected surviving
+liquidity of the Goldbach and Chen markets, both crossing the illiquidity threshold near
+$\phi=0.99$. Right: the Chen substitute spread $S_C(\phi)=S_C(0)(1-\phi)$ vanishes
+linearly---no resilience premium.}
+\label{fig:market}
+\end{figure}
+
+\subsection{Persistent topology of additive decompositions (a negative note)}
+\label{sec:tda2}
+
+It is tempting to filter additive decompositions of $N$ by arithmetic complexity rather
+than geometric distance: form the complex
+$K_N^{(k)}=\{\{a,b\}:a+b=N,\ \OmegaF(a)+\OmegaF(b)\le k\}$ and let $k$ grow. But for the
+\emph{binary} problem this is topologically empty: each integer $a$ lies in the single
+pair $\{a,N-a\}$, so $K_N^{(k)}$ is a disjoint matching for every $k$. Its $0$-dimensional
+persistence is therefore exactly the energy spectrum of \S\ref{sec:energy-emp}---each pair
+is a component born at its energy $\OmegaF(a)+\OmegaF(b)$ and never dying---and all higher
+homology vanishes. There is no topological structure to discover beyond the spectrum.
+
+Genuine higher dimension appears only at the \emph{ternary} level. For odd $N$, form the
+graph on primes $p<N$ with an edge $\{p,q\}$ whenever $N-p-q$ is prime, so that each edge
+\emph{is} a ternary representation $(p,q,N-p-q)$. At $N=99{,}999$ this graph has $9{,}591$
+vertices and $3.9\cdot10^{6}$ edges (density $0.084$, minimum degree $2$, so it is
+connected---a graph form of Helfgott's ternary theorem). Yet it is strongly
+\emph{anti}-clustered: it contains far fewer triangles than a random graph of equal
+density, so ternary representations do not aggregate into higher-order simplices. The
+honest conclusion is that the additive-complexity filtration adds nothing to the spectral
+and graph-theoretic pictures already developed; we record it as a negative result.
+
+\subsection{Goldbach as control: the value of arithmetic information}
+\label{sec:control-emp}
+
+Finally, view the even integers as a sequence of markets to be cleared by a controller: at
+each $N$ the controller picks a prime $p$ (the action) and clears if $q=N-p$ is prime.
+Goldbach is the statement that a successful policy exists; the computational question is
+which \emph{simple} policy clears fastest. A naive policy ignores the arithmetic of $N$; a
+\emph{residue-aware} policy with information budget $B$ uses the residues $N\bmod\ell$ for
+primes $\ell\le B$ to prefer $p$ with $N-p$ coprime to those $\ell$---i.e.\ it avoids
+spending tries on partners forced to share a small factor. Over a window near $10^{6}$
+(Fig.~\ref{fig:control}), the single-shot clearing probability rises from $18\%$ (naive) to
+$39\%$ at $B=13$, and the expected number of tries in a sequential search falls from $5.5$
+to $2.5$---a $55\%$ reduction. The marginal value of each prime of information is largest at
+$\ell=3$ (the factor $\tfrac{\ell-1}{\ell-2}=2$) and decreases thereafter, exactly tracking
+the singular series. Thus the same local arithmetic that the singular series encodes is
+directly actionable: a controller that ``knows'' $N$ modulo small primes clears the
+Goldbach market roughly twice as efficiently, quantifying the value of arithmetic
+information for additive prime decompositions.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.66\linewidth]{20_control.png}
+\caption{Value of arithmetic information for the Goldbach controller. As the information
+budget $B$ grows, the single-shot clearing probability (blue) rises and the sequential
+clearing cost (red) falls; the gain per prime tracks the singular-series factor
+$(\ell-1)/(\ell-2)$.}
+\label{fig:control}
+\end{figure}
+
 \section{Conclusion}
 
 The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.

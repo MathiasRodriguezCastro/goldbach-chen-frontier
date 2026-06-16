@@ -266,6 +266,43 @@ def tda(thrs, n_gold, n_chen, a1, a2, corr, name="14_valles.png"):
     return _save(fig, name)
 
 
+def control(Bs, success, cost, name="20_control.png"):
+    """Valor de la información aritmética: éxito y costo de aclaramiento vs presupuesto B."""
+    fig, ax = plt.subplots(figsize=(7.8, 5))
+    xs = [str(b) if b else "naive" for b in Bs]
+    ax.plot(xs, 100 * np.array(success), "o-", color="#1f4fa0", lw=2, ms=7,
+            label="éxito single-shot (%)")
+    ax.set_ylabel("éxito single-shot (%)", color="#1f4fa0")
+    ax.set_xlabel(r"presupuesto de información $B$ (controlador usa $N\,\mathrm{mod}\,\ell$, $\ell\leq B$)")
+    ax2 = ax.twinx()
+    ax2.plot(xs, cost, "s--", color="#c0392b", lw=2, ms=7, label="costo secuencial (intentos)")
+    ax2.set_ylabel("intentos hasta aclarar (medio)", color="#c0392b")
+    ax.set_title("Valor de la información aritmética para el controlador de Goldbach")
+    fig.tight_layout()
+    return _save(fig, name)
+
+
+def market(phis, LG, LC, S0, premium, name="19_mercado.png"):
+    """A: liquidez sobreviviente G vs C. B: spread de Chen S_C(phi)=S_C(0)(1-phi)."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    ax[0].semilogy(phis, LG, "-", color="#1f4fa0", lw=2.2, label="$L_G$ (Goldbach)")
+    ax[0].semilogy(phis, LC, "-", color="#c0392b", lw=2.2, label="$L_C$ (Chen)")
+    ax[0].axhline(1, color="0.6", ls=":", lw=1, label="umbral de iliquidez")
+    ax[0].set_xlabel(r"shock de oferta $\phi$ (fracción de primos perdidos)")
+    ax[0].set_ylabel("liquidez esperada sobreviviente")
+    ax[0].set_title("Ambos mercados colapsan casi juntos ($\\phi\\approx0.99$)")
+    ax[0].legend(fontsize=9)
+    sc = (LC - LG) / LG
+    ax[1].plot(phis, sc, "-", color="#6c3483", lw=2.2, label=r"$S_C(\phi)=(L_C-L_G)/L_G$")
+    ax[1].plot(phis, S0 * (1 - phis), "--", color="#e67e22", lw=1.6, label=r"$S_C(0)\,(1-\phi)$")
+    ax[1].set_xlabel(r"shock de oferta $\phi$")
+    ax[1].set_ylabel(r"spread / prima del sustituto de Chen")
+    ax[1].set_title(fr"El sustituto vale menos en crisis (prima resiliencia $\approx{premium:.3f}$)")
+    ax[1].legend(fontsize=9)
+    fig.tight_layout()
+    return _save(fig, name)
+
+
 def robustness(phis, rand_curve, modpts, kappa_frac, byclass3, name="18_robustez.png"):
     """A: percolación aleatoria vs ataques modulares. B: obstrucción modular mod 3."""
     fig, ax = plt.subplots(1, 2, figsize=(13, 5))
