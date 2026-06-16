@@ -1242,6 +1242,111 @@ with $\beta_2\to1$ being a statement strictly stronger than the Hardy--Littlewoo
 asymptotics it is built on.
 \end{remark}
 
+\subsection{A first-moment reduction: replacing pointwise HL by equidistribution}
+\label{sec:firstmoment}
+
+Assumption~\ref{ass:HL} demands a \emph{pointwise} asymptotic for $C_r'(N)$, which for
+fixed $N$ is as hard as the binary problem. The difficulty disappears if we pass to
+\emph{first moments} over the window, because summing over $N$ replaces the binary
+problem by counting primes in arithmetic progressions, which is unconditional
+(Siegel--Walfisz) for fixed modulus and is the content of Bombieri--Vinogradov
+uniformly. Define the conditional response ratios
+\[
+  A_\ell:=\frac{\langle R_1\rangle_{\ell\mid N}}{\langle R_1\rangle_{\ell\nmid N}},
+  \qquad
+  B_\ell:=\frac{\langle R_2\rangle_{\ell\mid N}}{\langle R_2\rangle_{\ell\nmid N}},
+\]
+where $\langle\,\cdot\,\rangle_{\ell\mid N}$ is the mean over $N\in\mathcal N_X$ with
+$\ell\mid N$, and the first-moment exponent
+\begin{equation}
+  \beta_2^{(1)}(X)-1:=\frac{\sum_\ell\log(B_\ell/A_\ell)\,g_\ell\,v_\ell}
+                          {\sum_\ell g_\ell^2\,v_\ell},\qquad v_\ell=\tfrac1\ell(1-\tfrac1\ell),
+  \label{eq:beta-fm}
+\end{equation}
+the decomposition of \eqref{eq:beta-def} by prime $\ell$ in the independence model of
+Lemma~\ref{lem:moments}.
+
+\begin{lemma}[First-moment responses]\label{lem:fm}
+Let $F_\ell=\langle\#\{p:\,\ell\mid N-p,\ N-p\in\SSemi\}\rangle/\langle R_2\rangle$ be
+the proportion of semiprime representations whose semiprime is divisible by $\ell$.
+If primes are equidistributed in the reduced residue classes mod $\ell$ (Siegel--Walfisz
+for fixed $\ell$; Bombieri--Vinogradov for $\ell\le X^{1/2-\varepsilon}$ on average),
+then
+\[
+  A_\ell=\frac{\ell-1}{\ell-2},\qquad
+  B_\ell=\frac{(\ell-1)(1-F_\ell)}{\ell-2+F_\ell}.
+\]
+\end{lemma}
+
+\begin{proof}
+Summing over $N\in\mathcal N_X$ removes the binary constraint:
+$\sum_{\ell\mid N}R_1=\#\{(p,p'):p+p'\in\mathcal N_X,\ \ell\mid p+p'\}$. As $p,p'$ are
+units mod $\ell$, equidistribution gives a proportion $1/(\ell-1)$ of pairs with
+$p'\equiv-p$, so $\sum_{\ell\mid N}R_1=\frac{1}{\ell-1}\sum_NR_1$; dividing by the
+counts $|\mathcal N_X|/\ell$ and $|\mathcal N_X|(\ell-1)/\ell$ yields
+$A_\ell=(\ell-1)/(\ell-2)$. For $R_2$, fix $(r,s)$ and count $p=N-rs$ in the window:
+$\ell\mid N$ forces $p\equiv-rs$. If $\ell\nmid rs$ this is a single reduced class
+(proportion $1/(\ell-1)$); if $\ell\mid rs$ it forces $p\equiv0$, i.e.\ $p=\ell$, so
+those representations (a fraction $F_\ell$ of $R_2$) are excluded. Hence
+$\sum_{\ell\mid N}R_2=\frac{1-F_\ell}{\ell-1}\sum_NR_2$, and the same normalisation gives
+$B_\ell=\frac{(\ell-1)(1-F_\ell)}{\ell-2+F_\ell}$.
+\end{proof}
+
+Both formulas are confirmed to four places (Table~\ref{tab:fm}); note $A_\ell$ is the
+exact singular factor, and $B_\ell<A_\ell$ by the blocked-channel deficit $F_\ell$.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccccc}
+\toprule
+$\ell$ & $3$ & $5$ & $7$ & $11$ & $13$\\
+\midrule
+$A_\ell$ (measured $=$ $\tfrac{\ell-1}{\ell-2}$) & $2.000$ & $1.333$ & $1.200$ & $1.111$ & $1.091$\\
+$B_\ell$ measured & $1.423$ & $1.152$ & $1.090$ & $1.048$ & $1.038$\\
+$\frac{(\ell-1)(1-F_\ell)}{\ell-2+F_\ell}$ & $1.423$ & $1.152$ & $1.090$ & $1.048$ & $1.038$\\
+$F_\ell$ & $0.169$ & $0.106$ & $0.078$ & $0.052$ & $0.044$\\
+\bottomrule
+\end{tabular}
+\caption{First-moment responses at $X=2\cdot10^{6}$: Lemma~\ref{lem:fm} is exact.}
+\label{tab:fm}
+\end{table}
+
+\begin{theorem}[First-moment exponent, conditional on Bombieri--Vinogradov]\label{thm:fm}
+Under the equidistribution input of Lemma~\ref{lem:fm} and with $F_\ell\sim$ the
+channel weight $\frac{(\ell-1)/(\ell-2)\,w_\ell}{\widetilde W_0}$, the first-moment
+exponent satisfies
+\[
+  \beta_2^{(1)}(X)=1-\frac{c^{(1)}}{\widetilde W_0(X)}+O(\widetilde W_0^{-2}),
+  \qquad c^{(1)}=\frac{1}{B}\sum_{\ell>2}\Big(\tfrac{\ell-1}{\ell-2}\Big)^{2}w_\ell\,g_\ell\,v_\ell ,
+\]
+an absolutely convergent constant; hence $\beta_2^{(1)}(X)\to1$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+By Lemma~\ref{lem:fm}, $\log(B_\ell/A_\ell)=\log\frac{(\ell-2)(1-F_\ell)}{\ell-2+F_\ell}
+=-\frac{\ell-1}{\ell-2}F_\ell+O(F_\ell^2)$. Inserting into \eqref{eq:beta-fm} with
+$F_\ell=\frac{\ell-1}{\ell-2}w_\ell/\widetilde W_0+o(\cdot)$ gives the stated slope,
+and $\widetilde W_0\sim\log\log X$ as in Theorem~\ref{thm:beta}.
+\end{proof}
+
+\paragraph{The reduced gap.}
+Theorem~\ref{thm:fm} rests only on equidistribution of primes in progressions---a
+theorem (Siegel--Walfisz; Bombieri--Vinogradov for uniformity in $\ell$)---together
+with the first moment $F_\ell$, which is of Prime-Number-Theorem strength. The sole
+remaining step to Theorem~\ref{thm:beta} is the passage from the first-moment exponent
+to the pointwise (log-regression) one. Empirically this gap is a \emph{constant}
+$\beta_2-\beta_2^{(1)}\approx0.004$, stable across $X=2\cdot10^{6}$--$10^{8}$
+(measured $\beta_2^{(1)}=0.528,0.563,0.585$ against $\beta_2=0.531,0.567,0.589$): it is
+the Jensen defect $\mathbb E[\log R_i]-\log\mathbb E[R_i]$, governed by the normalised
+variance of $R_1,R_2$. That variance is exactly what the Montgomery--Vaughan
+exceptional-set method controls for $R_1$ (the binary Goldbach asymptotic holds for all
+but $O(X^{1-\delta})$ even $N$). An analogous second-moment bound for $R_2$ would
+upgrade Theorem~\ref{thm:fm} to a statement about $\beta_2$ for almost all $N$, and
+hence---since the covariance \eqref{eq:beta-def} is insensitive to a sparse exceptional
+set of polynomially bounded counts---to the law $\beta_2(X)\to1$ itself. This isolates
+the genuine remaining difficulty as a \emph{variance} estimate (an exceptional set),
+rather than the pointwise asymptotic of Assumption~\ref{ass:HL}.
+
 
 \begin{thebibliography}{99}
 

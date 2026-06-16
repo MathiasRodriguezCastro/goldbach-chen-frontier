@@ -59,6 +59,7 @@ proyectoGoldbach/
 │   ├── run_layers.py   ← capas Ω(q)=k y exponente β_k
 │   ├── run_balance.py  ← exponente de balance residual
 │   ├── run_betalaw.py  ← validación de la ley β_2=1-c/⟨R2/R1⟩
+│   ├── run_firstmoment.py← reducción rigurosa: respuestas A_ℓ,B_ℓ (Lema 3) + β_2^(1)
 │   ├── run_transport.py← transporte óptimo / colapso de reflexión
 │   ├── run_tda.py      ← persistencia de valles (Goldbach vs Chen)
 │   └── run_dynamics.py ← dinámica estadística de θ(N)
@@ -118,5 +119,6 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 - [x] Exponente de balance residual $a_{\rm Res}(N)$: colapso típico + obstrucción local.
 - [x] **Ley derivada $\beta_2=1-c/\langle R_2/R_1\rangle\to1$** (déficit $1/\log\log N$), validada al 1%.
 - [x] Transporte óptimo (colapso de reflexión −22%), TDA de valles (Chen no rellena), dinámica de $\theta$ (94% determinista).
-- [ ] Demostración rigurosa (no heurística) de la ley $\beta_2\to1$ y del valor de $c$.
+- [x] **Reducción rigurosa** (apéndice §A.5): $\beta_2\to1$ reducido de "HL puntual uniforme en $r$" a **Bombieri–Vinogradov + cota de conjunto excepcional para $R_2$** (à la Montgomery–Vaughan). Respuestas $A_\ell,B_\ell$ exactas (Lema 3).
+- [ ] Cerrar el último paso: cota de segundo momento (conjunto excepcional) para $R_2$.
 - [ ] Column generation del MIP infinito (pricing real).

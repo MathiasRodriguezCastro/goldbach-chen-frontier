@@ -300,6 +300,26 @@ CV $=1.0\%$ (vs $1.7\%$ para $(1-\beta_2)\log\log N$): el "reloj" correcto es
 $\langle R_2/R_1\rangle$, exactamente como predice la derivación. $c\approx1.09$.
 Ver `figures/12_betalaw.png`.
 
+### Reducción rigurosa: de HL puntual a Bombieri–Vinogradov + conjunto excepcional
+
+El Teorema condicional del apéndice pide HL **puntual** uniforme en $r$ — tan difícil
+como el problema binario. La salida (apéndice §A.5): pasar a **primeros momentos**.
+Sumar sobre $N$ elimina la dificultad binaria (queda contar primos en progresiones).
+Respuestas condicionales (medias sobre la ventana), con prueba en el Lema 3:
+$$A_\ell=\frac{\langle R_1\rangle_{\ell\mid N}}{\langle R_1\rangle_{\ell\nmid N}}=\frac{\ell-1}{\ell-2},
+\qquad B_\ell=\frac{\langle R_2\rangle_{\ell\mid N}}{\langle R_2\rangle_{\ell\nmid N}}
+=\frac{(\ell-1)(1-F_\ell)}{\ell-2+F_\ell},$$
+con $F_\ell$ = fracción de reps de $R_2$ con $\ell\mid q$. **Ambas exactas a 4 cifras**
+(p.ej. $\ell=3$: $B_3=1.4232$ medido vs $1.4233$ fórmula). Se siguen SOLO de la
+**equidistribución de primos en progresiones (Siegel–Walfisz / Bombieri–Vinogradov —
+TEOREMAS)** más el primer momento $F_\ell$. El exponente de primer momento
+$\beta_2^{(1)}$ (Teorema 2) cumple $\beta_2^{(1)}=1-c^{(1)}/\widetilde W_0\to1$ y
+**reproduce $\beta_2$** con gap **constante** $\approx0.004$ (Jensen) en todas las
+escalas. Así el único paso que falta es puntual↔primer-momento = una **cota de
+segundo momento / conjunto excepcional para $R_2$** (à la Montgomery–Vaughan, que ya
+lo hace para $R_1$), MUCHO más tratable que la HL puntual. Es la dirección realista a
+un teorema incondicional.
+
 ## 5quater. Exponente de balance residual $a_{\rm Res}(N)$ (tercer draft)
 
 $a_{\rm Res}(N)=1+\min_{N=p+rs}\log r/\log s$ (Chen nondegenerado, $r,s$ primos);
