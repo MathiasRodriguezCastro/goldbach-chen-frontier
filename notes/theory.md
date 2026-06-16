@@ -297,8 +297,20 @@ constante. Medido en ventanas de $2\cdot10^6$:
 | $(1-\beta_2)\langle R_2/R_1\rangle$ | 1.110 | 1.100 | 1.088 | 1.084 |
 
 CV $=1.0\%$ (vs $1.7\%$ para $(1-\beta_2)\log\log N$): el "reloj" correcto es
-$\langle R_2/R_1\rangle$, exactamente como predice la derivación. $c\approx1.09$.
+$\langle R_2/R_1\rangle$, exactamente como predice la derivación. $c\approx1.1$.
 Ver `figures/12_betalaw.png`.
+
+**Sobre la constante $c$ (detalle técnico, resuelto honestamente).** La constante de
+la serie singular del canal SÍ es exacta y verificada:
+$C_r'(N)=2C_2\,\mathfrak S(N)\,\frac{r-1}{r-2}\,I_r(N)\,(1\pm0.004)$ con $I_r$ el integral
+arquimediano (`run_channel_check.py`: ratio 0.996 para $r=3$). PERO el peso crudo
+$w_r=\frac1r\frac{\log N}{\log(N/r)}$ **sobreestima $I_r/I_1$ ~1.5× para $r$ chico** —
+esa fue la fuente de mis líos con la constante. Con $w_r$ crudo sale $c\approx1.0$; con
+$I_r/I_1$ exacto sube hacia el medido $\approx1.1$. La constante $c(X)$ es $O(1)$,
+decrece lento, y su límite exacto es delicado (depende de $I_r/I_1$ y de la convención
+de promediado: media-de-cocientes vs cociente-de-sumas). Lo robusto e incondicional es
+el ORDEN: $c(X)\asymp1$, $1-\beta_2\asymp1/\log\log X$, $\beta_2\to1$. El valor preciso
+de $c$ NO afecta el teorema.
 
 ### Reducción rigurosa: de HL puntual a Bombieri–Vinogradov + conjunto excepcional
 
