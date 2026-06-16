@@ -473,6 +473,27 @@ redundancia de Goldbach es aritmética, no estadística. `run_robustness.py`, fi
   chicos aclara el mercado ~2× más eficiente.
 `run_market.py`, `run_control.py`.
 
+## 5nonies. Espectral, información y geometría (#3/#10, #9, #14)
+
+- **Método del círculo EMPÍRICO (#3/#10, fig 21).** Espectro de Fourier del cometa
+  destendenciado: picos discretos en las frecuencias aritméticas $a/q$ — pico dominante en
+  $1/3$ (mod 3, periodo-N 6), luego $1/5,2/5$ (mod 5), alturas que siguen $(\ell-1)/(\ell-2)$.
+  Son los **arcos mayores** visibles. Varianza de la oscilación de $\log R_1$ explicada:
+  **N mod 6 (primos 2,3) capta 85%**, mod 30 95%, saturando al techo $\mathfrak S$ de 99.9%.
+  *El cometa es casi un fenómeno mod 6.*
+- **Información (#9, fig 22).** Presupuesto de Var$(\log R_1)$: tendencia 81% + serie singular
+  18.8% + **residuo irreducible 0.11%**. El cometa es **~99.9% comprimible** (local-aritmético);
+  el residuo es ruido **BLANCO** (espectro plano, autocorr $-0.04$, std 2.7% ~ pocas veces el
+  piso de Poisson) — la fluctuación HL genuina, sin estructura escondida. Respuesta negativa
+  limpia a "¿los N anómalos son informacionalmente especiales?": no.
+- **Geometría discreta (#14, fig 23).** Soluciones Chen $p+rs=N$ como puntos en la superficie;
+  en coords log $(u,v)=(\log r/\log N,\log s/\log N)$ forman un triángulo con **estrías
+  discretas** (un rayo por cada primo $r$), masa contra el borde $u=0$ (Goldbach). Exponente
+  $a=1+\log r/\log s$: **mediana 1.30**, 50% con $a<1.3$, casi todo $\ll1.9$ (Li-Liu). Las
+  soluciones se concentran cerca de la frontera de Goldbach (semiprimo desbalanceado, factor
+  chico) — forma geométrica de $a_{\rm Res}$ y $B(q)$.
+`run_spectral.py`, `run_information.py`, `run_geometry.py`.
+
 ## 6. Direcciones del draft expandido: estado
 
 | dirección (draft expandido) | estado |

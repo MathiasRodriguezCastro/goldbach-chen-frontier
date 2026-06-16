@@ -1245,6 +1245,97 @@ $(\ell-1)/(\ell-2)$.}
 \label{fig:control}
 \end{figure}
 
+\subsection{An empirical circle method: the spectrum of the comet}
+\label{sec:spectral-emp}
+
+The circle method decomposes additive problems by Fourier analysis into major arcs
+(rationals $a/q$ with small $q$, carrying the singular series) and minor arcs (the
+pseudorandom remainder). One can see this decomposition \emph{empirically}. Detrending
+$R_1$ over a window of consecutive even integers and taking its power spectrum
+(Fig.~\ref{fig:spectral}, left) reveals a forest of sharp lines exactly at the arithmetic
+frequencies: the dominant peak is at $\tfrac13$ (period $T_N=6$, the modulus $3$), followed
+by $\tfrac15,\tfrac25$ (modulus $5$), with heights that decay across primes in step with the
+singular-series factors $(\ell-1)/(\ell-2)$. These are the major arcs made visible.
+
+Dually, one can ask how much of the comet's oscillation is captured by purely local
+information. Predicting the detrended $\log R_1(N)$ from the residue $N\bmod\prod_{\ell\le B}\ell$
+explains $84.6\%$ of the variance at $B=3$ (i.e.\ $N\bmod6$ alone), $95.0\%$ at $B=5$, and
+saturates toward the singular-series ceiling $R^2=0.999$ (Fig.~\ref{fig:spectral}, right).
+The comet is, to first order, a \emph{modulo-$6$ phenomenon}: the prime $3$ supplies $85\%$
+of all explainable structure, and successive primes contribute the rapidly shrinking
+remainder predicted by $\sing(N)$.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{21_espectral.png}
+\caption{Empirical circle method. Left: the power spectrum of the detrended Goldbach comet,
+with peaks at the arithmetic frequencies $a/q$ (the major arcs), dominated by $\tfrac13$
+(modulus $3$). Right: the fraction of the comet's oscillation explained by $N$ modulo the
+small primes, saturating at the singular-series ceiling; $N\bmod6$ already gives $85\%$.}
+\label{fig:spectral}
+\end{figure}
+
+\subsection{The information content of the comet}
+\label{sec:info-emp}
+
+The spectral saturation invites an information-theoretic reading: how compressible is the
+comet, and what is irreducible? Decomposing the variance of $\log R_1(N)$ into a smooth
+trend, the local arithmetic (the conditional mean given $N\bmod30030$, which captures
+$\sing$ non-linearly), and a residual, we find (Fig.~\ref{fig:info})
+\[
+  \underbrace{81.1\%}_{\text{trend }N/\log^2N}\ +\ \underbrace{18.8\%}_{\text{singular series }\sing(N)}\ +\ \underbrace{0.11\%}_{\text{irreducible}} .
+\]
+The comet is thus $99.9\%$ compressible by local arithmetic. The remaining $0.11\%$ is the
+genuine Hardy--Littlewood fluctuation: its power spectrum is \emph{flat}---white noise, in
+contrast to the sharply peaked spectrum of $R_1$ itself (\S\ref{sec:spectral-emp})---with
+lag-$1$ autocorrelation $-0.04$ and standard deviation $2.7\%$, a few times the Poisson
+floor $\langle R_1\rangle^{-1/2}=0.9\%$. In information terms, the Goldbach comet is almost
+entirely a singular-series codeword; its incompressible core carries no further arithmetic
+signal and is the structureless randomness of the primes. There is no hidden order below
+the singular series---a clean negative answer to whether anomalous $N$ are
+``informationally special''.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{22_informacion.png}
+\caption{Information budget of the comet. Left: the variance of $\log R_1$ splits into a
+smooth trend ($81\%$), the singular series ($18.8\%$), and an irreducible residual
+($0.11\%$). Right: the residual's power spectrum is flat---white noise, with none of the
+arithmetic peaks of Fig.~\ref{fig:spectral}.}
+\label{fig:info}
+\end{figure}
+
+\subsection{Discrete geometry of the Chen surface}
+\label{sec:geom-emp}
+
+Each Chen representation $N=p+rs$ ($q=N-p$ semiprime, $r=\mathrm{spf}(q)\le s$) is a lattice
+point on the surface $p+rs=N$. In normalised logarithmic coordinates
+$u=\log r/\log N,\ v=\log s/\log N$ the points fill the triangle $\{u\le v,\ u+v\le1\}$,
+with the edge $u=0$ (i.e.\ $r$ bounded) the Goldbach boundary and the diagonal $u=v$ the
+balanced semiprimes. Accumulating $6.6\cdot10^{7}$ solutions over a window near $10^{6}$
+(Fig.~\ref{fig:geom}, left) shows a cloud organised into discrete vertical \emph{rays}---one
+for each small prime $r=3,5,7,\dots$, since $r$ is prime---whose brightness decreases with
+$r$: the mass piles up against the Goldbach edge.
+
+Quantitatively, the Li--Liu exponent of a solution, $a=1+\log r/\log s$, has the spectrum of
+Fig.~\ref{fig:geom} (right): it peaks near $a\approx1.1$ and decays toward the balanced
+value $2$, with mean $1.38$ and \emph{median $1.30$}. Half of all Chen solutions already
+satisfy $a<1.3$, and essentially all sit far below the uniform threshold $a=1.9$ of
+Li--Liu. So the Chen solutions of a typical $N$ concentrate near the Goldbach boundary: the
+semiprime second summand is, far more often than not, an unbalanced product with a small
+factor---the geometric form of the residual-exponent and factor-balance findings of
+\S\ref{sec:balance-emp} and \S\ref{sec:diag-emp}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{23_geometria.png}
+\caption{Discrete geometry of $p+rs=N$. Left: density of Chen solutions in
+$(u,v)=(\log r/\log N,\log s/\log N)$, with discrete rays at each prime $r$ and mass against
+the Goldbach edge $u=0$. Right: the exponent spectrum $a=1+\log r/\log s$, median $1.30$,
+far below the Li--Liu threshold $1.9$.}
+\label{fig:geom}
+\end{figure}
+
 \section{Conclusion}
 
 The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.

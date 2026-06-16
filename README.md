@@ -52,6 +52,9 @@ proyectoGoldbach/
 │   ├── robustness.py   ← robustez del grafo de Goldbach (ataques aleatorio/dirigido/modular)
 │   ├── market.py       ← Goldbach como mercado: liquidez, spread de Chen, shocks de oferta
 │   ├── control.py      ← Goldbach como control: políticas conscientes de residuos
+│   ├── spectral.py     ← método del círculo empírico (espectro del cometa, varianza por módulo)
+│   ├── information.py  ← presupuesto de información del cometa (tendencia/𝔖/irreducible)
+│   ├── geometry.py     ← geometría de la superficie p+rs=N (nube 2D, espectro de exponentes)
 │   ├── diagnostics.py  ← theta, C(N), fragilidad, B(q), rescate L1/L2
 │   ├── mip.py          ← MIP de selección (Gurobi): variación / rescate
 │   └── plots.py        ← figuras
@@ -71,7 +74,10 @@ proyectoGoldbach/
 │   ├── run_energy.py   ← energía de estado fundamental aritmética + termodinámica
 │   ├── run_robustness.py← robustez adversarial del grafo de Goldbach
 │   ├── run_market.py   ← liquidez y resiliencia (Goldbach vs Chen)
-│   └── run_control.py  ← valor de la información aritmética para el controlador
+│   ├── run_control.py  ← valor de la información aritmética para el controlador
+│   ├── run_spectral.py ← método del círculo empírico
+│   ├── run_information.py← presupuesto de información del cometa
+│   └── run_geometry.py ← geometría de la superficie de Chen
 ├── notes/theory.md     ← hallazgos teóricos y experimentales
 ├── data/   (arrays .npz y summary.json — generados)
 └── figures/(PNG — generados)

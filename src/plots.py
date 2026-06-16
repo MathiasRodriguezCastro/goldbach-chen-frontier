@@ -282,6 +282,76 @@ def control(Bs, success, cost, name="20_control.png"):
     return _save(fig, name)
 
 
+def information(fracs, freq, Pres, name="22_informacion.png"):
+    """A: presupuesto de información (barra apilada). B: espectro del residuo (blanco)."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    labels = ["tendencia\n(N/log²N)", "serie singular\n$\\mathfrak{S}(N)$", "residuo\nirreducible"]
+    vals = [100 * fracs["trend"], 100 * fracs["singular"], 100 * fracs["irreducible"]]
+    cols = ["#aab7b8", "#1f4fa0", "#c0392b"]
+    left = 0
+    for v, lab, c in zip(vals, labels, cols):
+        ax[0].barh([0], [v], left=left, color=c, height=0.5)
+        ax[0].text(left + v / 2, 0, f"{lab}\n{v:.2f}%" if v < 5 else f"{lab}\n{v:.1f}%",
+                   ha="center", va="center", fontsize=9, color="white" if v > 5 else "#c0392b")
+        left += v
+    ax[0].set_xlim(0, 100); ax[0].set_ylim(-1, 1); ax[0].set_yticks([])
+    ax[0].set_xlabel("% de la varianza de $\\log R_1$")
+    ax[0].set_title("El cometa es ~99.9% comprimible (local-aritmético)")
+    ax[1].semilogy(freq, np.maximum(Pres, 1e-2), "-", color="#c0392b", lw=0.9)
+    ax[1].axhline(1, color="0.4", ls="--", lw=1, label="blanco (potencia plana)")
+    ax[1].set_xlabel("frecuencia"); ax[1].set_ylabel("potencia del residuo (norm.)")
+    ax[1].set_title("El residuo es ruido BLANCO: sin estructura escondida")
+    ax[1].set_ylim(1e-2, 1e2); ax[1].legend(fontsize=8)
+    fig.tight_layout()
+    return _save(fig, name)
+
+
+def spectral(freq, P, Bs, r2s, ceil, name="21_espectral.png"):
+    """A: espectro de potencia del cometa (arcos mayores). B: varianza explicada por módulo."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    ax[0].semilogy(freq, np.maximum(P, 1e-4), "-", color="#1f4fa0", lw=1.0)
+    for f, lab in [(1/3, "$1/3$ (mod 3, $T_N{=}6$)"), (1/5, "$1/5$ (mod 5)"),
+                   (2/5, "$2/5$ (mod 5)")]:
+        ax[0].axvline(f, color="#c0392b", ls="--", lw=1, alpha=0.7)
+        ax[0].text(f, 1.3, lab, rotation=90, fontsize=7, color="#c0392b", va="bottom", ha="right")
+    ax[0].set_xlabel("frecuencia (ciclos/paso en $N$ par)")
+    ax[0].set_ylabel("potencia (normalizada)")
+    ax[0].set_title("Espectro del cometa: arcos mayores en $a/q$ de primos chicos")
+    ax[0].set_ylim(1e-4, 3)
+    ax[1].plot([str(b) for b in Bs], 100 * np.array(r2s), "o-", color="#16a085", lw=2, ms=7,
+               label="$N\\,\\mathrm{mod}\\,$(primos $\\leq B$)")
+    ax[1].axhline(100 * ceil, color="#c0392b", ls="--", lw=1.2, label=f"techo $\\mathfrak{{S}}(N)$ ({100*ceil:.1f}%)")
+    ax[1].set_xlabel("corte de primos $B$")
+    ax[1].set_ylabel("% de la oscilación de $\\log R_1$ explicada")
+    ax[1].set_title("El cometa es casi un fenómeno mod 6")
+    ax[1].legend(fontsize=8)
+    fig.tight_layout()
+    return _save(fig, name)
+
+
+def geometry(H2, amid, a_hist, amed, name="23_geometria.png"):
+    """A: densidad 2D de soluciones Chen en (u,v). B: espectro de exponentes a."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    Hm = np.ma.masked_where(H2.T <= 0, H2.T)
+    im = ax[0].imshow(np.log10(Hm + 1), origin="lower", extent=[0, 1, 0, 1],
+                      cmap="viridis", aspect="auto")
+    ax[0].plot([0, 0.5], [0, 0.5], "w--", lw=1, label="$r=s$ (balanceado)")
+    ax[0].plot([0, 0], [0, 1], "r-", lw=2, label="$r=1$ (frontera Goldbach)")
+    ax[0].set_xlabel(r"$u=\log r/\log N$"); ax[0].set_ylabel(r"$v=\log s/\log N$")
+    ax[0].set_title("Nube de soluciones Chen en la superficie $p+rs=N$")
+    ax[0].legend(fontsize=8, loc="upper right")
+    fig.colorbar(im, ax=ax[0], label="$\\log_{10}$ densidad")
+    ax[1].bar(amid, 100 * a_hist / a_hist.sum(), width=amid[1] - amid[0], color="#16a085", alpha=0.85)
+    ax[1].axvline(amed, color="#1f4fa0", lw=2, label=f"mediana $a={amed:.2f}$")
+    ax[1].axvline(1.9, color="#c0392b", ls="--", lw=1.5, label="Li–Liu $a=1.9$")
+    ax[1].set_xlabel(r"exponente $a=1+\log r/\log s$")
+    ax[1].set_ylabel("% de soluciones")
+    ax[1].set_title("Espectro de exponentes: concentrado hacia Goldbach ($a\\to1$)")
+    ax[1].legend(fontsize=8)
+    fig.tight_layout()
+    return _save(fig, name)
+
+
 def market(phis, LG, LC, S0, premium, name="19_mercado.png"):
     """A: liquidez sobreviviente G vs C. B: spread de Chen S_C(phi)=S_C(0)(1-phi)."""
     fig, ax = plt.subplots(1, 2, figsize=(13, 5))
