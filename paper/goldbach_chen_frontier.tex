@@ -12,6 +12,8 @@
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage{listings}
 \usepackage{microtype}
+\usepackage{graphicx}
+\graphicspath{{../figures/}}
 
 \hypersetup{
   colorlinks=true,
@@ -599,6 +601,192 @@ A polished paper could be organized as follows:
   \item \textbf{Experiments.} Comets, ratios, factor geometry, weak-continuity plots, MIP selections.
   \item \textbf{Discussion.} What is learned about the Goldbach--Chen frontier.
 \end{enumerate}
+
+\section{Empirical results and a new regularity}
+\label{sec:empirical}
+
+This section reports the outcome of implementing the program above. All numbers
+are reproducible from the accompanying code (\texttt{experiments/run\_counts.py}
+and \texttt{experiments/run\_mip.py}); unless stated otherwise they use the range
+$X=2\cdot10^{6}$.
+
+\subsection{Computational setup and validation}
+
+The counts $R_1$ and $R_2$ are obtained for \emph{all} $N\le X$ at once as additive
+convolutions,
+\[
+  R_1=\mathbf 1_{\PP}*\mathbf 1_{\PP},\qquad
+  R_2=\mathbf 1_{\PP}*\mathbf 1_{\SSemi},
+\]
+evaluated by FFT in $O(X\log X)$. For $X=2\cdot10^{6}$ this takes about $15$
+seconds including sieves, diagnostics and figures. The FFT counts agree exactly
+with a brute-force enumeration on random samples (the rounding error of the
+transform is far below $1/2$), and Goldbach's condition $R_1(N)>0$ is verified
+throughout the range.
+
+\subsection{The singular-series exponent of $R_2$ is one half}
+
+The Hardy--Littlewood prediction \eqref{eq:HL} attaches to $R_1$ the full singular
+series $\sing(N)=\prod_{p\mid N,\,p>2}(p-1)/(p-2)$. Regressing
+$\log\!\big(R_1/(N/\log^2N)\big)$ against $\log\sing(N)$ recovers a slope
+$\beta_1=1.000$, and dividing by $\sing(N)$ collapses the coefficient of variation
+of the normalized count from $0.39$ to $0.015$ (a $25\times$ reduction); this is a
+control that reproduces \eqref{eq:HL} and the band structure of the Goldbach comet.
+
+The new observation concerns $R_2$. Define the \emph{empirical singular exponent}
+$\beta_2$ as the slope of
+\[
+  \log\frac{R_2(N)}{R_1(N)}\quad\text{versus}\quad\log\sing(N),
+  \qquad \text{slope}=\beta_2-1 ,
+\]
+which uses $R_1$ itself as a meter for $\sing(N)$ and is therefore independent of
+any chosen normalization. Table~\ref{tab:beta} reports $\beta_2$ across several
+ranges.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rcc}
+\toprule
+$X$ & $\beta_2$ & $R^2$ of the regression\\
+\midrule
+$5\cdot10^{5}$ & $0.452$ & $0.91$\\
+$1\cdot10^{6}$ & $0.475$ & $0.91$\\
+$2\cdot10^{6}$ & $0.497$ & $0.92$\\
+$4\cdot10^{6}$ & $0.513$ & $0.93$\\
+$8\cdot10^{6}$ & $0.529$ & $0.93$\\
+\bottomrule
+\end{tabular}
+\caption{Empirical singular exponent of $R_2$. In all ranges $\beta_2\approx1/2$,
+versus $\beta_1=1$ for $R_1$; the singular series explains about $92\%$ of the
+variance of $\log(R_2/R_1)$.}
+\label{tab:beta}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{02_singular_exponent.png}
+\caption{Left: $\log[R_1/(N/\log^2N)]$ against $\log\sing(N)$ has slope $1.000$
+(Hardy--Littlewood). Right: the same for $R_2$ has slope $0.497$, matching the
+reference line $\beta=1/2$. The vertical striations are the discrete values of
+$\sing(N)$.}
+\label{fig:exponent}
+\end{figure}
+
+We thus find the effective law
+\begin{equation}
+  R_2(N)\ \propto\ \sing(N)^{1/2}\,\frac{N}{\log^2 N}\,W(N),
+  \qquad
+  W(N)=\sum_{\substack{3\le r\le\sqrt N\\ r\ \mathrm{prime}}}\frac{r-1}{r-2}\,\frac1r\,
+  \frac{\log N}{\log(N/r)},
+  \label{eq:R2law}
+\end{equation}
+where $W(N)\sim\log\log N$ by Mertens' theorem. The weight $W$ makes precise the
+$\log\log N$ factor of \eqref{eq:R2heuristic}: it is a Mertens sum over the
+\emph{small prime factor} $r$ of the semiprime $q=rs$, weighted by the
+twin-prime-type local factor $(r-1)/(r-2)$. Table~\ref{tab:cv} compares the
+dispersion of $R_2$ under three normalizations.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lc}
+\toprule
+normalization of $R_2$ & CV ($X=2\cdot10^{6}$)\\
+\midrule
+$N\log\log N/\log^2 N$ \quad(heuristic of \S5) & $0.184$\\
+$2C_2\,\sing(N)^{1}\,N\,W/\log^2 N$ \quad(full inheritance) & $0.174$\\
+$2C_2\,\sing(N)^{1/2}\,N\,W/\log^2 N$ \quad(\textbf{half power}) & $\mathbf{0.018}$\\
+\bottomrule
+\end{tabular}
+\caption{The half-power normalization fits about $10\times$ tighter than the
+$\log\log N$ heuristic. Forcing the full singular series ($\beta=1$) makes the fit
+\emph{worse}, direct evidence that $R_2$ does not inherit $\sing(N)$ in full.}
+\label{tab:cv}
+\end{table}
+
+\paragraph{Interpretation: a quantitative Chen rescue effect.}
+Because $\beta_2<1$, the relative semiprime share obeys
+$R_2/R_1\propto\sing(N)^{-1/2}$: where Goldbach is locally rich (large $\sing$), the
+prime channel dominates, whereas where Goldbach is \emph{fragile} (small $\sing$)
+the semiprime channel is proportionally most abundant. This is the Chen rescue
+effect of Conjecture~2, now sharpened into a power law. Heuristically the exponent
+drops below $1$ because writing $q=rs$ allows the semiprime to absorb a small prime
+divisor of $N$: for the small factor $r\mid N$ the local enhancement
+$(r-1)/(r-2)$ \emph{reverses} to $(r-2)/(r-1)$, partially neutralizing the singular
+series exactly when it is large. This explains the direction $\beta_2<1$; the
+precise value $1/2$ (with a slow upward drift, Table~\ref{tab:beta}) is left as the
+central open problem of the project.
+
+\begin{conjecture}[Half-power singular law]
+As $X\to\infty$,
+\[
+  \frac{\sum_{N\le X}\log\!\big(R_2/R_1\big)\,\log\sing(N)}
+       {\sum_{N\le X}\log^2\sing(N)}\ \longrightarrow\ -\tfrac12 ,
+\]
+i.e.\ $R_2(N)/R_1(N)\asymp\sing(N)^{-1/2}$ in logarithmic mean.
+\end{conjecture}
+
+\subsection{Diagnostics}
+
+The prime share has mean $\bar\theta=0.311$ and decreases slowly with $N$ (the
+semiprime channel gains ground, as the $\log\log N$ factor predicts); the Chen
+surplus has mean $\overline{C}=2.27$. Goldbach fragility is extremely rare:
+$|\mathcal F_1|=1$, $|\mathcal F_2|=3$, $|\mathcal F_3|=5$, $|\mathcal F_5|=14$,
+$|\mathcal F_{10}|=49$ up to $X$; and \emph{every} fragile integer observed has
+$R_2>0$, so Chen always rescues. The semiprime factor balance $B(q)=\log a/\log q$
+has weighted mean $0.25$, with $16\%$ of the representation mass at $B<0.1$ (a tiny
+prime factor) and $18\%$ at $B>0.4$ (near balanced): Chen representations are
+dominated by \emph{unbalanced} semiprimes with a small prime factor
+(Fig.~\ref{fig:balance}), answering Question~3.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.62\linewidth]{05_balance.png}
+\caption{Representation-weighted distribution of the factor balance $B(q)$ of the
+semiprime second summand. Mass concentrates toward small $B$ (small prime factor),
+not toward the balanced value $1/2$.}
+\label{fig:balance}
+\end{figure}
+
+\subsection{Optimization experiments}
+
+\paragraph{Smoothness is a Pareto trade-off.}
+Minimizing the total spatial variation $\sum|s_N-s_{N-2}|$ of the selected location
+$s_N=q_N/N$ yields a geometrically very smooth branch (total variation $0.0040$ over
+$201$ consecutive even integers) that nonetheless \emph{switches type in $28\%$ of
+its steps} and uses semiprimes $72\%$ of the time (Fig.~\ref{fig:branch}). Forbidding
+semiprimes (the pure Goldbach branch, with zero type switches) raises the variation
+to $0.0246$, a factor of $6.2$ rougher. One cannot simultaneously maximize geometric
+and type smoothness: continuity in location and chaos in type coexist.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{07_rama_mip.png}
+\caption{Minimum-variation branch (Gurobi). The optimum hugs $s_N\approx1$ (the
+``least partner'' branch, $p$ a small prime) and is smooth in $s_N$, yet its type
+(blue prime / red semiprime) alternates.}
+\label{fig:branch}
+\end{figure}
+
+\paragraph{A unimodal Chen-rescue threshold.}
+Restricting representations to a balanced band $p\in[N/2-k,\,N/2]$ and measuring the
+fraction of $N$ that \emph{require} a semiprime (no prime pair in the band) gives a
+unimodal curve in $k$ (Fig.~\ref{fig:rescue}). For $k\gtrsim0.005\,N$ the prime
+channel essentially never fails; the rescue fraction peaks near $38$--$40\%$ at an
+intermediate half-width $k\sim20$--$40$; and for $k=1,2$ it falls again because
+often no representation exists at all. The peak shifts right with $N$ (roughly as
+$\log^2N$), marking where the expected number of balanced prime pairs,
+$\sim2C_2\,\sing(N)\,k/\log^2(N/2)$, drops to $O(1)$ -- a Poisson-type transition.
+This realizes the phase-diagram value $a_X^*(N)$ of \S12.1: Chen's semiprime
+flexibility becomes \emph{necessary} precisely when near-perfect balance is imposed.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{06_rescate.png}
+\caption{Fraction of $N$ that require a semiprime rescue as a function of the band
+half-width $k$, for three scales of $N$. The curve is unimodal and its peak scales
+like $\log^2N$.}
+\label{fig:rescue}
+\end{figure}
 
 \section{Conclusion}
 
