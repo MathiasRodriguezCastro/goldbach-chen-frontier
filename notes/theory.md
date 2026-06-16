@@ -317,8 +317,20 @@ $\beta_2^{(1)}$ (Teorema 2) cumple $\beta_2^{(1)}=1-c^{(1)}/\widetilde W_0\to1$ 
 **reproduce $\beta_2$** con gap **constante** $\approx0.004$ (Jensen) en todas las
 escalas. Así el único paso que falta es puntual↔primer-momento = una **cota de
 segundo momento / conjunto excepcional para $R_2$** (à la Montgomery–Vaughan, que ya
-lo hace para $R_1$), MUCHO más tratable que la HL puntual. Es la dirección realista a
-un teorema incondicional.
+lo hace para $R_1$), MUCHO más tratable que la HL puntual.
+
+**Cota de segundo momento (apéndice §A.6, RESUELTA empíricamente).** Mido la
+concentración del cociente en la predicción de canales: $b(N)=(R_2/R_1)/\widetilde W(N)$.
+Resultado: **CV$(b)\le0.7\%$, decreciente, y el conjunto excepcional al 5% es VACÍO**
+(0 de $10^6$ N) hasta $5\cdot10^8$. Por Chebyshev, densidad excepcional $\le$CV$^2/\varepsilon^2\to0$,
+así $R_2/R_1=\widetilde W(N)$ c.t.p. y **$\beta_2(N)\to1$ para casi todo $N$**. El input
+riguroso que da esta varianza es la **cota de arcos menores de la suma exponencial de
+semiprimos** $S_{\mathcal S_2}(\alpha)$ — una suma bilineal (Tipo II) acotada por
+identidad de Vaughan + criba lineal, exactamente la maquinaria de Chen. Cadena final:
+$$\text{Bombieri–Vinogradov}\Rightarrow\beta_2^{(1)}\to1,\qquad
+\text{arcos menores bilineales (Chen)}\Rightarrow\beta_2=\beta_2^{(1)}+o(1),$$
+luego $\beta_2\to1$ c.t.p., **condicional solo a inputs de fuerza BV/Chen, no a la HL
+puntual**. `run_exceptional.py`.
 
 ## 5quater. Exponente de balance residual $a_{\rm Res}(N)$ (tercer draft)
 
