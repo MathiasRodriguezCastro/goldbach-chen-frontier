@@ -352,6 +352,25 @@ def geometry(H2, amid, a_hist, amed, name="23_geometria.png"):
     return _save(fig, name)
 
 
+def bases(cov_y, cov_r2, kcar, hg, hr, excess_b, excess_v, name="24_bases.png"):
+    """A: distribución de #acarreos Goldbach vs aleatorio (base 2). B: exceso vs base."""
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+    ax[0].bar(kcar - 0.2, 100 * hr, width=0.4, color="#aab7b8", label="pares aleatorios")
+    ax[0].bar(kcar + 0.2, 100 * hg, width=0.4, color="#c0392b", label="Goldbach")
+    gm = np.average(kcar, weights=hg); rm = np.average(kcar, weights=hr)
+    ax[0].axvline(gm, color="#c0392b", ls="--", lw=1); ax[0].axvline(rm, color="#7f8c8d", ls="--", lw=1)
+    ax[0].set_xlabel("nº de acarreos en base 2  ($=v_2\\binom{N}{p}$, Kummer)")
+    ax[0].set_ylabel("% de representaciones")
+    ax[0].set_title(f"Firma digital: Goldbach acarrea más (+{gm-rm:.2f})")
+    ax[0].legend(fontsize=8)
+    ax[1].bar([str(b) for b in excess_b], excess_v, color="#1f4fa0", alpha=0.85)
+    ax[1].axhline(0, color="k", lw=0.8)
+    ax[1].set_xlabel("base $b$"); ax[1].set_ylabel("exceso de acarreos (Goldbach − aleatorio)")
+    ax[1].set_title("El exceso de acarreos aparece en toda base")
+    fig.tight_layout()
+    return _save(fig, name)
+
+
 def market(phis, LG, LC, S0, premium, name="19_mercado.png"):
     """A: liquidez sobreviviente G vs C. B: spread de Chen S_C(phi)=S_C(0)(1-phi)."""
     fig, ax = plt.subplots(1, 2, figsize=(13, 5))

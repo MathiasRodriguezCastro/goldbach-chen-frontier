@@ -494,6 +494,22 @@ redundancia de Goldbach es aritmética, no estadística. `run_robustness.py`, fi
   chico) — forma geométrica de $a_{\rm Res}$ y $B(q)$.
 `run_spectral.py`, `run_information.py`, `run_geometry.py`.
 
+## 5decies. Bases primoriales y geometría de acarreos (menú de bases)
+
+- **Cobertura primorial (#1/#2/#7/#8).** En base $B_y=\prod_{p\le y}p$, los residuos
+  admisibles $A_y(N)=\{a\in(\mathbb Z/B_y)^\times:N-a\in(\mathbb Z/B_y)^\times\}$ dan cobertura
+  local $\lambda_y(N)$; por CRT, $\lambda_y(N)/\lambda_y(\text{gen})=\prod_{p\mid N,p\le y}\frac{p-1}{p-2}=\mathfrak S_y(N)$.
+  **La cobertura primorial ES la serie singular truncada.** Explica el cometa: 84.6% (B₆),
+  → 99.8% (B₃₀) — la misma saturación que la sección espectral. El cometa es la sombra de
+  obstrucciones locales acumuladas.
+- **Geometría de acarreos (#3/#4/#9, NUEVO, fig 24).** #acarreos$(p,N{-}p)=(S_b(p)+S_b(N{-}p)-S_b(N))/(b-1)$;
+  en base 2 $= v_2\binom{N}{p}$ (Kummer). Las reps de Goldbach tienen un **EXCESO sistemático
+  de acarreos** sobre pares aleatorios: base 2 **+0.97** (9.9 vs 8.9), positivo en TODA base
+  (b=2..16). Origen aritmético: el último dígito del primo es coprimo con b → sesga $S_b(p)\equiv p$
+  mod (b−1). Es una **firma digital** de la primalidad en la geometría de la suma — las mismas
+  restricciones locales que dan la serie singular dejan una huella en los acarreos.
+`run_bases.py`, `src/bases.py`.
+
 ## 6. Direcciones del draft expandido: estado
 
 | dirección (draft expandido) | estado |

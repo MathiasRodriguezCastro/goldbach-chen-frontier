@@ -1336,6 +1336,46 @@ far below the Li--Liu threshold $1.9$.}
 \label{fig:geom}
 \end{figure}
 
+\subsection{Primorial bases and carry geometry}
+\label{sec:bases-emp}
+
+Two further reframings come from writing integers in a base. In a primorial base
+$B_y=\prod_{p\le y}p$, every large prime is a unit modulo $B_y$, so the residues
+admissible for $N$ are $A_y(N)=\{a\in(\mathbb Z/B_y)^\times:N-a\in(\mathbb Z/B_y)^\times\}$,
+with local coverage $\lambda_y(N)=|A_y(N)|/\phi(B_y)$. By the Chinese remainder theorem this
+factorises, and the \emph{relative} coverage is precisely the truncated singular series,
+\[
+  \frac{\lambda_y(N)}{\lambda_y(\text{generic})}
+  =\prod_{\substack{p\mid N\\3\le p\le y}}\frac{p-1}{p-2}=\sing_y(N).
+\]
+So primorial coverage \emph{is} the singular series, viewed as accumulated local
+obstructions; predicting $\log R_1$ from $\sing_y$ explains $84.6\%$ of the comet's
+oscillation at $y=3$ ($B_3=6$), rising to $99.8\%$ by $y=30$---the same saturation as
+\S\ref{sec:spectral-emp}, now read as ``the comet is the shadow of primorial local
+coverage''.
+
+The genuinely new object is the \emph{carry geometry}. Adding $p+q=N$ in base $b$ produces
+carries $c_i\in\{0,1\}$, and their number is fixed by the digit sums,
+$\#\text{carries}(p,N-p)=\big(S_b(p)+S_b(N-p)-S_b(N)\big)/(b-1)$; in base $2$ this is
+$v_2\binom{N}{p}$ (Kummer). Comparing Goldbach representations to random pairs $a+(N-a)=N$
+reveals a systematic \emph{carry excess}: Goldbach pairs carry more (Fig.~\ref{fig:bases}).
+In base $2$ the excess is $+0.97$ carries (Goldbach $9.9$ versus $8.9$), and a positive
+excess persists in every base tested ($b=2,\dots,16$), largest in the small bases. The
+origin is arithmetic: a prime's last digit is coprime to $b$, which biases the digit sums
+$S_b(p)\equiv p\pmod{b-1}$ away from the values that would avoid carries. Thus the same
+local constraints that produce the singular series leave a \emph{digital signature}:
+Goldbach decompositions are, bit for bit, slightly carry-heavier than chance---a
+statistical-mechanical fingerprint of primality in the geometry of addition.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{24_bases.png}
+\caption{Carry geometry. Left: the distribution of binary carries $v_2\binom{N}{p}$ for
+Goldbach representations (red) versus random pairs (grey)---Goldbach is shifted to more
+carries ($+0.97$). Right: the carry excess is positive in every base.}
+\label{fig:bases}
+\end{figure}
+
 \section{Conclusion}
 
 The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.
