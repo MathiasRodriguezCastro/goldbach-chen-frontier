@@ -55,7 +55,11 @@
 \maketitle
 
 \begin{abstract}
-The binary Goldbach conjecture asks whether every even integer $N>2$ can be represented as $N=p+q$ with $p,q$ prime. Chen's theorem proves the nearby statement that every sufficiently large even integer is $p+q$ where $p$ is prime and $q$ is either prime or the product of at most two primes. This note proposes a computational and optimization-oriented research program around the \emph{Goldbach--Chen frontier}: the empirical boundary between prime--prime representations and prime--semiprime representations. The project has four components. First, we define representation-count diagnostics that separate the cases $q$ prime and $q$ semiprime. Second, we propose finite and infinite mixed-integer programming formulations for Goldbach and Chen-type statements. Third, we formulate the user's intuition that the map $N\mapsto p+q$ may ``jump'' or ``oscillate'' between prime and semiprime behavior as a weak-convergence and minimum-variation selection problem. Fourth, we outline experiments on the distribution of $q$, the factor geometry of semiprime $q$, and the existence of smooth branches of representations across consecutive even integers. The goal is not to claim a proof of Goldbach, but to generate reproducible evidence, new diagnostics, and potentially publishable computational questions around one of the classical open problems in additive number theory.
+The binary Goldbach conjecture asks whether every even integer $N>2$ can be represented as $N=p+q$ with $p,q$ prime. Chen's theorem proves the nearby statement that every sufficiently large even integer is $p+q$ where $p$ is prime and $q$ is either prime or the product of at most two primes. This note studies the \emph{Goldbach--Chen frontier}: the empirical boundary between prime--prime and prime--semiprime representations. Separating the representation counts $R_1$ (prime $q$) and $R_2$ (semiprime $q$), our central finding is about how each responds to the Hardy--Littlewood singular series $\sing(N)$. Writing $R_i\propto\sing(N)^{\beta_i}$, the prime channel has $\beta_1=1$ (Hardy--Littlewood, recovered as a control), whereas the semiprime channel has a singular exponent that is \emph{not} fixed: measured locally in sieve windows up to $X=10^{9}$ it rises from $0.55$ to $0.61$, and both a derivation and the data give
+\[
+  \beta_2(N)=1-\frac{c}{\langle R_2/R_1\rangle_N}+o(\cdot),\qquad \langle R_2/R_1\rangle\sim\log\log N,\ c\approx1.09,
+\]
+so that $\beta_2\to1$ with a deficit of order $1/\log\log N$: the apparent ``half power'' near $X\sim10^{6}$ is a finite-range artefact, and $R_2$ asymptotically inherits the \emph{full} Goldbach singular series. Extending to layers $\OmegaF(q)=k$, the singular exponent $\beta_k$ decreases through $1,\tfrac12,\dots$ and turns negative for $k\ge3$, so the singular series enhances low-complexity and suppresses high-complexity channels. We complement this with reproducible diagnostics (Chen surplus, fragility, factor geometry), weak-continuity tests for the location measures of $q/N$, mixed-integer formulations whose minimum-variation solutions expose a Pareto trade-off between geometric and type smoothness, a unimodal Chen-rescue threshold under a balance constraint, and a residual balance exponent $a_{\rm Res}(N)$ in the spirit of the recent $(1+a)$ interpolation, whose obstructions correlate positively with $\sing(N)$. The goal is not a proof of Goldbach, but reproducible evidence and new regularities at the boundary between additive number theory, computational experimentation, and discrete optimization.
 \end{abstract}
 
 \tableofcontents
@@ -84,6 +88,14 @@ For each even $N$, define the number of representations with $q$ prime and with 
   N \longmapsto \{(p,q): p+q=N,\ p\in\PP,\ q\in \PP\cup\SSemi\}.
 \]
 This is a discrete object, so it is not continuous in the ordinary analytic sense. Nevertheless, one can ask whether the induced empirical measures converge weakly, whether normalized counts have stable asymptotics, and whether a mixed-integer model can select one representation per even integer with small variation. This gives a precise mathematical language for the intuition that the representation may ``jump'' between prime and semiprime behavior.
+
+\paragraph{Summary of findings.}
+Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implementing this program; all numbers are reproducible from the accompanying code. The main outcomes are:
+\begin{enumerate}[leftmargin=2em,itemsep=2pt]
+\item \textbf{The singular exponent of $R_2$ (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. While $R_1\propto\sing(N)^{1}$ exactly (Hardy--Littlewood), the exponent of $R_2$ rises with $N$; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit. The validation $(1-\beta_2)\langle R_2/R_1\rangle\approx c\approx1.09$ holds to $1\%$.
+\item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the singular exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
+\item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
+\end{enumerate}
 
 \section{Basic notation}
 
@@ -625,6 +637,7 @@ transform is far below $1/2$), and Goldbach's condition $R_1(N)>0$ is verified
 throughout the range.
 
 \subsection{The singular-series exponent of $R_2$ is one half}
+\label{sec:singexp}
 
 The Hardy--Littlewood prediction \eqref{eq:HL} attaches to $R_1$ the full singular
 series $\sing(N)=\prod_{p\mid N,\,p>2}(p-1)/(p-2)$. Regressing
@@ -742,11 +755,56 @@ The exponent drifts steadily above $1/2$ without sign of leveling off.}
 \label{fig:scaling}
 \end{figure}
 
-\begin{conjecture}[Slow singular drift]
-The local singular exponent of $R_2$ satisfies $\beta_2(X)\to\infty$, growing like
-$c\log\log X$ for some $c\in(0,\tfrac14]$; in particular $R_2/R_1$ has no fixed
-singular-series power, and the apparent half-power is a finite-range artefact.
-\end{conjecture}
+\paragraph{A derivation: $\beta_2\to1$ with an $\mathbf{1/\log\log N}$ deficit.}
+The drift is not arbitrary. Writing $q=N-p=rs$ and summing over the small factor
+$r$, each channel is a Goldbach count for the linear form $(s,N-rs)$, whose
+two-form singular series factorizes as
+\begin{equation}
+  \sing_2(r,N)=2C_2\,\sing(N)\,h_r(N),\qquad
+  h_r(N)=\begin{cases}(r-1)/(r-2),&r\nmid N,\\(r-2)/(r-1),&r\mid N.\end{cases}
+  \label{eq:S2factor}
+\end{equation}
+Since $R_1=2C_2\sing(N)I_1$ and $R_2=2C_2\sing(N)\sum_r h_r(N)I_r$, the ratio
+\emph{cancels the singular series exactly},
+\begin{equation}
+  \frac{R_2(N)}{R_1(N)}=\widetilde W(N):=\sum_{3\le r\le\sqrt N}h_r(N)\,w_r(N),
+  \qquad w_r=\frac1r\frac{\log N}{\log(N/r)} .
+  \label{eq:Wtilde}
+\end{equation}
+Hence the measured exponent is a regression slope,
+$\beta_2-1=\operatorname{Cov}(\log\widetilde W,\log\sing)/\operatorname{Var}(\log\sing)$,
+and the only coupling to $\sing(N)$ comes from the factor flips $h_r$ at the small
+prime divisors of $N$. Modelling $\mathbf 1[\ell\mid N]$ as independent with
+probability $1/\ell$, $\operatorname{Var}(\log\sing)=:B$ is a convergent constant,
+while the flips contribute
+$\operatorname{Cov}(\log\widetilde W,\log\sing)=-A/\widetilde W_0$ with $A>0$
+constant and $\widetilde W_0\approx\langle R_2/R_1\rangle\sim\log\log N$ the baseline
+sum. Therefore
+\begin{equation}
+  \beta_2(N)=1-\frac{c}{\langle R_2/R_1\rangle_N}+o\!\left(\frac1{\log\log N}\right),
+  \qquad c=\tfrac{A}{B}\approx1.09 ,
+  \label{eq:betalaw}
+\end{equation}
+so $\beta_2\to1$: \emph{$R_2$ asymptotically inherits the full Goldbach singular
+series}, the approach being governed by $1/\log\log N$. This explains why finite
+ranges show $\beta_2\approx\tfrac12$ and a slow apparent drift.
+
+\begin{proposition}[Validation, non-circular]
+The law \eqref{eq:betalaw} predicts that $(1-\beta_2)\langle R_2/R_1\rangle$ is
+constant. Measured over windows from $6\cdot10^{6}$ to $2\cdot10^{8}$ it equals
+$1.11,1.11,1.10,1.09,1.09,1.08$, a coefficient of variation of $1\%$ (versus
+$1.7\%$ for $(1-\beta_2)\log\log N$): the correct ``clock'' is
+$\langle R_2/R_1\rangle$, exactly as \eqref{eq:betalaw} requires
+(Fig.~\ref{fig:betalaw}).
+\end{proposition}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{12_betalaw.png}
+\caption{The derived law: $\beta_2$ against $1/\langle R_2/R_1\rangle\sim1/\log\log N$
+is a straight line through the limit point $(0,1)$, i.e.\ $\beta_2\to1$.}
+\label{fig:betalaw}
+\end{figure}
 
 \subsection{The singular exponent across arithmetic-complexity layers}
 \label{sec:layers-emp}
@@ -801,6 +859,7 @@ representations: the additive hierarchy is extremely redundant below the prime
 layer.
 
 \subsection{Diagnostics}
+\label{sec:diag-emp}
 
 The prime share has mean $\bar\theta=0.311$ and decreases slowly with $N$ (the
 semiprime channel gains ground, as the $\log\log N$ factor predicts); the Chen

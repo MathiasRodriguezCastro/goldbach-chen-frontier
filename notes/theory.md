@@ -260,6 +260,51 @@ $$\beta_2(X)\approx -0.094 + 0.234\,\log\log X\qquad(R^2=0.9987).$$
   singular en ventana exacta (cofactor primo grande recuperado). Ver
   `figures/09_beta_scaling.png`.
 
+### Derivación analítica de la ley (heurística)
+
+**Afirmación.** $\beta_2(N) = 1 - \dfrac{c}{\langle R_2/R_1\rangle_N} + o(\cdot)$ con
+$\langle R_2/R_1\rangle\sim\log\log N$, de modo que **$\beta_2\to1$**: $R_2$ hereda
+asintóticamente la serie singular COMPLETA, con déficit $\Theta(1/\log\log N)$.
+
+**Paso 1 — cancelación exacta de 𝔖.** Escribiendo $q=N-p=rs$ y sumando sobre el
+factor pequeño $r$, cada canal es un conteo de Goldbach de la forma lineal
+$(s,N-rs)$ con serie singular de dos formas
+$$\mathfrak S_2(r,N)=2C_2\,\mathfrak S(N)\,h_r(N),\qquad
+  h_r(N)=\begin{cases}(r-1)/(r-2),&r\nmid N\\ (r-2)/(r-1),&r\mid N.\end{cases}$$
+Como $R_1(N)=2C_2\,\mathfrak S(N)\,I_1(N)$ (Hardy–Littlewood) y
+$R_2(N)=2C_2\,\mathfrak S(N)\sum_r h_r(N) I_r(N)$, el cociente **cancela 𝔖**:
+$$\frac{R_2(N)}{R_1(N)}=\widetilde W(N):=\sum_{3\le r\le\sqrt N} h_r(N)\,w_r(N),
+  \qquad w_r=\frac{I_r}{I_1}=\frac1r\frac{\log N}{\log(N/r)}.$$
+
+**Paso 2 — de dónde sale el exponente.** El exponente medido es la pendiente de
+regresión $\beta_2-1=\mathrm{Cov}(\log\widetilde W,\log\mathfrak S)/\mathrm{Var}(\log\mathfrak S)$.
+Con $e_\ell=\mathbf 1[\ell\mid N]$ (independientes, $P=1/\ell$):
+$\log\mathfrak S=\sum_\ell g_\ell e_\ell$, $g_\ell=\log\frac{\ell-1}{\ell-2}$, así
+$\mathrm{Var}(\log\mathfrak S)=\sum_\ell g_\ell^2\frac1\ell(1-\frac1\ell)=:B$ **(constante**,
+dominada por $\ell=3,5$). Para $\widetilde W$, el flip $h_r$ al dividir $N$ cambia el
+término $r$ en $\delta_r=[(r-2)/(r-1)-(r-1)/(r-2)]w_r<0$; linealizando
+$\log\widetilde W\approx\log\widetilde W_0+\widetilde W_0^{-1}\sum_r\delta_r e_r$. Por
+independencia solo sobreviven los términos $r=\ell$:
+$$\mathrm{Cov}(\log\widetilde W,\log\mathfrak S)
+  =\frac1{\widetilde W_0}\sum_r \delta_r\,g_r\,\tfrac1r(1-\tfrac1r)=:-\frac{A}{\widetilde W_0},$$
+con $A>0$ **constante** (la suma converge, $\delta_r g_r/r\sim r^{-4}$). Por tanto
+$$\beta_2-1=\frac{-A/\widetilde W_0}{B}=-\frac{A/B}{\widetilde W_0},\qquad
+  \widetilde W_0\approx\langle R_2/R_1\rangle\sim\log\log N.$$
+La correlación con 𝔖 viene **solo** de los divisores primos pequeños de $N$ (una
+perturbación $O(1)$), repartida sobre una suma $\widetilde W_0\sim\log\log N$; de ahí
+el déficit $1/\log\log N$. **Conclusión: $\beta_2=1-(A/B)/\langle R_2/R_1\rangle\to1$.**
+
+**Validación (no circular).** La ley predice $(1-\beta_2)\langle R_2/R_1\rangle\equiv c$
+constante. Medido en ventanas de $2\cdot10^6$:
+
+| $X$ | $6\cdot10^6$ | $2\cdot10^7$ | $10^8$ | $2\cdot10^8$ |
+|-----|------|------|------|------|
+| $(1-\beta_2)\langle R_2/R_1\rangle$ | 1.110 | 1.100 | 1.088 | 1.084 |
+
+CV $=1.0\%$ (vs $1.7\%$ para $(1-\beta_2)\log\log N$): el "reloj" correcto es
+$\langle R_2/R_1\rangle$, exactamente como predice la derivación. $c\approx1.09$.
+Ver `figures/12_betalaw.png`.
+
 ## 5quater. Exponente de balance residual $a_{\rm Res}(N)$ (tercer draft)
 
 $a_{\rm Res}(N)=1+\min_{N=p+rs}\log r/\log s$ (Chen nondegenerado, $r,s$ primos);
