@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+data/*.npy
+data/*.npz
+figures/*.png
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.bbl
+paper/*.blg
+paper/*.synctex.gz
+.venv/
