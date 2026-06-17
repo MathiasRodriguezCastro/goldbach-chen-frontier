@@ -503,7 +503,11 @@ back-of-envelope form $w_r\approx\frac1r\frac{\log N}{\log(N/r)}$ displayed abov
 appendix and Theorem~\ref{thm:aa} use the \emph{exact} archimedean weight
 $w_r=I_r(N)/I_1(N)$ that it approximates; the elementary form overstates $I_r/I_1$ by a
 constant factor for small $r$ (quantified numerically in \S\ref{sec:majorarc}), which shifts
-the constants but not the qualitative comparison. Table~\ref{tab:cv} compares the
+the constants but not the qualitative comparison. We use the elementary weight in
+Table~\ref{tab:cv} for comparability with the finite-range fit \eqref{eq:R2law}; recomputing
+the four dispersions with the exact weight $I_r/I_1$ on a subsample changes the constants only
+slightly ($0.184/0.167/0.019/0.0135\to0.184/0.167/0.019/0.016$) and leaves the ordering---and
+the blocked full-inheritance normalization as the tightest---unchanged. Table~\ref{tab:cv} compares the
 dispersion of $R_2$ under four normalizations.
 
 \begin{table}[h]
@@ -1554,7 +1558,7 @@ logarithms (\S\ref{sec:truncated}).
 \end{corollary}
 
 \begin{remark}[The honest status of the limit]
-Theorem~\ref{thm:aa} is the result we actually establish in outline; Corollary
+Theorem~\ref{thm:aa} is the linear statement obtained within the stated bounded reduction (the Vaughan--Parseval second moment and the major-arc input); Corollary
 \ref{cor:beta-aa} is what is usually quoted as ``$\beta_2\to1$ for almost all $N$,'' but
 it carries a genuine extra hypothesis. The gap is precisely the lower tail of $R_2$:
 $L^2$ concentration of $R_2-\mathrm{main}$ bounds how often $R_2$ is \emph{large}, but the
