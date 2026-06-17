@@ -117,6 +117,21 @@ proyectoGoldbach/
 └── figures/(PNG — generados)
 ```
 
+## Reproducibilidad
+
+```bash
+python3 -m pip install -r requirements.txt   # numpy/scipy/matplotlib/sympy/pandas (Python 3.10)
+python3 run_all.py            # regenera TODAS las figuras y tablas (slow ~30 min)
+python3 run_all.py --fast     # salta los drivers lentos (~5 min)
+python3 run_all.py --with-gurobi   # además la MIP de selección (requiere licencia Gurobi)
+```
+
+`run_all.py` contiene el **mapa figura/tabla → driver** (la tabla `DRIVERS`): p.ej. Fig. 9 →
+`run_scaling.py`, Fig. 12 → `run_betalaw.py`, Fig. 24 → `run_bases.py`. Todo corre **sin
+Gurobi** salvo la MIP opcional (`run_mip.py`, detrás de `--with-gurobi`). Cada `src/<mod>.py`
+tiene un self-test (`python3 src/<mod>.py`); las semillas de criba y tablas derivadas están
+versionadas en `data/`. Snapshot citable: [`10.5281/zenodo.20725701`](https://doi.org/10.5281/zenodo.20725701).
+
 ## Uso
 
 Cada `src/*.py` tiene un self-test (`python3 src/<mod>.py`); cada figura se regenera

@@ -32,6 +32,7 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{assumption}{Assumption}
 \newtheorem{hypothesis}{Hypothesis}
+\newtheorem{observation}{Numerical Observation}
 
 \newcommand{\PP}{\mathbb P}
 \newcommand{\NN}{\mathbb N}
@@ -54,7 +55,7 @@
 }
 
 \title{The Goldbach--Chen Frontier: A Singular-Series Cancellation Identity and a Bounded Almost-All Reduction}
-\author{Mathias Rodr\'iguez Castro}
+\author{Mathias Rodr\'iguez Castro\thanks{ORCID: \href{https://orcid.org/0009-0002-7235-7677}{0009-0002-7235-7677}}}
 \date{June 2026}
 
 \begin{document}
@@ -85,6 +86,10 @@ identity, reproducible evidence, and an honestly bounded reduction; a gallery of
 cross-disciplinary reframings, all governed by the same $\sing(N)$, is summarized in an
 appendix and developed in a supplement.
 \end{abstract}
+
+\paragraph{\textit{2020 Mathematics Subject Classification.}} 11P32 (primary); 11N36, 11A41, 11Y35, 11-04 (secondary).
+
+\paragraph{\textit{Keywords.}} Goldbach--Chen frontier; Hardy--Littlewood singular series; semiprimes; circle method; experimental number theory; almost-all asymptotics.
 
 \tableofcontents
 
@@ -122,6 +127,38 @@ Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implem
 \item \textbf{An almost-all asymptotic, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve---is unconditional and reduces the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ (all but $o(X)$ even $N$) to the standard Hardy--Littlewood major-arc evaluation for the channel forms $s,N-rs$; we present it within that stated major-arc reduction rather than as a self-contained theorem. Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
 \item \textbf{Many mirrors, one fact (\S\ref{sec:spectral-emp}--\ref{sec:bases-emp}; Appendix~\ref{app:reframings}).} The frontier can be recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, and a discrete surface. We are explicit that this is \emph{one} finding---$\sing(N)$ sets the local densities---observed many times, not many findings; most reframings are deterministic functions of the same $\sing/R_2$ data and are collected in Appendix~\ref{app:reframings} (with the honest negatives: an empty additive-complexity topology and a Chen substitute with no resilience premium). Two earn a place in the body by yielding a \emph{new computation}: the empirical circle method (\S\ref{sec:spectral-emp}), whose comet power spectrum is an empirical shadow of the major arcs, and the carry geometry (\S\ref{sec:bases-emp}), which surfaces a digit/Kummer signature of primality.
 \end{enumerate}
+
+\paragraph{Status of the results: proven, conditional, conjectural.}
+Because the central object is an empirical exponent that is easy to mistake for a structural
+one, we state once, explicitly, what is proved unconditionally, what is conditional and on
+which input, and what is left as a precise conjecture (Table~\ref{tab:status}); the body labels
+each result accordingly (\textbf{Theorem}/\textbf{Proposition} for proved statements,
+\textbf{Numerical Observation} for empirical ones, \textbf{Hypothesis}/\textbf{Conjecture} for
+what we do not prove).
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{p{0.46\linewidth}p{0.46\linewidth}}
+\toprule
+Statement & Status \\
+\midrule
+Channel cancellation $R_2/R_1=W_f(N)$ (Lemma~\ref{lem:sing}) & \emph{Proved}, unconditional, elementary \\
+Finite-range effective exponent $\beta_2\approx\tfrac12$ and its drift; fit \eqref{eq:beta-loglog} & \emph{Numerical observation} (not extrapolated to a limit) \\
+Functional form $1-\beta_2\asymp1/\log\log N$ (Theorem~\ref{thm:beta}) & \emph{Conditional} (quantitative Hardy--Littlewood, Assumption~\ref{ass:HL}); the order is robust, the limiting constant open \\
+Non-circular validation $(1-\beta_2)\langle R_2/R_1\rangle\approx\mathrm{const}$ (Obs.~\ref{obs:validation}) & \emph{Numerical observation} (control) \\
+Linear almost-all $R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}) & \emph{Conditional} bounded reduction to a standard major-arc input; folklore (Remark~\ref{rem:literature}) \\
+$\beta_2\to1$ for almost all $N$ (Corollary~\ref{cor:beta-aa}) & \emph{Conditional} on the lower-tail hypothesis \\
+Lower-tail hypothesis & \emph{Conjecture}, stated precisely (\S\ref{sec:variance}) \\
+Diagnostics of \S\ref{sec:diag-emp}--\ref{sec:further-emp} (balance, continuity, valleys, transport, dynamics) & \emph{Numerical observations} \\
+Model statements in Appendix~A (blocked channel, weak uniformity, least-unblocked prime, carry excess) & \emph{Proved in the stated model} \\
+\bottomrule
+\end{tabular}
+\caption{What is proved, what is conditional, and what is conjectured. The half-power
+$\beta_2\approx\tfrac12$ is a numerical observation; the structural exponent is $1$
+(Lemma~\ref{lem:sing}).}
+\label{tab:status}
+\end{table}
 
 \section{Basic notation}
 
@@ -618,14 +655,15 @@ so $\beta_2\to1$: \emph{$R_2$ asymptotically inherits the full Goldbach singular
 series}, the approach being governed by $1/\log\log N$. This explains why finite
 ranges show $\beta_2\approx\tfrac12$ and a slow apparent drift.
 
-\begin{proposition}[Validation, non-circular]
+\begin{observation}[Non-circular validation]\label{obs:validation}
 The law \eqref{eq:betalaw} predicts that $(1-\beta_2)\langle R_2/R_1\rangle$ is
 constant. Measured over windows from $6\cdot10^{6}$ to $2\cdot10^{8}$ it equals
 $1.11,1.11,1.10,1.09,1.09,1.08$, a coefficient of variation of $1\%$ (versus
 $1.7\%$ for $(1-\beta_2)\log\log N$): the correct ``clock'' is
 $\langle R_2/R_1\rangle$, exactly as \eqref{eq:betalaw} requires
-(Fig.~\ref{fig:betalaw}).
-\end{proposition}
+(Fig.~\ref{fig:betalaw}). This is non-circular because $\beta_2$ (a covariance/variance
+slope) and $\langle R_2/R_1\rangle$ (a mean) are \emph{a priori} independent statistics.
+\end{observation}
 
 \begin{figure}[h]
 \centering
@@ -1014,6 +1052,31 @@ carries ($+0.97$). Right: the carry excess is positive in every base.}
 \label{fig:bases}
 \end{figure}
 
+\section{Open problems and conjectures}
+\label{sec:open}
+We isolate, as precisely as the evidence allows, what an interested reader could try to settle.
+
+\begin{enumerate}[leftmargin=2em,itemsep=2pt]
+\item \textbf{The lower-tail hypothesis} (\S\ref{sec:variance}). Prove that, for every
+$\delta>0$, the density of even $N\in(X,2X]$ with $R_2(N)/R_1(N)\le\delta\,W_f(N)$ tends to $0$
+as $\delta\downarrow0$. By Corollary~\ref{cor:beta-aa} this upgrades the linear almost-all
+asymptotic to the log-regression statement $\beta_2(N)\to1$. It would follow from a Chen-type
+lower bound on $R_{\le2}$ paired with a Montgomery--Vaughan upper bound on $R_1$
+(Remark in \S\ref{sec:variance}); the empirical exceptional set is \emph{empty} at the $5\%$
+level up to $5\cdot10^{8}$.
+\item \textbf{The limiting constant} (\S\ref{sec:confirm}). The order $1-\beta_2\asymp1/\log\log X$
+is robust, but the limiting constant of $(1-\beta_2)\langle R_2/R_1\rangle$ is correction-dominated
+and \emph{not} determinable from data up to $10^{9}$ (it is normalisation-dependent, $\approx0.5$--$0.7$).
+Is there a canonical normalisation with a clean limit?
+\item \textbf{Writing out the major arcs} (\S\ref{sec:majorarc}). Supply the full major-arc
+evaluation for the truncated semiprime channel (semiprimes in progressions of moduli $q\le Q$,
+uniformly in $r\le X^\eta$), turning Theorem~\ref{thm:aa} from a bounded reduction into a
+self-contained almost-all statement.
+\item \textbf{Layers} (\S\ref{sec:layers-emp}). Make the qualitative sign reversal of the layer
+exponents $\beta_k$ quantitative beyond the blocked-channel model (Appendix~\ref{sec:omega-gf}):
+predict the crossing $\beta_k=0$ and its drift with $X$.
+\end{enumerate}
+
 \section{Conclusion}
 
 The organizing observation of this study is a single Euler-product identity and its
@@ -1224,6 +1287,7 @@ $\Var_X=B$, whence the displayed slope. Finally $W_{f,0}(X)=\mathbb E_X[W_f]
 \end{proof}
 
 \subsection{Confirmation and the unconditional model}
+\label{sec:confirm}
 Numerically (Fig.~\ref{fig:betalaw}; \texttt{run\_betalaw.py}): the prediction
 $W_f(N)$ regressed against $\log\sing$ reproduces the measured $\beta_2$ with
 the correct drift ($0.554,0.583,0.602$ at $X=2\!\cdot\!10^{6},2\!\cdot\!10^{7},10^{8}$
