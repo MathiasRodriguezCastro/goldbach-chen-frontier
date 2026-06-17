@@ -75,7 +75,7 @@ The binary Goldbach conjecture states that every even integer $N>2$ can be writt
 \[
   N=p+q,
 \]
-where $p$ is prime and $q$ is either prime or the product of at most two primes \citep{chen1973}; the semiprime channel and the ``$E_2$'' numbers it counts are classical sieve objects \citep{halberstamrichert}. Recent sieve-theoretic work also studies intermediate statements between Chen's theorem and the binary Goldbach conjecture \citep{li2026}.
+where $p$ is prime and $q$ is either prime or the product of at most two primes \citep{chen1973}; the semiprime channel and the ``$E_2$'' numbers it counts are classical sieve objects \citep{halberstamrichert}, and for the broader additive-bases context we refer to \citet{nathanson}. Recent sieve-theoretic work also studies intermediate statements between Chen's theorem and the binary Goldbach conjecture \citep{li2026}.
 
 This project focuses on the transition between the Goldbach representation
 \[
@@ -734,7 +734,7 @@ $X\sim10^{6}$, with the understanding that the exponent $\tfrac12$ drifts to $1$
   \frac{\log N}{\log(N/r)},
   \label{eq:R2law}
 \end{equation}
-where $W(N)\sim\log\log N$ by Mertens' theorem. The weight $W$ makes precise the
+where $W(N)\sim\log\log N$ by Mertens' theorem \citep{hardywright}. The weight $W$ makes precise the
 $\log\log N$ factor of \eqref{eq:R2heuristic}: it is a Mertens sum over the
 \emph{small prime factor} $r$ of the semiprime $q=rs$, weighted by the
 twin-prime-type local factor $(r-1)/(r-2)$. Table~\ref{tab:cv} compares the
@@ -1313,8 +1313,9 @@ the singular series. Unlike the other reframings in this section, this one yield
 concrete \emph{algorithm} rather than a restatement: the residue-aware ordering is a drop-in
 search heuristic---enumerate candidate $p$ in increasing order of the number of small primes
 $\ell\le B$ that $N-p$ is forced to share with $N$---whose benchmark above (expected tries
-$5.5\to2.5$ at $B=13$, a $55\%$ reduction) is a measured speed-up of Goldbach verification,
-not an analogy. The same local arithmetic the singular series encodes is thus directly
+$5.5\to2.5$ at $B=13$, a $55\%$ reduction) is a measured speed-up of the per-$N$ Goldbach
+search---the cost of finding one representation for a given $N$, distinct from the global
+verification $R_1>0$ for all $N\le X$, which the FFT already settles---not an analogy. The same local arithmetic the singular series encodes is thus directly
 actionable.
 
 \begin{figure}[h]
@@ -1917,11 +1918,16 @@ it carries a genuine extra hypothesis. The gap is precisely the lower tail of $R
 $L^2$ concentration of $R_2-\mathrm{main}$ bounds how often $R_2$ is \emph{large}, but the
 log-regression that defines $\beta_2$ also weights $N$ where $R_2$ is \emph{small}, and a
 sparse set with $R_2$ very small could in principle skew the covariance. The required
-one-sided bound is mild (it would follow from a Chen-type lower bound $R_2(N)\gg
-\mathrm{main}(N)$, itself reasonable but not proved here) and is amply confirmed
-empirically---the exceptional set is \emph{empty} at the $5\%$ level up to
-$5\cdot10^{8}$ (Table~\ref{tab:conc}), so in the computed range no $N$ has $R_2/R_1$ even
-near the tail---but we flag it rather than claim it.
+one-sided bound is mild but does not come directly from Chen's theorem: Chen's method
+lower-bounds the \emph{combined} count $R_{\le2}=R_1+R_2$ (every large even $N$ has a
+prime-or-semiprime partner), not the semiprime-only $R_2$ in isolation. To extract
+$R_2\gg\mathrm{main}(N)$ one would pair such a lower bound on $R_{\le2}$ with an
+\emph{upper} bound on $R_1$, which holds for all but $O(X^{1-\delta})$ even $N$ by
+Montgomery--Vaughan~\cite{montgomeryvaughan1975}; the combination is reasonable but we do
+not prove it here. The hypothesis is amply confirmed empirically---the exceptional set is
+\emph{empty} at the $5\%$ level up to $5\cdot10^{8}$ (Table~\ref{tab:conc}), so in the
+computed range no $N$ has $R_2/R_1$ even near the tail---but we flag it rather than claim
+it.
 \end{remark}
 
 \begin{remark}
