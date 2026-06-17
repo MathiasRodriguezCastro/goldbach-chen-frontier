@@ -53,7 +53,7 @@
   keepspaces=true
 }
 
-\title{The Goldbach--Chen Frontier: How the Semiprime Channel Inherits the Singular Series}
+\title{The Goldbach--Chen Frontier: A Singular-Series Cancellation Identity and a Bounded Almost-All Reduction}
 \author{Mathias Rodr\'iguez Castro}
 \date{June 2026}
 
@@ -77,10 +77,10 @@ $\sim1/\log\log N$. A circle-method second-moment bound---only Vaughan's classic
 sieve---yields, in the stated reduction, the \emph{linear} almost-all asymptotic
 $R_2(N)=\mathrm{main}(N)(1+o(1))$; the passage to the log-regression statement
 $\beta_2\to1$ is isolated as one explicitly stated lower-tail hypothesis rather than
-overclaimed. The goal is not a proof of Goldbach but a
-clean new identity, reproducible evidence, and a bounded reduction; a gallery of
-cross-disciplinary reframings, all governed by the same $\sing(N)$, is collected in an
-appendix.
+overclaimed. The goal is not a proof of Goldbach but an explicit
+cancellation identity, reproducible evidence, and an honestly bounded reduction; a gallery
+of cross-disciplinary reframings, all governed by the same $\sing(N)$, is summarized in an
+appendix and developed in a supplement.
 \end{abstract}
 
 \tableofcontents
@@ -113,7 +113,7 @@ This is a discrete object, so it is not continuous in the ordinary analytic sens
 \paragraph{Summary of findings.}
 Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implementing this program; all numbers are reproducible from the accompanying code. The main outcomes are:
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-\item \textbf{The singular series of $R_2$, and the half-power mirage (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $\widetilde W(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not an exponent but a regression slope of a non-power-law object; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The slope is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading.
+\item \textbf{The singular series of $R_2$, and the finite-range half-power (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $\widetilde W(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not an exponent but a regression slope of a non-power-law object; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The slope is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading.
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the slope $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
 \item \textbf{An almost-all theorem, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional; a circle-method second-moment bound---Vaughan's classical \emph{prime} minor-arc estimate plus the trivial $L^2$ size of the semiprime sum, no sieve---gives the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, unconditional in outline. Upgrading this to the log-regression statement $\beta_2(N)\to1$ needs one further input (lower-tail control of $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
@@ -395,7 +395,7 @@ with a brute-force enumeration on random samples (the rounding error of the
 transform is far below $1/2$), and Goldbach's condition $R_1(N)>0$ is verified
 throughout the range.
 
-\subsection{The semiprime channel and the half-power mirage}
+\subsection{The semiprime channel and the finite-range half-power}
 \label{sec:singexp}
 
 The Hardy--Littlewood prediction \eqref{eq:HL} attaches to $R_1$ the full singular
@@ -942,7 +942,7 @@ oscillation at $y=3$ ($B_3=6$), rising to $99.8\%$ by $y=30$---the same saturati
 \S\ref{sec:spectral-emp}, now read as ``the comet is the shadow of primorial local
 coverage''.
 
-The genuinely new object is the \emph{carry geometry}. Adding $p+q=N$ in base $b$ produces
+The freshest object here is the \emph{carry geometry}. Adding $p+q=N$ in base $b$ produces
 carries $c_i\in\{0,1\}$, and their number is fixed by the digit sums,
 $\#\text{carries}(p,N-p)=\big(S_b(p)+S_b(N-p)-S_b(N)\big)/(b-1)$; in base $2$ this is
 $v_2\binom{N}{p}$ (Kummer). Comparing Goldbach representations to random pairs $a+(N-a)=N$
@@ -969,11 +969,13 @@ carries ($+0.97$). Right: the carry excess is positive in every base.}
 
 \section{Conclusion}
 
-The one durable result of this study is a single Euler-product identity and its
+The organizing observation of this study is a single Euler-product identity and its
 consequence: decomposing the semiprime channel by its small prime factor shows that the
 Goldbach singular series $\sing(N)$ enters $R_2$ with exponent $1$, exactly as it enters
-$R_1$, and \emph{cancels} in the ratio $R_2/R_1=\widetilde W(N)$ (Lemma~\ref{lem:sing}).
-The widely tabulated ``$\beta_2\approx\tfrac12$'' is therefore not an exponent but a
+$R_1$, and \emph{cancels} in the ratio $R_2/R_1=\widetilde W(N)$ (Lemma~\ref{lem:sing}). The
+local factorization and cancellation are elementary sieve bookkeeping; our contribution is
+to write them down explicitly and to follow their consequences. The first is that the
+naturally read ``$\beta_2\approx\tfrac12$'' of a finite-range fit is not an exponent but a
 regression slope of a non-power-law object, drifting to $1$ like $1-c/\log\log N$; we
 verify this non-circularly, show it is a multi-channel effect (not the $3\mid N$ atom),
 and reduce the limit to classical inputs---for the \emph{linear} almost-all asymptotic
@@ -992,9 +994,9 @@ the same singular-series governance re-photographed in different filters, and we
 so rather than count them as separate findings. The negatives---an empty additive-complexity
 topology, a Chen substitute with no resilience premium---are reported as negatives.
 
-This is not a proof of Goldbach. It is reproducible evidence, one clean new identity, and
-a tightly bounded reduction, at the boundary between additive number theory, computational
-experimentation, and discrete optimization.
+This is not a proof of Goldbach. It is reproducible evidence, one cancellation identity made
+explicit, and a tightly bounded reduction, at the boundary between additive number theory,
+computational experimentation, and discrete optimization.
 
 \appendix
 \section{Towards a proof that \texorpdfstring{$\beta_2\to1$}{beta2 to 1}}
@@ -1444,13 +1446,29 @@ Montgomery--Vaughan, and the Euler-product identity Lemma~\ref{lem:sing}---is cl
 A fully written proof must still supply the routine major-arc computation for the
 semiprime sum (semiprimes in progressions of modulus $\le(\log X)^{C}$, which follow from
 the prime distribution by Selberg--Sath\'e convolution \citep{selberg1954,sathe1953};
-\S\ref{sec:majorarc}) and track the dependence on $A$. The genuinely \emph{new} content
-is the singular-series cancellation of Lemma~\ref{lem:sing} and the resulting first-moment
-law; the analytic machinery that turns it into the \emph{linear} almost-all theorem is off
-the shelf. This is in sharp contrast to the pointwise Assumption~\ref{ass:HL}, which lies
-beyond current technology. The remaining step to the \emph{log-regression} statement
-$\beta_2\to1$ is the lower-tail input of Corollary~\ref{cor:beta-aa}, which is empirically
-trivial in range but not proved.
+\S\ref{sec:majorarc}) and track the dependence on $A$. The one ingredient we make
+\emph{explicit} is the singular-series cancellation of Lemma~\ref{lem:sing} and the resulting
+first-moment law; the analytic machinery that turns it into the \emph{linear} almost-all
+theorem is off the shelf. This is in sharp contrast to the pointwise Assumption~\ref{ass:HL},
+which lies beyond current technology. The remaining step to the \emph{log-regression}
+statement $\beta_2\to1$ is the lower-tail input of Corollary~\ref{cor:beta-aa}, which is
+empirically trivial in range but not proved.
+\end{remark}
+
+\begin{remark}[Relation to the literature]
+We stress that Theorem~\ref{thm:aa} is not a new estimate. The exceptional-set bound it rests
+on is the Montgomery--Vaughan template for the binary Goldbach asymptotic
+\citep{montgomeryvaughan1975}, and the only departure---that the semiprime sum enters through
+its $L^2$ norm alone, with no bilinear or sieve input---makes the argument, if anything,
+\emph{easier} than for $R_1$. Strong unconditional results on Goldbach-type counts, and the
+$(1+a)$ interpolation between Goldbach and Chen \citep{li2026}, already operate in this
+regime; we claim no improvement on them, and the linear almost-all asymptotic for $R_2$
+should be regarded as folklore in this circle of ideas. What is specific here is the
+singular-series cancellation of Lemma~\ref{lem:sing}, which exhibits
+$\mathrm{main}(N)=2C_2\,\sing(N)\,\widetilde W(N)\,J(N)$ explicitly and is the reason $\sing$
+disappears from the ratio $R_2/R_1$. The contribution of this appendix is the explicit
+bookkeeping and its consequences for the slope $\beta_2$, not the almost-all asymptotic
+itself.
 \end{remark}
 
 \subsection{Truncated logarithms and the blocked-channel model}
@@ -1982,8 +2000,9 @@ exceptional set in Theorem~\ref{thm:aa} is then
 for any fixed $C$ (take $A_0=\tfrac{C+3}2$). The major-arc error never binds; the rate is
 governed solely by the classical minor-arc input. This completes, in outline, the
 reduction of the \emph{linear} almost-all asymptotic $R_2=\mathrm{main}(1+o(1))$
-(Theorem~\ref{thm:aa}) to standard prime-distribution estimates, the only genuinely new
-step being the singular-series identity of Lemma~\ref{lem:sing}. The log-regression
+(Theorem~\ref{thm:aa}) to standard prime-distribution estimates; the analytic machinery is
+classical, and the one ingredient we make explicit is the singular-series cancellation of
+Lemma~\ref{lem:sing}. The log-regression
 statement $\beta_2(N)\to1$ then follows from the lower-tail hypothesis of
 Corollary~\ref{cor:beta-aa}, the one ingredient we do not prove.
 
@@ -2021,262 +2040,44 @@ column per even integer and the pricing problem seeks a representation of desira
 cost. As throughout, the interesting content is selection under structure---whether a
 low-variation path threads the representation cloud---not feasibility.
 
-\section{Supplementary reframings}
+\section{Cross-disciplinary reframings (summary)}
 \label{app:reframings}
 
-The reformulations below recast the Goldbach--Chen frontier in the languages of statistical
-physics, network science, markets, simplicial topology, control, information theory, and
-discrete geometry. In each the governing quantity is the same singular series $\sing(N)$, so
-they are best read as one fact---$\sing$ sets the local densities---seen in several mirrors,
-not as independent results; we keep them for the individual vocabularies and the honest
-negatives.
-
-\subsection{Goldbach as arithmetic ground-state energy}
-\label{sec:energy-emp}
-
-A single reformulation subsumes the counts $R_1,R_2$, the layers $\OmegaF(q)=k$, and
-the partition-function viewpoint. Assign to each decomposition $a+b=N$ ($a,b\ge2$) the
-\emph{arithmetic energy} $H(a,b)=\OmegaF(a)+\OmegaF(b)$, and define the ground-state
-energy and level spectrum
-\[
-  E(N)=\min_{a+b=N}H(a,b),\qquad
-  n_E(N)=\#\{a+b=N:\ \OmegaF(a)+\OmegaF(b)=E\}.
-\]
-Then $E(N)=2$ \emph{iff} Goldbach holds for $N$; the ground-state degeneracy is
-$n_2(N)=R_1(N)$, and the first excited level is $n_3(N)=2R_2(N)$ (prime$+$semiprime,
-Chen). The spectrum (Fig.~\ref{fig:energy}, left) is a hump peaked at the typical energy
-$\langle H\rangle\sim2\log\log N$, with the Goldbach ground state sitting in its
-low-energy tail; the gap $\langle H\rangle-E(N)\sim2\log\log N-2$ diverges.
-
-The thermodynamics is computable for all $N$ at once, since the partition function is a
-self-convolution,
-\[
-  Z_N(\beta)=\sum_{a+b=N}e^{-\beta H(a,b)}=(f_\beta*f_\beta)(N),\qquad f_\beta(n)=e^{-\beta\OmegaF(n)},
-\]
-so one FFT per $\beta$ yields $Z_N$, the mean energy $U_N(\beta)=-\partial_\beta\log Z_N$,
-and the specific heat $C_N(\beta)=\beta^2\Var_\beta(H)$. As $\beta$ increases past a
-``melting'' point $\beta^\star(N)$, the system localises onto the Goldbach ground state:
-$U_N$ drops from $\sim2\log\log N$ to $2$ and $C_N(\beta)$ peaks at $\beta^\star$
-(Fig.~\ref{fig:energy}, centre; mean $\beta^\star\approx2.1$). Strikingly, this melting
-temperature is almost a deterministic function of the singular series:
-$\operatorname{corr}(\beta^\star,\log\sing)=-0.92$ (Fig.~\ref{fig:energy}, right). Where
-$\sing(N)$ is large the ground state is highly degenerate ($R_1\propto\sing$) and
-entropically favoured, so Goldbach order melts at a \emph{lower} $\beta$. Thus the same
-singular series that governs $R_1$, $\beta_2$ and the balance exponent also governs the
-thermodynamic stability of the Goldbach ground state---a unified statistical-mechanical
-picture in which Goldbach is the statement ``every even $N$ has ground-state energy $2$''.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{17_energia.png}
-\caption{Arithmetic ground-state energy. Left: the energy spectrum $n_E(N)$, a hump at
-$\sim2\log\log N$ with the Goldbach ground state $E=2$ (red) in its tail. Centre: mean
-energy $U(\beta)\to2$ and specific heat $C(\beta)$, whose peak $\beta^\star\approx2.1$ is
-the melting temperature of Goldbach order. Right: $\beta^\star$ versus $\log\sing(N)$
-(correlation $-0.92$).}
-\label{fig:energy}
-\end{figure}
-
-\subsection{Adversarial robustness of the Goldbach graph}
-\label{sec:robust-emp}
-
-View the representations as a bipartite graph: even integers $N$ on one side, primes
-$p$ on the other, with an edge $N\!\sim\!p$ when $N-p$ is prime; the degree of $N$ is
-$R_1(N)/2$. How robust is Goldbach to deletion of primes? On a window of $1.5\cdot10^{4}$
-even integers near $10^{6}$ we compare three adversaries (Fig.~\ref{fig:robust}).
-
-\emph{Random deletion} is almost powerless: deleting each prime independently with
-probability $\phi$ leaves $N$ representable unless all its $\sim R_1(N)/2$ disjoint pairs
-are hit, an event of probability $(1-(1-\phi)^2)^{R_1(N)/2}$. Goldbach survives in the
-\emph{whole} window until $\phi\approx0.97$; one may delete $95\%$ of all primes at random
-and still represent every $N$.
-
-\emph{Targeted deletion} is efficient but local: since the pairs $\{p,N-p\}$ of a fixed
-$N$ are disjoint, breaking $N$ is a vertex cover of a matching, costing exactly
-$R_1(N)/2$ primes; the cheapest target is the lowest-degree $N$, giving
-$\kappa=\min_N R_1(N)/2$. In the window this is $4.6\%$ of the primes---an order of
-magnitude less than the random threshold, but aimed at a single $N$.
-
-\emph{Modular deletion} is the striking case. Delete the primes in one reduced class
-$a\bmod m$. The survivors lie in $(\mathbb Z/m)^\times\setminus\{a\}$, and an $N$ is
-destroyed when its class is missing from the survivors' sumset. For $m=3$, deleting the
-class $1$ (i.e.\ \emph{half} of all primes) leaves only the class $2$, whose sumset is
-$\{2+2\}=\{1\}$: every $N\equiv0,2\pmod3$ loses all its representations, destroying $59\%$
-of the window (Fig.~\ref{fig:robust}, right). The same $50\%$ of primes removed at random
-destroys nothing. Thus the adversary manufactures a \emph{local obstruction}---the exact
-mechanism the singular series rules out for the primes themselves. The effect is confined
-to the smallest moduli: $m=4$ deleting class $1$ kills $N\equiv0\bmod4$ ($50\%$), while for
-$m\ge5$ the surviving classes already sum onto everything and no $N$ is fully obstructed.
-
-In short, the Goldbach graph is \emph{random-robust but structure-fragile}: invulnerable to
-losing almost all primes by chance, yet shattered by removing one arithmetic progression.
-This is a network-science counterpart of the local--global theme: Goldbach's redundancy is
-enormous, but it is arithmetic, not statistical, redundancy.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{18_robustez.png}
-\caption{Robustness of the Goldbach graph. Left: fraction of window $N$ destroyed versus
-fraction of primes deleted---random deletion (curve) only bites near $\phi=1$, whereas the
-modular attacks at $\phi=0.5$ (mod $3,4$) destroy $50$--$60\%$, and the targeted cut needs
-only $\kappa=4.6\%$. Right: under the mod-$3$ attack, $N\equiv0$ and $N\equiv2$ are
-obstructed while $N\equiv1$ is untouched.}
-\label{fig:robust}
-\end{figure}
-
-\subsection{Goldbach as a market: liquidity and the fair-weather substitute}
-\label{sec:market-emp}
-
-Read each even $N$ as a market that must clear by hiring two prime inputs $p+q=N$; the
-liquidity is the number of matches, $L_G(N)=R_1(N)$. Chen lets one input be a
-\emph{minimally composite substitute} (a semiprime), giving $L_C(N)=R_1(N)+R_2(N)$ and a
-substitute spread $S_C(N)=R_2/R_1\approx2.3$: in normal times the Chen market is three
-times more liquid. We ask whether the substitute also provides \emph{resilience} under a
-supply shock that removes each prime with probability $\phi$. A Goldbach match survives
-with probability $(1-\phi)^2$ (two primes), but a Chen match only with $(1-\phi)^3$,
-because the semiprime $q=rs$ needs its two factors $r,s$ to survive as well. Hence the
-expected surviving liquidities are $L_G(\phi)=R_1(1-\phi)^2$ and
-$L_C(\phi)=L_G(\phi)+R_2(1-\phi)^3$, and the substitute spread \emph{decays linearly},
-\[
-  S_C(\phi)=\frac{L_C(\phi)-L_G(\phi)}{L_G(\phi)}=S_C(0)\,(1-\phi)\ \longrightarrow\ 0 .
-\]
-Solving $L(\phi)=1$ for the illiquidity threshold, both markets collapse at essentially the
-same point, $\phi_G\approx\phi_C\approx0.989$, and the resilience premium
-$\phi_C-\phi_G\approx2\cdot10^{-4}$ is negligible (Fig.~\ref{fig:market}). The economic
-reading is clean and a little counter-intuitive: the Chen channel is \emph{fair-weather
-liquidity}---abundant when primes are plentiful, but worth ever less precisely as they
-become scarce, because the composite good carries a higher assembly cost. The semiprime
-substitute deepens the market in calm times; it does not hedge the crisis.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{19_mercado.png}
-\caption{Goldbach as a market under a prime supply shock $\phi$. Left: expected surviving
-liquidity of the Goldbach and Chen markets, both crossing the illiquidity threshold near
-$\phi=0.99$. Right: the Chen substitute spread $S_C(\phi)=S_C(0)(1-\phi)$ vanishes
-linearly---no resilience premium.}
-\label{fig:market}
-\end{figure}
-
-\subsection{Persistent topology of additive decompositions (a negative note)}
-\label{sec:tda2}
-
-It is tempting to filter additive decompositions of $N$ by arithmetic complexity rather
-than geometric distance: form the complex
-$K_N^{(k)}=\{\{a,b\}:a+b=N,\ \OmegaF(a)+\OmegaF(b)\le k\}$ and let $k$ grow. But for the
-\emph{binary} problem this is topologically empty: each integer $a$ lies in the single
-pair $\{a,N-a\}$, so $K_N^{(k)}$ is a disjoint matching for every $k$. Its $0$-dimensional
-persistence is therefore exactly the energy spectrum of \S\ref{sec:energy-emp}---each pair
-is a component born at its energy $\OmegaF(a)+\OmegaF(b)$ and never dying---and all higher
-homology vanishes. There is no topological structure to discover beyond the spectrum.
-
-Genuine higher dimension appears only at the \emph{ternary} level. For odd $N$, form the
-graph on primes $p<N$ with an edge $\{p,q\}$ whenever $N-p-q$ is prime, so that each edge
-\emph{is} a ternary representation $(p,q,N-p-q)$. At $N=99{,}999$ this graph has $9{,}591$
-vertices and $3.9\cdot10^{6}$ edges (density $0.084$, minimum degree $2$, so it is
-connected---a graph form of Helfgott's ternary theorem). Yet it is strongly
-\emph{anti}-clustered: it contains far fewer triangles than a random graph of equal
-density, so ternary representations do not aggregate into higher-order simplices. The
-honest conclusion is that the additive-complexity filtration adds nothing to the spectral
-and graph-theoretic pictures already developed; we record it as a negative result.
-
-\subsection{Goldbach as control: the value of arithmetic information}
-\label{sec:control-emp}
-
-Finally, view the even integers as a sequence of markets to be cleared by a controller: at
-each $N$ the controller picks a prime $p$ (the action) and clears if $q=N-p$ is prime.
-Goldbach is the statement that a successful policy exists; the computational question is
-which \emph{simple} policy clears fastest. A naive policy ignores the arithmetic of $N$; a
-\emph{residue-aware} policy with information budget $B$ uses the residues $N\bmod\ell$ for
-primes $\ell\le B$ to prefer $p$ with $N-p$ coprime to those $\ell$---i.e.\ it avoids
-spending tries on partners forced to share a small factor. Over a window near $10^{6}$
-(Fig.~\ref{fig:control}), the single-shot clearing probability rises from $18\%$ (naive) to
-$39\%$ at $B=13$, and the expected number of tries in a sequential search falls from $5.5$
-to $2.5$---a $55\%$ reduction. The marginal value of each prime of information is largest at
-$\ell=3$ (the factor $\tfrac{\ell-1}{\ell-2}=2$) and decreases thereafter, exactly tracking
-the singular series. Unlike the other reframings in this section, this one yields a
-concrete \emph{algorithm} rather than a restatement: the residue-aware ordering is a drop-in
-search heuristic---enumerate candidate $p$ in increasing order of the number of small primes
-$\ell\le B$ that $N-p$ is forced to share with $N$---whose benchmark above (expected tries
-$5.5\to2.5$ at $B=13$, a $55\%$ reduction) is a measured speed-up of the per-$N$ Goldbach
-search---the cost of finding one representation for a given $N$, distinct from the global
-verification $R_1>0$ for all $N\le X$, which the FFT already settles---not an analogy. The same local arithmetic the singular series encodes is thus directly
-actionable.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.66\linewidth]{20_control.png}
-\caption{Value of arithmetic information for the Goldbach controller. As the information
-budget $B$ grows, the single-shot clearing probability (blue) rises and the sequential
-clearing cost (red) falls; the gain per prime tracks the singular-series factor
-$(\ell-1)/(\ell-2)$.}
-\label{fig:control}
-\end{figure}
-
-\subsection{The information content of the comet}
-\label{sec:info-emp}
-
-The spectral saturation invites an information-theoretic reading: how compressible is the
-comet, and what is irreducible? Decomposing the variance of $\log R_1(N)$ into a smooth
-trend, the local arithmetic (the conditional mean given $N\bmod30030$, which captures
-$\sing$ non-linearly), and a residual, we find (Fig.~\ref{fig:info})
-\[
-  \underbrace{81.1\%}_{\text{trend }N/\log^2N}\ +\ \underbrace{18.8\%}_{\text{singular series }\sing(N)}\ +\ \underbrace{0.11\%}_{\text{irreducible}} .
-\]
-The comet is thus $99.9\%$ compressible \emph{by this particular code}---the conditional
-mean given $N\bmod30030=2\cdot3\cdot5\cdot7\cdot11\cdot13$. We stress that this figure is
-relative to the chosen conditioning set, not a theorem: the ``irreducible'' $0.11\%$ is
-what survives after removing structure up to the prime $13$, and a richer conditioning
-(more primes, or non-residue features) would shrink it further. With that caveat, the
-residual is informative: its power spectrum is \emph{flat}---white noise, in contrast to
-the sharply peaked spectrum of $R_1$ itself (\S\ref{sec:spectral-emp})---with lag-$1$
-autocorrelation $-0.04$ and standard deviation $2.7\%$, a few times the Poisson floor
-$\langle R_1\rangle^{-1/2}=0.9\%$. So \emph{up to modulus $30030$} the Goldbach comet is
-almost entirely a singular-series codeword and the residue carries no further \emph{small-modulus}
-arithmetic signal; we do not claim the absence of all further structure, only that none is
-visible below this conditioning.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{22_informacion.png}
-\caption{Information budget of the comet \emph{relative to conditioning on $N\bmod30030$}.
-Left: the variance of $\log R_1$ splits into a smooth trend ($81\%$), the singular series
-($18.8\%$), and a residual ($0.11\%$) that is irreducible \emph{by this code} (richer
-conditioning would shrink it). Right: the residual's power spectrum is flat---white noise,
-with none of the small-modulus arithmetic peaks of Fig.~\ref{fig:spectral}.}
-\label{fig:info}
-\end{figure}
-
-\subsection{Discrete geometry of the Chen surface}
-\label{sec:geom-emp}
-
-Each Chen representation $N=p+rs$ ($q=N-p$ semiprime, $r=\mathrm{spf}(q)\le s$) is a lattice
-point on the surface $p+rs=N$. In normalised logarithmic coordinates
-$u=\log r/\log N,\ v=\log s/\log N$ the points fill the triangle $\{u\le v,\ u+v\le1\}$,
-with the edge $u=0$ (i.e.\ $r$ bounded) the Goldbach boundary and the diagonal $u=v$ the
-balanced semiprimes. Accumulating $6.6\cdot10^{7}$ solutions over a window near $10^{6}$
-(Fig.~\ref{fig:geom}, left) shows a cloud organised into discrete vertical \emph{rays}---one
-for each small prime $r=3,5,7,\dots$, since $r$ is prime---whose brightness decreases with
-$r$: the mass piles up against the Goldbach edge.
-
-Quantitatively, the Li--Liu exponent of a solution, $a=1+\log r/\log s$, has the spectrum of
-Fig.~\ref{fig:geom} (right): it peaks near $a\approx1.1$ and decays toward the balanced
-value $2$, with mean $1.38$ and \emph{median $1.30$}. Half of all Chen solutions already
-satisfy $a<1.3$, and essentially all sit far below the uniform threshold $a=1.9$ of
-Li--Liu. So the Chen solutions of a typical $N$ concentrate near the Goldbach boundary: the
-semiprime second summand is, far more often than not, an unbalanced product with a small
-factor---the geometric form of the residual-exponent and factor-balance findings of
-\S\ref{sec:balance-emp} and \S\ref{sec:diag-emp}.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{23_geometria.png}
-\caption{Discrete geometry of $p+rs=N$. Left: density of Chen solutions in
-$(u,v)=(\log r/\log N,\log s/\log N)$, with discrete rays at each prime $r$ and mass against
-the Goldbach edge $u=0$. Right: the exponent spectrum $a=1+\log r/\log s$, median $1.30$,
-far below the Li--Liu threshold $1.9$.}
-\label{fig:geom}
-\end{figure}
+The Goldbach--Chen frontier can be recast in the languages of statistical physics, network
+science, markets, simplicial topology, control, information theory, and discrete geometry. We
+are explicit that these are \emph{not} independent findings: in each the governing quantity
+is the same singular series $\sing(N)$, so they are one fact---$\sing$ sets the local
+densities---seen in several mirrors. We summarize them here and develop them, with their
+figures, in the accompanying supplement; the honest negatives are reported as such.
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \textbf{Arithmetic ground-state energy.} With energy $H(a,b)=\OmegaF(a)+\OmegaF(b)$,
+Goldbach is ``$E(N)=\min H=2$''; the ground-state degeneracy is $R_1$ and the first excited
+level $2R_2$. The partition function $Z_N(\beta)=(f_\beta*f_\beta)(N)$ costs one FFT per
+$\beta$, and the melting temperature $\beta^\star(N)$ at which Goldbach order localises is an
+almost deterministic function of the singular series ($\operatorname{corr}(\beta^\star,\log\sing)=-0.92$).
+\item \textbf{Adversarial robustness.} The Goldbach graph is \emph{random-robust but
+structure-fragile}: deleting $95\%$ of primes at random breaks no $N$ in the window, yet
+deleting one reduced class mod $3$ (half the primes) destroys $59\%$---a manufactured local
+obstruction.
+\item \textbf{Liquidity market.} Reading $N$ as a market cleared by two prime inputs, the Chen
+semiprime substitute is \emph{fair-weather liquidity}: under a supply shock the substitute
+spread decays linearly, $S_C(\phi)=S_C(0)(1-\phi)\to0$, with a negligible resilience premium.
+\item \textbf{Simplicial topology (negative).} For the \emph{binary} problem the
+additive-complexity filtration is a disjoint matching---its $0$-persistence is just the
+energy spectrum and higher homology vanishes; genuine higher structure appears only at the
+ternary level, which is anti-clustered. A reported negative.
+\item \textbf{Control / value of information.} A residue-aware search ordering---the one
+reframing that yields a concrete algorithm---cuts the expected per-$N$ Goldbach-search cost
+from $5.5$ to $2.5$ tries at budget $B=13$, the gain per prime tracking $(\ell-1)/(\ell-2)$.
+\item \textbf{Information content.} Conditioning $\log R_1$ on $N\bmod30030$ leaves a residual
+of $0.11\%$ that is white noise: up to that modulus the comet is almost entirely a
+singular-series codeword (a statement relative to the conditioning set, not a theorem).
+\item \textbf{Discrete geometry of $p+rs=N$.} The Chen solutions of a typical $N$ concentrate
+against the Goldbach edge (median Li--Liu exponent $a=1.30$, far below the $1.9$ threshold),
+the geometric form of the residual-exponent and factor-balance findings of the body.
+\end{itemize}
+The full development, with the corresponding figures (energy, robustness, market, control,
+information, geometry), is in the supplement \texttt{supplement.tex}.
 
 \section*{Data and code availability}
 \label{sec:availability}

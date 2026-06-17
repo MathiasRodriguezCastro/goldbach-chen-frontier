@@ -59,14 +59,17 @@ $\mathfrak S(N)$:
 | bases / acarreos | base primorial $B_y$, carries | cobertura $=\mathfrak S_y$; firma digital (+0.97 acarreos base 2) |
 
 Paper completo (37 pp, apéndice riguroso) en
-[`paper/goldbach_chen_frontier.tex`](paper/goldbach_chen_frontier.tex); detalles y
-derivaciones en [`notes/theory.md`](notes/theory.md).
+[`paper/goldbach_chen_frontier.tex`](paper/goldbach_chen_frontier.tex); las reformulaciones
+transdisciplinarias se resumen en el Apéndice C y se desarrollan en el supplement
+[`paper/supplement.tex`](paper/supplement.tex). Detalles y derivaciones en
+[`notes/theory.md`](notes/theory.md).
 
 ## Estructura
 
 ```
 proyectoGoldbach/
-├── paper/goldbach_chen_frontier.tex   ← propuesta original (el .tex)
+├── paper/goldbach_chen_frontier.tex   ← paper principal (37 pp)
+├── paper/supplement.tex               ← supplement: las 7 reformulaciones transdisciplinarias
 ├── src/
 │   ├── sieve.py        ← cribas: primos, Omega, spf, semiprimos
 │   ├── counts.py       ← R1, R2 por convolución FFT (validados vs fuerza bruta)
@@ -145,7 +148,7 @@ python3 experiments/run_geometry.py          # geometría de p+rs=N
 python3 experiments/run_bases.py             # bases primoriales + acarreos (~2.5 min)
 
 # paper (37 pp)
-cd paper && latexmk -pdf goldbach_chen_frontier.tex
+cd paper && latexmk -pdf goldbach_chen_frontier.tex && latexmk -pdf supplement.tex
 ```
 
 Requisitos: `numpy`, `scipy`, `pandas`, `matplotlib`, `sympy`; `gurobipy` (licencia;
