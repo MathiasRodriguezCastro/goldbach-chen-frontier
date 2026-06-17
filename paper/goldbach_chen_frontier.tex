@@ -77,7 +77,9 @@ circle-method second-moment bound---using only Vaughan's classical \emph{prime} 
 estimate and the trivial $L^2$ size of the semiprime sum, no sieve---gives the
 \emph{linear} almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ unconditionally in
 outline; the passage to the log-regression statement $\beta_2\to1$ is isolated as one
-explicitly stated lower-tail hypothesis rather than overclaimed. We complement this with
+explicitly stated lower-tail hypothesis rather than overclaimed. The same second moment also
+controls a \emph{truncated} log-regression statistic, and a blocked-channel model proves the
+$1/\log\log N$ deficit. We complement this with
 reproducible diagnostics and a gallery of cross-disciplinary reframings, all governed by
 the same $\sing(N)$---one fact in many mirrors---of which two (an empirical circle method
 whose comet spectrum is the major arcs, and a primorial-base carry geometry) add a
@@ -964,7 +966,10 @@ verify this non-circularly, show it is a multi-channel effect (not the $3\mid N$
 and reduce the limit to classical inputs---unconditionally for the \emph{linear}
 almost-all asymptotic $R_2=\mathrm{main}(1+o(1))$, and, for the log-regression statement
 $\beta_2\to1$, modulo one explicitly stated lower-tail hypothesis
-(Corollary~\ref{cor:beta-aa}).
+(Corollary~\ref{cor:beta-aa}). A truncated-log proposition and a blocked-channel model
+(\S\ref{sec:truncated}) sharpen this gap: the second moment already controls a stable
+logarithmic statistic and the model proves the $1/\log\log X$ deficit, while only the
+untruncated log-regression still requires lower-tail input.
 
 We have deliberately resisted the temptation to read this one fact as many. The
 optimization formulations give a language, not a proof strategy
@@ -1433,6 +1438,142 @@ the shelf. This is in sharp contrast to the pointwise Assumption~\ref{ass:HL}, w
 beyond current technology. The remaining step to the \emph{log-regression} statement
 $\beta_2\to1$ is the lower-tail input of Corollary~\ref{cor:beta-aa}, which is empirically
 trivial in range but not proved.
+\end{remark}
+
+\subsection{Truncated logarithms and the blocked-channel model}
+\label{sec:truncated}
+
+The second-moment estimate of \S\ref{sec:variance} controls $R_2-\mathrm{main}$ in $L^2$,
+not $\log(R_2/R_1)$, and Corollary~\ref{cor:beta-aa} flagged the lower tail as the
+obstruction to the untruncated slope. We add two short results that delimit the gap exactly:
+the second moment \emph{does} control a \emph{truncated} logarithmic statistic
+(Proposition~\ref{prop:trunc}), and an idealized blocked-channel model proves the
+$1/\log\log X$ deficit (Proposition~\ref{prop:blocked}). Neither establishes the untruncated
+$\beta_2\to1$; together they show that only the lower tail, on a sparse set, is left open.
+
+\paragraph{A truncated-log bridge.}
+Write $\rho(N)=R_2(N)/\mathrm{main}(N)$ and, on a dyadic window
+$\mathcal W=\{N\in(X,2X]:2\mid N\}$, let
+\[
+  \eta_X:=\frac1{|\mathcal W|}\sum_{N\in\mathcal W}\big|\rho(N)-1\big|^2 ,
+\]
+the relative variance bounded in Proposition~\ref{prop:var}/Theorem~\ref{thm:aa}:
+$\eta_X\ll(\log X)^{3-2A}/\log\log X\to0$ for $A\ge2$. Fix a truncation level
+$\varepsilon_X=(\log X)^{-A'}$ ($A'>0$ fixed) and set
+$L_X(N)=\log\max\{\rho(N),\varepsilon_X\}$, the response with its lower tail clipped.
+
+\begin{proposition}[Truncated logarithmic stability]\label{prop:trunc}
+If $\eta_X\log(1/\varepsilon_X)\to0$ (which holds for the above $\varepsilon_X$ whenever
+$A\ge2$), then
+\[
+  \frac1{|\mathcal W|}\sum_{N\in\mathcal W}\big|L_X(N)\big|
+  \ \ll\ \big(\eta_X\log(1/\varepsilon_X)\big)^{1/3}=o(1),
+  \qquad
+  \frac1{|\mathcal W|}\sum_{N\in\mathcal W}L_X(N)^2=o(1).
+\]
+\end{proposition}
+
+\begin{proof}
+Let $\delta_X\in(0,\tfrac12)$. On the good set $G=\{|\rho-1|\le\delta_X\}$ we have
+$\rho\ge1-\delta_X>\varepsilon_X$ for large $X$, so $L_X=\log\rho$ and $|L_X|\le2\delta_X$. By
+Chebyshev the complement has density $\le\eta_X/\delta_X^2$; there, if $\rho<1$ then
+$\max\{\rho,\varepsilon_X\}\ge\varepsilon_X$ gives $|L_X|\le\log(1/\varepsilon_X)$, while if
+$\rho\ge1$ then $R_2(N)\le N$ and $\mathrm{main}(N)\gg X\log\log X/\log^2X$ on $\mathcal W$
+give $\rho\ll\log^2X/\log\log X$, hence $|L_X|=\log\rho\le2\log\log X+O(1)\le
+C\log(1/\varepsilon_X)$. Therefore
+$|\mathcal W|^{-1}\sum_{\mathcal W}|L_X|\le2\delta_X+C\,\eta_X\delta_X^{-2}\log(1/\varepsilon_X)$,
+and $\delta_X=(\eta_X\log(1/\varepsilon_X))^{1/3}$ yields the first bound. The second follows
+from the pointwise $|L_X|\le C\log(1/\varepsilon_X)$:
+$|\mathcal W|^{-1}\sum L_X^2\le C\log(1/\varepsilon_X)\,|\mathcal W|^{-1}\sum|L_X|\to0$ for
+$A\ge2$.
+\end{proof}
+
+Since $\log(R_2/R_1)=\log\rho+\log(\mathrm{main}/R_1)$ and
+$\mathrm{main}(N)/R_1(N)=\widetilde W(N)(1+o(1))$ off a set of size $O(X^{1-\delta})$ (the
+major arcs of \S\ref{sec:majorarc} and Montgomery--Vaughan for $R_1$),
+Proposition~\ref{prop:trunc} shows that the $\log\rho$ part contributes $o(1)$ to both the
+variance and the covariance of the $\beta_2$-regression once truncated. The \emph{truncated}
+log-regression slope is therefore governed entirely by the channel term $\log\widetilde W$,
+treated next. This is the precise sense in which the second-moment machinery already
+suffices: the only quantity it cannot reach is the untruncated lower tail, which is
+empirically inactive ($\mathrm{CV}(b)<0.7\%$ up to $5\cdot10^{8}$, Table~\ref{tab:conc}), so
+in the computed range the truncated and untruncated slopes coincide.
+
+\paragraph{The blocked-channel model.}
+We make the mechanism behind $\beta_2(X)=1-c/\widetilde W_0$ (Theorem~\ref{thm:beta})
+precise in the Kubilius-type model of Lemma~\ref{lem:moments}, where the indicators
+$e_\ell=\mathbf 1[\ell\mid N]$ are independent Bernoulli$(1/\ell)$ over distinct odd primes.
+Freezing the weights at scale $X$, with $a_r=\frac{r-1}{r-2}\frac1r$ set
+\[
+  W_{0,X}=\!\!\sum_{3\le r\le\sqrt X}\!\!a_r,\qquad
+  D_X(N)=\!\!\sum_{\substack{r\mid N\\3\le r\le\sqrt X}}\!\!a_r,\qquad
+  W_X(N)=W_{0,X}-D_X(N),
+\]
+and, with $g_\ell=\log\frac{\ell-1}{\ell-2}$, $Y_X(N)=\sum_{\ell\mid N,\,\ell>2}g_\ell$ (the
+model's $\log\sing$).
+
+\begin{proposition}[Blocked-channel slope; model]\label{prop:blocked}
+In the independent-divisibility model,
+\[
+  \operatorname{Cov}(\log W_X,\,Y_X)=-\frac{A_X}{W_{0,X}}+O\!\big(W_{0,X}^{-2}\big),
+  \quad A_X=\!\!\sum_{3\le r\le\sqrt X}\!\!a_r\,g_r\,\tfrac1r\big(1-\tfrac1r\big)>0,
+\]
+and $\Var(Y_X)=B_X:=\sum_{2<\ell\le\sqrt X}g_\ell^2\,\tfrac1\ell(1-\tfrac1\ell)\to B$. Hence
+the model slope satisfies
+\[
+  \beta_{2,X}^{\mathrm{model}}=1+\frac{\operatorname{Cov}(\log W_X,Y_X)}{\Var(Y_X)}
+  =1-\frac{C_X}{W_{0,X}}+O\!\big(W_{0,X}^{-2}\big),\qquad C_X=\frac{A_X}{B_X},
+\]
+with $A_X,B_X$ positive and bounded; since $W_{0,X}=\log\log X+O(1)$ (Mertens),
+\[
+  \boxed{\,1-\beta_{2,X}^{\mathrm{model}}\ \asymp\ \frac1{\log\log X}.\,}
+\]
+\end{proposition}
+
+\begin{proof}
+As $\mathbb E[D_X]=\sum_r a_r/r=O(1)$ while $W_{0,X}\to\infty$, the event
+$\{D_X\le\tfrac12 W_{0,X}\}$ has complementary probability $O(W_{0,X}^{-2})$ (Chebyshev), and
+there $\log W_X=\log W_{0,X}-D_X/W_{0,X}+O(D_X^2/W_{0,X}^2)$; hence
+$\operatorname{Cov}(\log W_X,Y_X)=-W_{0,X}^{-1}\operatorname{Cov}(D_X,Y_X)+O(W_{0,X}^{-2})$. By
+independence $\operatorname{Cov}(e_r,e_\ell)=\delta_{r\ell}\,\tfrac1r(1-\tfrac1r)$, so
+$\operatorname{Cov}(D_X,Y_X)=\sum_r a_rg_r\tfrac1r(1-\tfrac1r)=A_X$ and
+$\Var(Y_X)=B_X$; both series converge ($a_rg_r/r\asymp r^{-3}$, $g_\ell^2/\ell\asymp\ell^{-3}$),
+and $W_{0,X}=\sum_{r\le\sqrt X}\frac{r-1}{(r-2)r}=\sum_{r\le\sqrt X}\tfrac1r+O(1)=\log\log X+O(1)$.
+\end{proof}
+
+This model theorem isolates the central mechanism: each unblocked semiprime channel inherits
+$\sing(N)$ in full, but the same small-prime divisibility that \emph{raises} $\sing(N)$
+(through $g_\ell>0$) \emph{removes} the matching $r$-channel from the Mertens sum (through
+$-a_r$ in $D_X$). The covariance is therefore negative, purely mechanical, and
+multi-channel---a diagonal sum over $r=\ell$ with no dominant term, consistent with the
+$\sim10\%$ weight of the $3\mid N$ atom in \S\ref{sec:singexp}---and of size
+$1/W_{0,X}\sim1/\log\log X$. It makes the constant $c=A/B$ of Theorem~\ref{thm:beta} precise
+\emph{within the model}; it is not a theorem about the primes, for which the same identity
+needs the unproven uniformity of Assumption~\ref{ass:HL}.
+
+\begin{remark}[Chen-rescue threshold; heuristic]
+Model the number of balanced Goldbach pairs in the band $p\in[N/2-k,\,N/2]$ as Poisson with
+mean $\lambda_k(N)\approx 2C_2\,\sing(N)\,k/\log^2(N/2)$ (the Hardy--Littlewood density on a
+band of $k$ integers). The chance of no prime pair is then $e^{-\lambda_k}$, so the fraction
+of $N$ that require a semiprime rises as the band narrows and crosses one half near
+$\lambda_k\approx\log2$, i.e.\ at
+\[
+  k_\star(N)\approx\frac{\log^2N}{2C_2\,\sing(N)}.
+\]
+This reproduces both features observed in \S\ref{sec:opt-emp}: the peak band-scale grows like
+$\log^2N$, and a large $\sing(N)$ pushes the threshold to \emph{smaller} $k$ (primes are
+locally abundant, so balance must be tighter before semiprimes are needed). The Poisson step
+is heuristic---it ignores correlations among nearby pairs.
+\end{remark}
+
+\begin{remark}[Arithmetic-complexity layers; qualitative]
+In the same model, a larger $\sing(N)$ means $N$ carries more small prime factors. The
+admissibility constraint for $N=p+q$ with $p$ prime forces $q=N-p$ into the reduced classes
+modulo those primes, biasing $q$ away from sharing $N$'s small factors and hence toward lower
+$\OmegaF(q)$. This is the qualitative origin of the sign reversal of \S\ref{sec:layers-emp}:
+$\sing(N)$ enhances low-complexity channels ($\beta_k>0$, $k\le2$) and suppresses
+high-complexity ones ($\beta_k<0$, $k\ge3$). We claim only the direction, not the numerical
+$\beta_k$ sequence.
 \end{remark}
 
 \subsection{The major arcs: semiprimes in progressions}
