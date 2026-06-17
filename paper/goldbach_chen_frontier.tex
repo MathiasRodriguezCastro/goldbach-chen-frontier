@@ -120,7 +120,7 @@ Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implem
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the effective exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
 \item \textbf{An almost-all asymptotic, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve---is unconditional and reduces the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ (all but $o(X)$ even $N$) to the standard Hardy--Littlewood major-arc evaluation for the channel forms $s,N-rs$; we present it within that stated major-arc reduction rather than as a self-contained theorem. Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
-\item \textbf{Many mirrors, one fact (\S\ref{sec:spectral-emp}--\ref{sec:bases-emp}; Appendix~\ref{app:reframings}).} The frontier can be recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, and a discrete surface. We are explicit that this is \emph{one} finding---$\sing(N)$ sets the local densities---observed many times, not many findings; most reframings are deterministic functions of the same $\sing/R_2$ data and are collected in Appendix~\ref{app:reframings} (with the honest negatives: an empty additive-complexity topology and a Chen substitute with no resilience premium). Two earn a place in the body by yielding a \emph{new computation}: the empirical circle method (\S\ref{sec:spectral-emp}), whose comet power spectrum is literally the major arcs, and the carry geometry (\S\ref{sec:bases-emp}), which surfaces a digit/Kummer signature of primality.
+\item \textbf{Many mirrors, one fact (\S\ref{sec:spectral-emp}--\ref{sec:bases-emp}; Appendix~\ref{app:reframings}).} The frontier can be recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, and a discrete surface. We are explicit that this is \emph{one} finding---$\sing(N)$ sets the local densities---observed many times, not many findings; most reframings are deterministic functions of the same $\sing/R_2$ data and are collected in Appendix~\ref{app:reframings} (with the honest negatives: an empty additive-complexity topology and a Chen substitute with no resilience premium). Two earn a place in the body by yielding a \emph{new computation}: the empirical circle method (\S\ref{sec:spectral-emp}), whose comet power spectrum is an empirical shadow of the major arcs, and the carry geometry (\S\ref{sec:bases-emp}), which surfaces a digit/Kummer signature of primality.
 \end{enumerate}
 
 \section{Basic notation}
@@ -446,7 +446,7 @@ $[5000,X]$ and a measurement at the leading edge.
 \centering
 \begin{tabular}{rcc}
 \toprule
-$X$ & $\beta_2$ & $R^2$ of the regression\\
+$X$ & $\beta_2$ & $R^2_{\mathrm{OLS}}$ of the regression\\
 \midrule
 $5\cdot10^{5}$ & $0.452$ & $0.91$\\
 $1\cdot10^{6}$ & $0.475$ & $0.91$\\
@@ -497,8 +497,14 @@ the channels $r\mid N$ (where $p=N-rs\equiv0\bmod r$ forces $p=r$),
   \label{eq:Wf}
 \end{equation}
 the same sum $W_f$ that governs the appendix derivation, where it is the channel-cancellation
-factor $R_2/R_1=W_f(N)$ (Theorem~\ref{thm:beta}). Table~\ref{tab:cv} compares the dispersion of
-$R_2$ under four normalizations.
+factor $R_2/R_1=W_f(N)$ (Theorem~\ref{thm:beta}). A notational caveat: in \eqref{eq:R2law},
+\eqref{eq:Wf} and Table~\ref{tab:cv} the channel weight is the \emph{elementary}
+back-of-envelope form $w_r\approx\frac1r\frac{\log N}{\log(N/r)}$ displayed above, whereas the
+appendix and Theorem~\ref{thm:aa} use the \emph{exact} archimedean weight
+$w_r=I_r(N)/I_1(N)$ that it approximates; the elementary form overstates $I_r/I_1$ by a
+constant factor for small $r$ (quantified numerically in \S\ref{sec:majorarc}), which shifts
+the constants but not the qualitative comparison. Table~\ref{tab:cv} compares the
+dispersion of $R_2$ under four normalizations.
 
 \begin{table}[h]
 \centering
@@ -549,7 +555,7 @@ settle at $1/2$: it rises monotonically (Fig.~\ref{fig:scaling}). Eight windows
 from $6\cdot10^{6}$ to $10^{9}$ are fit to within $0.0013$ by
 \begin{equation}
   \beta_2(X)\ \approx\ -0.094(7)+0.234(3)\,\log\log X
-  \qquad (R^2=0.9987,\ \text{8 windows}),
+  \qquad (R^2_{\mathrm{OLS}}=0.9987,\ \text{8 windows}),
   \label{eq:beta-loglog}
 \end{equation}
 the parenthesised figures being the last-digit standard errors of the two-parameter
@@ -560,7 +566,7 @@ $10^{9}$ (measured). We deliberately \emph{do not} read a numerical limit off
 say, $X\sim10^{46}$ (where it would touch $\beta_2=1$) is well outside the data and is
 not evidence---the robust content is the \emph{functional form} $1-\beta_2\asymp
 1/\log\log X$ and its derivation below, not a forecast of where the effective exponent
-crosses a particular value. The regression quality stays high throughout ($R^2\approx0.997$,
+crosses a particular value. The regression quality stays high throughout ($R^2_{\mathrm{OLS}}\approx0.997$,
 $\mathrm{CV}$ of the half-power normalization $\lesssim0.04$).
 
 \begin{figure}[h]
@@ -660,7 +666,7 @@ $\beta_k$ & $1.00$ & $0.50$ & $-0.30$ & $-1.38$ & $-2.73$ & $-4.04$\\
 \bottomrule
 \end{tabular}
 \caption{Layer profile and singular exponent at $X=2\cdot10^{6}$ (each regression has
-$R^2\approx0.92$). The exponent decreases monotonically and crosses zero between
+$R^2_{\mathrm{OLS}}\approx0.92$). The exponent decreases monotonically and crosses zero between
 $k=2$ and $k=3$; it is \emph{not} $1/k$.}
 \label{tab:layers}
 \end{table}
@@ -941,12 +947,12 @@ $R_1$ over a window of consecutive even integers and taking its power spectrum
 (Fig.~\ref{fig:spectral}, left) reveals a forest of sharp lines exactly at the arithmetic
 frequencies: the dominant peak is at $\tfrac13$ (period $T_N=6$, the modulus $3$), followed
 by $\tfrac15,\tfrac25$ (modulus $5$), with heights that decay across primes in step with the
-singular-series factors $(\ell-1)/(\ell-2)$. These are the major arcs made visible.
+singular-series factors $(\ell-1)/(\ell-2)$. These are the major-arc frequencies made visible empirically.
 
 Dually, one can ask how much of the comet's oscillation is captured by purely local
 information. Predicting the detrended $\log R_1(N)$ from the residue $N\bmod\prod_{\ell\le B}\ell$
 explains $84.6\%$ of the variance at $B=3$ (i.e.\ $N\bmod6$ alone), $95.0\%$ at $B=5$, and
-saturates toward the singular-series ceiling $R^2=0.999$ (Fig.~\ref{fig:spectral}, right).
+saturates toward the singular-series ceiling $R^2_{\mathrm{OLS}}=0.999$ (Fig.~\ref{fig:spectral}, right).
 The comet is, to first order, a \emph{modulo-$6$ phenomenon}: the prime $3$ supplies $85\%$
 of all explainable structure, and successive primes contribute the rapidly shrinking
 remainder predicted by $\sing(N)$.
@@ -2095,6 +2101,17 @@ Lemma~\ref{lem:sing}. Hence
 \]
 the tail $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$ being the standard
 absolutely-convergent completion of the singular series.
+
+\paragraph{Uniformity in the small factor.}
+The per-channel form of Proposition~\ref{prop:major} is this same computation carried out
+\emph{uniformly} for the small prime factor $r\le X^\eta$: for each such $r$ the modulus runs
+over $q_0\le Q$ and the local semiprime multiplier $\gamma_{q_0}$ is controlled uniformly by
+Lemma~\ref{lem:s2ap}, while the channels $r>X^\eta$ are absorbed by Lemma~\ref{lem:large-r}.
+Pairing the local product $G_2(a,q_0)$ with the prime factor $\mu(q_0)/\phi(q_0)$ reproduces,
+at each prime $\ell$, the singular factor $(\ell-1)/(\ell-2)$ for $\ell\mid N$ and the
+suppression at $\ell=r\mid N$---that is, exactly $2C_2\sing(N)\frac{r-1}{r-2}I_r(N)$ per
+unblocked channel. This is the sense in which the major-arc input of Theorem~\ref{thm:aa} is
+uniform over $3\le r\le\sqrt N$.
 
 \begin{remark}[Numerical check of the main term]
 The channel asymptotic underlying both Assumption~\ref{ass:HL} and Lemma~\ref{lem:sing}
