@@ -22,10 +22,10 @@ keywords:
   - semiprimes
 license: MIT
 version: "1.0.0"
-date-released: 2026-06-16
-repository-code: "https://github.com/USER/proyectoGoldbach"
-# A versioned snapshot will be archived on Zenodo; replace the DOI below upon deposit.
+date-released: 2026-06-17
+repository-code: "https://github.com/MathiasRodriguezCastro/goldbach-chen-frontier"
+doi: "10.5281/zenodo.20725701"
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.PENDING"
-    description: "Zenodo archive of the code and derived tables (to be minted on deposit)."
+    value: "10.5281/zenodo.20725701"
+    description: "Zenodo archive of the code and derived tables."
