@@ -735,6 +735,7 @@ like $\log^2N$.}
 \end{figure}
 
 \subsection{Weak continuity of the location measures}
+\label{sec:cont-emp}
 
 Finally we test the weak-continuity intuition of \S4 (Question~1 and the weak
 type-stabilization hypothesis there) directly. The pointwise measure $\mu_N$ of $q/N$ is noisy, but
@@ -757,6 +758,11 @@ confirming the weak type-stabilization picture. The semiprime location is slight
 $q$ (mean $q/N=0.513$ versus the exactly symmetric $0.500$ for primes), the only
 visible signature that $p$ and $q$ play asymmetric roles in $R_2$.
 \end{itemize}
+
+Appendix~\ref{sec:weak-cont} gives the weighted Hardy--Littlewood explanation: after
+normalization, both the inherited singular series and the Mertens channel sum cancel,
+leaving the uniform law for $q/N$ in either channel (conditional on the weighted
+channel asymptotics).
 
 \begin{figure}[h]
 \centering
@@ -1669,6 +1675,71 @@ negative one above it ($k>\bar\mu_y$). This is the mechanism behind the transiti
 positive response in the Goldbach and Chen layers to negative response for higher
 $\OmegaF$-layers; it gives the direction and the sign reversal, not the exact numerical
 $\beta_k$.
+
+\subsection{Weak uniformity of the location measures}
+\label{sec:weak-cont}
+
+The experiments of \S\ref{sec:cont-emp} suggest that the representation clouds become
+continuous after normalization: the empirical laws of $q/N$ for both prime and semiprime $q$
+approach the uniform law on $(0,1)$, up to small endpoint effects. This is what the weighted
+Hardy--Littlewood heuristic predicts. For a bounded $C^1$ test function
+$\varphi:[0,1]\to\mathbb R$ write, when $R_t(N)\ne0$,
+\[
+  \mu_N^{(1)}(\varphi):=\frac1{R_1(N)}\!\!\sum_{\substack{p<N\\ p,\,N-p\in\PP}}\!\!\varphi\Big(\tfrac{N-p}{N}\Big),
+  \qquad
+  \mu_N^{(2)}(\varphi):=\frac1{R_2(N)}\!\!\sum_{\substack{p<N\\ p\in\PP,\,N-p\in\SSemi}}\!\!\varphi\Big(\tfrac{N-p}{N}\Big),
+\]
+the averages of $\varphi$ against the type-$t$ location measures of \S\ref{sec:cont-emp}.
+
+\begin{hypothesis}[Weighted prime and semiprime channel asymptotics]\label{hyp:weighted}
+For every bounded $C^1$ test function $\varphi$ and almost all even $N$,
+\[
+  \sum_{\substack{p<N\\ p,\,N-p\in\PP}}\varphi\Big(\tfrac{N-p}{N}\Big)
+  =(1+o(1))\,2C_2\,\sing(N)\,\frac{N}{\log^2N}\int_0^1\varphi(x)\,dx ,
+\]
+and, for each unblocked semiprime channel $q=rs$, uniformly in the range of $r$ used in the
+paper,
+\[
+  \sum_{\substack{s\in\PP\\ N-rs\in\PP}}\varphi\Big(\tfrac{rs}{N}\Big)
+  =(1+o(1))\,2C_2\,\sing(N)\,\frac{r-1}{r-2}\,\frac{N}{r\log^2N}\int_0^1\varphi(x)\,dx ,
+\]
+the channel omitted when $r\mid N$.
+\end{hypothesis}
+
+\begin{proposition}[Weak uniformity of the location measures; conditional]\label{prop:weakcont}
+Under Hypothesis~\ref{hyp:weighted}, for almost all even $N$,
+\[
+  \mu_N^{(1)}(\varphi)=\int_0^1\varphi(x)\,dx+o(1),
+  \qquad
+  \mu_N^{(2)}(\varphi)=\int_0^1\varphi(x)\,dx+o(1) .
+\]
+Equivalently, the empirical measures of $q/N$ in the prime and semiprime channels converge
+weakly to the uniform law on $(0,1)$, in the same smoothed/almost-all sense as the weighted
+asymptotics.
+\end{proposition}
+
+\begin{proof}
+For the prime channel, the first weighted asymptotic with $\varphi\equiv1$ gives
+$R_1(N)=(1+o(1))\,2C_2\sing(N)N/\log^2N$; dividing the two estimates yields
+$\mu_N^{(1)}(\varphi)=\int_0^1\varphi+o(1)$. For the semiprime channel, writing $q=rs$ and
+summing the per-channel asymptotic over the unblocked $r\le\sqrt N$,
+\[
+  \sum_{\substack{p<N\\ p\in\PP,\,N-p\in\SSemi}}\varphi\Big(\tfrac{N-p}{N}\Big)
+  =(1+o(1))\,2C_2\sing(N)\,\frac{N}{\log^2N}
+  \Big(\!\!\sum_{\substack{3\le r\le\sqrt N\\ r\nmid N}}\!\!\frac{r-1}{r-2}\frac1r\Big)\int_0^1\varphi(x)\,dx ,
+\]
+the parenthesis being the Mertens channel sum $\widetilde W(N)$. Taking $\varphi\equiv1$ gives
+the matching asymptotic for $R_2(N)$; dividing cancels both the inherited singular series
+$\sing(N)$ and the channel sum, leaving $\mu_N^{(2)}(\varphi)=\int_0^1\varphi+o(1)$. This is
+weak convergence against every bounded $C^1$ test function.
+\end{proof}
+
+This explains why the discontinuous pointwise representation sets nonetheless produce smooth
+limiting clouds: the singular series governs the local \emph{density} of representations, but
+after normalizing each measure it cancels---together with the Mertens channel sum in the
+semiprime case---leaving the uniform spatial law. It is the conditional counterpart of the
+weak-continuity diagnostics of \S\ref{sec:cont-emp}, and like the other appendix results it is
+conditional on the stated weighted asymptotics, not an unconditional theorem about primes.
 
 \subsection{The least-unblocked-prime law and residual collapse}
 \label{sec:least-unblocked}
