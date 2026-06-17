@@ -116,7 +116,7 @@ This is a discrete object, so it is not continuous in the ordinary analytic sens
 \paragraph{Summary of findings.}
 Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implementing this program; all numbers are reproducible from the accompanying code. The main outcomes are:
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-\item \textbf{The singular series of $R_2$, and the finite-range half-power (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $W_f(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not a structural exponent but a finite-range effective exponent inferred from the regression slope $m_2=\beta_2-1$; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The deficit is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading.
+\item \textbf{The singular series of $R_2$, and the finite-range half-power (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $W_f(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not a structural exponent but a finite-range effective exponent inferred from the regression slope $m_2=\beta_2-1$; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The deficit is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading. The channel factorization itself is an elementary singular-series computation; what we record is its consequence---the exact cancellation of $\sing(N)$ in $R_2/R_1$---which the existence-oriented sieve literature has had no reason to isolate (Remark~\ref{rem:identity-novelty}).
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the effective exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
 \item \textbf{An almost-all asymptotic, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve---is unconditional and reduces the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ (all but $o(X)$ even $N$) to the standard Hardy--Littlewood major-arc evaluation for the channel forms $s,N-rs$; we present it within that stated major-arc reduction rather than as a self-contained theorem. Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
@@ -1105,6 +1105,34 @@ $1-r/r=0$ vanishes, and $\sing_2(r,N)=0$: the channel is identically blocked bec
 $p=N-rs\equiv0\bmod r$ forces $p=r$.
 \end{proof}
 
+\begin{remark}[Relation to standard sieve theory]\label{rem:identity-novelty}
+Each ingredient of Lemma~\ref{lem:sing} is classical. The singular series of a system of linear
+forms is the Hardy--Littlewood computation \citep{hardylittlewood1923} (see also
+\citep{vaughan1997}), and the decomposition of a semiprime by its prime factors is the staple
+device of the $E_2$ sieve \citep{halberstamrichert}; for a single fixed channel $(s,\,N-rs)$
+the evaluation of $\sing_2(r,N)$ is therefore routine, and a reader familiar with the prime
+$k$-tuple heuristic will reconstruct \eqref{eq:S2factor} without difficulty. What we wish to
+record is not this local computation but its global consequence, which to our knowledge is not
+stated explicitly in the literature: that every unblocked channel inherits the \emph{same}
+Goldbach singular series $\sing(N)$ that governs $R_1$---not a smaller quantity, and not a
+fractional power of it---so that $\sing(N)$ cancels \emph{exactly} in the ratio
+$R_2(N)/R_1(N)=W_f(N)$, leaving the pure Mertens channel sum \eqref{eq:Wtilde} as an
+unconditional Euler-product identity. That this seems not to have been written down is a matter
+of aim, not of difficulty. The sieve literature on Chen's theorem and on the $(1+a)$
+interpolation \citep{chen1973,halberstamrichert,li2026} is directed at \emph{existence}---lower
+bounds forcing $R_{\le2}(N)>0$, and upper bounds within a constant of the Hardy--Littlewood
+prediction; for those ends the singular-series content of the ratio $R_2/R_1$ is irrelevant and
+is never isolated. It becomes the natural object only once one asks how the relative semiprime
+share responds to $\sing(N)$, as the empirical regression of \S\ref{sec:singexp} forces. The
+identity is precisely what shows that the reproducible finite-range value
+$\beta_2\approx\tfrac12$ is not a structural half-power but an effective exponent inferred from
+the covariance between the blocked channels $r\mid N$ and $\sing(N)$ (Theorem~\ref{thm:beta}):
+$\sing(N)$ enters $R_2$ with exponent $1$, exactly as it does $R_1$. The contribution of
+Lemma~\ref{lem:sing} is thus expository in form and diagnostic in use, not a new sieve estimate.
+(This is a novelty claim about the \emph{identity}; for the separate almost-all reduction,
+which is folklore in this circle of ideas, cf.\ Remark~\ref{rem:literature}.)
+\end{remark}
+
 \begin{lemma}[Moments of $\log\sing$]\label{lem:moments}
 For distinct odd primes $\ell_1,\dots,\ell_k$,
 $\#\{N\in\mathcal N_X:\ell_i\mid N\ \forall i\}=|\mathcal N_X|\prod_i\ell_i^{-1}+O(2^k)$.
@@ -1592,8 +1620,10 @@ log-regression statement $\beta_2\to1$, which needs the lower-tail hypothesis of
 Corollary~\ref{cor:beta-aa}.
 \end{remark}
 
-\begin{remark}[Relation to the literature]
-We stress that Theorem~\ref{thm:aa} is not a new estimate. The exceptional-set bound it rests
+\begin{remark}[Relation to the literature]\label{rem:literature}
+We stress that Theorem~\ref{thm:aa} is not a new estimate (a novelty claim about the
+\emph{reduction}, to be kept distinct from the novelty claim about the \emph{identity} in
+Remark~\ref{rem:identity-novelty}). The exceptional-set bound it rests
 on is the Montgomery--Vaughan template for the binary Goldbach asymptotic
 \citep{montgomeryvaughan1975}, and the only departure---that the semiprime sum enters through
 its $L^2$ norm alone, with no bilinear or sieve input---makes the argument, if anything,
