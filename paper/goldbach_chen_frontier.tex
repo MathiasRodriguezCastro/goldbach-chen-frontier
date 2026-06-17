@@ -70,8 +70,9 @@ singular series, and in the ratio $R_2/R_1$ the singular series \emph{cancels} (
 unconditional Euler-product identity), leaving a Mertens channel sum
 $W_f(N)\sim\log\log N$. Thus $\sing(N)$ enters $R_2$ with exponent $1$, exactly as
 in $R_1$: $R_2$ inherits the full singular series, and the apparent ``half power'' reported
-by finite-range log--log fits is not an exponent but a regression \emph{slope} of a
-non-power-law object, obeying $\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ with deficit
+by finite-range log--log fits is not a structural exponent but a finite-range effective
+exponent inferred from the regression slope $m_2=\beta_2-1$, obeying
+$\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ with deficit
 $\sim1/\log\log N$. The local channel factorization is unconditional; a Vaughan--Parseval
 minor-arc estimate (Vaughan's classical \emph{prime} bound plus the trivial $L^2$ size of the
 semiprime sum, no sieve) gives a second-moment reduction, and the identification of the
@@ -115,8 +116,8 @@ This is a discrete object, so it is not continuous in the ordinary analytic sens
 \paragraph{Summary of findings.}
 Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implementing this program; all numbers are reproducible from the accompanying code. The main outcomes are:
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-\item \textbf{The singular series of $R_2$, and the finite-range half-power (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $W_f(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not an exponent but a regression slope of a non-power-law object; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The slope is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading.
-\item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the slope $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
+\item \textbf{The singular series of $R_2$, and the finite-range half-power (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $W_f(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not a structural exponent but a finite-range effective exponent inferred from the regression slope $m_2=\beta_2-1$; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The deficit is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading.
+\item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the effective exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
 \item \textbf{An almost-all asymptotic, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve---is unconditional and reduces the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ (all but $o(X)$ even $N$) to the standard Hardy--Littlewood major-arc evaluation for the channel forms $s,N-rs$; we present it within that stated major-arc reduction rather than as a self-contained theorem. Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
 \item \textbf{Many mirrors, one fact (\S\ref{sec:spectral-emp}--\ref{sec:bases-emp}; Appendix~\ref{app:reframings}).} The frontier can be recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, and a discrete surface. We are explicit that this is \emph{one} finding---$\sing(N)$ sets the local densities---observed many times, not many findings; most reframings are deterministic functions of the same $\sing/R_2$ data and are collected in Appendix~\ref{app:reframings} (with the honest negatives: an empty additive-complexity topology and a Chen substitute with no resilience premium). Two earn a place in the body by yielding a \emph{new computation}: the empirical circle method (\S\ref{sec:spectral-emp}), whose comet power spectrum is literally the major arcs, and the carry geometry (\S\ref{sec:bases-emp}), which surfaces a digit/Kummer signature of primality.
@@ -524,26 +525,26 @@ is not a limiting singular-series exponent.}
 \end{table}
 
 \paragraph{Interpretation: a quantitative Chen rescue effect.}
-Because the finite-range slope has $\beta_2<1$, over this range the relative semiprime
-share falls with the singular series, $R_2/R_1\propto\sing(N)^{-(1-\beta_2)}$ (locally
+Because the finite-range effective exponent satisfies $\beta_2<1$, over this range the
+relative semiprime share falls with the singular series, $R_2/R_1\propto\sing(N)^{-(1-\beta_2)}$ (locally
 $\approx\sing(N)^{-1/2}$): where Goldbach is locally rich (large $\sing$), the prime
 channel dominates, whereas where Goldbach is \emph{fragile} (small $\sing$) the semiprime
 channel is proportionally most abundant. This makes the Chen-rescue intuition---the
 semiprime channel matters most exactly where primes are scarce---quantitative as an
 \emph{effective finite-window scaling}, with the deficit $1-\beta_2\asymp1/\log\log N$
-vanishing asymptotically (so it is a slope, not a fixed power; \S\ref{sec:singexp}
-opening). Heuristically the slope sits below $1$ because writing $q=rs$ couples the
-divisors of $N$ to the factor $r$:
+vanishing asymptotically (so $\beta_2$ is an effective exponent, not a fixed power;
+\S\ref{sec:singexp} opening). Heuristically the effective exponent sits below $1$ because
+writing $q=rs$ couples the divisors of $N$ to the factor $r$:
 when a small prime $\ell\mid N$, the channel $r=\ell$ is \emph{blocked}
 (then $p=N-\ell s\equiv0\bmod\ell$ forces $p=\ell$), removing its term from the sum
 over channels precisely when $\sing(N)$ is large (Lemma~\ref{lem:sing}). This
 explains the direction $\beta_2<1$; the precise value is not $1/2$, as the scaling
 analysis below shows.
 
-\paragraph{Scaling to $10^9$: the slope grows like $\log\log X$.}
+\paragraph{Scaling to $10^9$: the effective exponent drifts up like $\log\log X$.}
 Measuring $\beta_2$ \emph{locally} in a window of $2\cdot10^{6}$ even integers
 centred at $X$ (computed by a block-convolution sieve, so that $X$ can reach
-$10^{9}$ while only the window is held in memory), the slope does \emph{not}
+$10^{9}$ while only the window is held in memory), the effective exponent does \emph{not}
 settle at $1/2$: it rises monotonically (Fig.~\ref{fig:scaling}). Eight windows
 from $6\cdot10^{6}$ to $10^{9}$ are fit to within $0.0013$ by
 \begin{equation}
@@ -553,21 +554,21 @@ from $6\cdot10^{6}$ to $10^{9}$ are fit to within $0.0013$ by
 \end{equation}
 the parenthesised figures being the last-digit standard errors of the two-parameter
 fit. Thus the half-power $\beta_2\approx\tfrac12$ is only the \emph{local} value near
-$X\sim10^{6}$, and the slope is not a constant. The fit reaches $\beta_2\approx0.61$ at
+$X\sim10^{6}$, and the effective exponent is not a constant. The fit reaches $\beta_2\approx0.61$ at
 $10^{9}$ (measured). We deliberately \emph{do not} read a numerical limit off
 \eqref{eq:beta-loglog}: extrapolating a $\log\log X$ trend fitted over three decades to,
 say, $X\sim10^{46}$ (where it would touch $\beta_2=1$) is well outside the data and is
 not evidence---the robust content is the \emph{functional form} $1-\beta_2\asymp
-1/\log\log X$ and its derivation below, not a forecast of where the slope crosses a
-particular value. The regression quality stays high throughout ($R^2\approx0.997$,
+1/\log\log X$ and its derivation below, not a forecast of where the effective exponent
+crosses a particular value. The regression quality stays high throughout ($R^2\approx0.997$,
 $\mathrm{CV}$ of the half-power normalization $\lesssim0.04$).
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.82\linewidth]{09_beta_scaling.png}
-\caption{Local regression slope $\beta_2(X)$ for windows up to $10^{9}$, with the
-$\log\log X$ fit \eqref{eq:beta-loglog} (the dashed extrapolation beyond $10^{9}$ is
-shown only to display the functional form, not as a prediction). The slope drifts
+\caption{Local effective singular exponent $\beta_2(X)=1+m_2(X)$ for windows up to $10^{9}$,
+with the $\log\log X$ fit \eqref{eq:beta-loglog} (the dashed extrapolation beyond $10^{9}$ is
+shown only to display the functional form, not as a prediction). The effective exponent drifts
 steadily above $1/2$ without sign of leveling off, consistent with $\beta_2\to1$.}
 \label{fig:scaling}
 \end{figure}
@@ -589,8 +590,8 @@ ratio \emph{cancels the singular series exactly},
   \qquad w_r=\frac1r\frac{\log N}{\log(N/r)} .
   \label{eq:Wtilde}
 \end{equation}
-Hence the measured exponent is a regression slope,
-$\beta_2-1=\operatorname{Cov}(\log W_f,\log\sing)/\operatorname{Var}(\log\sing)$,
+Hence the raw regression slope is
+$m_2=\beta_2-1=\operatorname{Cov}(\log W_f,\log\sing)/\operatorname{Var}(\log\sing)$,
 and the only coupling to $\sing(N)$ comes from the blocked channels $r\mid N$, each
 \emph{removed} from $W_f$. Modelling $\mathbf 1[\ell\mid N]$ as independent
 with probability $1/\ell$, $\operatorname{Var}(\log\sing)=:B$ is a convergent constant,
@@ -625,15 +626,15 @@ is a straight line through the limit point $(0,1)$, i.e.\ $\beta_2\to1$.}
 \end{figure}
 
 \paragraph{Not a single-atom effect.}
-A natural worry is that the whole slope is the arithmetic of one prime: $3\mid N$
+A natural worry is that the whole deficit $1-\beta_2$ is the arithmetic of one prime: $3\mid N$
 simultaneously doubles $\sing(N)$ (the factor $\frac{3-1}{3-2}=2$) and deletes the
 heaviest semiprime channel $r=3$, so one might suspect $\beta_2\approx\tfrac12$ is just
 ``what divisibility by $3$ does'' near $X\sim10^{6}$. The data refute this. Recomputing
-the slope on the subpopulation $3\nmid N$ (the $r=3$ atom removed) gives, at
+$\beta_2$ on the subpopulation $3\nmid N$ (the $r=3$ atom removed) gives, at
 $X=2\cdot10^{6}$, $\beta_2=0.547\pm0.0004$ against $0.495$ on all $N$: the deficit
 $1-\beta_2$ falls by only about $10\%$ (\texttt{run\_estimator\_audit.py}). The mechanism
 is real---conditional means confirm $\langle\log\sing\mid 3\mid N\rangle-\langle\log\sing\mid 3\nmid N\rangle=0.69\approx\log2$ and a depressed
-$R_2/R_1$ on $3\mid N$---but it accounts for a tenth of the slope, not the bulk. The
+$R_2/R_1$ on $3\mid N$---but it accounts for a tenth of the deficit, not the bulk. The
 negativity of $\beta_2-1$ is genuinely a \emph{sum over channels} $r=3,5,7,\dots$, each
 blocked on the sparse set $r\mid N$, exactly as $A(X)=\sum_r(\cdots)$ in
 \eqref{eq:betalaw}; it is not the signature of a single residue class.
@@ -1011,8 +1012,9 @@ Goldbach singular series $\sing(N)$ enters $R_2$ with exponent $1$, exactly as i
 $R_1$, and \emph{cancels} in the ratio $R_2/R_1=W_f(N)$ (Lemma~\ref{lem:sing}). The
 local factorization and cancellation are elementary sieve bookkeeping; our contribution is
 to write them down explicitly and to follow their consequences. The first is that the
-naturally read ``$\beta_2\approx\tfrac12$'' of a finite-range fit is not an exponent but a
-regression slope of a non-power-law object, drifting to $1$ like $1-c/\log\log N$; we
+naturally read ``$\beta_2\approx\tfrac12$'' of a finite-range fit is not a structural exponent
+but a finite-range effective exponent inferred from the regression slope $m_2=\beta_2-1$,
+drifting to $1$ like $1-c/\log\log N$; we
 verify this non-circularly, show it is a multi-channel effect (not the $3\mid N$ atom),
 and reduce the limit to classical inputs---for the \emph{linear} almost-all asymptotic
 $R_2=\mathrm{main}(1+o(1))$ within the second-moment reduction developed in
@@ -1174,7 +1176,7 @@ $W_f(N)(1+O(\log^{-\delta}N))$ and $\sing(N)$ cancels. Only the channels
 $r\mid N$ are special, each \emph{removed} from $W_f$ (not merely
 reweighted); thus $W_f(N)=W_{f,0}-\sum_{r}\frac{r-1}{r-2}w_r e_r$ up
 to the slow variation of $w_r$. Linearising,
-$\log W_f=\logW_{f,0}-W_{f,0}^{-1}\sum_r\frac{r-1}{r-2}w_r e_r+O(W_{f,0}^{-2})$.
+$\log W_f=\log W_{f,0}-W_{f,0}^{-1}\sum_r\frac{r-1}{r-2}w_r e_r+O(W_{f,0}^{-2})$.
 Insert into \eqref{eq:beta-def}: with $\log\sing=\sum_\ell g_\ell e_\ell$ and the
 asymptotic independence of Lemma~\ref{lem:moments}, only the diagonal $r=\ell$ terms
 survive, giving $\operatorname{Cov}_X=-W_{f,0}^{-1}A(X)$ and
@@ -1515,7 +1517,10 @@ satisfies
   \ll_{\varepsilon,A}\frac{X(\log X)^{3-2A}}{\log\log X}=o(X),
 \]
 so $R_2(N)=\mathrm{main}(N)(1+o(1))$ off $\mathcal E_\varepsilon$. The channels $r>X^\eta$
-contribute $o(\mathrm{main})$ off a further $o(X)$ set (Lemma~\ref{lem:large-r}), so the
+contribute $o(\mathrm{main})$ to the actual count off a further $o(X)$ set
+(Lemma~\ref{lem:large-r}); their contribution to the major-arc main term is also
+$o(\mathrm{main})$, deterministically, since
+$\sum_{X^\eta<r\le\sqrt N}I_r(N)/I_1(N)\ll_\eta1=o(W_f(N;X^\eta))$. Hence the
 major-arc main term reduces to the truncated one of Proposition~\ref{prop:major}; with
 Lemma~\ref{lem:sing} this is
 $2C_2\sing(N)\sum_{r\nmid N}\frac{r-1}{r-2}I_r(N)(1+o(1))=W_f(N)[2C_2\sing(N)I_1(N)](1+o(1))$.
@@ -1534,8 +1539,9 @@ asymptotic but is \emph{not} implied by the $L^2$ bound of Proposition~\ref{prop
 
 \begin{corollary}[$\beta_2\to1$, conditional on the lower-tail hypothesis]\label{cor:beta-aa}
 Under the lower-tail hypothesis above, the exceptional set $\mathcal E_X$ of
-Theorem~\ref{thm:aa} contributes $o(1)$ to the covariance \eqref{eq:beta-def}; the slope is
-then computed off $\mathcal E_X$, where $R_2/R_1=W_f(1+o(1))$, and $\beta_2(X)\to1$. Without
+Theorem~\ref{thm:aa} contributes $o(1)$ to the covariance \eqref{eq:beta-def}; the raw slope
+$m_2$ is then computed off $\mathcal E_X$, where $R_2/R_1=W_f(1+o(1))$, so $m_2\to0$ and
+$\beta_2(X)\to1$. Without
 this hypothesis, the second-moment result of Theorem~\ref{thm:aa} controls $R_2-\mathrm{main}$,
 not the untruncated log-regression; for unconditional statements one restricts to truncated
 logarithms (\S\ref{sec:truncated}).
@@ -1588,8 +1594,8 @@ should be regarded as folklore in this circle of ideas. What is specific here is
 singular-series cancellation of Lemma~\ref{lem:sing}, which exhibits
 $\mathrm{main}(N)=2C_2\,\sing(N)\,W_f(N)\,J(N)$ explicitly and is the reason $\sing$
 disappears from the ratio $R_2/R_1$. The contribution of this appendix is the explicit
-bookkeeping and its consequences for the slope $\beta_2$, not the almost-all asymptotic
-itself.
+bookkeeping and its consequences for the effective exponent $\beta_2$, not the almost-all
+asymptotic itself.
 \end{remark}
 
 \subsection{Truncated logarithms and the blocked-channel model}
@@ -2119,9 +2125,10 @@ exceptional set in Theorem~\ref{thm:aa} is then
   \ \ll_{C}\ \frac{X}{(\log X)^{C}}
 \]
 for any fixed $C$ (take $A_0=\tfrac{C+3}2$). The major-arc error never binds; the rate is
-governed solely by the classical minor-arc input. This completes, in outline, the
-reduction of the \emph{linear} almost-all asymptotic $R_2=\mathrm{main}(1+o(1))$
-(Theorem~\ref{thm:aa}) to standard prime-distribution estimates; the analytic machinery is
+governed solely by the classical minor-arc input. This completes the bounded reduction of the
+\emph{linear} almost-all asymptotic $R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}) to
+standard prime-distribution estimates, at the level of the stated major-arc input; the
+analytic machinery is
 classical, and the one ingredient we make explicit is the singular-series cancellation of
 Lemma~\ref{lem:sing}. The log-regression
 statement $\beta_2(N)\to1$ then follows from the lower-tail hypothesis of
