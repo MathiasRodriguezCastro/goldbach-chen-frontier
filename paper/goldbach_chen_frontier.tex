@@ -663,7 +663,9 @@ $\beta_k=0$ moves slowly to the right. We also find that the strongest
 ``rescue'' channel, $q=$ composite$\times$composite (both factors composite), is
 available for \emph{every} even $N$ in the range with on average $\sim1.8\cdot10^{4}$
 representations: the additive hierarchy is extremely redundant below the prime
-layer.
+layer. The whole sign reversal is the coefficient-level shadow of a single
+generating-function response in the blocked-channel model, made precise in
+Appendix~\ref{sec:omega-gf}.
 
 \subsection{Diagnostics}
 \label{sec:diag-emp}
@@ -1566,15 +1568,102 @@ locally abundant, so balance must be tighter before semiprimes are needed). The 
 is heuristic---it ignores correlations among nearby pairs.
 \end{remark}
 
-\begin{remark}[Arithmetic-complexity layers; qualitative]
-In the same model, a larger $\sing(N)$ means $N$ carries more small prime factors. The
-admissibility constraint for $N=p+q$ with $p$ prime forces $q=N-p$ into the reduced classes
-modulo those primes, biasing $q$ away from sharing $N$'s small factors and hence toward lower
-$\OmegaF(q)$. This is the qualitative origin of the sign reversal of \S\ref{sec:layers-emp}:
-$\sing(N)$ enhances low-complexity channels ($\beta_k>0$, $k\le2$) and suppresses
-high-complexity ones ($\beta_k<0$, $k\ge3$). We claim only the direction, not the numerical
-$\beta_k$ sequence.
-\end{remark}
+\subsection{The \texorpdfstring{$\Omega$}{Omega}-generating function and singular-series response}
+\label{sec:omega-gf}
+
+The layer experiment of \S\ref{sec:layers-emp} can be organized by a single generating
+function. For an even integer $N$, define
+\[
+  Z_N(z):=\sum_{p<N}\ones_{\PP}(p)\,z^{\OmegaF(N-p)} .
+\]
+Then $[z^k]Z_N(z)$ is the number of representations $N=p+q$ with $p$ prime and
+$\OmegaF(q)=k$; in particular $[z]Z_N(z)=R_1(N)$ and $[z^2]Z_N(z)=R_2(N)$. For $z=e^{-\beta}$
+this is the one-sided arithmetic partition function for the $\OmegaF$-energy of the second
+summand (its two-sided analogue is the energy reframing of Appendix~\ref{app:reframings}).
+
+The following is a \emph{model} statement, not a theorem about the primes: it is exact in the
+local blocked-channel model of \S\ref{sec:truncated}, and it explains why a large singular
+series pushes the second summand toward lower arithmetic complexity. Fix $y$ and let
+$\mathcal P_y$ be the odd primes $\ell\le y$; model $B_\ell:=\ones_{\ell\mid N}$ as
+independent Bernoulli$(1/\ell)$ (Lemma~\ref{lem:moments}). With $g_\ell=\log\frac{\ell-1}{\ell-2}$
+as before, the model $\log\sing$ is $Y_y(N):=\sum_{\ell\in\mathcal P_y}g_\ell B_\ell$. Given
+the divisibility vector $B=(B_\ell)$, the admissible second summand $q=N-p$ has local
+divisibility probabilities
+\[
+  \Pr(\ell\mid q\mid B_\ell)=\pi_\ell(B_\ell):=
+  \begin{cases}0,&B_\ell=1,\\[1mm]\dfrac1{\ell-1},&B_\ell=0,\end{cases}
+\]
+since $\ell\mid N$ blocks the channel ($q\equiv-p\not\equiv0$ for admissible
+$p\not\equiv0\pmod\ell$), whereas if $\ell\nmid N$ exactly one admissible residue of $p$
+gives $q\equiv0\pmod\ell$. Let
+\[
+  F_y(z;B):=\prod_{\ell\in\mathcal P_y}\big(1+(z-1)\pi_\ell(B_\ell)\big)
+  =\prod_{\ell\in\mathcal P_y}\Big(1+(z-1)\tfrac{1-B_\ell}{\ell-1}\Big)
+\]
+be the local $\OmegaF$-generating function of $q$ after the inherited Goldbach singular
+factor is divided out.
+
+\begin{proposition}[Generating-function response; model]\label{prop:omega-gf}
+Define the model singular response
+$\beta_y(z)-1:=\operatorname{Cov}\!\big(\log F_y(z;B),\,Y_y(B)\big)/\Var(Y_y(B))$. Then, for
+every fixed $z>0$ for which the logarithms are defined,
+\[
+  \beta_y(z)-1=-\,
+  \frac{\sum_{\ell\in\mathcal P_y}\frac1\ell\big(1-\frac1\ell\big)\,g_\ell\,\log\!\big(1+\frac{z-1}{\ell-1}\big)}
+       {\sum_{\ell\in\mathcal P_y}\frac1\ell\big(1-\frac1\ell\big)\,g_\ell^2}.
+\]
+Consequently $\beta_y(z)<1$ for $z>1$, $\beta_y(z)>1$ for $0<z<1$, and $\beta_y(1)=1$.
+\end{proposition}
+
+\begin{proof}
+Write $\log F_y(z;B)=\sum_{\ell}(1-B_\ell)\,h_\ell(z)$ with
+$h_\ell(z):=\log\!\big(1+\frac{z-1}{\ell-1}\big)$, and $Y_y(B)=\sum_\ell g_\ell B_\ell$. By
+independence the off-diagonal covariances vanish, so
+\[
+  \operatorname{Cov}(\log F_y,Y_y)
+  =\sum_\ell h_\ell(z)\,g_\ell\,\operatorname{Cov}(1-B_\ell,B_\ell)
+  =-\sum_\ell h_\ell(z)\,g_\ell\,\tfrac1\ell\big(1-\tfrac1\ell\big),
+\]
+and $\Var(Y_y)=\sum_\ell g_\ell^2\,\tfrac1\ell(1-\tfrac1\ell)$. Dividing gives the formula. As
+$g_\ell>0$ for every odd prime, the sign is that of $h_\ell(z)$: positive for $z>1$, negative
+for $0<z<1$, zero at $z=1$.
+\end{proof}
+
+The singular series therefore acts on the whole $\OmegaF$-generating function, not only on
+the isolated layers $R_1,R_2$: weights $z>1$ overweight high complexity, where the response
+falls below one (large $\sing$ suppresses the high-$\OmegaF$ tail), and $0<z<1$ overweight
+low complexity, where it rises above one (large $\sing$ favours low-$\OmegaF$ summands). The
+sign reversal of \S\ref{sec:layers-emp} is the coefficient-level shadow of this single
+response.
+
+\paragraph{Stochastic-dominance form.}
+Let $\OmegaF_y(q):=\sum_{\ell\in\mathcal P_y}\ones_{\ell\mid q}$ in the same model;
+conditional on $B$ its summands are independent Bernoulli$(\pi_\ell(B_\ell))$. If $B'\ge B$
+coordinatewise then $\pi_\ell(B'_\ell)\le\pi_\ell(B_\ell)$ for every $\ell$, so
+$\OmegaF_y(q)\mid B'\preceq_{\mathrm{st}}\OmegaF_y(q)\mid B$: adding blockers shifts the
+factor-count law to the left. Since $Y_y(B)$ is increasing in $B$, for any increasing
+$\varphi$ the map $B\mapsto\mathbb E[\varphi(\OmegaF_y(q))\mid B]$ is decreasing, and the
+Harris--FKG inequality for product measures gives
+$\operatorname{Cov}\big(\mathbb E[\varphi(\OmegaF_y(q))\mid B],\,Y_y(B)\big)\le0$. Taking
+$\varphi=\ones_{\{m\ge k\}}$ shows the high-complexity tail is negatively correlated with the
+singular series; $\varphi=\ones_{\{m\le k\}}$ gives the positive correlation for
+low-complexity events.
+
+\paragraph{Poissonized layers.}
+With $\mu_y(B):=\sum_{\ell\in\mathcal P_y}\pi_\ell(B_\ell)=\sum_\ell\frac{1-B_\ell}{\ell-1}$,
+\[
+  \operatorname{Cov}(\mu_y,Y_y)=-\sum_{\ell\in\mathcal P_y}\frac{g_\ell}{\ell-1}\,\tfrac1\ell\big(1-\tfrac1\ell\big)<0 .
+\]
+Approximating $\OmegaF_y(q)\mid B$ by a Poisson variable of mean $\mu_y(B)$ and linearizing
+\[
+  \log\Pr(\OmegaF_y(q)=k\mid B)=\mathrm{const}+\Big(\frac{k}{\bar\mu_y}-1\Big)\big(\mu_y(B)-\bar\mu_y\big)+\cdots
+\]
+about $\bar\mu_y=\mathbb E\mu_y$ shows, since $\operatorname{Cov}(\mu_y,Y_y)<0$, a positive
+singular-series response for layers below the typical factor count ($k<\bar\mu_y$) and a
+negative one above it ($k>\bar\mu_y$). This is the mechanism behind the transition from
+positive response in the Goldbach and Chen layers to negative response for higher
+$\OmegaF$-layers; it gives the direction and the sign reversal, not the exact numerical
+$\beta_k$.
 
 \subsection{The major arcs: semiprimes in progressions}
 \label{sec:majorarc}
