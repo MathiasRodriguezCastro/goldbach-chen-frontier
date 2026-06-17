@@ -74,9 +74,10 @@ by finite-range log--log fits is not an exponent but a regression \emph{slope} o
 non-power-law object, obeying $\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ with deficit
 $\sim1/\log\log N$. A circle-method second-moment bound---only Vaughan's classical
 \emph{prime} minor-arc estimate and the trivial $L^2$ size of the semiprime sum, no
-sieve---gives the \emph{linear} almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$; the
-passage to the log-regression statement $\beta_2\to1$ is isolated as one explicitly stated
-lower-tail hypothesis rather than overclaimed. The goal is not a proof of Goldbach but a
+sieve---yields, in the stated reduction, the \emph{linear} almost-all asymptotic
+$R_2(N)=\mathrm{main}(N)(1+o(1))$; the passage to the log-regression statement
+$\beta_2\to1$ is isolated as one explicitly stated lower-tail hypothesis rather than
+overclaimed. The goal is not a proof of Goldbach but a
 clean new identity, reproducible evidence, and a bounded reduction; a gallery of
 cross-disciplinary reframings, all governed by the same $\sing(N)$, is collected in an
 appendix.
@@ -793,10 +794,12 @@ threshold $1.9$. The worst case is pinned by a few small ``hard'' $N$.
 \item \textbf{The minimal multiplier is tiny.} $r_\star=3$ for $68\%$ of $N$ and the
 dictionary $\{2,3,5,7\}$ already covers $99.7\%$; $\{2,\dots,11\}$ covers
 $99.99\%$. This settles the multiplier-dictionary question empirically.
-Appendix~\ref{sec:least-unblocked} explains the dictionary through a
-least-unblocked-prime law: conditionally on fixed-channel almost-all asymptotics,
-$r_\star(N)$ equals the least odd prime not dividing $N$ for almost all even $N$ (so
-$\Pr(r_\star\in\{3,5,7\})\approx0.99$ in the divisibility model).
+Apart from the parity-degenerate $r=2$ channel (which forces $p=2$, a density-zero
+family), Appendix~\ref{sec:least-unblocked} explains the odd multiplier dictionary
+through a least-unblocked-prime law: conditionally on fixed-channel almost-all
+asymptotics, the nondegenerate $r_\star(N)$ equals the least odd prime not dividing $N$
+for almost all even $N$ (so $\Pr(r_\star\in\{3,5,7\})\approx0.99$ in the divisibility
+model).
 \item \textbf{Local obstruction.} $r_\star$ jumps when a small prime divides $N$: if
 $3\mid N$ the channel $r=3$ is blocked (then $p=N-3s\equiv0\bmod3$), and indeed the
 mean $r_\star$ is $4.59$ for $3\mid N$ versus $2.94$ otherwise.
@@ -1827,7 +1830,7 @@ Hypothesis~\ref{hyp:fixedchannel}---a standard fixed-channel almost-all input---
 unconditional theorem about primes; granting that input, the residual collapse and the
 distribution of $r_\star$ follow from a clean local-obstruction argument.
 
-\subsection{Local carry excess from prime residue restrictions}
+\subsection{A last-digit model for the carry excess}
 \label{sec:carry-model}
 
 The carry geometry of \S\ref{sec:bases-emp} can be partly explained by a local digit
