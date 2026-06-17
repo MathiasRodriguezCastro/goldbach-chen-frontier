@@ -68,18 +68,20 @@ respond to the Hardy--Littlewood singular series $\sing(N)$. Decomposing the sem
 channel $q=rs$ by its small prime factor $r$, each channel carries its own two-form
 singular series, and in the ratio $R_2/R_1$ the singular series \emph{cancels} (an
 unconditional Euler-product identity), leaving a Mertens channel sum
-$\widetilde W(N)\sim\log\log N$. Thus $\sing(N)$ enters $R_2$ with exponent $1$, exactly as
+$W_f(N)\sim\log\log N$. Thus $\sing(N)$ enters $R_2$ with exponent $1$, exactly as
 in $R_1$: $R_2$ inherits the full singular series, and the apparent ``half power'' reported
 by finite-range log--log fits is not an exponent but a regression \emph{slope} of a
 non-power-law object, obeying $\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ with deficit
-$\sim1/\log\log N$. A circle-method second-moment bound---only Vaughan's classical
-\emph{prime} minor-arc estimate and the trivial $L^2$ size of the semiprime sum, no
-sieve---yields, in the stated reduction, the \emph{linear} almost-all asymptotic
-$R_2(N)=\mathrm{main}(N)(1+o(1))$; the passage to the log-regression statement
-$\beta_2\to1$ is isolated as one explicitly stated lower-tail hypothesis rather than
-overclaimed. The goal is not a proof of Goldbach but an explicit
-cancellation identity, reproducible evidence, and an honestly bounded reduction; a gallery
-of cross-disciplinary reframings, all governed by the same $\sing(N)$, is summarized in an
+$\sim1/\log\log N$. The local channel factorization is unconditional; a Vaughan--Parseval
+minor-arc estimate (Vaughan's classical \emph{prime} bound plus the trivial $L^2$ size of the
+semiprime sum, no sieve) gives a second-moment reduction, and the identification of the
+major-arc main term is the standard Hardy--Littlewood calculation for the channel forms
+$s,N-rs$; together these reduce the \emph{linear} almost-all asymptotic
+$R_2(N)=\mathrm{main}(N)(1+o(1))$ to that major-arc input. The passage from this linear
+statement to the untruncated log-regression statement $\beta_2\to1$ is isolated as an explicit
+lower-tail hypothesis. The goal is not a proof of Goldbach but an explicit cancellation
+identity, reproducible evidence, and an honestly bounded reduction; a gallery of
+cross-disciplinary reframings, all governed by the same $\sing(N)$, is summarized in an
 appendix and developed in a supplement.
 \end{abstract}
 
@@ -113,10 +115,10 @@ This is a discrete object, so it is not continuous in the ordinary analytic sens
 \paragraph{Summary of findings.}
 Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implementing this program; all numbers are reproducible from the accompanying code. The main outcomes are:
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-\item \textbf{The singular series of $R_2$, and the finite-range half-power (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $\widetilde W(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not an exponent but a regression slope of a non-power-law object; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The slope is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading.
+\item \textbf{The singular series of $R_2$, and the finite-range half-power (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $W_f(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not an exponent but a regression slope of a non-power-law object; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The slope is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading.
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the slope $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
-\item \textbf{An almost-all theorem, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional; a circle-method second-moment bound---Vaughan's classical \emph{prime} minor-arc estimate plus the trivial $L^2$ size of the semiprime sum, no sieve---gives the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, unconditional in outline. Upgrading this to the log-regression statement $\beta_2(N)\to1$ needs one further input (lower-tail control of $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
+\item \textbf{An almost-all asymptotic, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve---is unconditional and reduces the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ (all but $o(X)$ even $N$) to the standard Hardy--Littlewood major-arc evaluation for the channel forms $s,N-rs$; we present it within that stated major-arc reduction rather than as a self-contained theorem. Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
 \item \textbf{Many mirrors, one fact (\S\ref{sec:spectral-emp}--\ref{sec:bases-emp}; Appendix~\ref{app:reframings}).} The frontier can be recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, and a discrete surface. We are explicit that this is \emph{one} finding---$\sing(N)$ sets the local densities---observed many times, not many findings; most reframings are deterministic functions of the same $\sing/R_2$ data and are collected in Appendix~\ref{app:reframings} (with the honest negatives: an empty additive-complexity topology and a Chen substitute with no resilience premium). Two earn a place in the body by yielding a \emph{new computation}: the empirical circle method (\S\ref{sec:spectral-emp}), whose comet power spectrum is literally the major arcs, and the carry geometry (\S\ref{sec:bases-emp}), which surfaces a digit/Kummer signature of primality.
 \end{enumerate}
 
@@ -372,7 +374,7 @@ Restricting representations to a balanced band $p\in[N/2-k,\,N/2]$ and counting 
 unimodal profile in $k$ is reported in \S\ref{sec:opt-emp}; if the minimum number of
 semiprime selections is zero over a finite range, Goldbach holds there.
 
-\section{Empirical results and a new regularity}
+\section{Empirical results and the singular-series regularity}
 \label{sec:empirical}
 
 This section reports the outcome of implementing the program above. All numbers are
@@ -405,23 +407,36 @@ $1.000$, and dividing by $\sing(N)$ collapses the coefficient of variation of th
 normalized count from $0.39$ to $0.015$ (a $25\times$ reduction); this is a control
 that reproduces \eqref{eq:HL} and the band structure of the Goldbach comet.
 
-The new observation concerns $R_2$. We measure how strongly the relative semiprime
-share tracks $\sing(N)$ by the \emph{regression slope}
+The channel observation concerns $R_2$. We measure how strongly the relative semiprime
+share tracks $\sing(N)$ through the regression of $\log(R_2/R_1)$ on $\log\sing(N)$, which
+uses $R_1$ itself as a meter for $\sing(N)$ and is therefore independent of any chosen
+normalization.
+
+\paragraph{Regression notation.}
+To avoid confusing the raw regression slope with the effective singular exponent, we write
 \[
-  \beta_2-1:=\text{slope of}\quad
-  \log\frac{R_2(N)}{R_1(N)}\quad\text{against}\quad\log\sing(N),
+m_2(X):=
+\operatorname{slope}_{5000\le N\le X}
+\left(
+\log\frac{R_2(N)}{R_1(N)}
+\;\text{ on }\;
+\log\sing(N)
+\right),
+\qquad
+\beta_2(X):=1+m_2(X).
 \]
-which uses $R_1$ itself as a meter for $\sing(N)$ and is therefore independent of any
-chosen normalization. We call $\beta_2$ the \emph{empirical singular exponent}, but
-stress at the outset that \textbf{$\beta_2$ is a regression slope, not an exponent of a
-power law}: as Lemma~\ref{lem:sing} shows below, $\sing(N)$ enters $R_2$ with exponent
-$1$ (exactly as in $R_1$) and \emph{cancels} in the ratio $R_2/R_1$, so $\beta_2$ is the
-slope of a non-power-law object and the value $\approx\tfrac12$ reported in finite
-ranges is a finite-size correction, not a structural exponent (developed after
-Table~\ref{tab:beta}). We adopt one estimator throughout: ordinary least squares of
-$\log(R_2/R_1)$ on $\log\sing$, taken \emph{cumulatively} over all even
-$5000\le N\le X$. Table~\ref{tab:beta} reports it across several ranges; standard errors
-are $\le10^{-4}$ (so the digits shown are significant), and the appendix
+Thus $\beta_2=1$ means that $R_2$ carries the same singular-series power as $R_1$, while
+$m_2=0$ means that the ratio $R_2/R_1$ is uncorrelated with $\sing(N)$. We call $\beta_2$ the
+\emph{effective singular exponent} of $R_2$: it is an effective exponent inferred from a
+regression slope, and the raw slope is $m_2=\beta_2-1$. As Lemma~\ref{lem:sing} shows below,
+$\sing(N)$ enters $R_2$ with exponent $1$ (exactly as in $R_1$) and \emph{cancels} in the
+ratio $R_2/R_1$, so $R_2/R_1$ is not a power of $\sing$ and the value $\beta_2\approx\tfrac12$
+reported in finite ranges is a finite-size correction, not a structural exponent (developed
+after Table~\ref{tab:beta}). All tables below report $\beta_2$, not the raw slope $m_2$, using
+one estimator throughout: ordinary least squares, cumulative over all even $5000\le N\le X$.
+The reported OLS standard errors are descriptive only, since consecutive even integers are
+arithmetically dependent; a block-bootstrap robustness check is left as a diagnostic in the
+replication code, and the present tables report descriptive OLS uncertainty only. The appendix
 (\S\ref{sec:variance}) instead uses a \emph{local} window centred at $X$, which runs
 $\approx0.02$--$0.03$ higher at the same $X$---the distinction is between an average over
 $[5000,X]$ and a measurement at the leading edge.
@@ -439,11 +454,13 @@ $4\cdot10^{6}$ & $0.513$ & $0.93$\\
 $8\cdot10^{6}$ & $0.529$ & $0.93$\\
 \bottomrule
 \end{tabular}
-\caption{Cumulative regression slope $\beta_2$ of $\log(R_2/R_1)$ on $\log\sing$ over
-$[5000,X]$ (standard error $\le10^{-4}$). The value sits near $\tfrac12$ in this range
-and \emph{rises} with $X$---already a warning that it is not a fixed exponent (contrast
-$\beta_1=1.000$, which is genuinely scale-invariant). The singular series explains about
-$92\%$ of the variance of $\log(R_2/R_1)$.}
+\caption{Effective singular exponent $\beta_2=1+m_2$ of $R_2$, where $m_2$ is the cumulative
+OLS slope of $\log(R_2/R_1)$ on $\log\sing$ over $[5000,X]$; the table reports $\beta_2$, not
+the raw slope $m_2=\beta_2-1$. The value sits near $\tfrac12$ in this range and \emph{rises}
+with $X$---already a warning that it is not a fixed exponent (contrast $\beta_1=1.000$, which
+is genuinely scale-invariant). The singular series explains about $92\%$ of the variance of
+$\log(R_2/R_1)$. OLS standard errors are descriptive only (nearby $N$ are arithmetically
+dependent).}
 \label{tab:beta}
 \end{table}
 
@@ -451,28 +468,36 @@ $92\%$ of the variance of $\log(R_2/R_1)$.}
 \centering
 \includegraphics[width=\linewidth]{02_singular_exponent.png}
 \caption{Left: $\log[R_1/(N/\log^2N)]$ against $\log\sing(N)$ has slope $1.000$
-(Hardy--Littlewood). Right: the same for $R_2$ has slope $0.497$ at $X=2\cdot10^{6}$,
-near the reference line $\beta=1/2$---but this is the \emph{finite-range} slope of a
-non-power-law object (it drifts toward $1$; Fig.~\ref{fig:scaling}), not a fixed
-exponent. The vertical striations are the discrete values of $\sing(N)$.}
+(Hardy--Littlewood). Right: the same regression for $R_2$ gives effective exponent
+$\beta_2=0.497$ at $X=2\cdot10^{6}$, near the reference line $\beta=1/2$---but this is the
+\emph{finite-range} effective exponent of a non-power-law ratio (it drifts toward $1$;
+Fig.~\ref{fig:scaling}), not a fixed power. The vertical striations are the discrete values
+of $\sing(N)$.}
 \label{fig:exponent}
 \end{figure}
 
 Over this range, the best finite-range log--log normalization is consistent with the
-effective fit (near $X\sim10^{6}$, the exponent $\tfrac12$ drifting to $1$;
+effective fit (near $X\sim10^{6}$, the effective exponent $\tfrac12$ drifting to $1$;
 \S\ref{sec:singexp} below)
 \begin{equation}
-  R_2(N)\ \propto\ \sing(N)^{1/2}\,\frac{N}{\log^2 N}\,W(N),
+  R_2(N)\ \propto\ \sing(N)^{1/2}\,\frac{N}{\log^2 N}\,W_0(N),
   \qquad
-  W(N)=\sum_{\substack{3\le r\le\sqrt N\\ r\ \mathrm{prime}}}\frac{r-1}{r-2}\,\frac1r\,
+  W_0(N)=\sum_{\substack{3\le r\le\sqrt N\\ r\ \mathrm{prime}}}\frac{r-1}{r-2}\,\frac1r\,
   \frac{\log N}{\log(N/r)},
   \label{eq:R2law}
 \end{equation}
-where $W(N)\sim\log\log N$ by Mertens' theorem \citep{tenenbaum}. The weight $W$ makes precise the
-$\log\log N$ factor of \eqref{eq:R2heuristic}: it is a Mertens sum over the
-\emph{small prime factor} $r$ of the semiprime $q=rs$, weighted by the
-twin-prime-type local factor $(r-1)/(r-2)$. Table~\ref{tab:cv} compares the
-dispersion of $R_2$ under three normalizations.
+with $W_0(N)\sim\log\log N$ by Mertens' theorem \citep{tenenbaum}; here $W_0$ is the
+\emph{unblocked} Mertens channel sum, ranging over all small primes $r$. The
+theoretically relevant object is instead the \emph{blocked} channel sum $W_f$, which omits
+the channels $r\mid N$ (where $p=N-rs\equiv0\bmod r$ forces $p=r$),
+\begin{equation}
+  W_f(N)=\sum_{\substack{3\le r\le\sqrt N\\ r\in\PP,\ r\nmid N}}\frac{r-1}{r-2}\,\frac1r\,
+  \frac{\log N}{\log(N/r)},
+  \label{eq:Wf}
+\end{equation}
+the same sum $W_f$ that governs the appendix derivation, where it is the channel-cancellation
+factor $R_2/R_1=W_f(N)$ (Theorem~\ref{thm:beta}). Table~\ref{tab:cv} compares the dispersion of
+$R_2$ under four normalizations.
 
 \begin{table}[h]
 \centering
@@ -481,16 +506,20 @@ dispersion of $R_2$ under three normalizations.
 normalization of $R_2$ & CV ($X=2\cdot10^{6}$)\\
 \midrule
 $N\log\log N/\log^2 N$ \quad(heuristic of \S5) & $0.184$\\
-$2C_2\,\sing(N)^{1}\,N\,W/\log^2 N$ \quad(full inheritance) & $0.174$\\
-$2C_2\,\sing(N)^{1/2}\,N\,W/\log^2 N$ \quad(\textbf{half power}) & $\mathbf{0.018}$\\
+$2C_2\,\sing(N)\,N\,W_0/\log^2 N$ \quad(full $\sing$, \emph{unblocked} $W_0$) & $0.167$\\
+$2C_2\,\sing(N)^{1/2}\,N\,W_0/\log^2 N$ \quad(half power, $W_0$) & $0.019$\\
+$2C_2\,\sing(N)\,N\,W_f/\log^2 N$ \quad(\textbf{full inheritance, blocked channels}) & $\mathbf{0.0135}$\\
 \bottomrule
 \end{tabular}
-\caption{At $X=2\cdot10^{6}$ the half-power normalization fits about $10\times$ tighter
-than the $\log\log N$ heuristic, and tighter than the full singular series
-($\beta=1$)---but this is a statement about the \emph{finite-range} value of the slope,
-not about the limiting exponent. As $X$ grows the best-fitting $\beta$ rises toward $1$
-(Fig.~\ref{fig:scaling}); the local optimality of $\beta=\tfrac12$ here reflects the
-$1/\log\log N$ deficit at $X\sim10^{6}$, not a failure of $R_2$ to inherit $\sing(N)$.}
+\caption{Dispersion of $R_2$ under four normalizations. The finite-range half-power
+normalization is descriptive rather than structural: it fits tightly (CV $0.019$) only
+because it pairs the unblocked Mertens sum $W_0$ with the \emph{wrong} power $\sing^{1/2}$.
+The theoretically relevant full-inheritance normalization is the \emph{blocked}-channel
+expression $2C_2\sing(N)W_f(N)N/\log^2N$, which carries the \emph{full} singular series
+($\beta=1$) and fits \emph{tighter still} (CV $0.0135$); forcing the full series with the
+\emph{unblocked} $W_0$ instead fits worst ($0.167$). The apparent $1/2$ power thus summarizes,
+over a finite range, the covariance between the blocked channels $r\mid N$ and $\sing(N)$; it
+is not a limiting singular-series exponent.}
 \label{tab:cv}
 \end{table}
 
@@ -556,18 +585,18 @@ two-form singular series factorizes as
 $R_1=2C_2\sing(N)I_1$ and $R_2=2C_2\sing(N)\sum_{r\nmid N}\frac{r-1}{r-2}I_r$, the
 ratio \emph{cancels the singular series exactly},
 \begin{equation}
-  \frac{R_2(N)}{R_1(N)}=\widetilde W(N):=\sum_{\substack{3\le r\le\sqrt N\\r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
+  \frac{R_2(N)}{R_1(N)}=W_f(N):=\sum_{\substack{3\le r\le\sqrt N\\r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
   \qquad w_r=\frac1r\frac{\log N}{\log(N/r)} .
   \label{eq:Wtilde}
 \end{equation}
 Hence the measured exponent is a regression slope,
-$\beta_2-1=\operatorname{Cov}(\log\widetilde W,\log\sing)/\operatorname{Var}(\log\sing)$,
+$\beta_2-1=\operatorname{Cov}(\log W_f,\log\sing)/\operatorname{Var}(\log\sing)$,
 and the only coupling to $\sing(N)$ comes from the blocked channels $r\mid N$, each
-\emph{removed} from $\widetilde W$. Modelling $\mathbf 1[\ell\mid N]$ as independent
+\emph{removed} from $W_f$. Modelling $\mathbf 1[\ell\mid N]$ as independent
 with probability $1/\ell$, $\operatorname{Var}(\log\sing)=:B$ is a convergent constant,
 while the removed terms contribute
-$\operatorname{Cov}(\log\widetilde W,\log\sing)=-A/\widetilde W_0$ with $A>0$
-constant and $\widetilde W_0\approx\langle R_2/R_1\rangle\sim\log\log N$ the baseline
+$\operatorname{Cov}(\log W_f,\log\sing)=-A/W_{f,0}$ with $A>0$
+constant and $W_{f,0}\approx\langle R_2/R_1\rangle\sim\log\log N$ the baseline
 sum (Theorem~\ref{thm:beta}). Therefore
 \begin{equation}
   \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o\!\left(\frac1{\log\log N}\right),
@@ -689,6 +718,11 @@ not toward the balanced value $1/2$.}
 \subsection{Optimization experiments}
 \label{sec:opt-emp}
 
+The minimum-variation branch below is a diagnostic of the representation cloud, not an
+invariant of Goldbach--Chen arithmetic. In particular, the endpoint branch
+$s_N\approx1$ reflects the objective's preference for small $p$; imposing an interior
+constraint $q/N\in[\varepsilon,1-\varepsilon]$ would define a different diagnostic.
+
 \paragraph{Smoothness is a Pareto trade-off.}
 Minimizing the total spatial variation $\sum|s_N-s_{N-2}|$ of the selected location
 $s_N=q_N/N$ yields a geometrically very smooth branch (total variation $0.0040$ over
@@ -745,8 +779,10 @@ $4000$ (Fig.~\ref{fig:continuity}, right), i.e.\ the per-$N$ noise averages out 
 a concrete form of weak convergence.
 \item \textbf{The limit is essentially uniform.} The prime-$q$ density is within
 total variation $0.028$ of the uniform law on $(0,1)$, with only a mild upturn near
-the endpoints (the $1/(\log(xN)\log((1-x)N))$ effect). This answers Question~1
-affirmatively: after removing endpoint effects, $\mu_N^{(1)}$ is close to uniform.
+the endpoints (the $1/(\log(xN)\log((1-x)N))$ effect). This gives empirical support for the
+window-smoothed version of Question~1: after smoothing and removing endpoint effects,
+$\mu_N^{(1)}$ is close to uniform (we do not claim pointwise weak convergence along typical
+$N$).
 \item \textbf{Prime and semiprime locations nearly coincide.} The two densities are
 within total variation $0.019$ of each other (Fig.~\ref{fig:continuity}, center),
 confirming the weak type-stabilization picture. The semiprime location is slightly skewed toward larger
@@ -972,7 +1008,7 @@ carries ($+0.97$). Right: the carry excess is positive in every base.}
 The organizing observation of this study is a single Euler-product identity and its
 consequence: decomposing the semiprime channel by its small prime factor shows that the
 Goldbach singular series $\sing(N)$ enters $R_2$ with exponent $1$, exactly as it enters
-$R_1$, and \emph{cancels} in the ratio $R_2/R_1=\widetilde W(N)$ (Lemma~\ref{lem:sing}). The
+$R_1$, and \emph{cancels} in the ratio $R_2/R_1=W_f(N)$ (Lemma~\ref{lem:sing}). The
 local factorization and cancellation are elementary sieve bookkeeping; our contribution is
 to write them down explicitly and to follow their consequences. The first is that the
 naturally read ``$\beta_2\approx\tfrac12$'' of a finite-range fit is not an exponent but a
@@ -1106,15 +1142,15 @@ arena of the sieve work surrounding Proposition $(1+a)$).
 \begin{theorem}[$\beta_2\to1$, conditional on Assumption~\ref{ass:HL}]\label{thm:beta}
 Under Assumption~\ref{ass:HL}, for $N\in\mathcal N_X$,
 \[
-  \frac{R_2(N)}{R_1(N)}=\widetilde W(N)\big(1+o(1)\big),\qquad
-  \widetilde W(N)=\sum_{\substack{3\le r\le\sqrt N\\ r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
+  \frac{R_2(N)}{R_1(N)}=W_f(N)\big(1+o(1)\big),\qquad
+  W_f(N)=\sum_{\substack{3\le r\le\sqrt N\\ r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
   \quad w_r=\frac{I_r}{I_1}=\frac1r\frac{\log N}{\log(N/r)}\big(1+o(1)\big),
 \]
 the Goldbach singular series $\sing(N)$ cancelling by Lemma~\ref{lem:sing}.
-Writing $\widetilde W_0(X)=\mathbb E_X[\widetilde W]\sim\log\log X$ and linearising
-$\log\widetilde W$ about $\widetilde W_0$,
+Writing $W_{f,0}(X)=\mathbb E_X[W_f]\sim\log\log X$ and linearising
+$\log W_f$ about $W_{f,0}$,
 \[
-  \beta_2(X)-1=-\frac{c(X)}{\widetilde W_0(X)}+O\!\big(\widetilde W_0^{-2}\big),
+  \beta_2(X)-1=-\frac{c(X)}{W_{f,0}(X)}+O\!\big(W_{f,0}^{-2}\big),
   \qquad
   c(X)=\frac{A(X)}{B},\quad
   A(X)=\sum_{r>2}\frac{r-1}{r-2}\,w_r(X)\,g_r\,\frac1r\Big(1-\frac1r\Big),
@@ -1134,22 +1170,22 @@ but is immaterial to the conclusion, since the \emph{order} is robust:
 \begin{proof}[Proof sketch]
 By Lemma~\ref{lem:sing}, $R_2=\sum_{r\nmid N}\sing_2(r,N)I_r=2C_2\sing(N)\sum_{r\nmid N}\frac{r-1}{r-2}I_r$
 and $R_1=2C_2\sing(N)I_1$, so under Assumption~\ref{ass:HL} the ratio is
-$\widetilde W(N)(1+O(\log^{-\delta}N))$ and $\sing(N)$ cancels. Only the channels
-$r\mid N$ are special, each \emph{removed} from $\widetilde W$ (not merely
-reweighted); thus $\widetilde W(N)=\widetilde W_0-\sum_{r}\frac{r-1}{r-2}w_r e_r$ up
+$W_f(N)(1+O(\log^{-\delta}N))$ and $\sing(N)$ cancels. Only the channels
+$r\mid N$ are special, each \emph{removed} from $W_f$ (not merely
+reweighted); thus $W_f(N)=W_{f,0}-\sum_{r}\frac{r-1}{r-2}w_r e_r$ up
 to the slow variation of $w_r$. Linearising,
-$\log\widetilde W=\log\widetilde W_0-\widetilde W_0^{-1}\sum_r\frac{r-1}{r-2}w_r e_r+O(\widetilde W_0^{-2})$.
+$\log W_f=\logW_{f,0}-W_{f,0}^{-1}\sum_r\frac{r-1}{r-2}w_r e_r+O(W_{f,0}^{-2})$.
 Insert into \eqref{eq:beta-def}: with $\log\sing=\sum_\ell g_\ell e_\ell$ and the
 asymptotic independence of Lemma~\ref{lem:moments}, only the diagonal $r=\ell$ terms
-survive, giving $\operatorname{Cov}_X=-\widetilde W_0^{-1}A(X)$ and
-$\Var_X=B$, whence the displayed slope. Finally $\widetilde W_0(X)=\mathbb E_X[\widetilde W]
+survive, giving $\operatorname{Cov}_X=-W_{f,0}^{-1}A(X)$ and
+$\Var_X=B$, whence the displayed slope. Finally $W_{f,0}(X)=\mathbb E_X[W_f]
 =\sum_{3\le r\le\sqrt X}\frac{r-1}{r-2}\frac1r\frac{\log X}{\log(X/r)}(1-1/r)
 =\log\log X+O(1)$ by Mertens, and equals $\langle R_2/R_1\rangle_X$ up to $o(1)$.
 \end{proof}
 
 \subsection{Confirmation and the unconditional model}
 Numerically (Fig.~\ref{fig:betalaw}; \texttt{run\_betalaw.py}): the prediction
-$\widetilde W(N)$ regressed against $\log\sing$ reproduces the measured $\beta_2$ with
+$W_f(N)$ regressed against $\log\sing$ reproduces the measured $\beta_2$ with
 the correct drift ($0.554,0.583,0.602$ at $X=2\!\cdot\!10^{6},2\!\cdot\!10^{7},10^{8}$
 versus measured $0.531,0.567,0.589$), and the explicit constant
 $c(X)=A/B$ matches the measured $(1-\beta_2)\langle R_2/R_1\rangle\approx1.1$ in order and
@@ -1194,8 +1230,8 @@ uniform Hardy--Littlewood Assumption~\ref{ass:HL}, in particular uniformity in t
 coefficient $r$ up to $\sqrt N$ (a Bombieri--Vinogradov-type input); (ii) a rigorous
 bound on the correlation between the HL error terms and $\log\sing$, currently
 absorbed into the $o(1)$; (iii) control of the linearisation remainder, which is
-genuinely $O(\widetilde W_0^{-2})$ by the absolute convergence of $A,B$ but requires
-the tail of $\widetilde W$. None of these is available unconditionally, consistent
+genuinely $O(W_{f,0}^{-2})$ by the absolute convergence of $A,B$ but requires
+the tail of $W_f$. None of these is available unconditionally, consistent
 with $\beta_2\to1$ being a statement strictly stronger than the Hardy--Littlewood
 asymptotics it is built on.
 \end{remark}
@@ -1271,10 +1307,10 @@ $F_\ell$ & $0.169$ & $0.106$ & $0.078$ & $0.052$ & $0.044$\\
 
 \begin{theorem}[First-moment exponent, conditional on Bombieri--Vinogradov]\label{thm:fm}
 Under the equidistribution input of Lemma~\ref{lem:fm} and with $F_\ell\sim$ the
-channel weight $\frac{(\ell-1)/(\ell-2)\,w_\ell}{\widetilde W_0}$, the first-moment
+channel weight $\frac{(\ell-1)/(\ell-2)\,w_\ell}{W_{f,0}}$, the first-moment
 exponent satisfies
 \[
-  \beta_2^{(1)}(X)=1-\frac{c^{(1)}}{\widetilde W_0(X)}+O(\widetilde W_0^{-2}),
+  \beta_2^{(1)}(X)=1-\frac{c^{(1)}}{W_{f,0}(X)}+O(W_{f,0}^{-2}),
   \qquad c^{(1)}=\frac{1}{B}\sum_{\ell>2}\Big(\tfrac{\ell-1}{\ell-2}\Big)^{2}w_\ell\,g_\ell\,v_\ell ,
 \]
 an absolutely convergent constant; hence $\beta_2^{(1)}(X)\to1$.
@@ -1283,8 +1319,8 @@ an absolutely convergent constant; hence $\beta_2^{(1)}(X)\to1$.
 \begin{proof}[Proof sketch]
 By Lemma~\ref{lem:fm}, $\log(B_\ell/A_\ell)=\log\frac{(\ell-2)(1-F_\ell)}{\ell-2+F_\ell}
 =-\frac{\ell-1}{\ell-2}F_\ell+O(F_\ell^2)$. Inserting into \eqref{eq:beta-fm} with
-$F_\ell=\frac{\ell-1}{\ell-2}w_\ell/\widetilde W_0+o(\cdot)$ gives the stated slope,
-and $\widetilde W_0\sim\log\log X$ as in Theorem~\ref{thm:beta}.
+$F_\ell=\frac{\ell-1}{\ell-2}w_\ell/W_{f,0}+o(\cdot)$ gives the stated slope,
+and $W_{f,0}\sim\log\log X$ as in Theorem~\ref{thm:beta}.
 \end{proof}
 
 \paragraph{The reduced gap.}
@@ -1319,9 +1355,9 @@ We now show that the required variance is small, so the exceptional set is spars
 the pointwise law holds for almost all $N$. The natural object is the concentration of
 the \emph{ratio} on the channel prediction: set
 \[
-  b(N):=\frac{R_2(N)/R_1(N)}{\widetilde W(N)},
+  b(N):=\frac{R_2(N)/R_1(N)}{W_f(N)},
 \]
-so that $b(N)\equiv1$ would be the pointwise law $R_2/R_1=\widetilde W$, hence (taking
+so that $b(N)\equiv1$ would be the pointwise law $R_2/R_1=W_f$, hence (taking
 logs and regressing on $\log\sing$) $\beta_2(N)=\beta_2^{(1)}(X)$ for every $N$. The
 measured fluctuation of $b$ is tiny and decreasing (Table~\ref{tab:conc}): the
 coefficient of variation is below $0.7\%$ and \emph{no} $N$ in the window deviates from
@@ -1338,7 +1374,7 @@ $10^{8}$       & $0.974$ & $0.0049$ & $0$ & $0.95\%$ & $0.0008$\\
 $5\cdot10^{8}$ & $0.978$ & $0.0039$ & $0$ & --- & $0.0004$\\
 \bottomrule
 \end{tabular}
-\caption{Concentration of $R_2/R_1$ on $\widetilde W$. The constant $\langle b\rangle\approx0.97$
+\caption{Concentration of $R_2/R_1$ on $W_f$. The constant $\langle b\rangle\approx0.97$
 is the finite-size Hardy--Littlewood normalisation; the spread is $<0.7\%$ and the
 exceptional set at the $5\%$ level is empty (\texttt{run\_exceptional.py}).}
 \label{tab:conc}
@@ -1346,10 +1382,10 @@ exceptional set at the $5\%$ level is empty (\texttt{run\_exceptional.py}).}
 
 \begin{proposition}[Exceptional set, linear form]\label{prop:exc}
 By Chebyshev, the density of $N\in\mathcal N_X$ with
-$|R_2/R_1-\langle b\rangle\widetilde W|>\varepsilon\widetilde W$ is at most
+$|R_2/R_1-\langle b\rangle W_f|>\varepsilon W_f$ is at most
 $\mathrm{CV}(b)^2/\varepsilon^2$. With the measured $\mathrm{CV}(b)\le0.7\%$ this is
 $\le0.2\%$ at $\varepsilon=0.05$ (and the empirical exceptional set is in fact empty).
-Hence $R_2(N)/R_1(N)=\widetilde W(N)\,(1+o(1))$ for all but a density-$o(1)$ set of $N$.
+Hence $R_2(N)/R_1(N)=W_f(N)\,(1+o(1))$ for all but a density-$o(1)$ set of $N$.
 This is the \emph{linear} almost-all statement; the further passage to
 $\beta_2(N)\to1$ is Corollary~\ref{cor:beta-aa}.
 \end{proposition}
@@ -1393,31 +1429,116 @@ The only arithmetic input is the \emph{classical} Vinogradov--Vaughan bound for 
 \emph{prime} sum; the semiprime sum enters through its $L^2$ norm alone---no bilinear
 or sieve estimate for $S_{\SSemi}$ is required.
 
-\begin{theorem}[Linear almost-all asymptotic for $R_2$]\label{thm:aa}
-Since a typical $\mathrm{main}(N)\asymp X\log\log X/\log^2 X$, Proposition~\ref{prop:var}
-gives, for $A\ge2$, a relative variance $\ll(\log X)^{3-2A}/\log\log X\to0$; by Chebyshev
-the set of $N\in(X,2X]$ with $|R_2(N)-\mathrm{main}(N)|>\varepsilon\,\mathrm{main}(N)$ has
-size $\ll_\varepsilon X(\log X)^{3-2A}=o(X)$. On the major arcs
-$\mathrm{main}(N)=\widetilde W(N)\,[2C_2\sing(N)I_1(N)]\,(1+o(1))$ by the equidistribution
-of primes and semiprimes in progressions of modulus $\le Q$ (Siegel--Walfisz and its
-semiprime convolution) together with Lemma~\ref{lem:sing}; and $R_1(N)=2C_2\sing(N)I_1(N)(1+o(1))$
-for all but $O(X^{1-\delta})$ even $N$ by Montgomery--Vaughan~\cite{montgomeryvaughan1975}.
-Hence, for all but $o(X)$ even $N\in(X,2X]$,
+\begin{lemma}[Uniform lower bound for the blocked channel sum]\label{lem:Wf-size}
+Fix $0<\eta<1/2$. Uniformly for even $N\in(X,2X]$, the truncated blocked channel sum
 \[
-  R_2(N)=\mathrm{main}(N)(1+o(1)),\qquad
-  \frac{R_2(N)}{R_1(N)}=\widetilde W(N)(1+o(1)).
+  W_f(N;X^\eta):=\sum_{\substack{3\le r\le X^\eta\\ r\in\PP,\ r\nmid N}}\frac{r-1}{r-2}\,\frac1r\,\frac{\log N}{\log(N/r)}
+  \ \gg_\eta\ \log\log X,
+\]
+and consequently $W_f(N)\gg_\eta\log\log X$.
+\end{lemma}
+\begin{proof}
+For $r\le X^\eta$ and $N\in(X,2X]$ the archimedean channel weight satisfies
+$w_r(N)=I_r(N)/I_1(N)\gg_\eta1/r$, so
+$W_f(N;X^\eta)\gg_\eta\sum_{3\le r\le X^\eta,\,r\nmid N}1/r$. By Mertens' theorem
+$\sum_{3\le r\le X^\eta}1/r=\log\log X+O_\eta(1)$. The reciprocal mass removed by the primes
+$r\mid N$ is $O(\log\log\log X)$: writing $P_z=\prod_{3\le p\le z}p$, the bound $P_z\le2X$
+forces $z\ll\log X$, so $\sum_{r\mid N}1/r\le\sum_{3\le r\ll\log X}1/r=O(\log\log\log X)$. Hence
+$\sum_{3\le r\le X^\eta,\,r\nmid N}1/r\ge\log\log X-O(\log\log\log X)\gg\log\log X$.
+\end{proof}
+
+\begin{lemma}[Large-$r$ channels are negligible almost everywhere]\label{lem:large-r}
+Fix $0<\eta<1/2$ and let $T_\eta(N)$ count the representations $N=p+rs$ with $p,r,s$ prime,
+$r\le s$, and $r>X^\eta$. Then for every $\varepsilon>0$,
+\[
+  \#\Big\{X<N\le2X,\ 2\mid N:\ T_\eta(N)>\varepsilon\,\tfrac{X\log\log X}{\log^2X}\Big\}=o(X).
+\]
+\end{lemma}
+\begin{proof}
+A first-moment count gives
+$\sum_{X<N\le2X}T_\eta(N)\ll\frac{X^2}{\log^2X}\sum_{X^\eta<r\le\sqrt{2X}}\frac1r$, and
+$\sum_{X^\eta<r\le\sqrt X}1/r=\log\log\sqrt X-\log\log X^\eta+o(1)=\log\frac1{2\eta}+o(1)$ by
+Mertens. Hence the mean of $T_\eta$ over the $\sim X/2$ even $N\in(X,2X]$ is
+$\ll_\eta X/\log^2X=o\big(X\log\log X/\log^2X\big)$, and Markov's inequality gives the claim.
+\end{proof}
+
+\begin{proposition}[Major-arc evaluation for the truncated semiprime channel]\label{prop:major}
+Fix $0<\eta<1/2$, put $Y=X^\eta$, and define
+$R_2^{(\le Y)}(N):=\sum_{p+rs=N,\ p,r,s\in\PP,\ 3\le r\le Y}1$, with major-arc contribution
+$M^{(\le Y)}(N)$. Then the standard major-arc calculation---the distribution of semiprimes in
+progressions of moduli $q\le Q$ (\S\ref{sec:majorarc}, Lemma~\ref{lem:s2ap}) together with
+Lemma~\ref{lem:sing}---gives
+\[
+  M^{(\le Y)}(N)=2C_2\,\sing(N)\sum_{\substack{3\le r\le Y\\ r\in\PP,\ r\nmid N}}\frac{r-1}{r-2}\,I_r(N)
+  +o\Big(\frac{X\log\log X}{\log^2X}\Big)
+\]
+for even $N\in(X,2X]$, uniformly outside an admissible $o(X)$ exceptional set.
+\end{proposition}
+
+\begin{theorem}[Linear almost-all asymptotic for the semiprime channel]\label{thm:aa}
+Let $X\to\infty$ and let $N$ range over even integers in $(X,2X]$. Split the circle
+$[0,1]=\mathfrak M\cup\mathfrak m$ at denominator bound $Q=(\log X)^{2A+8}$ with $A>2$ fixed,
+and put $\mathrm{main}(N)=\int_{\mathfrak M}S_\PP(\alpha)S_{\SSemi}(\alpha)e(-N\alpha)\,d\alpha$.
+Assume the major-arc evaluation of Proposition~\ref{prop:major} (semiprimes in progressions of
+moduli $q\le Q$). Then, for all but $o(X)$ even $N\in(X,2X]$,
+\[
+  R_2(N)=\mathrm{main}(N)(1+o(1)),
+\]
+and
+\[
+  \mathrm{main}(N)=2C_2\sing(N)\!\!\sum_{\substack{3\le r\le\sqrt N\\ r\in\PP,\ r\nmid N}}\!\!\frac{r-1}{r-2}I_r(N)(1+o(1))
+  =W_f(N)\,[2C_2\sing(N)I_1(N)](1+o(1)).
+\]
+Consequently, using the Montgomery--Vaughan almost-all asymptotic for $R_1$,
+\[
+  \frac{R_2(N)}{R_1(N)}=W_f(N)(1+o(1))\qquad\text{for all but }o(X)\text{ even }N\in(X,2X].
 \]
 \end{theorem}
+\begin{proof}
+On the minor arcs,
+$R_2(N)-\mathrm{main}(N)=\int_{\mathfrak m}S_\PP(\alpha)S_{\SSemi}(\alpha)e(-N\alpha)\,d\alpha$,
+so by Proposition~\ref{prop:var}
+\[
+  \sum_{X<N\le2X}|R_2(N)-\mathrm{main}(N)|^2
+  \le\int_{\mathfrak m}|S_\PP(\alpha)|^2|S_{\SSemi}(\alpha)|^2\,d\alpha
+  \le\Big(\sup_{\alpha\in\mathfrak m}|S_\PP(\alpha)|\Big)^2\!\int_0^1|S_{\SSemi}(\alpha)|^2\,d\alpha
+  \ll_A X^3(\log\log X)(\log X)^{-2A-1}.
+\]
+By Lemma~\ref{lem:Wf-size} and the major-arc evaluation,
+$\mathrm{main}(N)\gg X\log\log X/\log^2X$ uniformly off an $o(X)$ set. Hence by Chebyshev the
+exceptional set
+$\mathcal E_\varepsilon(X)=\{X<N\le2X:|R_2(N)-\mathrm{main}(N)|>\varepsilon\,\mathrm{main}(N)\}$
+satisfies
+\[
+  \#\mathcal E_\varepsilon(X)\ll_{\varepsilon,A}
+  \frac{X^3(\log\log X)(\log X)^{-2A-1}}{X^2(\log\log X)^2(\log X)^{-4}}
+  \ll_{\varepsilon,A}\frac{X(\log X)^{3-2A}}{\log\log X}=o(X),
+\]
+so $R_2(N)=\mathrm{main}(N)(1+o(1))$ off $\mathcal E_\varepsilon$. The channels $r>X^\eta$
+contribute $o(\mathrm{main})$ off a further $o(X)$ set (Lemma~\ref{lem:large-r}), so the
+major-arc main term reduces to the truncated one of Proposition~\ref{prop:major}; with
+Lemma~\ref{lem:sing} this is
+$2C_2\sing(N)\sum_{r\nmid N}\frac{r-1}{r-2}I_r(N)(1+o(1))=W_f(N)[2C_2\sing(N)I_1(N)](1+o(1))$.
+Intersecting with the full-density set on which $R_1(N)=2C_2\sing(N)I_1(N)(1+o(1))$
+(Montgomery--Vaughan~\cite{montgomeryvaughan1975}) yields $R_2/R_1=W_f(N)(1+o(1))$ off $o(X)$.
+\end{proof}
 
-\begin{corollary}[$\beta_2\to1$, conditional on lower-tail control]\label{cor:beta-aa}
-Suppose in addition that $\log(R_2(N)/R_1(N))$ is uniformly integrable over
-$\mathcal N_X$---equivalently, that the exceptional set $\mathcal E_X$ of
-Theorem~\ref{thm:aa} contributes $o(1)$ to the covariance \eqref{eq:beta-def}, which holds
-as soon as $R_2(N)\gg_A \mathrm{main}(N)(\log X)^{-A}$ for $N\in\mathcal E_X$ (a one-sided
-lower bound, strictly weaker than the full asymptotic but \emph{not} implied by the $L^2$
-bound of Proposition~\ref{prop:var}). Then the contribution of $\mathcal E_X$ to
-\eqref{eq:beta-def} is negligible, the regression slope is computed off
-$\mathcal E_X$ where $R_2/R_1=\widetilde W(1+o(1))$, and $\beta_2(X)\to1$.
+\paragraph{Lower-tail hypothesis.}
+For every $\delta>0$,
+\[
+  \frac1X\,\#\Big\{X<N\le2X,\ 2\mid N:\ \frac{R_2(N)}{R_1(N)}\le\delta\,W_f(N)\Big\}\longrightarrow0
+  \qquad(\delta\downarrow0,\ X\to\infty).
+\]
+This is a one-sided control of the lower tail of $R_2/R_1$; it is strictly weaker than the full
+asymptotic but is \emph{not} implied by the $L^2$ bound of Proposition~\ref{prop:var}.
+
+\begin{corollary}[$\beta_2\to1$, conditional on the lower-tail hypothesis]\label{cor:beta-aa}
+Under the lower-tail hypothesis above, the exceptional set $\mathcal E_X$ of
+Theorem~\ref{thm:aa} contributes $o(1)$ to the covariance \eqref{eq:beta-def}; the slope is
+then computed off $\mathcal E_X$, where $R_2/R_1=W_f(1+o(1))$, and $\beta_2(X)\to1$. Without
+this hypothesis, the second-moment result of Theorem~\ref{thm:aa} controls $R_2-\mathrm{main}$,
+not the untruncated log-regression; for unconditional statements one restricts to truncated
+logarithms (\S\ref{sec:truncated}).
 \end{corollary}
 
 \begin{remark}[The honest status of the limit]
@@ -1439,20 +1560,20 @@ computed range no $N$ has $R_2/R_1$ even near the tail---but we flag it rather t
 it.
 \end{remark}
 
-\begin{remark}
-The \emph{linear} Theorem~\ref{thm:aa} is unconditional in outline: every
-ingredient---Vaughan's minor-arc bound \citep{vaughan1997}, Siegel--Walfisz,
-Montgomery--Vaughan, and the Euler-product identity Lemma~\ref{lem:sing}---is classical.
-A fully written proof must still supply the routine major-arc computation for the
-semiprime sum (semiprimes in progressions of modulus $\le(\log X)^{C}$, which follow from
-the prime distribution by Selberg--Sath\'e convolution \citep{selberg1954,sathe1953};
-\S\ref{sec:majorarc}) and track the dependence on $A$. The one ingredient we make
-\emph{explicit} is the singular-series cancellation of Lemma~\ref{lem:sing} and the resulting
-first-moment law; the analytic machinery that turns it into the \emph{linear} almost-all
-theorem is off the shelf. This is in sharp contrast to the pointwise Assumption~\ref{ass:HL},
-which lies beyond current technology. The remaining step to the \emph{log-regression}
-statement $\beta_2\to1$ is the lower-tail input of Corollary~\ref{cor:beta-aa}, which is
-empirically trivial in range but not proved.
+\begin{remark}[What is and is not proved]
+Theorem~\ref{thm:aa} is stated as a \emph{bounded reduction}, not as a self-contained
+unconditional theorem. The minor-arc variance estimate (Proposition~\ref{prop:var}) is
+unconditional; the identification of the major-arc main term is the standard
+Hardy--Littlewood major-arc evaluation for the channel forms $s$ and $N-rs$
+(Proposition~\ref{prop:major}, \S\ref{sec:majorarc}), which we invoke but do not write out in
+full---it follows the prime distribution by Selberg--Sath\'e convolution
+\citep{selberg1954,sathe1953}. Every ingredient---Vaughan's minor-arc bound
+\citep{vaughan1997}, Siegel--Walfisz, Montgomery--Vaughan, and the Euler-product identity
+Lemma~\ref{lem:sing}---is classical, and the one thing we make \emph{explicit} is the
+singular-series cancellation of Lemma~\ref{lem:sing}. This is in sharp contrast to the
+pointwise Assumption~\ref{ass:HL}, which lies beyond current technology, and to the
+log-regression statement $\beta_2\to1$, which needs the lower-tail hypothesis of
+Corollary~\ref{cor:beta-aa}.
 \end{remark}
 
 \begin{remark}[Relation to the literature]
@@ -1465,7 +1586,7 @@ $(1+a)$ interpolation between Goldbach and Chen \citep{li2026}, already operate 
 regime; we claim no improvement on them, and the linear almost-all asymptotic for $R_2$
 should be regarded as folklore in this circle of ideas. What is specific here is the
 singular-series cancellation of Lemma~\ref{lem:sing}, which exhibits
-$\mathrm{main}(N)=2C_2\,\sing(N)\,\widetilde W(N)\,J(N)$ explicitly and is the reason $\sing$
+$\mathrm{main}(N)=2C_2\,\sing(N)\,W_f(N)\,J(N)$ explicitly and is the reason $\sing$
 disappears from the ratio $R_2/R_1$. The contribution of this appendix is the explicit
 bookkeeping and its consequences for the slope $\beta_2$, not the almost-all asymptotic
 itself.
@@ -1520,18 +1641,18 @@ $A\ge2$.
 \end{proof}
 
 Since $\log(R_2/R_1)=\log\rho+\log(\mathrm{main}/R_1)$ and
-$\mathrm{main}(N)/R_1(N)=\widetilde W(N)(1+o(1))$ off a set of size $O(X^{1-\delta})$ (the
+$\mathrm{main}(N)/R_1(N)=W_f(N)(1+o(1))$ off a set of size $O(X^{1-\delta})$ (the
 major arcs of \S\ref{sec:majorarc} and Montgomery--Vaughan for $R_1$),
 Proposition~\ref{prop:trunc} shows that the $\log\rho$ part contributes $o(1)$ to both the
 variance and the covariance of the $\beta_2$-regression once truncated. The \emph{truncated}
-log-regression slope is therefore governed entirely by the channel term $\log\widetilde W$,
+log-regression slope is therefore governed entirely by the channel term $\log W_f$,
 treated next. This is the precise sense in which the second-moment machinery already
 suffices: the only quantity it cannot reach is the untruncated lower tail, which is
 empirically inactive ($\mathrm{CV}(b)<0.7\%$ up to $5\cdot10^{8}$, Table~\ref{tab:conc}), so
 in the computed range the truncated and untruncated slopes coincide.
 
 \paragraph{The blocked-channel model.}
-We make the mechanism behind $\beta_2(X)=1-c/\widetilde W_0$ (Theorem~\ref{thm:beta})
+We make the mechanism behind $\beta_2(X)=1-c/W_{f,0}$ (Theorem~\ref{thm:beta})
 precise in the Kubilius-type model of Lemma~\ref{lem:moments}, where the indicators
 $e_\ell=\mathbf 1[\ell\mid N]$ are independent Bernoulli$(1/\ell)$ over distinct odd primes.
 Freezing the weights at scale $X$, with $a_r=\frac{r-1}{r-2}\frac1r$ set
@@ -1746,7 +1867,7 @@ summing the per-channel asymptotic over the unblocked $r\le\sqrt N$,
   =(1+o(1))\,2C_2\sing(N)\,\frac{N}{\log^2N}
   \Big(\!\!\sum_{\substack{3\le r\le\sqrt N\\ r\nmid N}}\!\!\frac{r-1}{r-2}\frac1r\Big)\int_0^1\varphi(x)\,dx ,
 \]
-the parenthesis being the Mertens channel sum $\widetilde W(N)$. Taking $\varphi\equiv1$ gives
+the parenthesis being the Mertens channel sum $W_f(N)$. Taking $\varphi\equiv1$ gives
 the matching asymptotic for $R_2(N)$; dividing cancels both the inherited singular series
 $\sing(N)$ and the channel sum, leaving $\mu_N^{(2)}(\varphi)=\int_0^1\varphi+o(1)$. This is
 weak convergence against every bounded $C^1$ test function.
@@ -1940,7 +2061,7 @@ $\ell-1$ reduced classes share $\SSemi^*(x;\ell)=\pi_2(x)-\pi(x/\ell)$ equally. 
 confirmed to the integer at $x=4\cdot10^{6}$: $\pi_2(x;3,0)=102{,}383=\pi(x/3)$ and each
 reduced class holds $344{,}302=(\pi_2-\pi(x/3))/2$. The class-$0$ suppression
 $\pi(x/\ell)/\pi_2(x)\sim 1/(\ell\log\log x)$ is exactly the $\log\log$ deficit that
-produces the channel weight $\widetilde W$ and the blocking of Lemma~\ref{lem:sing}.
+produces the channel weight $W_f$ and the blocking of Lemma~\ref{lem:sing}.
 \end{remark}
 
 \paragraph{The main term.}
@@ -1963,7 +2084,7 @@ $\ell\mid N$ removed and the suppression at $\ell=r\mid N$---i.e.\ the singular 
 Lemma~\ref{lem:sing}. Hence
 \[
   \mathrm{main}(N)=\mathfrak S_2(N;Q)\,J(N)\big(1+o(1)\big),
-  \quad \mathfrak S_2(N;Q)=2C_2\,\sing(N)\,\widetilde W(N)+O(Q^{-1}),
+  \quad \mathfrak S_2(N;Q)=2C_2\,\sing(N)\,W_f(N)+O(Q^{-1}),
   \quad J(N)\asymp\frac{X\log\log X}{\log^2 X},
 \]
 the tail $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$ being the standard
