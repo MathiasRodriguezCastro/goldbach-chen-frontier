@@ -61,12 +61,12 @@ def main():
     fig, ax = plt.subplots(figsize=(7.5, 5))
     ax.semilogx(Xa, ba, "o-", ms=6, color="#c0392b", label=r"$\beta_{\rm local}(X)$")
     ax.axhline(0.5, color="k", ls="--", lw=1, label=r"$\beta=1/2$")
-    ax.set_xlabel("$X$ (centro de la ventana)")
-    ax.set_ylabel(r"exponente singular local $\beta_2$")
-    ax.set_title(r"¿Se estabiliza $\beta_2$ de $R_2$? (ventanas de $2\cdot10^6$)")
+    ax.set_xlabel("$X$ (window centre)")
+    ax.set_ylabel(r"local regression slope $\beta_2$")
+    ax.set_title(r"Does $\beta_2$ of $R_2$ stabilize? (windows of $2\cdot10^6$)")
     ax.legend()
     fig.savefig(os.path.join(FIG, "09_beta_scaling.png"), dpi=130, bbox_inches="tight")
-    print("figura:", os.path.relpath(os.path.join(FIG, "09_beta_scaling.png")))
+    print("figure:", os.path.relpath(os.path.join(FIG, "09_beta_scaling.png")))
 
 
 _cache = {}

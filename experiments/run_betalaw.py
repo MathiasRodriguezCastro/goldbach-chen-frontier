@@ -49,12 +49,12 @@ def main():
     xx = np.linspace(0, inv.max() * 1.05, 50)
     ax.plot(xx, 1 - c * xx, "-", color="#e67e22", lw=1.6,
             label=fr"$\beta_2=1-{c:.2f}/\langle R_2/R_1\rangle$  (rms {rms:.4f})")
-    ax.scatter(inv, betas, s=55, color="#c0392b", zorder=3, label="medido (ventanas)")
+    ax.scatter(inv, betas, s=55, color="#c0392b", zorder=3, label="measured (windows)")
     ax.scatter([0], [1], marker="*", s=180, color="k", zorder=3,
-               label=r"límite $\beta_2\to1$ ($N\to\infty$)")
+               label=r"limit $\beta_2\to1$ ($N\to\infty$)")
     ax.set_xlabel(r"$1/\langle R_2/R_1\rangle_N$  ($\sim 1/\log\log N$)")
-    ax.set_ylabel(r"exponente singular local $\beta_2$")
-    ax.set_title(r"Ley derivada: $\beta_2=1-c/\langle R_2/R_1\rangle\to1$")
+    ax.set_ylabel(r"local regression slope $\beta_2$")
+    ax.set_title(r"Derived law: $\beta_2=1-c/\langle R_2/R_1\rangle\to1$")
     ax.legend(fontsize=9)
     path = os.path.join(FIG, "12_betalaw.png")
     fig.savefig(path, dpi=130, bbox_inches="tight"); plt.close(fig)

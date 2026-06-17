@@ -14,23 +14,31 @@ experimentación y optimización discreta.
 
 Sea $R_1(N)$ el nº de representaciones $N=p+q$ (ambos primos), $R_2(N)$ con $q$
 semiprimo, y $\mathfrak S(N)=\prod_{p\mid N,p>2}\frac{p-1}{p-2}$ la serie singular de
-Goldbach. Escribiendo $R_i\propto\mathfrak S(N)^{\beta_i}$:
+Goldbach.
 
-- $R_1$: $\beta_1=1$ exacto (Hardy–Littlewood — control que recuperamos).
-- $R_2$: el **exponente singular no es fijo**. Medido localmente en ventanas hasta
-  $X=10^9$ (criba por bloques), sube de 0.55 a 0.61, y tanto una derivación como los
-  datos dan
-  $$\boxed{\ \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o(\cdot)\ \longrightarrow\ 1,\qquad 1-\beta_2\asymp\tfrac1{\log\log N}\ }$$
+- $R_1$: $\mathfrak S(N)$ entra con exponente $1$ (Hardy–Littlewood — control que recuperamos).
+- $R_2$: **también con exponente $1$**. Descomponiendo el canal semiprimo $q=rs$ por su
+  factor primo chico $r$, cada canal lleva su propia serie singular de dos formas, y en
+  el **cociente $R_2/R_1$ la serie singular se cancela** (Lema 1), dejando una suma de
+  Mertens $\widetilde W(N)\sim\log\log N$. Así, **$R_2$ hereda la serie singular COMPLETA**.
 
-> **$R_2$ hereda asintóticamente la serie singular COMPLETA** ($\beta_2\to1$); el "½"
-> que se ve cerca de $10^6$ es un artefacto de rango finito. La validación no circular
-> $(1-\beta_2)\langle R_2/R_1\rangle\approx c$ se cumple al 1%.
+El número $\beta_2\approx\tfrac12$ que reporta un ajuste log–log en rango finito **no es
+un exponente** sino la **pendiente de regresión** de un objeto que no es ley de potencia;
+una derivación y los datos dan
+$$\boxed{\ \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o(\cdot)\ \longrightarrow\ 1,\qquad 1-\beta_2\asymp\tfrac1{\log\log N}\ }$$
 
-**Reducción rigurosa (apéndice).** $\beta_2\to1$ se reduce a inputs analíticos estándar
-— identidad incondicional de la serie singular, reducción de primer momento a
-Bombieri–Vinogradov, y cota de varianza por el arco-menor de Vinogradov — dando
-**$\beta_2(N)\to1$ para casi todo $N$**, condicional solo a fuerza BV/Chen, no a la HL
-puntual.
+> El "½" cerca de $10^6$ es una **corrección de tamaño finito** $1/\log\log N$, no una
+> deriva real. Validación no circular $(1-\beta_2)\langle R_2/R_1\rangle\approx c$ al 1%.
+> La pendiente es **multi-canal**: remover el átomo $3\mid N$ baja el déficit solo ~10%
+> (refuta la lectura de "un solo átomo").
+
+**Reducción rigurosa (apéndice).** La identidad de cancelación (Lema 1) es incondicional;
+una cota de 2º momento por el método del círculo — solo el arco-menor de primos de Vaughan
++ el tamaño $L^2$ trivial de la suma de semiprimos, **sin criba** — da el resultado
+**lineal** $R_2(N)=\mathrm{main}(N)(1+o(1))$ para casi todo $N$, incondicional en outline.
+El paso a la afirmación de **log-regresión** $\beta_2(N)\to1$ requiere un input extra
+(control de cola inferior de $R_2/R_1$, más fuerte que $L^2$); lo enunciamos como tal, sin
+sobre-afirmar.
 
 ## Una docena de reformulaciones, una serie singular
 
@@ -116,6 +124,7 @@ con su `experiments/run_*.py`. Rápidos (≲1 min) salvo donde se indica.
 python3 experiments/run_counts.py 2000000   # conteos, diagnósticos, figuras 01-05
 python3 experiments/run_scaling.py           # β₂(X) hasta 1e9  (LENTO ~20 min)
 python3 experiments/run_betalaw.py           # ley β₂=1-c/⟨R2/R1⟩  (LENTO ~5 min)
+python3 experiments/run_estimator_audit.py   # estimador acumulado vs ventana + átomo 3|N
 python3 experiments/run_firstmoment.py       # reducción rigurosa: respuestas A_ℓ,B_ℓ
 python3 experiments/run_exceptional.py       # cota de 2º momento (conjunto excepcional)
 

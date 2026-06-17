@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the work below."
+title: "The Goldbach–Chen Frontier: How the Semiprime Channel Inherits the Singular Series"
+abstract: >-
+  Computational and analytic study of how the Goldbach (R1) and Chen-surplus (R2)
+  representation counts respond to the Hardy–Littlewood singular series. Central result:
+  an Euler-product cancellation identity (R2/R1 loses the singular series, leaving a
+  Mertens channel sum), so R2 inherits the full singular series and the finite-range
+  "half-power" is a 1/loglog N regression-slope artefact. Includes a circle-method
+  almost-all reduction and a suite of reproducible diagnostics and reframings.
+type: software
+authors:
+  - given-names: Mathias
+    family-names: Rodríguez Castro
+    email: mrodriguezcastro24@gmail.com
+keywords:
+  - Goldbach conjecture
+  - Chen's theorem
+  - singular series
+  - circle method
+  - experimental number theory
+  - semiprimes
+license: MIT
+version: "1.0.0"
+date-released: 2026-06-16
+repository-code: "https://github.com/USER/proyectoGoldbach"
+# A versioned snapshot will be archived on Zenodo; replace the DOI below upon deposit.
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.PENDING"
+    description: "Zenodo archive of the code and derived tables (to be minted on deposit)."

@@ -42,12 +42,12 @@ def main():
                         (c, r"$c=(1-\beta_2)\langle R_2/R_1\rangle$", "#1f4fa0")]:
         a, b = np.polyfit(inv, y, 1)
         xs = np.linspace(0, inv.max() * 1.05, 50)
-        ax.plot(xs, b + a * xs, "--", color=col, lw=1.3, label=lab + f"  (límite {b:.2f})")
+        ax.plot(xs, b + a * xs, "--", color=col, lw=1.3, label=lab + f"  (limit {b:.2f})")
         ax.scatter(inv, y, s=55, color=col, zorder=3)
-        print(f"  {lab}: límite (1/loglogX->0) = {b:.3f}, pendiente {a:.2f}")
+        print(f"  {lab}: limit (1/loglogX->0) = {b:.3f}, slope {a:.2f}")
     ax.axvline(0, color="0.7", lw=0.8); ax.set_xlim(left=-0.01)
-    ax.set_xlabel(r"$1/\log\log X$"); ax.set_ylabel("constante de tasa")
-    ax.set_title(r"Constante de tasa: corrección $\sim2/\log\log X$ domina; límite $\sim0.5$-$0.7$")
+    ax.set_xlabel(r"$1/\log\log X$"); ax.set_ylabel("rate constant")
+    ax.set_title(r"Rate constant: the $\sim2/\log\log X$ correction dominates; limit $\sim0.5$-$0.7$")
     ax.legend(fontsize=9)
     fig.savefig(os.path.join(FIG, "16_constante.png"), dpi=130, bbox_inches="tight")
     json.dump({"X": Xs, "kappa": kappa, "c": c},

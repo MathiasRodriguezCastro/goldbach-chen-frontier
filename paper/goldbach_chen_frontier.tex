@@ -28,6 +28,7 @@
 \newtheorem{remark}{Remark}
 \newtheorem{proposition}{Proposition}
 \newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
 \newtheorem{lemma}{Lemma}
 \newtheorem{assumption}{Assumption}
 
@@ -51,7 +52,7 @@
   keepspaces=true
 }
 
-\title{The Goldbach--Chen Frontier: Representations by Primes and Semiprimes, Infinite MIP Formulations, and Empirical Continuity}
+\title{The Goldbach--Chen Frontier: How the Semiprime Channel Inherits the Singular Series}
 \author{Mathias Rodr\'iguez Castro}
 \date{Working draft --- \today}
 
@@ -59,30 +60,11 @@
 \maketitle
 
 \begin{abstract}
-The binary Goldbach conjecture asks whether every even integer $N>2$ can be represented as $N=p+q$ with $p,q$ prime. Chen's theorem proves the nearby statement that every sufficiently large even integer is $p+q$ where $p$ is prime and $q$ is either prime or the product of at most two primes. This note studies the \emph{Goldbach--Chen frontier}: the empirical boundary between prime--prime and prime--semiprime representations. Separating the representation counts $R_1$ (prime $q$) and $R_2$ (semiprime $q$), our central finding is about how each responds to the Hardy--Littlewood singular series $\sing(N)$. Writing $R_i\propto\sing(N)^{\beta_i}$, the prime channel has $\beta_1=1$ (Hardy--Littlewood, recovered as a control), whereas the semiprime channel has a singular exponent that is \emph{not} fixed: measured locally in sieve windows up to $X=10^{9}$ it rises from $0.55$ to $0.61$, and both a derivation and the data give
+The binary Goldbach conjecture asks whether every even integer $N>2$ can be represented as $N=p+q$ with $p,q$ prime. Chen's theorem proves the nearby statement that every sufficiently large even integer is $p+q$ where $p$ is prime and $q$ is either prime or the product of at most two primes. This note studies the \emph{Goldbach--Chen frontier}: the empirical boundary between prime--prime and prime--semiprime representations. Separating the representation counts $R_1$ (prime $q$) and $R_2$ (semiprime $q$), our central object is how each responds to the Hardy--Littlewood singular series $\sing(N)$. The exact statement is an Euler-product identity: decomposing the semiprime channel $q=rs$ by its small prime factor $r$, each channel carries its own two-form singular series, and in the \emph{ratio} $R_2/R_1$ the Goldbach singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving a Mertens-type channel sum $\widetilde W(N)\sim\log\log N$. Thus the true exponent of $\sing(N)$ in $R_2$ is $1$, exactly as in $R_1$: \emph{$R_2$ inherits the full Goldbach singular series}. What a finite-range log--log fit reports instead is a regression \emph{slope} $\beta_2$ of the non-power-law object $R_2/R_1$ against $\sing$; we show analytically and numerically that
 \[
   \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o(\cdot),\qquad \langle R_2/R_1\rangle\sim\log\log N,\ c(N)=O(1),
 \]
-so that $\beta_2\to1$ with a deficit of order $1/\log\log N$: the apparent ``half power'' near $X\sim10^{6}$ is a finite-range artefact, and $R_2$ asymptotically inherits the \emph{full} Goldbach singular series. Extending to layers $\OmegaF(q)=k$, the singular exponent $\beta_k$ decreases through $1,\tfrac12,\dots$ and turns negative for $k\ge3$, so the singular series enhances low-complexity and suppresses high-complexity channels. On the theoretical side we reduce the law $\beta_2\to1$ to standard analytic inputs: an
-appendix gives an unconditional singular-series identity, a first-moment reduction to the
-equidistribution of primes in progressions (Siegel--Walfisz / Bombieri--Vinogradov), and a
-variance bound from the classical Vinogradov minor-arc estimate, yielding $\beta_2(N)\to1$
-for \emph{almost all} $N$ conditional only on inputs of Bombieri--Vinogradov / Chen strength
-rather than on a pointwise Hardy--Littlewood asymptotic. We complement this with a broad
-suite of reproducible reframings, all of which turn out to be governed by the same singular
-series: diagnostics (Chen surplus, fragility, factor geometry) and weak-continuity of the
-$q/N$ measures; mixed-integer minimum-variation selection and a unimodal Chen-rescue
-threshold; a residual balance exponent $a_{\rm Res}(N)$ in the spirit of the $(1+a)$
-interpolation; an arithmetic ground-state energy whose Goldbach order melts at a temperature
-$\beta^\star$ anticorrelated with $\sing(N)$; the adversarial robustness of the Goldbach
-graph (random-robust but structure-fragile); a market reading in which the Chen substitute is
-fair-weather liquidity; a control policy quantifying the value of arithmetic information; an
-empirical circle method whose comet spectrum is the major arcs and whose information content
-is $99.9\%$ compressible by local arithmetic; the discrete geometry of the surface $p+rs=N$;
-and a primorial-base and carry-geometry analysis exhibiting a digital signature of primality.
-The goal is not a proof of Goldbach, but reproducible evidence and new regularities at the
-boundary between additive number theory, computational experimentation, and discrete
-optimization---unified by the Hardy--Littlewood singular series.
+so the much-quoted ``half power'' near $X\sim10^{6}$ is a $1/\log\log N$ finite-size correction to the fixed exponent $1$, not a genuine drift: $\beta_2\to1$. The slope's negativity is a multi-channel effect, not a single-atom artefact---removing the heaviest channel ($3\mid N$) accounts for only $\sim10\%$ of it. Extending to layers $\OmegaF(q)=k$, the slope $\beta_k$ decreases through $1,\tfrac12,\dots$ and turns negative for $k\ge3$, so the singular series enhances low-complexity and suppresses high-complexity channels. On the theoretical side we make the limit precise (Appendix~\ref{app:rigorous}): the cancellation identity is unconditional, and a circle-method second-moment bound---using only Vaughan's classical \emph{prime} minor-arc estimate and the trivial $L^2$ size of the semiprime sum, no sieve---yields the \emph{linear} almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, unconditional in outline. The passage from this to the log-regression statement $\beta_2(N)\to1$ requires one further input (lower-tail/log-integrability control of $R_2/R_1$, which the $L^2$ bound alone does not supply); we state it as such rather than overclaim. We complement the core with reproducible diagnostics (Chen surplus, fragility, factor geometry), weak continuity of the $q/N$ measures, a residual balance exponent $a_{\rm Res}(N)$ in the spirit of the $(1+a)$ interpolation, and a gallery of cross-disciplinary reframings; we are explicit that these are \emph{one} fact---$\sing(N)$ sets the local densities---seen in many mirrors, and single out the two that add a new computation: an empirical circle method whose comet power spectrum \emph{is} the major arcs, and a primorial-base carry geometry exhibiting a digital signature of primality. The goal is not a proof of Goldbach, but reproducible evidence and a clean new regularity at the boundary between additive number theory, computational experimentation, and discrete optimization.
 \end{abstract}
 
 \tableofcontents
@@ -93,7 +75,7 @@ The binary Goldbach conjecture states that every even integer $N>2$ can be writt
 \[
   N=p+q,
 \]
-where $p$ is prime and $q$ is either prime or the product of at most two primes \citep{chen1973}. Recent sieve-theoretic work also studies intermediate statements between Chen's theorem and the binary Goldbach conjecture \citep{li2026}.
+where $p$ is prime and $q$ is either prime or the product of at most two primes \citep{chen1973}; the semiprime channel and the ``$E_2$'' numbers it counts are classical sieve objects \citep{halberstamrichert}. Recent sieve-theoretic work also studies intermediate statements between Chen's theorem and the binary Goldbach conjecture \citep{li2026}.
 
 This project focuses on the transition between the Goldbach representation
 \[
@@ -115,11 +97,11 @@ This is a discrete object, so it is not continuous in the ordinary analytic sens
 \paragraph{Summary of findings.}
 Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implementing this program; all numbers are reproducible from the accompanying code. The main outcomes are:
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-\item \textbf{The singular exponent of $R_2$ (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. While $R_1\propto\sing(N)^{1}$ exactly (Hardy--Littlewood), the exponent of $R_2$ rises with $N$; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit. The validation $(1-\beta_2)\langle R_2/R_1\rangle\approx c\approx1.09$ holds to $1\%$.
-\item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the singular exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
+\item \textbf{The singular series of $R_2$, and the half-power mirage (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both $R_1$ and $R_2$ carry $\sing(N)$ with exponent~$1$: in the ratio $R_2/R_1$ the singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving the Mertens channel sum $\widetilde W(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not an exponent but a regression slope of a non-power-law object; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The slope is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading.
+\item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the slope $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
-\item \textbf{A reduction towards a theorem (Appendix~\ref{app:rigorous}).} The law $\beta_2\to1$ is reduced to standard analytic number theory: an unconditional singular-series identity (Lemma~\ref{lem:sing}), a first-moment reduction to Siegel--Walfisz / Bombieri--Vinogradov, and a variance bound from Vaughan's minor-arc estimate, giving $\beta_2(N)\to1$ for almost all $N$ conditional only on Bombieri--Vinogradov / Chen-strength inputs.
-\item \textbf{A dozen reframings, one singular series (\S\ref{sec:energy-emp}--\ref{sec:bases-emp}).} Goldbach is recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, a discrete surface, and a carry geometry. In each, the governing quantity is the Hardy--Littlewood singular series $\sing(N)$: it sets the melting temperature $\beta^\star$, the modular fragility, the substitute spread, the value of information, the comet spectrum (which is $99.9\%$ compressible), the concentration of Chen solutions toward Goldbach, and the carry signature of primality.
+\item \textbf{An almost-all theorem, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional; a circle-method second-moment bound---Vaughan's classical \emph{prime} minor-arc estimate plus the trivial $L^2$ size of the semiprime sum, no sieve---gives the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, unconditional in outline. Upgrading this to the log-regression statement $\beta_2(N)\to1$ needs one further input (lower-tail control of $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
+\item \textbf{Many mirrors, one fact (\S\ref{sec:energy-emp}--\ref{sec:bases-emp}).} Goldbach can be recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, a discrete surface, and a carry geometry. We are explicit that this is \emph{one} finding---$\sing(N)$ sets the local densities---observed many times, not many findings; most reframings are deterministic functions of the same $\sing/R_2$ data. Two earn their place by yielding a \emph{new computation}: the empirical circle method (\S\ref{sec:spectral-emp}), whose comet power spectrum is literally the major arcs, and the carry geometry (\S\ref{sec:bases-emp}), which surfaces a digit/Kummer signature of primality. The honest negatives (additive-complexity topology is empty; the Chen substitute carries no resilience premium) are reported as such.
 \end{enumerate}
 
 \section{Basic notation}
@@ -294,16 +276,23 @@ Among representations $N=p+q$ with $q\in\SSemi$, how is $B(q)$ distributed? Are 
 
 This question is interesting because Chen's theorem is obtained by sieve methods. Empirically, one can ask whether the extra freedom in $q$ comes mostly from allowing small prime divisors, or whether semiprime representations are broadly distributed across factor shapes.
 
-\section{Heuristic asymptotics}
+\section{Heuristic asymptotics (classical recovery)}
 
-The Hardy--Littlewood heuristic for Goldbach suggests a main term of the form
+The asymptotics in this section are classical; we recall them only to fix
+normalisation and as a control for the computations of \S\ref{sec:empirical}, not as
+new derivations. The Hardy--Littlewood circle-method heuristic for Goldbach
+\citep{hardylittlewood1923} predicts a main term of the form
 \begin{equation}
   R_1(N) \approx 2C_2\,\sing(N)\frac{N}{\log^2 N},
   \label{eq:HL}
 \end{equation}
-where $C_2$ is the twin-prime constant and $\sing(N)$ is a singular-series correction depending on the prime divisors of $N$.
+where $C_2$ is the twin-prime constant and $\sing(N)=\prod_{p\mid N,\,p>2}\frac{p-1}{p-2}$ is
+the singular-series correction depending on the odd prime divisors of $N$ (the factor $2C_2$
+already absorbs the $p=2$ local density).
 
-For semiprime $q$, a rough Landau-type density heuristic suggests
+For semiprime $q$, Landau's density of numbers with two prime factors
+\citep{landau1909}, $\#\{n\le x:\OmegaF(n)=2\}\sim x\log\log x/\log x$, gives the rough
+estimate
 \begin{equation}
   \#\{n\le x:\OmegaF(n)=2\}
   \sim \frac{x\log\log x}{\log x}.
@@ -324,6 +313,15 @@ The empirical project should therefore compare
 If the heuristic is meaningful, $A_1(N)$ and $A_2(N)$ should be much more stable than the raw counts.
 
 \section{A finite MIP formulation}
+\label{sec:finitemip}
+
+\emph{Scope note.} The next four sections (\S\ref{sec:finitemip}--\ref{sec:colgen})
+develop the optimization \emph{language} for the frontier. We keep them deliberately
+short and exploratory: as we note below, the feasibility version is trivial and a MIP
+solver will not prove Goldbach (Remark~\ref{rem:notproof}). Their role is to define the
+minimum-variation and Chen-rescue diagnostics later measured in \S\ref{sec:opt-emp}, and
+the column-generation reading that motivates the infinite formulation. A reader after the
+empirical results may skip to \S\ref{sec:empirical} without loss.
 
 Although Goldbach is not naturally an optimization problem, finite-window versions can be written as mixed-integer programs. This is useful not because a MIP solver will prove Goldbach, but because it gives a language for selection, smoothness, robustness, and structural constraints.
 
@@ -453,7 +451,7 @@ The infinite Goldbach-cover formulation is the special case
 \end{align}
 Thus the binary Goldbach conjecture is equivalent to feasibility of the infinite Goldbach-cover problem.
 
-\begin{remark}[Why this is not a proof strategy]
+\begin{remark}[Why this is not a proof strategy]\label{rem:notproof}
 This infinite MIP does not make the problem easier by itself. It simply translates the conjecture into a covering problem over an infinite hypergraph whose vertices are even integers and whose hyperedges are prime-pair certificates. Its value is conceptual: it allows one to import notions such as relaxations, covering, selection, stability, total variation, and column generation into the empirical study of Goldbach-type representations.
 \end{remark}
 
@@ -472,6 +470,7 @@ One can also write a formal infinite objective:
 where $w_N>0$ is summable, for example $w_N=N^{-2}$. This is a mathematically controlled version of asking whether the representation can be made continuous in the limit. The weights make the infinite objective finite, while finite-window truncations recover the MIP above.
 
 \section{Column-generation interpretation}
+\label{sec:colgen}
 
 The variables $z_{N,p,t}$ can be viewed as columns. Each column corresponds to a certificate that the even number $N$ is covered by a representation of type $t$. In the finite-window case, the master problem selects one column per even integer. The pricing problem asks for a representation with desirable reduced cost.
 
@@ -642,9 +641,10 @@ A polished paper could be organized as follows:
 \section{Empirical results and a new regularity}
 \label{sec:empirical}
 
-This section reports the outcome of implementing the program above. All numbers
-are reproducible from the accompanying code (\texttt{experiments/run\_counts.py}
-and \texttt{experiments/run\_mip.py}); unless stated otherwise they use the range
+This section reports the outcome of implementing the program above. All numbers are
+reproducible from the accompanying code (see the Data and code availability statement;
+the drivers \texttt{run\_counts.py}, \texttt{run\_scaling.py}, \texttt{run\_betalaw.py},
+\texttt{run\_estimator\_audit.py}); unless stated otherwise they use the range
 $X=2\cdot10^{6}$.
 
 \subsection{Computational setup and validation}
@@ -661,25 +661,36 @@ with a brute-force enumeration on random samples (the rounding error of the
 transform is far below $1/2$), and Goldbach's condition $R_1(N)>0$ is verified
 throughout the range.
 
-\subsection{The singular-series exponent of $R_2$ is one half}
+\subsection{The semiprime channel and the half-power mirage}
 \label{sec:singexp}
 
 The Hardy--Littlewood prediction \eqref{eq:HL} attaches to $R_1$ the full singular
 series $\sing(N)=\prod_{p\mid N,\,p>2}(p-1)/(p-2)$. Regressing
-$\log\!\big(R_1/(N/\log^2N)\big)$ against $\log\sing(N)$ recovers a slope
-$\beta_1=1.000$, and dividing by $\sing(N)$ collapses the coefficient of variation
-of the normalized count from $0.39$ to $0.015$ (a $25\times$ reduction); this is a
-control that reproduces \eqref{eq:HL} and the band structure of the Goldbach comet.
+$\log\!\big(R_1/(N/\log^2N)\big)$ against $\log\sing(N)$ recovers, empirically, a slope
+$1.000$, and dividing by $\sing(N)$ collapses the coefficient of variation of the
+normalized count from $0.39$ to $0.015$ (a $25\times$ reduction); this is a control
+that reproduces \eqref{eq:HL} and the band structure of the Goldbach comet.
 
-The new observation concerns $R_2$. Define the \emph{empirical singular exponent}
-$\beta_2$ as the slope of
+The new observation concerns $R_2$. We measure how strongly the relative semiprime
+share tracks $\sing(N)$ by the \emph{regression slope}
 \[
-  \log\frac{R_2(N)}{R_1(N)}\quad\text{versus}\quad\log\sing(N),
-  \qquad \text{slope}=\beta_2-1 ,
+  \beta_2-1:=\text{slope of}\quad
+  \log\frac{R_2(N)}{R_1(N)}\quad\text{against}\quad\log\sing(N),
 \]
-which uses $R_1$ itself as a meter for $\sing(N)$ and is therefore independent of
-any chosen normalization. Table~\ref{tab:beta} reports $\beta_2$ across several
-ranges.
+which uses $R_1$ itself as a meter for $\sing(N)$ and is therefore independent of any
+chosen normalization. We call $\beta_2$ the \emph{empirical singular exponent}, but
+stress at the outset that \textbf{$\beta_2$ is a regression slope, not an exponent of a
+power law}: as Lemma~\ref{lem:sing} shows below, $\sing(N)$ enters $R_2$ with exponent
+$1$ (exactly as in $R_1$) and \emph{cancels} in the ratio $R_2/R_1$, so $\beta_2$ is the
+slope of a non-power-law object and the value $\approx\tfrac12$ reported in finite
+ranges is a finite-size correction, not a structural exponent (developed after
+Table~\ref{tab:beta}). We adopt one estimator throughout: ordinary least squares of
+$\log(R_2/R_1)$ on $\log\sing$, taken \emph{cumulatively} over all even
+$5000\le N\le X$. Table~\ref{tab:beta} reports it across several ranges; standard errors
+are $\le10^{-4}$ (so the digits shown are significant), and the appendix
+(\S\ref{sec:variance}) instead uses a \emph{local} window centred at $X$, which runs
+$\approx0.02$--$0.03$ higher at the same $X$---the distinction is between an average over
+$[5000,X]$ and a measurement at the leading edge.
 
 \begin{table}[h]
 \centering
@@ -694,9 +705,11 @@ $4\cdot10^{6}$ & $0.513$ & $0.93$\\
 $8\cdot10^{6}$ & $0.529$ & $0.93$\\
 \bottomrule
 \end{tabular}
-\caption{Empirical singular exponent of $R_2$. In all ranges $\beta_2\approx1/2$,
-versus $\beta_1=1$ for $R_1$; the singular series explains about $92\%$ of the
-variance of $\log(R_2/R_1)$.}
+\caption{Cumulative regression slope $\beta_2$ of $\log(R_2/R_1)$ on $\log\sing$ over
+$[5000,X]$ (standard error $\le10^{-4}$). The value sits near $\tfrac12$ in this range
+and \emph{rises} with $X$---already a warning that it is not a fixed exponent (contrast
+$\beta_1=1.000$, which is genuinely scale-invariant). The singular series explains about
+$92\%$ of the variance of $\log(R_2/R_1)$.}
 \label{tab:beta}
 \end{table}
 
@@ -704,13 +717,16 @@ variance of $\log(R_2/R_1)$.}
 \centering
 \includegraphics[width=\linewidth]{02_singular_exponent.png}
 \caption{Left: $\log[R_1/(N/\log^2N)]$ against $\log\sing(N)$ has slope $1.000$
-(Hardy--Littlewood). Right: the same for $R_2$ has slope $0.497$, matching the
-reference line $\beta=1/2$. The vertical striations are the discrete values of
-$\sing(N)$.}
+(Hardy--Littlewood). Right: the same for $R_2$ has slope $0.497$ at $X=2\cdot10^{6}$,
+near the reference line $\beta=1/2$---but this is the \emph{finite-range} slope of a
+non-power-law object (it drifts toward $1$; Fig.~\ref{fig:scaling}), not a fixed
+exponent. The vertical striations are the discrete values of $\sing(N)$.}
 \label{fig:exponent}
 \end{figure}
 
-We thus find the effective law
+We thus find the effective \emph{finite-range} law (valid as a fit near
+$X\sim10^{6}$, with the understanding that the exponent $\tfrac12$ drifts to $1$;
+\S\ref{sec:singexp} below)
 \begin{equation}
   R_2(N)\ \propto\ \sing(N)^{1/2}\,\frac{N}{\log^2 N}\,W(N),
   \qquad
@@ -735,9 +751,12 @@ $2C_2\,\sing(N)^{1}\,N\,W/\log^2 N$ \quad(full inheritance) & $0.174$\\
 $2C_2\,\sing(N)^{1/2}\,N\,W/\log^2 N$ \quad(\textbf{half power}) & $\mathbf{0.018}$\\
 \bottomrule
 \end{tabular}
-\caption{The half-power normalization fits about $10\times$ tighter than the
-$\log\log N$ heuristic. Forcing the full singular series ($\beta=1$) makes the fit
-\emph{worse}, direct evidence that $R_2$ does not inherit $\sing(N)$ in full.}
+\caption{At $X=2\cdot10^{6}$ the half-power normalization fits about $10\times$ tighter
+than the $\log\log N$ heuristic, and tighter than the full singular series
+($\beta=1$)---but this is a statement about the \emph{finite-range} value of the slope,
+not about the limiting exponent. As $X$ grows the best-fitting $\beta$ rises toward $1$
+(Fig.~\ref{fig:scaling}); the local optimality of $\beta=\tfrac12$ here reflects the
+$1/\log\log N$ deficit at $X\sim10^{6}$, not a failure of $R_2$ to inherit $\sing(N)$.}
 \label{tab:cv}
 \end{table}
 
@@ -754,30 +773,35 @@ over channels precisely when $\sing(N)$ is large (Lemma~\ref{lem:sing}). This
 explains the direction $\beta_2<1$; the precise value is not $1/2$, as the scaling
 analysis below shows.
 
-\paragraph{Scaling to $10^9$: the exponent grows like $\log\log X$.}
+\paragraph{Scaling to $10^9$: the slope grows like $\log\log X$.}
 Measuring $\beta_2$ \emph{locally} in a window of $2\cdot10^{6}$ even integers
 centred at $X$ (computed by a block-convolution sieve, so that $X$ can reach
-$10^{9}$ while only the window is held in memory), the exponent does \emph{not}
+$10^{9}$ while only the window is held in memory), the slope does \emph{not}
 settle at $1/2$: it rises monotonically (Fig.~\ref{fig:scaling}). Eight windows
 from $6\cdot10^{6}$ to $10^{9}$ are fit to within $0.0013$ by
 \begin{equation}
-  \beta_2(X)\ \approx\ -0.094+0.234\,\log\log X
-  \qquad (R^2=0.9987).
+  \beta_2(X)\ \approx\ -0.094(7)+0.234(3)\,\log\log X
+  \qquad (R^2=0.9987,\ \text{8 windows}),
   \label{eq:beta-loglog}
 \end{equation}
-Thus the half-power $\beta_2\approx\tfrac12$ is only the \emph{local} value near
-$X\sim10^{6}$. The fit reaches $\beta_2\approx0.61$ at $10^{9}$ (measured),
-extrapolates to $\approx0.79$ at the Goldbach-verified bound $4\cdot10^{18}$, and
-attains $\beta_2=1$ only near $X\sim10^{46}$. The regression quality stays high
-throughout ($R^2\approx0.997$, $\mathrm{CV}$ of the half-power normalization
-$\lesssim0.04$).
+the parenthesised figures being the last-digit standard errors of the two-parameter
+fit. Thus the half-power $\beta_2\approx\tfrac12$ is only the \emph{local} value near
+$X\sim10^{6}$, and the slope is not a constant. The fit reaches $\beta_2\approx0.61$ at
+$10^{9}$ (measured). We deliberately \emph{do not} read a numerical limit off
+\eqref{eq:beta-loglog}: extrapolating a $\log\log X$ trend fitted over three decades to,
+say, $X\sim10^{46}$ (where it would touch $\beta_2=1$) is well outside the data and is
+not evidence---the robust content is the \emph{functional form} $1-\beta_2\asymp
+1/\log\log X$ and its derivation below, not a forecast of where the slope crosses a
+particular value. The regression quality stays high throughout ($R^2\approx0.997$,
+$\mathrm{CV}$ of the half-power normalization $\lesssim0.04$).
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.82\linewidth]{09_beta_scaling.png}
-\caption{Local singular exponent $\beta_2(X)$ for windows up to $10^{9}$, with the
-$\log\log X$ fit \eqref{eq:beta-loglog} extrapolated to the Goldbach-verified bound.
-The exponent drifts steadily above $1/2$ without sign of leveling off.}
+\caption{Local regression slope $\beta_2(X)$ for windows up to $10^{9}$, with the
+$\log\log X$ fit \eqref{eq:beta-loglog} (the dashed extrapolation beyond $10^{9}$ is
+shown only to display the functional form, not as a prediction). The slope drifts
+steadily above $1/2$ without sign of leveling off, consistent with $\beta_2\to1$.}
 \label{fig:scaling}
 \end{figure}
 
@@ -832,6 +856,20 @@ $\langle R_2/R_1\rangle$, exactly as \eqref{eq:betalaw} requires
 is a straight line through the limit point $(0,1)$, i.e.\ $\beta_2\to1$.}
 \label{fig:betalaw}
 \end{figure}
+
+\paragraph{Not a single-atom effect.}
+A natural worry is that the whole slope is the arithmetic of one prime: $3\mid N$
+simultaneously doubles $\sing(N)$ (the factor $\frac{3-1}{3-2}=2$) and deletes the
+heaviest semiprime channel $r=3$, so one might suspect $\beta_2\approx\tfrac12$ is just
+``what divisibility by $3$ does'' near $X\sim10^{6}$. The data refute this. Recomputing
+the slope on the subpopulation $3\nmid N$ (the $r=3$ atom removed) gives, at
+$X=2\cdot10^{6}$, $\beta_2=0.547\pm0.0004$ against $0.495$ on all $N$: the deficit
+$1-\beta_2$ falls by only about $10\%$ (\texttt{run\_estimator\_audit.py}). The mechanism
+is real---conditional means confirm $\langle\log\sing\mid 3\mid N\rangle-\langle\log\sing\mid 3\nmid N\rangle=0.69\approx\log2$ and a depressed
+$R_2/R_1$ on $3\mid N$---but it accounts for a tenth of the slope, not the bulk. The
+negativity of $\beta_2-1$ is genuinely a \emph{sum over channels} $r=3,5,7,\dots$, each
+blocked on the sparse set $r\mid N$, exactly as $A(X)=\sum_r(\cdots)$ in
+\eqref{eq:betalaw}; it is not the signature of a single residue class.
 
 \subsection{The singular exponent across arithmetic-complexity layers}
 \label{sec:layers-emp}
@@ -909,6 +947,7 @@ not toward the balanced value $1/2$.}
 \end{figure}
 
 \subsection{Optimization experiments}
+\label{sec:opt-emp}
 
 \paragraph{Smoothness is a Pareto trade-off.}
 Minimizing the total spatial variation $\sum|s_N-s_{N-2}|$ of the selected location
@@ -1088,6 +1127,25 @@ the residual autocorrelation, small and non-white.}
 \label{fig:dynamics}
 \end{figure}
 
+\subsection*{A note on the reframings that follow}
+The subsections \S\ref{sec:energy-emp}--\ref{sec:bases-emp} recast the Goldbach--Chen
+frontier in the languages of statistical physics, network science, markets, control,
+the circle method, information theory, and digit geometry. We are explicit that these are
+\emph{not} independent findings: in every case the governing quantity turns out to be the
+same singular series $\sing(N)$, so most of them are one fact---$\sing$ sets the local
+densities---re-encoded, and several (the melting temperature, the substitute spread, the
+information budget) are deterministic functions of the same $\sing/R_2$ data already
+plotted above. We keep them because the vocabularies are individually illuminating, but we
+flag, for each, whether it merely \emph{re-describes} or actually \emph{predicts or
+computes} something the bare law $R_2\propto\sing$ does not. By that test two stand out and
+should be read as the genuine contributions of this section: the empirical circle method
+(\S\ref{sec:spectral-emp}), whose comet power spectrum literally exhibits the major arcs
+and quantifies how modulus-$6$ structure dominates, and the carry geometry
+(\S\ref{sec:bases-emp}), which surfaces a new object---a digit-sum/Kummer-carry signature
+of primality. The control reframing (\S\ref{sec:control-emp}) is kept for its concrete
+search-heuristic benchmark; the topology probe (\S\ref{sec:tda2}) is a reported
+negative. The reader interested only in the theorem may skip to the conclusion.
+
 \subsection{Goldbach as arithmetic ground-state energy}
 \label{sec:energy-emp}
 
@@ -1251,10 +1309,13 @@ spending tries on partners forced to share a small factor. Over a window near $1
 $39\%$ at $B=13$, and the expected number of tries in a sequential search falls from $5.5$
 to $2.5$---a $55\%$ reduction. The marginal value of each prime of information is largest at
 $\ell=3$ (the factor $\tfrac{\ell-1}{\ell-2}=2$) and decreases thereafter, exactly tracking
-the singular series. Thus the same local arithmetic that the singular series encodes is
-directly actionable: a controller that ``knows'' $N$ modulo small primes clears the
-Goldbach market roughly twice as efficiently, quantifying the value of arithmetic
-information for additive prime decompositions.
+the singular series. Unlike the other reframings in this section, this one yields a
+concrete \emph{algorithm} rather than a restatement: the residue-aware ordering is a drop-in
+search heuristic---enumerate candidate $p$ in increasing order of the number of small primes
+$\ell\le B$ that $N-p$ is forced to share with $N$---whose benchmark above (expected tries
+$5.5\to2.5$ at $B=13$, a $55\%$ reduction) is a measured speed-up of Goldbach verification,
+not an analogy. The same local arithmetic the singular series encodes is thus directly
+actionable.
 
 \begin{figure}[h]
 \centering
@@ -1306,23 +1367,27 @@ $\sing$ non-linearly), and a residual, we find (Fig.~\ref{fig:info})
 \[
   \underbrace{81.1\%}_{\text{trend }N/\log^2N}\ +\ \underbrace{18.8\%}_{\text{singular series }\sing(N)}\ +\ \underbrace{0.11\%}_{\text{irreducible}} .
 \]
-The comet is thus $99.9\%$ compressible by local arithmetic. The remaining $0.11\%$ is the
-genuine Hardy--Littlewood fluctuation: its power spectrum is \emph{flat}---white noise, in
-contrast to the sharply peaked spectrum of $R_1$ itself (\S\ref{sec:spectral-emp})---with
-lag-$1$ autocorrelation $-0.04$ and standard deviation $2.7\%$, a few times the Poisson
-floor $\langle R_1\rangle^{-1/2}=0.9\%$. In information terms, the Goldbach comet is almost
-entirely a singular-series codeword; its incompressible core carries no further arithmetic
-signal and is the structureless randomness of the primes. There is no hidden order below
-the singular series---a clean negative answer to whether anomalous $N$ are
-``informationally special''.
+The comet is thus $99.9\%$ compressible \emph{by this particular code}---the conditional
+mean given $N\bmod30030=2\cdot3\cdot5\cdot7\cdot11\cdot13$. We stress that this figure is
+relative to the chosen conditioning set, not a theorem: the ``irreducible'' $0.11\%$ is
+what survives after removing structure up to the prime $13$, and a richer conditioning
+(more primes, or non-residue features) would shrink it further. With that caveat, the
+residual is informative: its power spectrum is \emph{flat}---white noise, in contrast to
+the sharply peaked spectrum of $R_1$ itself (\S\ref{sec:spectral-emp})---with lag-$1$
+autocorrelation $-0.04$ and standard deviation $2.7\%$, a few times the Poisson floor
+$\langle R_1\rangle^{-1/2}=0.9\%$. So \emph{up to modulus $30030$} the Goldbach comet is
+almost entirely a singular-series codeword and the residue carries no further \emph{small-modulus}
+arithmetic signal; we do not claim the absence of all further structure, only that none is
+visible below this conditioning.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{22_informacion.png}
-\caption{Information budget of the comet. Left: the variance of $\log R_1$ splits into a
-smooth trend ($81\%$), the singular series ($18.8\%$), and an irreducible residual
-($0.11\%$). Right: the residual's power spectrum is flat---white noise, with none of the
-arithmetic peaks of Fig.~\ref{fig:spectral}.}
+\caption{Information budget of the comet \emph{relative to conditioning on $N\bmod30030$}.
+Left: the variance of $\log R_1$ splits into a smooth trend ($81\%$), the singular series
+($18.8\%$), and a residual ($0.11\%$) that is irreducible \emph{by this code} (richer
+conditioning would shrink it). Right: the residual's power spectrum is flat---white noise,
+with none of the small-modulus arithmetic peaks of Fig.~\ref{fig:spectral}.}
 \label{fig:info}
 \end{figure}
 
@@ -1399,9 +1464,29 @@ carries ($+0.97$). Right: the carry excess is positive in every base.}
 
 \section{Conclusion}
 
-The proposed project reframes the gap between Goldbach and Chen as an empirical and optimization-theoretic object. The key move is to distinguish prime--prime representations from prime--semiprime representations and then study their distribution, stability, and selectable smoothness. The infinite MIP formulation gives a formal covering interpretation of the conjectures, while the finite MIP creates new computational diagnostics: minimum semiprime use, minimum type switching, and minimum spatial variation. Finally, the weak-convergence formulation gives a precise way to express the intuition that the discrete representation function may look continuous only after normalization and smoothing.
+The one durable result of this study is a single Euler-product identity and its
+consequence: decomposing the semiprime channel by its small prime factor shows that the
+Goldbach singular series $\sing(N)$ enters $R_2$ with exponent $1$, exactly as it enters
+$R_1$, and \emph{cancels} in the ratio $R_2/R_1=\widetilde W(N)$ (Lemma~\ref{lem:sing}).
+The widely tabulated ``$\beta_2\approx\tfrac12$'' is therefore not an exponent but a
+regression slope of a non-power-law object, drifting to $1$ like $1-c/\log\log N$; we
+verify this non-circularly, show it is a multi-channel effect (not the $3\mid N$ atom),
+and reduce the limit to classical inputs---unconditionally for the \emph{linear}
+almost-all asymptotic $R_2=\mathrm{main}(1+o(1))$, and, for the log-regression statement
+$\beta_2\to1$, modulo one explicitly stated lower-tail hypothesis
+(Corollary~\ref{cor:beta-aa}).
 
-This is not a proof of Goldbach. It is a research program that can produce reproducible computations, new empirical regularities, and potentially publishable questions at the boundary between additive number theory, computational experimentation, and discrete optimization.
+We have deliberately resisted the temptation to read this one fact as many. The
+optimization formulations give a language, not a proof strategy
+(Remark~\ref{rem:notproof}); the dozen physical, economic, and information-theoretic
+reframings are, with two exceptions (the empirical circle method and the carry geometry),
+the same singular-series governance re-photographed in different filters, and we have said
+so rather than count them as separate findings. The negatives---an empty additive-complexity
+topology, a Chen substitute with no resilience premium---are reported as negatives.
+
+This is not a proof of Goldbach. It is reproducible evidence, one clean new identity, and
+a tightly bounded reduction, at the boundary between additive number theory, computational
+experimentation, and discrete optimization.
 
 \appendix
 \section{Towards a proof that \texorpdfstring{$\beta_2\to1$}{beta2 to 1}}
@@ -1703,12 +1788,19 @@ $\beta_2-\beta_2^{(1)}\approx0.004$, stable across $X=2\cdot10^{6}$--$10^{8}$
 the Jensen defect $\mathbb E[\log R_i]-\log\mathbb E[R_i]$, governed by the normalised
 variance of $R_1,R_2$. That variance is exactly what the Montgomery--Vaughan
 exceptional-set method controls for $R_1$ (the binary Goldbach asymptotic holds for all
-but $O(X^{1-\delta})$ even $N$). An analogous second-moment bound for $R_2$ would
-upgrade Theorem~\ref{thm:fm} to a statement about $\beta_2$ for almost all $N$, and
-hence---since the covariance \eqref{eq:beta-def} is insensitive to a sparse exceptional
-set of polynomially bounded counts---to the law $\beta_2(X)\to1$ itself. This isolates
-the genuine remaining difficulty as a \emph{variance} estimate (an exceptional set),
-rather than the pointwise asymptotic of Assumption~\ref{ass:HL}.
+but $O(X^{1-\delta})$ even $N$). An analogous second-moment bound for $R_2$ (which we
+prove below, Proposition~\ref{prop:var}) yields the \emph{linear} almost-all asymptotic
+$R_2=\mathrm{main}(1+o(1))$ off a sparse set. We are careful about the last step. A
+variance ($L^2$) bound controls the \emph{quantity} $R_2-\mathrm{main}$, not its
+\emph{logarithm}: the covariance \eqref{eq:beta-def} that defines $\beta_2$ involves
+$\log(R_2/R_1)$, which is sensitive to the lower tail (where $R_2$ is small,
+$\log(R_2/R_1)\to-\infty$), and an $L^2$ bound alone does not preclude a sparse set from
+dominating that covariance. Passing from the linear statement to
+``$\beta_2(X)\to1$ for almost all $N$'' therefore needs an additional input---a
+lower-tail (log-integrability) control of $R_2/R_1$ off the exceptional set---which we
+isolate explicitly in Corollary~\ref{cor:beta-aa} rather than absorb into an $o(1)$.
+This already isolates the genuine remaining difficulty as a \emph{variance plus
+lower-tail} estimate, not the pointwise asymptotic of Assumption~\ref{ass:HL}.
 
 \subsection{The variance bound and the exceptional set}
 \label{sec:variance}
@@ -1742,13 +1834,14 @@ exceptional set at the $5\%$ level is empty (\texttt{run\_exceptional.py}).}
 \label{tab:conc}
 \end{table}
 
-\begin{proposition}[Exceptional set]\label{prop:exc}
+\begin{proposition}[Exceptional set, linear form]\label{prop:exc}
 By Chebyshev, the density of $N\in\mathcal N_X$ with
 $|R_2/R_1-\langle b\rangle\widetilde W|>\varepsilon\widetilde W$ is at most
 $\mathrm{CV}(b)^2/\varepsilon^2$. With the measured $\mathrm{CV}(b)\le0.7\%$ this is
 $\le0.2\%$ at $\varepsilon=0.05$ (and the empirical exceptional set is in fact empty).
-Hence $R_2(N)/R_1(N)=\widetilde W(N)\,(1+o(1))$ for all but a density-$o(1)$ set of $N$,
-and therefore $\beta_2(N)\to1$ for almost all $N$.
+Hence $R_2(N)/R_1(N)=\widetilde W(N)\,(1+o(1))$ for all but a density-$o(1)$ set of $N$.
+This is the \emph{linear} almost-all statement; the further passage to
+$\beta_2(N)\to1$ is Corollary~\ref{cor:beta-aa}.
 \end{proposition}
 
 \paragraph{The variance bound by the circle method.}
@@ -1790,7 +1883,7 @@ The only arithmetic input is the \emph{classical} Vinogradov--Vaughan bound for 
 \emph{prime} sum; the semiprime sum enters through its $L^2$ norm alone---no bilinear
 or sieve estimate for $S_{\SSemi}$ is required.
 
-\begin{theorem}[$\beta_2\to1$ for almost all $N$]\label{thm:aa}
+\begin{theorem}[Linear almost-all asymptotic for $R_2$]\label{thm:aa}
 Since a typical $\mathrm{main}(N)\asymp X\log\log X/\log^2 X$, Proposition~\ref{prop:var}
 gives, for $A\ge2$, a relative variance $\ll(\log X)^{3-2A}/\log\log X\to0$; by Chebyshev
 the set of $N\in(X,2X]$ with $|R_2(N)-\mathrm{main}(N)|>\varepsilon\,\mathrm{main}(N)$ has
@@ -1799,23 +1892,52 @@ $\mathrm{main}(N)=\widetilde W(N)\,[2C_2\sing(N)I_1(N)]\,(1+o(1))$ by the equidi
 of primes and semiprimes in progressions of modulus $\le Q$ (Siegel--Walfisz and its
 semiprime convolution) together with Lemma~\ref{lem:sing}; and $R_1(N)=2C_2\sing(N)I_1(N)(1+o(1))$
 for all but $O(X^{1-\delta})$ even $N$ by Montgomery--Vaughan~\cite{montgomeryvaughan1975}.
-Hence $R_2(N)/R_1(N)=\widetilde W(N)(1+o(1))$, and therefore $\beta_2(N)\to1$, for almost
-all $N$.
+Hence, for all but $o(X)$ even $N\in(X,2X]$,
+\[
+  R_2(N)=\mathrm{main}(N)(1+o(1)),\qquad
+  \frac{R_2(N)}{R_1(N)}=\widetilde W(N)(1+o(1)).
+\]
 \end{theorem}
 
+\begin{corollary}[$\beta_2\to1$, conditional on lower-tail control]\label{cor:beta-aa}
+Suppose in addition that $\log(R_2(N)/R_1(N))$ is uniformly integrable over
+$\mathcal N_X$---equivalently, that the exceptional set $\mathcal E_X$ of
+Theorem~\ref{thm:aa} contributes $o(1)$ to the covariance \eqref{eq:beta-def}, which holds
+as soon as $R_2(N)\gg_A \mathrm{main}(N)(\log X)^{-A}$ for $N\in\mathcal E_X$ (a one-sided
+lower bound, strictly weaker than the full asymptotic but \emph{not} implied by the $L^2$
+bound of Proposition~\ref{prop:var}). Then the contribution of $\mathcal E_X$ to
+\eqref{eq:beta-def} is negligible, the regression slope is computed off
+$\mathcal E_X$ where $R_2/R_1=\widetilde W(1+o(1))$, and $\beta_2(X)\to1$.
+\end{corollary}
+
+\begin{remark}[The honest status of the limit]
+Theorem~\ref{thm:aa} is the result we actually establish in outline; Corollary
+\ref{cor:beta-aa} is what is usually quoted as ``$\beta_2\to1$ for almost all $N$,'' but
+it carries a genuine extra hypothesis. The gap is precisely the lower tail of $R_2$:
+$L^2$ concentration of $R_2-\mathrm{main}$ bounds how often $R_2$ is \emph{large}, but the
+log-regression that defines $\beta_2$ also weights $N$ where $R_2$ is \emph{small}, and a
+sparse set with $R_2$ very small could in principle skew the covariance. The required
+one-sided bound is mild (it would follow from a Chen-type lower bound $R_2(N)\gg
+\mathrm{main}(N)$, itself reasonable but not proved here) and is amply confirmed
+empirically---the exceptional set is \emph{empty} at the $5\%$ level up to
+$5\cdot10^{8}$ (Table~\ref{tab:conc}), so in the computed range no $N$ has $R_2/R_1$ even
+near the tail---but we flag it rather than claim it.
+\end{remark}
+
 \begin{remark}
-Theorem~\ref{thm:aa} is unconditional in outline: every ingredient---Vaughan's minor-arc
-bound, Siegel--Walfisz, Montgomery--Vaughan, and the Euler-product identity
-Lemma~\ref{lem:sing}---is classical. A fully written proof must still supply the routine
-major-arc computation for the semiprime sum (semiprimes in progressions of modulus
-$\le(\log X)^{C}$, which follow from the prime distribution by Selberg--Sath\'e
-convolution) and track the dependence on $A$. The genuinely \emph{new} content is the
-singular-series cancellation of Lemma~\ref{lem:sing} and the resulting first-moment law;
-the analytic machinery that turns it into an almost-all theorem is off the shelf. This is
-in sharp contrast to the pointwise Assumption~\ref{ass:HL}, which lies beyond current
-technology. The empirical concentration (Table~\ref{tab:conc}, exceptional set
-\emph{empty} at the $5\%$ level up to $5\cdot10^{8}$) confirms the bound with a large
-margin.
+The \emph{linear} Theorem~\ref{thm:aa} is unconditional in outline: every
+ingredient---Vaughan's minor-arc bound \citep{vaughan1997}, Siegel--Walfisz,
+Montgomery--Vaughan, and the Euler-product identity Lemma~\ref{lem:sing}---is classical.
+A fully written proof must still supply the routine major-arc computation for the
+semiprime sum (semiprimes in progressions of modulus $\le(\log X)^{C}$, which follow from
+the prime distribution by Selberg--Sath\'e convolution \citep{selberg1954,sathe1953};
+\S\ref{sec:majorarc}) and track the dependence on $A$. The genuinely \emph{new} content
+is the singular-series cancellation of Lemma~\ref{lem:sing} and the resulting first-moment
+law; the analytic machinery that turns it into the \emph{linear} almost-all theorem is off
+the shelf. This is in sharp contrast to the pointwise Assumption~\ref{ass:HL}, which lies
+beyond current technology. The remaining step to the \emph{log-regression} statement
+$\beta_2\to1$ is the lower-tail input of Corollary~\ref{cor:beta-aa}, which is empirically
+trivial in range but not proved.
 \end{remark}
 
 \subsection{The major arcs: semiprimes in progressions}
@@ -1921,10 +2043,27 @@ exceptional set in Theorem~\ref{thm:aa} is then
 \]
 for any fixed $C$ (take $A_0=\tfrac{C+3}2$). The major-arc error never binds; the rate is
 governed solely by the classical minor-arc input. This completes, in outline, the
-reduction of $\beta_2(N)\to1$ (almost all $N$) to standard prime-distribution estimates,
-the only genuinely new step remaining the singular-series identity of
-Lemma~\ref{lem:sing}.
+reduction of the \emph{linear} almost-all asymptotic $R_2=\mathrm{main}(1+o(1))$
+(Theorem~\ref{thm:aa}) to standard prime-distribution estimates, the only genuinely new
+step being the singular-series identity of Lemma~\ref{lem:sing}. The log-regression
+statement $\beta_2(N)\to1$ then follows from the lower-tail hypothesis of
+Corollary~\ref{cor:beta-aa}, the one ingredient we do not prove.
 
+
+\section*{Data and code availability}
+\label{sec:availability}
+Every figure, table, and quoted number in this paper is reproduced by the accompanying
+open-source repository (Python; \texttt{numpy}/\texttt{scipy}/\texttt{matplotlib}, with
+\texttt{gurobipy} only for the optional MIP of \S\ref{sec:opt-emp}). Each
+\texttt{src/} module carries a self-test (\texttt{python3 src/<module>.py}) and each
+figure is regenerated by its \texttt{experiments/run\_*.py} driver; the central results
+use \texttt{run\_counts.py} (FFT counts to $2\cdot10^{6}$), \texttt{run\_scaling.py}
+(block-convolution sieve to $10^{9}$), \texttt{run\_betalaw.py} (the law
+\eqref{eq:betalaw}), \texttt{run\_estimator\_audit.py} (the estimator reconciliation and
+the $3\mid N$ atom of \S\ref{sec:singexp}), and \texttt{run\_exceptional.py} (the
+concentration of Table~\ref{tab:conc}). Derived tables and the sieve seeds are stored in
+\texttt{data/}. A versioned snapshot will be deposited on Zenodo and assigned a DOI; the
+repository and citation metadata (\texttt{CITATION.cff}) accompany this manuscript.
 
 \begin{thebibliography}{99}
 
@@ -1932,6 +2071,16 @@ Lemma~\ref{lem:sing}.
 Chen, J. R. (1973).
 \newblock On the representation of a larger even integer as the sum of a prime and the product of at most two primes.
 \newblock \emph{Scientia Sinica}, 16, 157--176.
+
+\bibitem[Halberstam and Richert(1974)]{halberstamrichert}
+Halberstam, H. and Richert, H.-E. (1974).
+\newblock \emph{Sieve Methods}.
+\newblock Academic Press, London. (London Mathematical Society Monographs, 4.)
+
+\bibitem[Hardy and Littlewood(1923)]{hardylittlewood1923}
+Hardy, G. H. and Littlewood, J. E. (1923).
+\newblock Some problems of `Partitio Numerorum'; III: On the expression of a number as a sum of primes.
+\newblock \emph{Acta Mathematica}, 44, 1--70.
 
 \bibitem[Helfgott(2014)]{helf2014ternary}
 Helfgott, H. A. (2014).
@@ -1962,6 +2111,21 @@ Nathanson, M. B. (1996).
 Oliveira e Silva, T., Herzog, S., and Pardi, S. (2014).
 \newblock Empirical verification of the even Goldbach conjecture and computation of prime gaps up to $4\cdot10^{18}$.
 \newblock \emph{Mathematics of Computation}, 83(288), 2033--2060.
+
+\bibitem[Sath\'e(1953)]{sathe1953}
+Sath\'e, L. G. (1953).
+\newblock On a problem of Hardy on the distribution of integers having a given number of prime factors.
+\newblock \emph{Journal of the Indian Mathematical Society}, 17, 63--141.
+
+\bibitem[Selberg(1954)]{selberg1954}
+Selberg, A. (1954).
+\newblock Note on a paper by L. G. Sath\'e.
+\newblock \emph{Journal of the Indian Mathematical Society}, 18, 83--87.
+
+\bibitem[Vaughan(1997)]{vaughan1997}
+Vaughan, R. C. (1997).
+\newblock \emph{The Hardy--Littlewood Method}.
+\newblock Cambridge University Press, 2nd edition.
 
 \bibitem[Hardy and Wright(2008)]{hardywright}
 Hardy, G. H. and Wright, E. M. (2008).
