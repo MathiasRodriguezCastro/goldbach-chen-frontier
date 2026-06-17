@@ -453,7 +453,7 @@ def layers(ks, shares, betas, betas_r2, name="10_capas.png"):
     ax[1].plot(ks, [1.0 / k for k in ks], "s--", color="0.5", ms=5, label=r"$1/k$ (reference)")
     ax[1].set_xlabel(r"layer $k=\Omega(q)$")
     ax[1].set_ylabel(r"singular slope $\beta_k$")
-    ax[1].set_title(r"$R_k\propto\mathfrak{S}(N)^{\beta_k}$: enhancement ($k\leq2$) vs suppression ($k\geq3$)")
+    ax[1].set_title(r"Slope $\beta_k$: enhancement ($k\leq2$) vs suppression ($k\geq3$)")
     ax[1].legend()
     fig.tight_layout()
     return _save(fig, name)

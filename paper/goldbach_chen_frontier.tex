@@ -60,11 +60,29 @@
 \maketitle
 
 \begin{abstract}
-The binary Goldbach conjecture asks whether every even integer $N>2$ can be represented as $N=p+q$ with $p,q$ prime. Chen's theorem proves the nearby statement that every sufficiently large even integer is $p+q$ where $p$ is prime and $q$ is either prime or the product of at most two primes. This note studies the \emph{Goldbach--Chen frontier}: the empirical boundary between prime--prime and prime--semiprime representations. Separating the representation counts $R_1$ (prime $q$) and $R_2$ (semiprime $q$), our central object is how each responds to the Hardy--Littlewood singular series $\sing(N)$. The exact statement is an Euler-product identity: decomposing the semiprime channel $q=rs$ by its small prime factor $r$, each channel carries its own two-form singular series, and in the \emph{ratio} $R_2/R_1$ the Goldbach singular series \emph{cancels} (Lemma~\ref{lem:sing}), leaving a Mertens-type channel sum $\widetilde W(N)\sim\log\log N$. Thus the true exponent of $\sing(N)$ in $R_2$ is $1$, exactly as in $R_1$: \emph{$R_2$ inherits the full Goldbach singular series}. What a finite-range log--log fit reports instead is a regression \emph{slope} $\beta_2$ of the non-power-law object $R_2/R_1$ against $\sing$; we show analytically and numerically that
-\[
-  \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o(\cdot),\qquad \langle R_2/R_1\rangle\sim\log\log N,\ c(N)=O(1),
-\]
-so the much-quoted ``half power'' near $X\sim10^{6}$ is a $1/\log\log N$ finite-size correction to the fixed exponent $1$, not a genuine drift: $\beta_2\to1$. The slope's negativity is a multi-channel effect, not a single-atom artefact---removing the heaviest channel ($3\mid N$) accounts for only $\sim10\%$ of it. Extending to layers $\OmegaF(q)=k$, the slope $\beta_k$ decreases through $1,\tfrac12,\dots$ and turns negative for $k\ge3$, so the singular series enhances low-complexity and suppresses high-complexity channels. On the theoretical side we make the limit precise (Appendix~\ref{app:rigorous}): the cancellation identity is unconditional, and a circle-method second-moment bound---using only Vaughan's classical \emph{prime} minor-arc estimate and the trivial $L^2$ size of the semiprime sum, no sieve---yields the \emph{linear} almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, unconditional in outline. The passage from this to the log-regression statement $\beta_2(N)\to1$ requires one further input (lower-tail/log-integrability control of $R_2/R_1$, which the $L^2$ bound alone does not supply); we state it as such rather than overclaim. We complement the core with reproducible diagnostics (Chen surplus, fragility, factor geometry), weak continuity of the $q/N$ measures, a residual balance exponent $a_{\rm Res}(N)$ in the spirit of the $(1+a)$ interpolation, and a gallery of cross-disciplinary reframings; we are explicit that these are \emph{one} fact---$\sing(N)$ sets the local densities---seen in many mirrors, and single out the two that add a new computation: an empirical circle method whose comet power spectrum \emph{is} the major arcs, and a primorial-base carry geometry exhibiting a digital signature of primality. The goal is not a proof of Goldbach, but reproducible evidence and a clean new regularity at the boundary between additive number theory, computational experimentation, and discrete optimization.
+The binary Goldbach conjecture asks whether every even $N>2$ is a sum of two primes;
+Chen's theorem replaces the second prime by a prime or semiprime. We study how the
+Goldbach count $R_1(N)$ (prime $q$) and the Chen-surplus count $R_2(N)$ (semiprime $q$)
+respond to the Hardy--Littlewood singular series $\sing(N)$. Decomposing the semiprime
+channel $q=rs$ by its small prime factor $r$, each channel carries its own two-form
+singular series, and in the ratio $R_2/R_1$ the Goldbach singular series \emph{cancels}
+(an unconditional Euler-product identity, Lemma~\ref{lem:sing}), leaving a Mertens channel
+sum $\widetilde W(N)\sim\log\log N$. Thus $\sing(N)$ enters $R_2$ with exponent $1$,
+exactly as in $R_1$: $R_2$ inherits the full singular series. The ``half power''
+$R_2\propto\sing^{1/2}$ reported by finite-range log--log fits is therefore not an exponent
+but a regression \emph{slope} of a non-power-law object, obeying
+$\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ with deficit $\sim1/\log\log N$ (a
+multi-channel effect: the $3\mid N$ atom accounts for only $\sim10\%$ of it). A
+circle-method second-moment bound---using only Vaughan's classical \emph{prime} minor-arc
+estimate and the trivial $L^2$ size of the semiprime sum, no sieve---gives the
+\emph{linear} almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ unconditionally in
+outline; the passage to the log-regression statement $\beta_2\to1$ is isolated as one
+explicitly stated lower-tail hypothesis rather than overclaimed. We complement this with
+reproducible diagnostics and a gallery of cross-disciplinary reframings, all governed by
+the same $\sing(N)$---one fact in many mirrors---of which two (an empirical circle method
+whose comet spectrum is the major arcs, and a primorial-base carry geometry) add a
+genuinely new computation. The goal is not a proof of Goldbach but a clean new identity,
+reproducible evidence, and a bounded reduction.
 \end{abstract}
 
 \tableofcontents
@@ -312,331 +330,49 @@ The empirical project should therefore compare
 \end{align}
 If the heuristic is meaningful, $A_1(N)$ and $A_2(N)$ should be much more stable than the raw counts.
 
-\section{A finite MIP formulation}
+\section{Selection formulations}
 \label{sec:finitemip}
 
-\emph{Scope note.} The next four sections (\S\ref{sec:finitemip}--\ref{sec:colgen})
-develop the optimization \emph{language} for the frontier. We keep them deliberately
-short and exploratory: as we note below, the feasibility version is trivial and a MIP
-solver will not prove Goldbach (Remark~\ref{rem:notproof}). Their role is to define the
-minimum-variation and Chen-rescue diagnostics later measured in \S\ref{sec:opt-emp}, and
-the column-generation reading that motivates the infinite formulation. A reader after the
-empirical results may skip to \S\ref{sec:empirical} without loss.
+\emph{Scope note.} This section records the optimization \emph{language} used by two
+diagnostics measured in \S\ref{sec:opt-emp} (a minimum-variation selection and a
+Chen-rescue threshold). It is deliberately short: the feasibility version is trivial and
+no MIP solver will prove Goldbach (Remark~\ref{rem:notproof}). The infinite-dimensional and
+column-generation readings are recorded in Appendix~\ref{app:infinite}; a reader after the
+empirical results may skip to \S\ref{sec:empirical}.
 
-Although Goldbach is not naturally an optimization problem, finite-window versions can be written as mixed-integer programs. This is useful not because a MIP solver will prove Goldbach, but because it gives a language for selection, smoothness, robustness, and structural constraints.
-
-Fix an even integer $N\le X$. Let
-\[
-  \mathcal A_N^{(1)} := \{p\in\PP: p<N,\ N-p\in\PP\},
-\]
-and
-\[
-  \mathcal A_N^{(2)} := \{p\in\PP: p<N,\ N-p\in\SSemi\}.
-\]
-For $t\in\{1,2\}$, introduce binary variables
-\[
-  z_{N,p,t}\in\{0,1\},
-\]
-where $z_{N,p,t}=1$ means that for integer $N$ we select the representation $N=p+q$ of type $t$, with $q$ prime if $t=1$ and semiprime if $t=2$.
-
-\subsection{Feasibility formulation}
-
-For a finite window $\EE_X:=\{N:4\le N\le X,\ N\equiv0\pmod2\}$, the Chen feasibility model is
-\begin{align}
-  \sum_{p\in\mathcal A_N^{(1)}} z_{N,p,1}
-  + \sum_{p\in\mathcal A_N^{(2)}} z_{N,p,2} &\ge 1,
-  &&\forall N\in\EE_X,\label{eq:chen-cover}\\
-  z_{N,p,t} &\in\{0,1\}.
-\end{align}
-The Goldbach version removes the type-$2$ variables and keeps only
-\begin{equation}
-  \sum_{p\in\mathcal A_N^{(1)}}z_{N,p,1}\ge1.
-\end{equation}
-
-\paragraph{Interpretation.}
-For a fixed finite $X$, the sets $\mathcal A_N^{(t)}$ can be precomputed by a sieve. The resulting MIP is trivial as a feasibility problem, but it becomes interesting once one adds objectives that select representations with additional structure.
-
-\subsection{Minimum-semiprime formulation}
-
-One can ask how many semiprime choices are needed if one chooses one representation per $N$:
-\begin{align}
-  \min \quad & \sum_{N\in\EE_X}\sum_{p\in\mathcal A_N^{(2)}} z_{N,p,2} \\
-  \text{s.t.}\quad
-  &\sum_{p\in\mathcal A_N^{(1)}} z_{N,p,1}
-  + \sum_{p\in\mathcal A_N^{(2)}} z_{N,p,2} = 1,
-  &&\forall N\in\EE_X,\\
-  & z_{N,p,t}\in\{0,1\}.
-\end{align}
-If the optimum is zero over a finite range, Goldbach holds over that range. If one imposes extra restrictions---for example $p/N\in [a,b]$, modular constraints, or smoothness across consecutive $N$---then semiprime selections may become necessary even when unrestricted Goldbach representations exist.
-
-\section{A MIP for oscillation and empirical continuity}
-
-The user's intuition can be formalized as follows. Suppose we select one representation
-\[
-  N = p_N + q_N,
-  \qquad q_N\in\PP\cup\SSemi,
-\]
-for every even $N$ in a finite range. Does the selected type of $q_N$ oscillate between prime and semiprime, or can we choose a smooth branch?
-
-Introduce a binary type variable
-\[
-  u_N =
-  \begin{cases}
-    0, & q_N\in\PP,\\
-    1, & q_N\in\SSemi.
-  \end{cases}
-\]
-Let $s_N$ denote the normalized location of the selected second summand:
-\[
-  s_N := \frac{q_N}{N}.
-\]
-This is linear in the selection variables because
-\begin{equation}
-  s_N = \sum_{p\in\mathcal A_N^{(1)}} \frac{N-p}{N}z_{N,p,1}
-      + \sum_{p\in\mathcal A_N^{(2)}} \frac{N-p}{N}z_{N,p,2}.
-\end{equation}
-
-To penalize type changes, introduce $v_N\ge |u_N-u_{N-2}|$. To penalize spatial variation, introduce $r_N\ge |s_N-s_{N-2}|$. The minimum-variation selection MIP is
-\begin{align}
-  \min \quad
-  & \alpha\sum_{N\in\EE_X,\,N>4} v_N
-  + \beta\sum_{N\in\EE_X,\,N>4} r_N
-  + \gamma\sum_{N\in\EE_X}\left|s_N-\frac12\right| \\
-  \text{s.t.}\quad
-  &\sum_{p\in\mathcal A_N^{(1)}} z_{N,p,1}
-  + \sum_{p\in\mathcal A_N^{(2)}} z_{N,p,2} = 1,
-  &&\forall N\in\EE_X,\\
-  &u_N = \sum_{p\in\mathcal A_N^{(2)}} z_{N,p,2},
-  &&\forall N\in\EE_X,\\
-  &s_N = \sum_{p\in\mathcal A_N^{(1)}} \frac{N-p}{N}z_{N,p,1}
-      + \sum_{p\in\mathcal A_N^{(2)}} \frac{N-p}{N}z_{N,p,2},
-  &&\forall N\in\EE_X,\\
-  &v_N\ge u_N-u_{N-2},\quad v_N\ge u_{N-2}-u_N,
-  &&\forall N\in\EE_X,\ N>4,\\
-  &r_N\ge s_N-s_{N-2},\quad r_N\ge s_{N-2}-s_N,
-  &&\forall N\in\EE_X,\ N>4,\\
-  &z_{N,p,t}\in\{0,1\},\quad u_N\in\{0,1\},\quad v_N\ge0,\quad r_N\ge0.
-\end{align}
-The term $\sum v_N$ measures type oscillation. The term $\sum r_N$ measures geometric oscillation in the normalized location $q_N/N$. The term $|s_N-1/2|$ encourages balanced representations near $p\approx q\approx N/2$; it can be linearized with the usual two inequalities.
-
-\begin{question}[Smooth branch problem]
-As $X\to\infty$, does the minimum type-switch rate
-\[
-  \frac{1}{|\EE_X|}\min\sum_N v_N
-\]
-seem to decrease, stabilize, or remain bounded away from zero? A positive limiting rate would support the intuition that any Chen branch must oscillate between prime and semiprime behavior. A decreasing rate would suggest that smooth selections exist.
-\end{question}
-
-\section{An infinite MIP formulation}
-
-The finite MIP can be written as an infinite-dimensional feasibility problem. Let
-\[
-  \EE := \{N\in\NN: N>2,\ N\equiv0\pmod 2\}.
-\]
-For every $N\in\EE$, every $p\in\PP$ with $p<N$, and every admissible type $t\in\{1,2\}$, define binary variables $z_{N,p,t}$.
-
-The infinite Chen-cover formulation is
-\begin{align}
-  \sum_{\substack{p\in\PP\\N-p\in\PP}} z_{N,p,1}
-  + \sum_{\substack{p\in\PP\\N-p\in\SSemi}} z_{N,p,2} &\ge 1,
-  &&\forall N\in\EE,\\
-  z_{N,p,t}&\in\{0,1\}.
-\end{align}
-
-The infinite Goldbach-cover formulation is the special case
-\begin{align}
-  \sum_{\substack{p\in\PP\\N-p\in\PP}} z_{N,p,1} &\ge 1,
-  &&\forall N\in\EE,\\
-  z_{N,p,1}&\in\{0,1\}.
-\end{align}
-Thus the binary Goldbach conjecture is equivalent to feasibility of the infinite Goldbach-cover problem.
+Fix an even $N\le X$ and let $\mathcal A_N^{(1)}=\{p\in\PP:N-p\in\PP\}$ and
+$\mathcal A_N^{(2)}=\{p\in\PP:N-p\in\SSemi\}$. Binary variables $z_{N,p,t}$ select one
+representation $N=p+q$ of type $t$ (prime $t=1$, semiprime $t=2$); the cover constraint
+$\sum_{p\in\mathcal A_N^{(1)}}z_{N,p,1}+\sum_{p\in\mathcal A_N^{(2)}}z_{N,p,2}\ge1$ for every
+even $N$ in a window $\EE_X$ is Chen feasibility, and dropping the type-$2$ terms is
+Goldbach feasibility. With the sets $\mathcal A_N^{(t)}$ precomputed by a sieve this is
+trivial as a feasibility problem; it becomes informative only under added structure.
 
 \begin{remark}[Why this is not a proof strategy]\label{rem:notproof}
-This infinite MIP does not make the problem easier by itself. It simply translates the conjecture into a covering problem over an infinite hypergraph whose vertices are even integers and whose hyperedges are prime-pair certificates. Its value is conceptual: it allows one to import notions such as relaxations, covering, selection, stability, total variation, and column generation into the empirical study of Goldbach-type representations.
+These mixed-integer programs do not make Goldbach easier by themselves. They translate the
+conjecture into a covering problem over a hypergraph whose vertices are even integers and
+whose hyperedges are prime-pair certificates; the value is conceptual, letting one import
+selection, smoothness, total variation, and column generation into the empirical study of
+Goldbach-type representations (Appendix~\ref{app:infinite}).
 \end{remark}
 
-\subsection{Infinite continuity functional}
+\paragraph{Minimum-variation selection.}
+Selecting one representation per even $N$ in a window, with type
+$u_N=\sum_{p\in\mathcal A_N^{(2)}}z_{N,p,2}\in\{0,1\}$ and normalized location
+$s_N=q_N/N=\sum_{p,t}\frac{N-p}{N}z_{N,p,t}$ (linear in the selection variables), the
+minimum-variation MIP minimizes
+$\alpha\sum_N v_N+\beta\sum_N r_N+\gamma\sum_N|s_N-\tfrac12|$ subject to one selection per
+$N$ and $v_N\ge|u_N-u_{N-2}|$, $r_N\ge|s_N-s_{N-2}|$. The term $\sum v_N$ measures type
+oscillation, $\sum r_N$ geometric oscillation, and $|s_N-\tfrac12|$ rewards balance. The
+guiding question is whether the minimum type-switch rate $|\EE_X|^{-1}\min\sum_N v_N$
+decreases or stays bounded away from $0$ as $X\to\infty$; \S\ref{sec:opt-emp} reports the
+answer (a smooth-location branch that nonetheless keeps switching type).
 
-One can also write a formal infinite objective:
-\begin{equation}
-  \inf_{(p_N,q_N)}
-  \sum_{N\in\EE} w_N
-  \left(
-    \alpha |\tau(q_N)-\tau(q_{N-2})|
-    +\beta\left|\frac{q_N}{N}-\frac{q_{N-2}}{N-2}\right|
-  \right),
-  \label{eq:infinite-continuity}
-\end{equation}
-where $w_N>0$ is summable, for example $w_N=N^{-2}$. This is a mathematically controlled version of asking whether the representation can be made continuous in the limit. The weights make the infinite objective finite, while finite-window truncations recover the MIP above.
-
-\section{Column-generation interpretation}
-\label{sec:colgen}
-
-The variables $z_{N,p,t}$ can be viewed as columns. Each column corresponds to a certificate that the even number $N$ is covered by a representation of type $t$. In the finite-window case, the master problem selects one column per even integer. The pricing problem asks for a representation with desirable reduced cost.
-
-This gives a clean computational analogy:
-\begin{itemize}[leftmargin=2em]
-  \item Goldbach columns: $(N,p,q)$ with $p,q\in\PP$ and $p+q=N$.
-  \item Chen columns: $(N,p,q)$ with $p\in\PP$, $q\in\Ptwo$, and $p+q=N$.
-  \item Smoothness columns: columns are coupled across consecutive $N$ by penalties on type and normalized location.
-\end{itemize}
-
-The interesting part is not feasibility but selection under structure. For example, one can ask whether there exists a low-variation path through the representation cloud.
-
-\section{Experimental plan}
-
-\subsection{Data generation}
-
-For a maximum range $X$:
-\begin{enumerate}[leftmargin=2em]
-  \item Generate all primes up to $X$ by the sieve of Eratosthenes.
-  \item Compute $\OmegaF(n)$ for all $n\le X$ using a smallest-prime-factor sieve.
-  \item Mark primes $\PP$, semiprimes $\SSemi$, and Chen numbers $\Ptwo$.
-  \item For each even $N\le X$, enumerate $p\in\PP$ and test whether $q=N-p$ is prime or semiprime.
-  \item Store $R_1(N)$, $R_2(N)$, $\theta(N)$, $C(N)$, factor-balance statistics, and modular residues.
-\end{enumerate}
-
-\subsection{Core plots}
-
-The following plots should be produced:
-\begin{enumerate}[leftmargin=2em]
-  \item Goldbach comet: $N\mapsto R_1(N)$.
-  \item Chen comet: $N\mapsto R_{\le2}(N)$.
-  \item Semiprime comet: $N\mapsto R_2(N)$.
-  \item Ratio plot: $N\mapsto R_2(N)/(R_1(N)+1)$.
-  \item Prime share: $N\mapsto\theta(N)$.
-  \item Normalized counts: $A_1(N)$ and $A_2(N)$.
-  \item Distribution of $q/N$ for prime $q$ versus semiprime $q$.
-  \item Distribution of semiprime balance $B(q)=\log a/\log q$.
-  \item Modular heatmaps for $q\bmod m$ and $p\bmod m$.
-  \item MIP branch plots: selected $q_N/N$ and type $u_N$ for minimum-variation selections.
-\end{enumerate}
-
-\subsection{Pseudo-code}
-
-\begin{lstlisting}[language=Python,caption={Computing Goldbach--Chen counts up to X.}]
-def goldbach_chen_counts(X):
-    is_prime = sieve_primes(X)
-    omega = smallest_prime_factor_omega(X)
-    is_semiprime = [omega[n] == 2 for n in range(X+1)]
-
-    R1 = {}
-    R2 = {}
-    examples = {}
-
-    primes = [p for p in range(2, X+1) if is_prime[p]]
-
-    for N in range(4, X+1, 2):
-        r1 = 0
-        r2 = 0
-        sample = []
-        for p in primes:
-            if p >= N:
-                break
-            q = N - p
-            if is_prime[q]:
-                r1 += 1
-                sample.append((p, q, 1))
-            elif is_semiprime[q]:
-                r2 += 1
-                sample.append((p, q, 2))
-        R1[N] = r1
-        R2[N] = r2
-        examples[N] = sample
-
-    return R1, R2, examples
-\end{lstlisting}
-
-\section{Possible empirical hypotheses}
-
-\begin{conjecture}[Normalized stability]
-The normalized sequences
-\[
-  A_1(N)=\frac{R_1(N)}{N/\log^2 N},
-  \qquad
-  A_2(N)=\frac{R_2(N)}{N\log\log N/\log^2 N}
-\]
-exhibit substantially lower relative dispersion than the raw counts $R_1(N)$ and $R_2(N)$.
-\end{conjecture}
-
-\begin{conjecture}[Chen rescue effect]
-Even integers with unusually small $R_1(N)$ tend to have non-small $R_2(N)$ after normalization. In other words, the semiprime channel may be empirically robust where the prime channel is fragile.
-\end{conjecture}
-
-\begin{conjecture}[Weak spatial continuity]
-For large $N$, the empirical distributions of $q/N$ for prime $q$ and semiprime $q$ become close after smoothing over intervals $N\in[X,X+H]$ with $H\to\infty$ and $H/X\to0$.
-\end{conjecture}
-
-\begin{conjecture}[Type oscillation]
-In the minimum-variation MIP, the selected type sequence $u_N$ displays either:
-\begin{enumerate}[label=(\roman*),leftmargin=2em]
-  \item vanishing switch frequency, suggesting the existence of smooth Chen branches; or
-  \item persistent switch frequency, suggesting intrinsic oscillation between prime and semiprime representations.
-\end{enumerate}
-Both outcomes are mathematically interesting.
-\end{conjecture}
-
-\section{Further ideas inspired by the formulation}
-
-\subsection{A phase diagram between Goldbach and Chen}
-
-Li and Liu's notation suggests a family of intermediate statements between $(1+1)$ and $(1+2)$ \citep{li2026}. Empirically, one can define a finite-range version. Let
-\[
-  q = r s,
-  \qquad r\le s^{a-1},
-\]
-where $r$ is either $1$ or prime and $s$ is prime. For $a\in[1,2]$, define
-\[
-  R_{1+a}(N) := \#\{(p,r,s): N=p+rs,\ p,s\in\PP,\ r=1 \text{ or } r\in\PP,\ r\le s^{a-1}\}.
-\]
-Then build a phase diagram over $(N,a)$ indicating when $R_{1+a}(N)>0$. The critical empirical value
-\[
-  a_X^*(N) := \inf\{a\in[1,2]: R_{1+a}(N)>0\}
-\]
-measures how far $N$ is from needing Chen's full semiprime flexibility.
-
-\subsection{The least semiprime rescue}
-
-Define the least-rescue statistic
-\[
-  L_2(N) := \min\{q: N=p+q,\ p\in\PP,\ q\in\SSemi\}.
-\]
-Compare it with the least Goldbach prime partner
-\[
-  L_1(N) := \min\{q: N=p+q,\ p\in\PP,\ q\in\PP\}.
-\]
-The distribution of $L_2(N)/L_1(N)$ may reveal whether semiprimes rescue representations near the boundary or throughout the interval.
-
-\subsection{Entropy of representation types}
-
-For each $N$, define
-\[
-  H(N) := -\theta(N)\log\theta(N) - (1-\theta(N))\log(1-\theta(N)).
-\]
-Large entropy means that prime and semiprime channels are both active. Low entropy means one channel dominates.
-
-\subsection{Modular fingerprints}
-
-For each modulus $m$, define the empirical distribution
-\[
-  \rho_{N,m}^{(t)}(a,b)
-  := \#\{(p,q)\in\mathcal R_t(N): p\equiv a\pmod m,\ q\equiv b\pmod m\}.
-\]
-This can reveal local obstructions and singular-series effects. Comparing $t=1$ and $t=2$ may show how semiprimes bypass local scarcity in prime--prime representations.
-
-\section{Potential paper structure}
-
-A polished paper could be organized as follows:
-
-\begin{enumerate}[leftmargin=2em]
-  \item \textbf{Introduction.} Motivation from Goldbach, Chen, and empirical additive number theory.
-  \item \textbf{Definitions.} Counts $R_1$, $R_2$, $R_{\le2}$, Chen surplus, fragility, empirical measures.
-  \item \textbf{Heuristics.} Hardy--Littlewood normalization for $R_1$ and Landau-type normalization for $R_2$.
-  \item \textbf{Optimization formulations.} Finite MIP, infinite MIP, minimum-variation MIP.
-  \item \textbf{Computational pipeline.} Sieve construction, enumeration, validation, complexity.
-  \item \textbf{Experiments.} Comets, ratios, factor geometry, weak-continuity plots, MIP selections.
-  \item \textbf{Discussion.} What is learned about the Goldbach--Chen frontier.
-\end{enumerate}
+\paragraph{Chen-rescue threshold.}
+Restricting representations to a balanced band $p\in[N/2-k,\,N/2]$ and counting how many $N$
+\emph{require} a semiprime (no prime pair in the band) defines the rescue fraction, whose
+unimodal profile in $k$ is reported in \S\ref{sec:opt-emp}; if the minimum number of
+semiprime selections is zero over a finite range, Goldbach holds there.
 
 \section{Empirical results and a new regularity}
 \label{sec:empirical}
@@ -761,12 +497,16 @@ $1/\log\log N$ deficit at $X\sim10^{6}$, not a failure of $R_2$ to inherit $\sin
 \end{table}
 
 \paragraph{Interpretation: a quantitative Chen rescue effect.}
-Because $\beta_2<1$, the relative semiprime share obeys
-$R_2/R_1\propto\sing(N)^{-1/2}$: where Goldbach is locally rich (large $\sing$), the
-prime channel dominates, whereas where Goldbach is \emph{fragile} (small $\sing$)
-the semiprime channel is proportionally most abundant. This is the Chen rescue
-effect of Conjecture~2, now sharpened into a power law. Heuristically the exponent
-drops below $1$ because writing $q=rs$ couples the divisors of $N$ to the factor $r$:
+Because the finite-range slope has $\beta_2<1$, over this range the relative semiprime
+share falls with the singular series, $R_2/R_1\propto\sing(N)^{-(1-\beta_2)}$ (locally
+$\approx\sing(N)^{-1/2}$): where Goldbach is locally rich (large $\sing$), the prime
+channel dominates, whereas where Goldbach is \emph{fragile} (small $\sing$) the semiprime
+channel is proportionally most abundant. This makes the Chen-rescue intuition---the
+semiprime channel matters most exactly where primes are scarce---quantitative as an
+\emph{effective finite-window scaling}, with the deficit $1-\beta_2\asymp1/\log\log N$
+vanishing asymptotically (so it is a slope, not a fixed power; \S\ref{sec:singexp}
+opening). Heuristically the slope sits below $1$ because writing $q=rs$ couples the
+divisors of $N$ to the factor $r$:
 when a small prime $\ell\mid N$, the channel $r=\ell$ is \emph{blocked}
 (then $p=N-\ell s\equiv0\bmod\ell$ forces $p=\ell$), removing its term from the sum
 over channels precisely when $\sing(N)$ is large (Lemma~\ref{lem:sing}). This
@@ -935,7 +675,7 @@ $R_2>0$, so Chen always rescues. The semiprime factor balance $B(q)=\log a/\log 
 has weighted mean $0.25$, with $16\%$ of the representation mass at $B<0.1$ (a tiny
 prime factor) and $18\%$ at $B>0.4$ (near balanced): Chen representations are
 dominated by \emph{unbalanced} semiprimes with a small prime factor
-(Fig.~\ref{fig:balance}), answering Question~3.
+(Fig.~\ref{fig:balance}), answering the semiprime factor-geometry question of \S4.
 
 \begin{figure}[h]
 \centering
@@ -976,8 +716,9 @@ intermediate half-width $k\sim20$--$40$; and for $k=1,2$ it falls again because
 often no representation exists at all. The peak shifts right with $N$ (roughly as
 $\log^2N$), marking where the expected number of balanced prime pairs,
 $\sim2C_2\,\sing(N)\,k/\log^2(N/2)$, drops to $O(1)$ -- a Poisson-type transition.
-This realizes the phase-diagram value $a_X^*(N)$ of \S12.1: Chen's semiprime
-flexibility becomes \emph{necessary} precisely when near-perfect balance is imposed.
+This is the regime captured by the residual exponent $a_{\rm Res}(N)$ of
+\S\ref{sec:balance-emp}: Chen's semiprime flexibility becomes \emph{necessary} precisely
+when near-perfect balance is imposed.
 
 \begin{figure}[h]
 \centering
@@ -990,8 +731,8 @@ like $\log^2N$.}
 
 \subsection{Weak continuity of the location measures}
 
-Finally we test the weak-continuity intuition of \S4 (Question~1 and
-Conjecture~3) directly. The pointwise measure $\mu_N$ of $q/N$ is noisy, but
+Finally we test the weak-continuity intuition of \S4 (Question~1 and the weak
+type-stabilization hypothesis there) directly. The pointwise measure $\mu_N$ of $q/N$ is noisy, but
 averaging over a window $N\in[X,X+H]$ produces a stable density
 (Fig.~\ref{fig:continuity}, left). Three findings, at $X=10^{6}$:
 
@@ -1007,7 +748,7 @@ the endpoints (the $1/(\log(xN)\log((1-x)N))$ effect). This answers Question~1
 affirmatively: after removing endpoint effects, $\mu_N^{(1)}$ is close to uniform.
 \item \textbf{Prime and semiprime locations nearly coincide.} The two densities are
 within total variation $0.019$ of each other (Fig.~\ref{fig:continuity}, center),
-confirming Conjecture~3. The semiprime location is slightly skewed toward larger
+confirming the weak type-stabilization picture. The semiprime location is slightly skewed toward larger
 $q$ (mean $q/N=0.513$ versus the exactly symmetric $0.500$ for primes), the only
 visible signature that $p$ and $q$ play asymmetric roles in $R_2$.
 \end{itemize}
@@ -2055,6 +1796,39 @@ step being the singular-series identity of Lemma~\ref{lem:sing}. The log-regress
 statement $\beta_2(N)\to1$ then follows from the lower-tail hypothesis of
 Corollary~\ref{cor:beta-aa}, the one ingredient we do not prove.
 
+
+\section{The infinite formulation and column generation}
+\label{app:infinite}
+
+The finite selection MIPs of \S\ref{sec:finitemip} are truncations of an
+infinite-dimensional feasibility problem. Let $\EE=\{N\in\NN:N>2,\ N\equiv0\,(2)\}$; for
+every $N\in\EE$, $p\in\PP$ with $p<N$, and type $t\in\{1,2\}$ take a binary $z_{N,p,t}$. The
+infinite Chen-cover is
+\[
+  \sum_{\substack{p\in\PP\\N-p\in\PP}} z_{N,p,1}
+  + \sum_{\substack{p\in\PP\\N-p\in\SSemi}} z_{N,p,2}\ \ge\ 1
+  \qquad(\forall N\in\EE),
+\]
+and its type-$1$ restriction is the infinite Goldbach-cover; the binary Goldbach conjecture
+is exactly the feasibility of the latter. One can also write a formal infinite continuity
+objective
+\[
+  \inf_{(p_N,q_N)}\sum_{N\in\EE} w_N\!\left(
+    \alpha\,|\tau(q_N)-\tau(q_{N-2})|
+    +\beta\Big|\tfrac{q_N}{N}-\tfrac{q_{N-2}}{N-2}\Big|\right),
+  \qquad w_N=N^{-2},
+\]
+a mathematically controlled version of asking whether the representation can be made
+continuous in the limit; finite-window truncations recover the minimum-variation MIP of
+\S\ref{sec:finitemip}.
+
+\paragraph{Column-generation reading.}
+The variables $z_{N,p,t}$ are columns, each a certificate that $N$ is covered by a type-$t$
+representation: Goldbach columns $(N,p,q)$ with $p,q\in\PP$, Chen columns with $q\in\Ptwo$,
+coupled across consecutive $N$ by the smoothness penalties. The master problem selects one
+column per even integer and the pricing problem seeks a representation of desirable reduced
+cost. As throughout, the interesting content is selection under structure---whether a
+low-variation path threads the representation cloud---not feasibility.
 
 \section*{Data and code availability}
 \label{sec:availability}
