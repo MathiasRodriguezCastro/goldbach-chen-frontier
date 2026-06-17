@@ -31,6 +31,7 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{lemma}{Lemma}
 \newtheorem{assumption}{Assumption}
+\newtheorem{hypothesis}{Hypothesis}
 
 \newcommand{\PP}{\mathbb P}
 \newcommand{\NN}{\mathbb N}
@@ -792,6 +793,10 @@ threshold $1.9$. The worst case is pinned by a few small ``hard'' $N$.
 \item \textbf{The minimal multiplier is tiny.} $r_\star=3$ for $68\%$ of $N$ and the
 dictionary $\{2,3,5,7\}$ already covers $99.7\%$; $\{2,\dots,11\}$ covers
 $99.99\%$. This settles the multiplier-dictionary question empirically.
+Appendix~\ref{sec:least-unblocked} explains the dictionary through a
+least-unblocked-prime law: conditionally on fixed-channel almost-all asymptotics,
+$r_\star(N)$ equals the least odd prime not dividing $N$ for almost all even $N$ (so
+$\Pr(r_\star\in\{3,5,7\})\approx0.99$ in the divisibility model).
 \item \textbf{Local obstruction.} $r_\star$ jumps when a small prime divides $N$: if
 $3\mid N$ the channel $r=3$ is blocked (then $p=N-3s\equiv0\bmod3$), and indeed the
 mean $r_\star$ is $4.59$ for $3\mid N$ versus $2.94$ otherwise.
@@ -1664,6 +1669,95 @@ negative one above it ($k>\bar\mu_y$). This is the mechanism behind the transiti
 positive response in the Goldbach and Chen layers to negative response for higher
 $\OmegaF$-layers; it gives the direction and the sign reversal, not the exact numerical
 $\beta_k$.
+
+\subsection{The least-unblocked-prime law and residual collapse}
+\label{sec:least-unblocked}
+
+The residual exponent of \S\ref{sec:balance-emp} suggests that the Chen surplus is not merely
+large: for most integers it collapses to the first locally admissible semiprime channel. This
+can be formalized under the same kind of fixed-channel almost-all input that underlies the
+circle-method discussion above.
+
+For an even integer $N$, define the nondegenerate minimal multiplier
+\[
+  r_\star(N):=\min\{r\ge3:\ r\in\PP,\ \exists\,p,s\in\PP,\ N=p+rs\} .
+\]
+(In \S\ref{sec:balance-emp} the multiplier ranges over all primes; we restrict to $r\ge3$ to
+exclude the parity-degenerate channel $r=2$, which forces $p=N-2s$ even, hence $p=2$ and
+$s=N/2-1$ prime---a density-zero family. When $r\mid N$ the congruence $p=N-rs\equiv0\pmod r$
+likewise forces $p=r$, a density-zero exception for each fixed $r$; so the two definitions
+agree for almost all $N$.) Let
+\[
+  \rho(N):=\min\{r\ge3:\ r\in\PP,\ r\nmid N\}
+\]
+be the least locally unblocked odd prime. We use the following fixed-channel almost-all
+hypothesis---an averaged, single-channel form of Assumption~\ref{ass:HL}.
+
+\begin{hypothesis}[Fixed-channel almost-all asymptotic]\label{hyp:fixedchannel}
+For every fixed finite set $\mathcal R$ of odd primes and every fixed $0<\eta<1/2$, for all
+but $o_{\mathcal R,\eta}(X)$ even $N\le X$, uniformly for every $r\in\mathcal R$ with
+$r\nmid N$,
+\[
+  C_{r,\eta}(N):=\#\Big\{s\in\PP:\ \eta\tfrac Nr\le s\le(1-\eta)\tfrac Nr,\ \ N-rs\in\PP\Big\}
+  =(1+o(1))\,2C_2\,\sing(N)\,\frac{r-1}{r-2}\,\frac{(1-2\eta)N}{r\log^2N}.
+\]
+In particular, for every fixed unblocked $r$ the channel $N=p+rs$ contains a representation
+with $s\asymp N/r$ for almost all even $N$.
+\end{hypothesis}
+
+\begin{theorem}[Least-unblocked-prime law; conditional]\label{thm:leastunblocked}
+Assume Hypothesis~\ref{hyp:fixedchannel}. Then $r_\star(N)=\rho(N)$ for almost all even
+integers $N$, and consequently $a_{\rm Res}(N)\to1$ for almost all even integers $N$.
+\end{theorem}
+
+\begin{proof}
+Fix a finite set of odd primes $\mathcal R_Y:=\{3\le r\le Y:\ r\in\PP\}$, and let $\rho_Y(N)$
+be the least prime in $\mathcal R_Y$ not dividing $N$, when one exists. Consider an even
+$N\le X$ for which $\rho_Y(N)$ exists. Every odd prime $r<\rho_Y(N)$ in $\mathcal R_Y$ divides
+$N$, so its channel is locally blocked: $p=N-rs\equiv0\pmod r$, whence $p$ is prime only if
+$p=r$, forcing $s=N/r-1$. For fixed $r$ the set of $N\le X$ with $N/r-1$ prime has size
+$O(X/(r\log X))=o(X)$; the finite union over $r\in\mathcal R_Y$ is exceptional of size
+$o_Y(X)$, and outside it no blocked $r<\rho_Y(N)$ yields a representation.
+
+On the other hand $\rho_Y(N)\nmid N$, so by Hypothesis~\ref{hyp:fixedchannel} applied to
+$\mathcal R_Y$, for all but $o_Y(X)$ even $N\le X$ the channel $r=\rho_Y(N)$ carries a
+representation $N=p+\rho_Y(N)s$ with $s\asymp N/\rho_Y(N)$. Hence, outside a set of size
+$o_Y(X)$, $r_\star(N)=\rho_Y(N)$ whenever $\rho_Y(N)$ exists.
+
+It remains to remove the cutoff $Y$. The even $N$ for which $\rho_Y(N)$ does not exist are
+exactly those divisible by every odd prime $r\le Y$, of density
+$\prod_{3\le r\le Y}\tfrac1r$ among even integers. Therefore
+\[
+  \limsup_{X\to\infty}\frac{\#\{N\le X\ \mathrm{even}:\ r_\star(N)\ne\rho(N)\}}{X/2}
+  \le\prod_{\substack{3\le r\le Y\\ r\in\PP}}\frac1r ,
+\]
+and the product tends to $0$ as $Y\to\infty$, giving $r_\star(N)=\rho(N)$ for almost all even
+$N$. Finally, on the same density-one set the representation has $r=r_\star(N)\le Y$ (outside
+a set of arbitrarily small upper density) and $s\asymp N/r$, so
+\[
+  a_{\rm Res}(N)=1+\frac{\log r_\star(N)}{\log s}\le1+\frac{\log Y}{\log N+O_Y(1)} ,
+\]
+which tends to $1$ as $N\to\infty$ for each fixed $Y$; since the exceptional density can be
+made arbitrarily small, $a_{\rm Res}(N)\to1$ for almost all even $N$.
+\end{proof}
+
+This gives a precise meaning to the empirical ``residual collapse'' of
+\S\ref{sec:balance-emp}: the small multiplier is not mysterious in the model---it is usually
+just the first prime channel not locally blocked by divisibility of $N$. In the
+independent-divisibility model of Lemma~\ref{lem:moments} it predicts
+\[
+  \Pr(\rho(N)=3)=\tfrac23,\quad
+  \Pr(\rho(N)=5)=\tfrac13\!\cdot\!\tfrac45=\tfrac4{15},\quad
+  \Pr(\rho(N)=7)=\tfrac13\!\cdot\!\tfrac15\!\cdot\!\tfrac67=\tfrac2{35},
+\]
+so $\Pr(\rho(N)\in\{3,5,7\})=\tfrac23+\tfrac4{15}+\tfrac2{35}\approx0.9905$, explaining why a
+very small multiplier dictionary covers almost all integers in the experiments. It also
+clarifies the link to the singular series: the same small-prime divisibility that
+\emph{increases} $\sing(N)$ \emph{blocks} the corresponding small $r$-channels, so the least
+available Chen multiplier is governed by local obstructions. The statement is conditional on
+Hypothesis~\ref{hyp:fixedchannel}---a standard fixed-channel almost-all input---and is not an
+unconditional theorem about primes; granting that input, the residual collapse and the
+distribution of $r_\star$ follow from a clean local-obstruction argument.
 
 \subsection{The major arcs: semiprimes in progressions}
 \label{sec:majorarc}
