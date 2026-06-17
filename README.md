@@ -10,28 +10,49 @@ No es un intento de *probar* Goldbach: es evidencia reproducible, diagnósticos 
 preguntas precisas en la frontera entre teoría analítica de números,
 experimentación y optimización discreta.
 
-## Resultado principal (nuevo)
+## Resultado central
 
-Sea $\mathfrak S(N)=\prod_{p\mid N,p>2}\frac{p-1}{p-2}$ la serie singular de
-Goldbach. Empíricamente, hasta $X=8\cdot10^6$:
+Sea $R_1(N)$ el nº de representaciones $N=p+q$ (ambos primos), $R_2(N)$ con $q$
+semiprimo, y $\mathfrak S(N)=\prod_{p\mid N,p>2}\frac{p-1}{p-2}$ la serie singular de
+Goldbach. Escribiendo $R_i\propto\mathfrak S(N)^{\beta_i}$:
 
-| conteo | $\propto \mathfrak S(N)^{\beta}$ | $\beta$ medido |
-|--------|----------------------------------|----------------|
-| $R_1$ (primo+primo) | $\beta_1$ | **1.00** (Hardy–Littlewood, control) |
-| $R_2$ (primo+semiprimo) | $\beta_2$ | **≈ 0.50** (raíz cuadrada) |
+- $R_1$: $\beta_1=1$ exacto (Hardy–Littlewood — control que recuperamos).
+- $R_2$: el **exponente singular no es fijo**. Medido localmente en ventanas hasta
+  $X=10^9$ (criba por bloques), sube de 0.55 a 0.61, y tanto una derivación como los
+  datos dan
+  $$\boxed{\ \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o(\cdot)\ \longrightarrow\ 1,\qquad 1-\beta_2\asymp\tfrac1{\log\log N}\ }$$
 
-> **$R_2$ hereda solo la *raíz* de la serie singular de Goldbach.** La serie
-> singular explica el ~92 % de la varianza de $\log(R_2/R_1)$. Consecuencia: la
-> cuota relativa del canal semiprimo escala como $\mathfrak S(N)^{-1/2}$ — los
-> semiprimos son proporcionalmente más abundantes justo donde Goldbach es
-> *frágil*. Es una forma cuantitativa del **“Chen rescue effect”**.
+> **$R_2$ hereda asintóticamente la serie singular COMPLETA** ($\beta_2\to1$); el "½"
+> que se ve cerca de $10^6$ es un artefacto de rango finito. La validación no circular
+> $(1-\beta_2)\langle R_2/R_1\rangle\approx c$ se cumple al 1%.
 
-Normalizar $R_2$ por $2C_2\,\mathfrak S(N)^{1/2}\,N\,W(N)/\log^2N$ (con $W$ una
-suma de Mertens sobre el factor primo pequeño) reduce el coeficiente de variación
-de **0.18** (heurística del `.tex`) a **0.018** — un ajuste 10× más fino.
+**Reducción rigurosa (apéndice).** $\beta_2\to1$ se reduce a inputs analíticos estándar
+— identidad incondicional de la serie singular, reducción de primer momento a
+Bombieri–Vinogradov, y cota de varianza por el arco-menor de Vinogradov — dando
+**$\beta_2(N)\to1$ para casi todo $N$**, condicional solo a fuerza BV/Chen, no a la HL
+puntual.
 
-Detalles, tablas, derivación y preguntas abiertas en
-[`notes/theory.md`](notes/theory.md).
+## Una docena de reformulaciones, una serie singular
+
+Goldbach se reformula de ~13 maneras; en **todas** el parámetro que gobierna es
+$\mathfrak S(N)$:
+
+| reformulación | objeto | hallazgo (todos gobernados por $\mathfrak S$) |
+|---|---|---|
+| frontera Chen | $R_2/R_1$, capas $\Omega(q)=k$ | $\beta_k$ cambia de signo (realce $k\le2$, supresión $k\ge3$) |
+| exponente de balance | $a_{\rm Res}(N)$ (Li–Liu $1{+}a$) | obstrucción local; corr$(a_{\rm Res},\log\mathfrak S)=+0.59$ |
+| energía termodinámica | $E(N)=\min(\Omega(a)+\Omega(b))$ | $E{=}2\!\iff\!$Goldbach; fusión $\beta^\star$, corr$(\beta^\star,\log\mathfrak S)=-0.92$ |
+| robustez de redes | grafo $N\sim p$ | robusto-al-azar (97%) pero frágil-a-lo-modular (clase mod 3 mata 2/3) |
+| mercado de liquidez | $L_G,L_C$, shock $\phi$ | Chen es liquidez de buen tiempo (sin prima de resiliencia) |
+| control / RL | política $\pi(N)=p$ | info $N$ mod primos chicos: éxito 18%→39%, costo −55% |
+| círculo empírico | espectro de Fourier del cometa | picos = arcos mayores; mod 6 capta 85%, → 99.9% |
+| información | presupuesto de $\mathrm{Var}\log R_1$ | 99.9% comprimible (local); residuo = ruido blanco |
+| geometría discreta | superficie $p+rs=N$ | nube concentrada hacia Goldbach (mediana $a=1.30$) |
+| bases / acarreos | base primorial $B_y$, carries | cobertura $=\mathfrak S_y$; firma digital (+0.97 acarreos base 2) |
+
+Paper completo (37 pp, apéndice riguroso) en
+[`paper/goldbach_chen_frontier.tex`](paper/goldbach_chen_frontier.tex); detalles y
+derivaciones en [`notes/theory.md`](notes/theory.md).
 
 ## Estructura
 
@@ -87,22 +108,39 @@ proyectoGoldbach/
 
 ## Uso
 
+Cada `src/*.py` tiene un self-test (`python3 src/<mod>.py`); cada figura se regenera
+con su `experiments/run_*.py`. Rápidos (≲1 min) salvo donde se indica.
+
 ```bash
-# núcleo: conteos, diagnósticos y figuras (≈15 s para X=2e6)
-python3 experiments/run_counts.py 2000000
+# --- núcleo y resultado central ---
+python3 experiments/run_counts.py 2000000   # conteos, diagnósticos, figuras 01-05
+python3 experiments/run_scaling.py           # β₂(X) hasta 1e9  (LENTO ~20 min)
+python3 experiments/run_betalaw.py           # ley β₂=1-c/⟨R2/R1⟩  (LENTO ~5 min)
+python3 experiments/run_firstmoment.py       # reducción rigurosa: respuestas A_ℓ,B_ℓ
+python3 experiments/run_exceptional.py       # cota de 2º momento (conjunto excepcional)
 
-# experimentos de optimización (rescate de Chen + rama MIP)
-python3 experiments/run_mip.py
+# --- frontera Chen y diagnósticos ---
+python3 experiments/run_layers.py            # capas Ω(q)=k, exponente β_k
+python3 experiments/run_balance.py           # exponente de balance a_Res(N)
+python3 experiments/run_continuity.py        # continuidad débil de q/N
+python3 experiments/run_mip.py               # MIP: rescate + rama (requiere Gurobi)
 
-# continuidad débil de las medidas de q/N
-python3 experiments/run_continuity.py
+# --- las reformulaciones ---
+python3 experiments/run_energy.py            # energía termodinámica + β*
+python3 experiments/run_robustness.py        # robustez del grafo
+python3 experiments/run_market.py            # mercado / liquidez
+python3 experiments/run_control.py           # control / valor de la información
+python3 experiments/run_spectral.py          # círculo empírico (espectro)
+python3 experiments/run_information.py        # presupuesto de información
+python3 experiments/run_geometry.py          # geometría de p+rs=N
+python3 experiments/run_bases.py             # bases primoriales + acarreos (~2.5 min)
 
-# tests rápidos de cada módulo
-python3 src/sieve.py && python3 src/counts.py && python3 src/heuristics.py
+# paper (37 pp)
+cd paper && latexmk -pdf goldbach_chen_frontier.tex
 ```
 
-Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
-`mip.py`/`run_mip.py`). El resto funciona sin Gurobi.
+Requisitos: `numpy`, `scipy`, `pandas`, `matplotlib`, `sympy`; `gurobipy` (licencia;
+solo `mip.py`/`run_mip.py`). El resto funciona sin Gurobi.
 
 ## Figuras generadas
 
@@ -123,11 +161,20 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 | `13_transporte.png` | colapso de transporte: semiprimos reflejados matchean mejor a los primos (−22%) |
 | `14_valles.png` | persistencia de valles: Chen NO rellena los valles de Goldbach (anomalías corr +0.64) |
 | `15_dinamica.png` | $\theta(N)$ 94% determinista en $\mathfrak S(N)$; residuo no-blanco |
+| `16_constante.png` | la constante $c$ del déficit: dominada por correcciones, dependiente de convención |
+| `17_energia.png` | termodinámica aritmética: $Z_N(\beta)$, energía interna, calor específico, fusión $\beta^\star$ |
+| `18_robustez.png` | robustez del grafo: curvas de ataque aleatorio / dirigido / modular |
+| `19_mercado.png` | liquidez $L_G,L_C$ y respuesta al shock de oferta $\phi$ (Chen sin prima de resiliencia) |
+| `20_control.png` | valor de la información aritmética: éxito y costo vs residuos observados |
+| `21_espectral.png` | círculo empírico: espectro de Fourier del cometa, varianza captada por módulo |
+| `22_informacion.png` | presupuesto de información: tendencia / $\mathfrak S$ / residuo irreducible (99.9% comprimible) |
+| `23_geometria.png` | geometría de $p+rs=N$: nube 2D y espectro de exponentes $a$ |
+| `24_bases.png` | cobertura primorial $=\mathfrak S_y$ y exceso de acarreos (firma digital, base 2 = Kummer) |
 
 ## Estado
 
 - [x] Núcleo (cribas + conteos FFT) validado vs fuerza bruta; Goldbach verificado.
-- [x] Serie singular: $\beta_1=1$ (control HL), $\beta_2\approx1/2$ (nuevo).
+- [x] Serie singular: $\beta_1=1$ (control HL); $\beta_2\to1$ con déficit $1/\log\log N$ (el "½" es local).
 - [x] Diagnósticos: $\theta$, $C$, fragilidad, $B(q)$, rescate.
 - [x] MIP: rama de mínima variación + umbral de rescate de Chen.
 - [x] Continuidad débil de $\mu_N^{(t)}$: se estabiliza al suavizar; $q/N$ ≈ uniforme.
@@ -138,4 +185,8 @@ Requisitos: `numpy`, `scipy`, `matplotlib`, `gurobipy` (licencia; solo para
 - [x] Transporte óptimo (colapso de reflexión −22%), TDA de valles (Chen no rellena), dinámica de $\theta$ (94% determinista).
 - [x] **Reducción rigurosa** (apéndice §A.5): $\beta_2\to1$ reducido de "HL puntual uniforme en $r$" a **Bombieri–Vinogradov + cota de conjunto excepcional para $R_2$** (à la Montgomery–Vaughan). Respuestas $A_\ell,B_\ell$ exactas (Lema 3).
 - [x] **Teorema casi-todo-$N$** (apéndice §A.6): $\beta_2(N)\to1$ para casi todo $N$, **incondicional en outline** (la varianza usa solo el arco-menor de primos de Vinogradov + $\int|S_{\mathcal S_2}|^2=\#\mathcal S_2$; sin criba). Conjunto excepcional vacío al 5%.
+- [x] Arco-mayor en detalle (§A.7): Lema 4 (Selberg–Sathé en progresiones), tracking de $A$.
+- [x] **Reformulaciones**: energía termodinámica ($\beta^\star$), redes (robusto/frágil), mercado (liquidez de buen tiempo), control (valor de la info), círculo empírico, información (99.9% comprimible), geometría discreta, bases/acarreos (firma digital). Todas gobernadas por $\mathfrak S(N)$.
+- [x] **Consolidación**: 19 módulos con self-test OK, 42 archivos compilan, paper 37 pp limpio, 24 figuras reproducibles.
+- [ ] Demostración rigurosa COMPLETA (cerrar constantes/arco-mayor) y publicación.
 - [ ] Column generation del MIP infinito (pricing real).

@@ -63,7 +63,26 @@ The binary Goldbach conjecture asks whether every even integer $N>2$ can be repr
 \[
   \beta_2(N)=1-\frac{c(N)}{\langle R_2/R_1\rangle_N}+o(\cdot),\qquad \langle R_2/R_1\rangle\sim\log\log N,\ c(N)=O(1),
 \]
-so that $\beta_2\to1$ with a deficit of order $1/\log\log N$: the apparent ``half power'' near $X\sim10^{6}$ is a finite-range artefact, and $R_2$ asymptotically inherits the \emph{full} Goldbach singular series. Extending to layers $\OmegaF(q)=k$, the singular exponent $\beta_k$ decreases through $1,\tfrac12,\dots$ and turns negative for $k\ge3$, so the singular series enhances low-complexity and suppresses high-complexity channels. We complement this with reproducible diagnostics (Chen surplus, fragility, factor geometry), weak-continuity tests for the location measures of $q/N$, mixed-integer formulations whose minimum-variation solutions expose a Pareto trade-off between geometric and type smoothness, a unimodal Chen-rescue threshold under a balance constraint, and a residual balance exponent $a_{\rm Res}(N)$ in the spirit of the recent $(1+a)$ interpolation, whose obstructions correlate positively with $\sing(N)$. The goal is not a proof of Goldbach, but reproducible evidence and new regularities at the boundary between additive number theory, computational experimentation, and discrete optimization.
+so that $\beta_2\to1$ with a deficit of order $1/\log\log N$: the apparent ``half power'' near $X\sim10^{6}$ is a finite-range artefact, and $R_2$ asymptotically inherits the \emph{full} Goldbach singular series. Extending to layers $\OmegaF(q)=k$, the singular exponent $\beta_k$ decreases through $1,\tfrac12,\dots$ and turns negative for $k\ge3$, so the singular series enhances low-complexity and suppresses high-complexity channels. On the theoretical side we reduce the law $\beta_2\to1$ to standard analytic inputs: an
+appendix gives an unconditional singular-series identity, a first-moment reduction to the
+equidistribution of primes in progressions (Siegel--Walfisz / Bombieri--Vinogradov), and a
+variance bound from the classical Vinogradov minor-arc estimate, yielding $\beta_2(N)\to1$
+for \emph{almost all} $N$ conditional only on inputs of Bombieri--Vinogradov / Chen strength
+rather than on a pointwise Hardy--Littlewood asymptotic. We complement this with a broad
+suite of reproducible reframings, all of which turn out to be governed by the same singular
+series: diagnostics (Chen surplus, fragility, factor geometry) and weak-continuity of the
+$q/N$ measures; mixed-integer minimum-variation selection and a unimodal Chen-rescue
+threshold; a residual balance exponent $a_{\rm Res}(N)$ in the spirit of the $(1+a)$
+interpolation; an arithmetic ground-state energy whose Goldbach order melts at a temperature
+$\beta^\star$ anticorrelated with $\sing(N)$; the adversarial robustness of the Goldbach
+graph (random-robust but structure-fragile); a market reading in which the Chen substitute is
+fair-weather liquidity; a control policy quantifying the value of arithmetic information; an
+empirical circle method whose comet spectrum is the major arcs and whose information content
+is $99.9\%$ compressible by local arithmetic; the discrete geometry of the surface $p+rs=N$;
+and a primorial-base and carry-geometry analysis exhibiting a digital signature of primality.
+The goal is not a proof of Goldbach, but reproducible evidence and new regularities at the
+boundary between additive number theory, computational experimentation, and discrete
+optimization---unified by the Hardy--Littlewood singular series.
 \end{abstract}
 
 \tableofcontents
@@ -99,6 +118,8 @@ Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implem
 \item \textbf{The singular exponent of $R_2$ (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. While $R_1\propto\sing(N)^{1}$ exactly (Hardy--Littlewood), the exponent of $R_2$ rises with $N$; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit. The validation $(1-\beta_2)\langle R_2/R_1\rangle\approx c\approx1.09$ holds to $1\%$.
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the singular exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
+\item \textbf{A reduction towards a theorem (Appendix~\ref{app:rigorous}).} The law $\beta_2\to1$ is reduced to standard analytic number theory: an unconditional singular-series identity (Lemma~\ref{lem:sing}), a first-moment reduction to Siegel--Walfisz / Bombieri--Vinogradov, and a variance bound from Vaughan's minor-arc estimate, giving $\beta_2(N)\to1$ for almost all $N$ conditional only on Bombieri--Vinogradov / Chen-strength inputs.
+\item \textbf{A dozen reframings, one singular series (\S\ref{sec:energy-emp}--\ref{sec:bases-emp}).} Goldbach is recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, a discrete surface, and a carry geometry. In each, the governing quantity is the Hardy--Littlewood singular series $\sing(N)$: it sets the melting temperature $\beta^\star$, the modular fragility, the substitute spread, the value of information, the comet spectrum (which is $99.9\%$ compressible), the concentration of Chen solutions toward Goldbach, and the carry signature of primality.
 \end{enumerate}
 
 \section{Basic notation}
