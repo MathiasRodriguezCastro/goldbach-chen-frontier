@@ -9,6 +9,9 @@
 \newcommand{\OmegaF}{\Omega}
 \newcommand{\sing}{\mathfrak S}
 \newcommand{\Var}{\operatorname{Var}}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\EE}{\mathcal E}
+\newcommand{\Ptwo}{\mathcal P_2}
 \title{Supplement: cross-disciplinary reframings of the\\ Goldbach--Chen frontier}
 \author{Mathias Rodr\'iguez Castro}
 \date{June 2026}
@@ -269,5 +272,38 @@ far below the Li--Liu threshold $1.9$.}
 \label{fig:geom}
 \end{figure}
 
+
+\section{The infinite formulation and column generation}
+\label{app:infinite}
+
+The finite selection MIPs of the selection formulations of the main text are truncations of an
+infinite-dimensional feasibility problem. Let $\EE=\{N\in\NN:N>2,\ N\equiv0\,(2)\}$; for
+every $N\in\EE$, $p\in\PP$ with $p<N$, and type $t\in\{1,2\}$ take a binary $z_{N,p,t}$. The
+infinite Chen-cover is
+\[
+  \sum_{\substack{p\in\PP\\N-p\in\PP}} z_{N,p,1}
+  + \sum_{\substack{p\in\PP\\N-p\in\SSemi}} z_{N,p,2}\ \ge\ 1
+  \qquad(\forall N\in\EE),
+\]
+and its type-$1$ restriction is the infinite Goldbach-cover; the binary Goldbach conjecture
+is exactly the feasibility of the latter. One can also write a formal infinite continuity
+objective
+\[
+  \inf_{(p_N,q_N)}\sum_{N\in\EE} w_N\!\left(
+    \alpha\,|\tau(q_N)-\tau(q_{N-2})|
+    +\beta\Big|\tfrac{q_N}{N}-\tfrac{q_{N-2}}{N-2}\Big|\right),
+  \qquad w_N=N^{-2},
+\]
+a mathematically controlled version of asking whether the representation can be made
+continuous in the limit; finite-window truncations recover the minimum-variation MIP of
+the selection formulations of the main text.
+
+\paragraph{Column-generation reading.}
+The variables $z_{N,p,t}$ are columns, each a certificate that $N$ is covered by a type-$t$
+representation: Goldbach columns $(N,p,q)$ with $p,q\in\PP$, Chen columns with $q\in\Ptwo$,
+coupled across consecutive $N$ by the smoothness penalties. The master problem selects one
+column per even integer and the pricing problem seeks a representation of desirable reduced
+cost. As throughout, the interesting content is selection under structure---whether a
+low-variation path threads the representation cloud---not feasibility.
 
 \end{document}

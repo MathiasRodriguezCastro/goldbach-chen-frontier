@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite the work below."
-title: "The Goldbach–Chen Frontier: A Singular-Series Cancellation Identity and a Bounded Almost-All Reduction"
+title: "The Goldbach–Chen Frontier, Experimentally: A Singular-Series Cancellation and the Finite-Range Half-Power Artifact"
 abstract: >-
   Computational and analytic study of how the Goldbach (R1) and Chen-surplus (R2)
   representation counts respond to the Hardy–Littlewood singular series. Central result:

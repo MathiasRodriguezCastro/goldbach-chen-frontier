@@ -54,7 +54,7 @@
   keepspaces=true
 }
 
-\title{The Goldbach--Chen Frontier: A Singular-Series Cancellation Identity and a Bounded Almost-All Reduction}
+\title{The Goldbach--Chen Frontier, Experimentally: A Singular-Series Cancellation and the Finite-Range Half-Power Artifact}
 \author{Mathias Rodr\'iguez Castro\thanks{ORCID: \href{https://orcid.org/0009-0002-7235-7677}{0009-0002-7235-7677}}}
 \date{June 2026}
 
@@ -375,7 +375,7 @@ If the heuristic is meaningful, $A_1(N)$ and $A_2(N)$ should be much more stable
 diagnostics measured in \S\ref{sec:opt-emp} (a minimum-variation selection and a
 Chen-rescue threshold). It is deliberately short: the feasibility version is trivial and
 no MIP solver will prove Goldbach (Remark~\ref{rem:notproof}). The infinite-dimensional and
-column-generation readings are recorded in Appendix~\ref{app:infinite}; a reader after the
+column-generation readings are recorded in the supplement; a reader after the
 empirical results may skip to \S\ref{sec:empirical}.
 
 Fix an even $N\le X$ and let $\mathcal A_N^{(1)}=\{p\in\PP:N-p\in\PP\}$ and
@@ -391,7 +391,7 @@ These mixed-integer programs do not make Goldbach easier by themselves. They tra
 conjecture into a covering problem over a hypergraph whose vertices are even integers and
 whose hyperedges are prime-pair certificates; the value is conceptual, letting one import
 selection, smoothness, total variation, and column generation into the empirical study of
-Goldbach-type representations (Appendix~\ref{app:infinite}).
+Goldbach-type representations (developed in the supplement).
 \end{remark}
 
 \paragraph{Minimum-variation selection.}
@@ -2249,39 +2249,6 @@ Lemma~\ref{lem:sing}. The log-regression
 statement $\beta_2(N)\to1$ then follows from the lower-tail hypothesis of
 Corollary~\ref{cor:beta-aa}, the one ingredient we do not prove.
 
-
-\section{The infinite formulation and column generation}
-\label{app:infinite}
-
-The finite selection MIPs of \S\ref{sec:finitemip} are truncations of an
-infinite-dimensional feasibility problem. Let $\EE=\{N\in\NN:N>2,\ N\equiv0\,(2)\}$; for
-every $N\in\EE$, $p\in\PP$ with $p<N$, and type $t\in\{1,2\}$ take a binary $z_{N,p,t}$. The
-infinite Chen-cover is
-\[
-  \sum_{\substack{p\in\PP\\N-p\in\PP}} z_{N,p,1}
-  + \sum_{\substack{p\in\PP\\N-p\in\SSemi}} z_{N,p,2}\ \ge\ 1
-  \qquad(\forall N\in\EE),
-\]
-and its type-$1$ restriction is the infinite Goldbach-cover; the binary Goldbach conjecture
-is exactly the feasibility of the latter. One can also write a formal infinite continuity
-objective
-\[
-  \inf_{(p_N,q_N)}\sum_{N\in\EE} w_N\!\left(
-    \alpha\,|\tau(q_N)-\tau(q_{N-2})|
-    +\beta\Big|\tfrac{q_N}{N}-\tfrac{q_{N-2}}{N-2}\Big|\right),
-  \qquad w_N=N^{-2},
-\]
-a mathematically controlled version of asking whether the representation can be made
-continuous in the limit; finite-window truncations recover the minimum-variation MIP of
-\S\ref{sec:finitemip}.
-
-\paragraph{Column-generation reading.}
-The variables $z_{N,p,t}$ are columns, each a certificate that $N$ is covered by a type-$t$
-representation: Goldbach columns $(N,p,q)$ with $p,q\in\PP$, Chen columns with $q\in\Ptwo$,
-coupled across consecutive $N$ by the smoothness penalties. The master problem selects one
-column per even integer and the pricing problem seeks a representation of desirable reduced
-cost. As throughout, the interesting content is selection under structure---whether a
-low-variation path threads the representation cloud---not feasibility.
 
 \section{Cross-disciplinary reframings (summary)}
 \label{app:reframings}
