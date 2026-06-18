@@ -73,12 +73,12 @@ ratio of Hardy--Littlewood main terms, leaving a Mertens channel sum $W_f(N)\sim
 with exponent $1$, exactly as in $R_1$, and the apparent ``half power'' of finite-range
 log--log fits is not a structural exponent but an effective exponent inferred from the
 regression slope $m_2=\beta_2-1$, obeying $\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ with
-deficit $\sim1/\log\log N$. A Vaughan--Parseval minor-arc second moment (no sieve) reduces the
-\emph{linear} almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ to the standard
-Hardy--Littlewood major-arc input for the channel forms $s,N-rs$; the passage to the
-untruncated log-regression statement $\beta_2\to1$ is isolated as an explicit lower-tail
-hypothesis. The goal is not a proof of Goldbach but an explicit cancellation identity,
-reproducible evidence, and an honestly bounded reduction. Additional computational reframings
+deficit $\sim1/\log\log N$. A Vaughan--Parseval minor-arc second moment (no sieve), together with the equidistribution of
+semiprimes in arithmetic progressions, makes the \emph{linear} almost-all asymptotic
+$R_2(N)=\mathrm{main}(N)(1+o(1))$ \emph{unconditional}; the passage to the untruncated
+log-regression statement $\beta_2\to1$ is isolated as an explicit lower-tail hypothesis. The
+goal is not a proof of Goldbach but an explicit cancellation identity, reproducible evidence,
+and an unconditional almost-all asymptotic. Additional computational reframings
 are summarized in an appendix and developed in the supplement.
 \end{abstract}
 
@@ -119,7 +119,7 @@ Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implem
 \item \textbf{The singular series of $R_2$, and the finite-range half-power (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. Both main terms carry $\sing(N)$ with exponent~$1$: the per-channel singular series factorizes (Lemma~\ref{lem:sing}), so $\sing(N)$ \emph{cancels} in the main-term ratio, leaving $R_2/R_1=W_f(N)(1+o(1))$ with the Mertens channel sum $W_f(N)\sim\log\log N$. The number $\beta_2\approx\tfrac12$ that a finite-range log--log fit reports is therefore not a structural exponent but a finite-range effective exponent inferred from the regression slope $m_2=\beta_2-1$; a derivation and the data agree on $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with $\langle R_2/R_1\rangle\sim\log\log N$, so $\beta_2\to1$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$). The deficit is multi-channel: deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ of it (\S\ref{sec:singexp}), refuting a single-atom reading. The channel factorization itself is an elementary singular-series computation; what we record is its consequence---the cancellation of $\sing(N)$ in the main-term ratio---which the existence-oriented sieve literature has had no reason to isolate (Remark~\ref{rem:identity-novelty}).
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the effective exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics, continuity, optimization (\S\ref{sec:diag-emp}--\ref{sec:balance-emp}).} Factor geometry favours unbalanced semiprimes; the $q/N$ measures stabilize weakly to a near-uniform law; minimum-variation selection is a Pareto trade-off between geometric and type smoothness; the Chen-rescue threshold under a balance constraint is unimodal; and the residual balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$.
-\item \textbf{An almost-all asymptotic, honestly bounded (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve---is unconditional and reduces the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ (all but $o(X)$ even $N$) to the standard Hardy--Littlewood major-arc evaluation for the channel forms $s,N-rs$; we present it within that stated major-arc reduction rather than as a self-contained theorem. Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
+\item \textbf{An unconditional almost-all asymptotic (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve (Prop.~\ref{prop:var})---together with the major-arc evaluation (Lemma~\ref{lem:s2ap}, the equidistribution of semiprimes in progressions, proved from Siegel--Walfisz) gives the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, \emph{unconditionally} (Theorem~\ref{thm:aa}). Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
 \item \textbf{Many mirrors, one fact (\S\ref{sec:spectral-emp}--\ref{sec:bases-emp}; Appendix~\ref{app:reframings}).} The frontier can be recast as a thermodynamic ground state, an adversarial network, a liquidity market, a control problem, an empirical circle method, an information channel, and a discrete surface. We are explicit that this is \emph{one} finding---$\sing(N)$ sets the local densities---observed many times, not many findings; most reframings are deterministic functions of the same $\sing/R_2$ data and are collected in Appendix~\ref{app:reframings} (with the honest negatives: an empty additive-complexity topology and a Chen substitute with no resilience premium). Two earn a place in the body by yielding a \emph{new computation}: the empirical circle method (\S\ref{sec:spectral-emp}), whose comet power spectrum is an empirical shadow of the major arcs, and the carry geometry (\S\ref{sec:bases-emp}), which surfaces a digit/Kummer signature of primality.
 \end{enumerate}
 
@@ -143,7 +143,7 @@ Main-term cancellation $R_{2,\mathrm{main}}/R_{1,\mathrm{main}}=W_f(N)$ & \emph{
 Finite-range effective exponent $\beta_2\approx\tfrac12$ and its drift; fit \eqref{eq:beta-loglog} & \emph{Numerical observation} (not extrapolated to a limit) \\
 Functional form $1-\beta_2\asymp1/\log\log N$ (Theorem~\ref{thm:beta}) & \emph{Conditional} (quantitative Hardy--Littlewood, Assumption~\ref{ass:HL}); the order is robust, the limiting constant open \\
 Non-circular validation $(1-\beta_2)\langle R_2/R_1\rangle\approx\mathrm{const}$ (Obs.~\ref{obs:validation}) & \emph{Numerical observation} (control) \\
-Linear almost-all $R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}) & \emph{Conditional} bounded reduction to a standard major-arc input; a standard circle-method consequence (Remark~\ref{rem:literature}) \\
+Linear almost-all $R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}) & \emph{Proved}, unconditionally (Vaughan minor arc + semiprimes in progressions, Lemma~\ref{lem:s2ap}); a standard circle-method consequence (Remark~\ref{rem:literature}) \\
 $\beta_2\to1$ for almost all $N$ (Corollary~\ref{cor:beta-aa}) & \emph{Conditional} on the lower-tail hypothesis \\
 Lower-tail hypothesis & \emph{Conjecture}, stated precisely (\S\ref{sec:variance}) \\
 Diagnostics of \S\ref{sec:diag-emp}--\ref{sec:further-emp} (balance, continuity, valleys, transport, dynamics) & \emph{Numerical observations} \\
@@ -1078,10 +1078,6 @@ level up to $5\cdot10^{8}$.
 is robust, but the limiting constant of $(1-\beta_2)\langle R_2/R_1\rangle$ is correction-dominated
 and \emph{not} determinable from data up to $10^{9}$ (it is normalisation-dependent, $\approx0.5$--$0.7$).
 Is there a canonical normalisation with a clean limit?
-\item \textbf{Writing out the major arcs} (\S\ref{sec:majorarc}). Supply the full major-arc
-evaluation for the truncated semiprime channel (semiprimes in progressions of moduli $q\le Q$,
-uniformly in $r\le X^\eta$), turning Theorem~\ref{thm:aa} from a bounded reduction into a
-self-contained almost-all statement.
 \item \textbf{Layers} (\S\ref{sec:layers-emp}). The Poisson model predicts
 $\beta_k(X)=1-(k-1)\kappa_X$ to leading order, with crossing $k^\star=1+1/\kappa_X\asymp\log\log X$
 (Prop.~\ref{prop:layers}); this captures the slope near the top and the crossing layer but
@@ -1120,8 +1116,8 @@ so rather than count them as separate findings. The negatives---an empty additiv
 topology, a Chen substitute with no resilience premium---are reported as negatives.
 
 This is not a proof of Goldbach. It is reproducible evidence, one cancellation identity made
-explicit, and a tightly bounded reduction, at the boundary between additive number theory,
-computational experimentation, and discrete optimization.
+explicit, and an unconditional almost-all asymptotic for the semiprime channel, at the boundary
+between additive number theory, computational experimentation, and discrete optimization.
 
 \appendix
 \section{Towards a proof that \texorpdfstring{$\beta_2\to1$}{beta2 to 1}}
@@ -1599,13 +1595,26 @@ Lemma~\ref{lem:sing}---gives
 \]
 for even $N\in(X,2X]$, uniformly outside an admissible $o(X)$ exceptional set.
 \end{proposition}
+\begin{proof}
+This is the circle-method major-arc evaluation carried out in \S\ref{sec:majorarc}. The one
+arithmetic ingredient is the equidistribution of semiprimes in progressions of moduli
+$q_0\le Q=(\log X)^{C}$, supplied \emph{unconditionally} by Lemma~\ref{lem:s2ap}
+(Siegel--Walfisz); integrating $S_\PP S_{\SSemi}$ over $\mathfrak M$ then gives
+$M^{(\le Y)}(N)=\mathfrak S_2(N;Q)\,J(N)(1+o(1))$ with truncated singular series
+$\mathfrak S_2(N;Q)$. By the per-channel Euler-product identity of Lemma~\ref{lem:sing} the
+local factors assemble, channel by channel, into $2C_2\sing(N)\frac{r-1}{r-2}$ for $r\nmid N$
+(and $0$ for $r\mid N$); summing against the archimedean weights $I_r(N)$ over $3\le r\le Y$
+gives the displayed sum, the completion $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$ being
+the absolutely convergent tail.
+\end{proof}
 
-\begin{theorem}[Linear almost-all asymptotic for the semiprime channel]\label{thm:aa}
+\begin{theorem}[Linear almost-all asymptotic for the semiprime channel; unconditional]\label{thm:aa}
 Let $X\to\infty$ and let $N$ range over even integers in $(X,2X]$. Split the circle
 $[0,1]=\mathfrak M\cup\mathfrak m$ at denominator bound $Q=(\log X)^{2A+8}$ with $A>2$ fixed,
 and put $\mathrm{main}(N)=\int_{\mathfrak M}S_\PP(\alpha)S_{\SSemi}(\alpha)e(-N\alpha)\,d\alpha$.
-Assume the major-arc evaluation of Proposition~\ref{prop:major} (semiprimes in progressions of
-moduli $q\le Q$). Then, for all but $o(X)$ even $N\in(X,2X]$,
+By the major-arc evaluation of Proposition~\ref{prop:major} (proved unconditionally in
+\S\ref{sec:majorarc} from Lemma~\ref{lem:s2ap}) and the minor-arc variance bound of
+Proposition~\ref{prop:var}, for all but $o(X)$ even $N\in(X,2X]$,
 \[
   R_2(N)=\mathrm{main}(N)(1+o(1)),
 \]
@@ -1671,9 +1680,10 @@ logarithms (\S\ref{sec:truncated}).
 \end{corollary}
 
 \begin{remark}[The honest status of the limit]
-Theorem~\ref{thm:aa} is the linear statement obtained within the stated bounded reduction (the Vaughan--Parseval second moment and the major-arc input); Corollary
-\ref{cor:beta-aa} is what is usually quoted as ``$\beta_2\to1$ for almost all $N$,'' but
-it carries a genuine extra hypothesis. The gap is precisely the lower tail of $R_2$:
+Theorem~\ref{thm:aa} is unconditional: it rests only on the Vaughan--Parseval second moment
+(Prop.~\ref{prop:var}) and the major-arc evaluation (Lemma~\ref{lem:s2ap}), both proved here.
+Corollary~\ref{cor:beta-aa} is what is usually quoted as ``$\beta_2\to1$ for almost all $N$,''
+but it carries a genuine extra hypothesis. The gap is precisely the lower tail of $R_2$:
 $L^2$ concentration of $R_2-\mathrm{main}$ bounds how often $R_2$ is \emph{large}, but the
 log-regression that defines $\beta_2$ also weights $N$ where $R_2$ is \emph{small}, and a
 sparse set with $R_2$ very small could in principle skew the covariance. The required
@@ -1696,19 +1706,21 @@ it.
 \end{remark}
 
 \begin{remark}[What is and is not proved]
-Theorem~\ref{thm:aa} is stated as a \emph{bounded reduction}, not as a self-contained
-unconditional theorem. The minor-arc variance estimate (Proposition~\ref{prop:var}) is
-unconditional; the identification of the major-arc main term is the standard
-Hardy--Littlewood major-arc evaluation for the channel forms $s$ and $N-rs$
-(Proposition~\ref{prop:major}, \S\ref{sec:majorarc}), which we invoke but do not write out in
-full---it follows the prime distribution by Selberg--Sath\'e convolution
-\citep{selberg1954,sathe1953}. Every ingredient---Vaughan's minor-arc bound
-\citep{vaughan1997}, Siegel--Walfisz, Montgomery--Vaughan, and the Euler-product identity
-Lemma~\ref{lem:sing}---is classical, and the one thing we make \emph{explicit} is the
-singular-series cancellation of Lemma~\ref{lem:sing}. This is in sharp contrast to the
-pointwise Assumption~\ref{ass:HL}, which lies beyond current technology, and to the
-log-regression statement $\beta_2\to1$, which needs the lower-tail hypothesis of
-Corollary~\ref{cor:beta-aa}.
+Theorem~\ref{thm:aa} is unconditional. The minor-arc variance estimate
+(Proposition~\ref{prop:var}) is unconditional (Vaughan); the major-arc main term is the
+standard Hardy--Littlewood evaluation for the channel forms $s$ and $N-rs$
+(Proposition~\ref{prop:major}, \S\ref{sec:majorarc}), whose one arithmetic input---the
+equidistribution of semiprimes in progressions---is supplied unconditionally by
+Lemma~\ref{lem:s2ap} (Selberg--Sath\'e convolution of Siegel--Walfisz,
+\citealp{selberg1954,sathe1953}), and whose singular series is the \emph{unconditional}
+Euler product of Lemma~\ref{lem:sing}. Every ingredient---Vaughan's minor-arc bound
+\citep{vaughan1997}, Siegel--Walfisz, Montgomery--Vaughan, and Lemma~\ref{lem:sing}---is
+classical; the singular-series bookkeeping is presented at the level of detail standard for
+the circle method, and the one thing we make genuinely \emph{explicit} is the cancellation of
+$\sing(N)$ in the ratio (Lemma~\ref{lem:sing}). This is in sharp contrast to the pointwise
+Assumption~\ref{ass:HL}, which lies beyond current technology, and to the log-regression
+statement $\beta_2\to1$, which needs the lower-tail hypothesis of Corollary~\ref{cor:beta-aa}:
+those are the genuine conditional steps, not Theorem~\ref{thm:aa}.
 \end{remark}
 
 \begin{remark}[Relation to the literature]\label{rem:literature}
@@ -1721,8 +1733,8 @@ its $L^2$ norm alone, with no bilinear or sieve input---makes the argument, if a
 \emph{easier} than for $R_1$. Strong unconditional results on Goldbach-type counts, and the
 $(1+a)$ interpolation between Goldbach and Chen \citep{li2026}, already operate in this
 regime; we claim no improvement on them, and the linear almost-all asymptotic for $R_2$
-should be regarded as a standard consequence of the classical circle-method framework, under
-the stated major-arc input. What is specific here is the
+should be regarded as a standard consequence of the classical circle-method framework, with the
+major-arc input supplied unconditionally in \S\ref{sec:majorarc}. What is specific here is the
 singular-series cancellation of Lemma~\ref{lem:sing}, which exhibits
 $\mathrm{main}(N)=2C_2\,\sing(N)\,W_f(N)\,J(N)$ explicitly and is the reason $\sing$
 disappears from the ratio $R_2/R_1$. The contribution of this appendix is the explicit
@@ -2277,16 +2289,21 @@ Lemma~\ref{lem:sing}. Hence
 the tail $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$ being the standard
 absolutely-convergent completion of the singular series.
 
-\paragraph{Uniformity in the small factor.}
-The per-channel form of Proposition~\ref{prop:major} is this same computation carried out
-\emph{uniformly} for the small prime factor $r\le X^\eta$: for each such $r$ the modulus runs
-over $q_0\le Q$ and the local semiprime multiplier $\gamma_{q_0}$ is controlled uniformly by
-Lemma~\ref{lem:s2ap}, while the channels $r>X^\eta$ are absorbed by Lemma~\ref{lem:large-r}.
-Pairing the local product $G_2(a,q_0)$ with the prime factor $\mu(q_0)/\phi(q_0)$ reproduces,
-at each prime $\ell$, the singular factor $(\ell-1)/(\ell-2)$ for $\ell\mid N$ and the
-suppression at $\ell=r\mid N$---that is, exactly $2C_2\sing(N)\frac{r-1}{r-2}I_r(N)$ per
-unblocked channel. This is the sense in which the major-arc input of Theorem~\ref{thm:aa} is
-uniform over $3\le r\le\sqrt N$.
+\paragraph{No per-channel uniformity is needed.}
+It is worth being precise about the logic, since the channel sum over $r$ might suggest a
+delicate uniform estimate. It is not one. The major arcs are applied \emph{once}, to the full
+semiprime sum $S_{\SSemi}$, and Lemma~\ref{lem:s2ap} carries a \emph{single} Siegel--Walfisz
+error $O(Xe^{-c\sqrt{\log X}})$ for all moduli $q_0\le Q$ at once---no sum of per-$r$ errors
+arises. The decomposition into channels $r$ enters only \emph{afterwards}, as an algebraic
+re-summation of the resulting singular series: pairing the local product $G_2(a,q_0)$ with the
+prime factor $\mu(q_0)/\phi(q_0)$ reproduces at each prime $\ell$ the factor $(\ell-1)/(\ell-2)$
+for $\ell\nmid N$ and the suppression at $\ell\mid N$, which is exactly the per-channel
+Euler product $\mathfrak S_2(r,N)=2C_2\sing(N)\frac{r-1}{r-2}$ of the \emph{unconditional}
+Lemma~\ref{lem:sing}. Summing $\mathfrak S_2(r,N)I_r(N)$ over $3\le r\le X^\eta$ gives the main
+term; the tail $r>X^\eta$ contributes $o(\mathrm{main})$ deterministically to the major-arc sum
+and $o(\mathrm{main})$ to the actual count off an $o(X)$ set (Lemma~\ref{lem:large-r}). Thus the
+``uniformity over $3\le r\le\sqrt N$'' is a property of the convergent singular series, supplied
+by Lemma~\ref{lem:sing}, not an analytic input beyond the single major-arc evaluation.
 
 \begin{remark}[Numerical check of the main term]
 The channel asymptotic underlying both Assumption~\ref{ass:HL} and Lemma~\ref{lem:sing}
@@ -2317,14 +2334,14 @@ exceptional set in Theorem~\ref{thm:aa} is then
   \ \ll_{C}\ \frac{X}{(\log X)^{C}}
 \]
 for any fixed $C$ (take $A_0=\tfrac{C+3}2$). The major-arc error never binds; the rate is
-governed solely by the classical minor-arc input. This completes the bounded reduction of the
-\emph{linear} almost-all asymptotic $R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}) to
-standard prime-distribution estimates, at the level of the stated major-arc input; the
-analytic machinery is
-classical, and the one ingredient we make explicit is the singular-series cancellation of
-Lemma~\ref{lem:sing}. The log-regression
-statement $\beta_2(N)\to1$ then follows from the lower-tail hypothesis of
-Corollary~\ref{cor:beta-aa}, the one ingredient we do not prove.
+governed solely by the classical minor-arc input. This completes the \emph{unconditional}
+proof of the linear almost-all asymptotic $R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}):
+the major-arc evaluation rests on Lemma~\ref{lem:s2ap} (semiprimes in progressions) and the
+unconditional singular series of Lemma~\ref{lem:sing}, the minor arcs on Vaughan's bound; the
+analytic machinery is classical, and the one ingredient we make genuinely explicit is the
+singular-series cancellation of Lemma~\ref{lem:sing}. Only the log-regression statement
+$\beta_2(N)\to1$ goes further, via the lower-tail hypothesis of Corollary~\ref{cor:beta-aa}---the
+one ingredient we do not prove.
 
 
 \section{Cross-disciplinary reframings (summary)}

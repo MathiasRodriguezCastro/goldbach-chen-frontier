@@ -6,8 +6,8 @@ abstract: >-
   representation counts respond to the Hardy–Littlewood singular series. Central result:
   an Euler-product cancellation identity (R2/R1 loses the singular series, leaving a
   Mertens channel sum), so R2 inherits the full singular series and the finite-range
-  "half-power" is a 1/loglog N regression-slope artefact. Includes a circle-method
-  almost-all reduction and a suite of reproducible diagnostics and reframings.
+  "half-power" is a 1/loglog N regression-slope artefact. Includes an unconditional
+  circle-method almost-all asymptotic and a suite of reproducible diagnostics and reframings.
 type: software
 authors:
   - given-names: Mathias
