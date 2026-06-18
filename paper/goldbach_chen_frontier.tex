@@ -252,174 +252,34 @@ a finite-range regression reports (\S\ref{sec:singexp}) is an effective exponent
 the blocked channels, \emph{not} a structural one. What we record is the \emph{use} of this
 cancellation; the local computation itself is classical (Remark~\ref{rem:identity-novelty}).
 
-\section{The Goldbach--Chen frontier}
+\section{The Goldbach--Chen frontier and its classical heuristic}
+\label{sec:frontier}
 
-The central empirical object is the decomposition of Chen representations into genuinely Goldbach and genuinely semiprime representations:
-\[
-  R_{\le2}(N) = R_1(N)+R_2(N).
-\]
-This suggests several diagnostics.
+The empirical object is the split $R_{\le2}(N)=R_1(N)+R_2(N)$ into genuinely Goldbach and
+genuinely semiprime representations. We track a few statistics. The \emph{Chen surplus}
+$C(N)=R_2(N)/(R_1(N)+1)$ measures how far semiprime representations outnumber prime ones; the
+\emph{prime share} $\theta(N)=R_1(N)/(R_1(N)+R_2(N))$ is the complementary ratio; and, for a
+threshold $k$, the \emph{$k$-fragile} integers
+$\mathcal F_k(X)=\{N\le X\ \mathrm{even}:R_1(N)\le k,\ R_2(N)>0\}$ are those for which Goldbach
+is sparse while Chen still rescues. For a semiprime $q=ab$ with $a\le b$ prime, the \emph{factor
+balance} $B(q)=\log a/\log q\in(0,\tfrac12]$ is near $0$ when $q$ has a small prime factor and
+near $\tfrac12$ when $q$ is balanced.
 
-\subsection{Chen surplus and Goldbach fragility}
-
-\begin{definition}[Chen surplus]
-For even $N$, define the Chen surplus ratio
+The classical Hardy--Littlewood heuristic \citep{hardylittlewood1923} fixes the normalisation we
+use as a control, not as a new derivation: the Goldbach main term is
 \begin{equation}
-  C(N) := \frac{R_2(N)}{R_1(N)+1}.
-  \label{eq:chen-surplus}
-\end{equation}
-Large values of $C(N)$ identify integers for which semiprime representations are much more abundant than prime--prime representations.
-\end{definition}
-
-\begin{definition}[Goldbach fragility]
-For a threshold $k\in\NN$, define the set of $k$-fragile even integers up to $X$ by
-\begin{equation}
-  \mathcal F_k(X) := \{N\le X: N\equiv0\pmod 2,\ R_1(N)\le k,\ R_2(N)>0\}.
-\end{equation}
-These are integers for which Goldbach representations exist only sparsely, while Chen-type representations remain available.
-\end{definition}
-
-\paragraph{Research question.}
-How large is $\mathcal F_k(X)$? Are fragile integers concentrated in specific congruence classes? Does fragility correlate with the singular series correction in the Hardy--Littlewood heuristic?
-
-\subsection{Prime versus semiprime share}
-
-Define
-\begin{equation}
-  \theta(N) := \frac{R_1(N)}{R_1(N)+R_2(N)},
-  \label{eq:theta}
-\end{equation}
-with the convention $\theta(N)=0$ if the denominator is zero.
-
-Here $\theta(N)$ is the empirical share of Chen representations in which $q$ is prime rather than semiprime. A small value of $\theta(N)$ means that most Chen representations use a genuinely semiprime second summand.
-
-A naive density heuristic suggests
-\[
-  R_1(N) \asymp \frac{N}{\log^2 N},
-  \qquad
-  R_2(N) \asymp \frac{N\log\log N}{\log^2 N},
-\]
-because primes have local density roughly $1/\log N$, while semiprimes have density roughly $\log\log N/\log N$. Therefore, at a first heuristic level, semiprime representations should outnumber prime--prime representations by a factor of order $\log\log N$. This does not prove Goldbach or Chen, but it motivates the following empirical conjecture.
-
-\begin{conjecture}[Average semiprime dominance]
-There exists a slowly varying normalization $L(X)\sim \log\log X$ such that
-\[
-  \frac{1}{X/2}\sum_{\substack{N\le X\\N\equiv0\, (2)}}
-  \frac{R_2(N)}{R_1(N)+1}
-  \asymp L(X).
-\]
-Equivalently, prime--semiprime representations should become increasingly abundant relative to prime--prime representations on average.
-\end{conjecture}
-
-\section{Distribution of the second summand $q$}
-
-For each even $N$, define the representation sets
-\begin{align}
-  \mathcal R_1(N) &:= \{(p,q): p+q=N,\ p\in\PP,\ q\in\PP\},\\
-  \mathcal R_2(N) &:= \{(p,q): p+q=N,\ p\in\PP,\ q\in\SSemi\},\\
-  \mathcal R_{\le2}(N) &:= \mathcal R_1(N)\cup\mathcal R_2(N).
-\end{align}
-
-The object $q=N-p$ can be studied in several ways.
-
-\subsection{Location of $q$ inside $[0,N]$}
-
-Define empirical measures on $[0,1]$:
-\begin{align}
-  \mu_{N}^{(1)} &:= \frac{1}{R_1(N)}\sum_{(p,q)\in\mathcal R_1(N)} \delta_{q/N},\\
-  \mu_{N}^{(2)} &:= \frac{1}{R_2(N)}\sum_{(p,q)\in\mathcal R_2(N)} \delta_{q/N},\\
-  \mu_{N}^{(\le2)} &:= \frac{1}{R_{\le2}(N)}\sum_{(p,q)\in\mathcal R_{\le2}(N)} \delta_{q/N},
-\end{align}
-whenever the denominators are nonzero.
-
-\begin{question}[Weak continuity]
-Do the measures $\mu_N^{(1)}$, $\mu_N^{(2)}$, or $\mu_N^{(\le2)}$ converge weakly along typical even $N$? If so, is the limit close to the uniform distribution on $(0,1)$ after removing small endpoint effects?
-\end{question}
-
-This is a precise version of the intuition that the representation function might become ``continuous'' after smoothing. The pointwise object is discontinuous, because primality is discrete; but the normalized cloud of representations may stabilize in distribution.
-
-\subsection{Type-labeled empirical measures}
-
-Let the type of $q$ be
-\[
-  \tau(q) :=
-  \begin{cases}
-    1, & q\in\PP,\\
-    2, & q\in\SSemi.
-  \end{cases}
-\]
-Define a type-labeled empirical measure on $[0,1]\times\{1,2\}$ by
-\begin{equation}
-  \nu_N := \frac{1}{R_{\le2}(N)}
-  \sum_{(p,q)\in\mathcal R_{\le2}(N)} \delta_{(q/N,\tau(q))}.
-  \label{eq:nuN}
-\end{equation}
-
-\begin{conjecture}[Weak type stabilization]
-For typical large even $N$, the measures $\nu_N$ are close to a product-like law
-\[
-  \nu_N \approx f_N(x,t)\,dx\,d\tau,
-\]
-where the spatial component in $x=q/N$ varies slowly, while the type marginal increasingly favors $t=2$ because semiprimes have larger density than primes.
-\end{conjecture}
-
-This is not ordinary continuity. It is closer to convergence of empirical distributions, or continuity after smoothing over windows $N\in[X,X+H]$.
-
-\subsection{Factor geometry of semiprime $q$}
-
-If $q\in\SSemi$, write
-\[
-  q=ab,
-  \qquad a,b\in\PP,
-  \qquad a\le b.
-\]
-Then define the balance statistic
-\begin{equation}
-  B(q) := \frac{\log a}{\log q}\in \left(0,\frac12\right].
-\end{equation}
-A value near $1/2$ means that $q$ is a balanced semiprime; a value near $0$ means that $q$ has a very small prime factor.
-
-\begin{question}[Semiprime factor geometry]
-Among representations $N=p+q$ with $q\in\SSemi$, how is $B(q)$ distributed? Are Chen representations dominated by unbalanced semiprimes with a small factor, or by balanced semiprimes?
-\end{question}
-
-This question is interesting because Chen's theorem is obtained by sieve methods. Empirically, one can ask whether the extra freedom in $q$ comes mostly from allowing small prime divisors, or whether semiprime representations are broadly distributed across factor shapes.
-
-\section{Heuristic asymptotics (classical recovery)}
-
-The asymptotics in this section are classical; we recall them only to fix
-normalisation and as a control for the computations of \S\ref{sec:empirical}, not as
-new derivations. The Hardy--Littlewood circle-method heuristic for Goldbach
-\citep{hardylittlewood1923} predicts a main term of the form
-\begin{equation}
-  R_1(N) \approx 2C_2\,\sing(N)\frac{N}{\log^2 N},
+  R_1(N) \approx 2C_2\,\sing(N)\,\frac{N}{\log^2 N},
   \label{eq:HL}
 \end{equation}
-where $C_2$ is the twin-prime constant and $\sing(N)=\prod_{p\mid N,\,p>2}\frac{p-1}{p-2}$ is
-the singular-series correction depending on the odd prime divisors of $N$ (the factor $2C_2$
-already absorbs the $p=2$ local density).
-
-For semiprime $q$, Landau's density of numbers with two prime factors
-\citep{landau1909}, $\#\{n\le x:\OmegaF(n)=2\}\sim x\log\log x/\log x$, gives the rough
-estimate
-\begin{equation}
-  \#\{n\le x:\OmegaF(n)=2\}
-  \sim \frac{x\log\log x}{\log x}.
-\end{equation}
-Therefore, a first-order independence heuristic gives
-\begin{equation}
-  R_2(N) \approx K_2(N)\frac{N\log\log N}{\log^2 N},
-  \label{eq:R2heuristic}
-\end{equation}
-where $K_2(N)$ is a correction factor capturing congruence constraints and local arithmetic structure.
-
-\paragraph{Normalization.}
-The empirical project should therefore compare
-\begin{align}
-  A_1(N) &:= \frac{R_1(N)}{N/\log^2 N},\\
-  A_2(N) &:= \frac{R_2(N)}{N\log\log N/\log^2 N}.
-\end{align}
-If the heuristic is meaningful, $A_1(N)$ and $A_2(N)$ should be much more stable than the raw counts.
+with $C_2$ the twin-prime constant and $\sing(N)$ as in \S\ref{sec:identity}. For the semiprime
+channel, Landau's count $\#\{n\le x:\OmegaF(n)=2\}\sim x\log\log x/\log x$ \citep{landau1909}
+gives $R_2(N)\asymp K_2(N)\,N\log\log N/\log^2 N$ with a local correction $K_2$: at a first
+heuristic level semiprime representations outnumber prime--prime ones by a factor
+$\sim\log\log N$, so the share $\theta(N)$ should drift slowly downward. Section~\ref{sec:singexp}
+makes the response of the ratio $R_2/R_1$ to $\sing(N)$ precise and resolves the apparent
+half-power. The location law of $q/N$ and the type-labeled measures---whether the normalized
+representation clouds stabilize weakly to a near-uniform law---are confirmed in the supplement;
+here we go straight to the singular-series response.
 
 \section{Empirical results and the singular-series regularity}
 \label{sec:empirical}
@@ -562,7 +422,7 @@ dispersion of $R_2$ under four normalizations.
 \toprule
 normalization of $R_2$ & CV ($X=2\cdot10^{6}$)\\
 \midrule
-$N\log\log N/\log^2 N$ \quad(heuristic of \S5) & $0.184$\\
+$N\log\log N/\log^2 N$ \quad(heuristic of \S\ref{sec:frontier}) & $0.184$\\
 $2C_2\,\sing(N)\,N\,W_0/\log^2 N$ \quad(full $\sing$, \emph{unblocked} $W_0$) & $0.167$\\
 $2C_2\,\sing(N)^{1/2}\,N\,W_0/\log^2 N$ \quad(half power, $W_0$) & $0.019$\\
 $2C_2\,\sing(N)\,N\,W_f/\log^2 N$ \quad(\textbf{full inheritance, blocked channels}) & $\mathbf{0.0135}$\\
@@ -802,7 +662,7 @@ $R_2>0$, so Chen always rescues. The semiprime factor balance $B(q)=\log a/\log 
 has weighted mean $0.25$, with $16\%$ of the representation mass at $B<0.1$ (a tiny
 prime factor) and $18\%$ at $B>0.4$ (near balanced): Chen representations are
 dominated by \emph{unbalanced} semiprimes with a small prime factor
-(Fig.~\ref{fig:balance}), answering the semiprime factor-geometry question of \S4.
+(Fig.~\ref{fig:balance}), answering the semiprime factor-geometry question of \S\ref{sec:frontier}.
 
 \begin{figure}[h]
 \centering
@@ -1934,19 +1794,6 @@ falls below one (large $\sing$ suppresses the high-$\OmegaF$ tail), and $0<z<1$ 
 low complexity, where it rises above one (large $\sing$ favours low-$\OmegaF$ summands). The
 sign reversal of \S\ref{sec:layers-emp} is the coefficient-level shadow of this single
 response.
-
-\paragraph{Stochastic-dominance form.}
-Let $\OmegaF_y(q):=\sum_{\ell\in\mathcal P_y}\ones_{\ell\mid q}$ in the same model;
-conditional on $B$ its summands are independent Bernoulli$(\pi_\ell(B_\ell))$. If $B'\ge B$
-coordinatewise then $\pi_\ell(B'_\ell)\le\pi_\ell(B_\ell)$ for every $\ell$, so
-$\OmegaF_y(q)\mid B'\preceq_{\mathrm{st}}\OmegaF_y(q)\mid B$: adding blockers shifts the
-factor-count law to the left. Since $Y_y(B)$ is increasing in $B$, for any increasing
-$\varphi$ the map $B\mapsto\mathbb E[\varphi(\OmegaF_y(q))\mid B]$ is decreasing, and the
-Harris--FKG inequality for product measures gives
-$\operatorname{Cov}\big(\mathbb E[\varphi(\OmegaF_y(q))\mid B],\,Y_y(B)\big)\le0$. Taking
-$\varphi=\ones_{\{m\ge k\}}$ shows the high-complexity tail is negatively correlated with the
-singular series; $\varphi=\ones_{\{m\le k\}}$ gives the positive correlation for
-low-complexity events.
 
 \paragraph{Poissonized layers.}
 With $\mu_y(B):=\sum_{\ell\in\mathcal P_y}\pi_\ell(B_\ell)=\sum_\ell\frac{1-B_\ell}{\ell-1}$,
