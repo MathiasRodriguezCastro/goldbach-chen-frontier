@@ -150,7 +150,7 @@ Functional form $1-\beta_2\asymp1/\log\log N$ (Theorem~\ref{thm:beta}) & \emph{C
 Non-circular validation $(1-\beta_2)\langle R_2/R_1\rangle\approx\mathrm{const}$ (Obs.~\ref{obs:validation}) & \emph{Numerical observation} (control) \\
 Linear almost-all $R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}) & \emph{Proved}, unconditionally (Vaughan minor arc + semiprimes in progressions, Lemma~\ref{lem:s2ap}); a standard circle-method consequence (Remark~\ref{rem:literature}) \\
 $\beta_2\to1$ for almost all $N$ (Corollary~\ref{cor:beta-aa}) & \emph{Conditional} on the lower-tail hypothesis \\
-Lower-tail hypothesis & \emph{Conjecture}, stated precisely (\S\ref{sec:variance}) \\
+Lower-tail hypothesis & \emph{Conjecture}, stated precisely (Conjecture~\ref{conj:lowertail}) \\
 Diagnostics of \S\ref{sec:diag-emp} (fragility, factor balance) and the circle-method experiment of \S\ref{sec:two-experiments} (spectrum, carry signature) & \emph{Numerical observations} \\
 Model statements in Appendix~A (blocked channel, weak uniformity, least-unblocked prime, carry excess) & \emph{Proved in the stated model} \\
 \bottomrule
@@ -551,6 +551,17 @@ a deterministic consequence of the local blocking encoded in $W_f$, not of highe
 correlations among the primes; the small residual offset is the elementary-weight/Jensen gap
 between $W_f$ and the true channel counts.
 
+\paragraph{An independent estimator: the first-moment exponent.}
+The drift is also not an artifact of the log-regression estimator. A \emph{first-moment} exponent
+$\beta_2^{(1)}$, built from the conditional responses
+$A_\ell=\langle R_1\rangle_{\ell\mid N}/\langle R_1\rangle_{\ell\nmid N}$ and
+$B_\ell=\langle R_2\rangle_{\ell\mid N}/\langle R_2\rangle_{\ell\nmid N}$ of the counts to each
+small prime $\ell$ (Appendix~\ref{app:uncond}; \texttt{run\_firstmoment.py})---a different
+functional of the data, not a regression slope---reproduces $\beta_2$ to a constant Jensen gap of
+$\approx0.004$: $\beta_2^{(1)}=0.528,\,0.563,\,0.585$ at $X=2\cdot10^{6},2\cdot10^{7},10^{8}$,
+versus the measured $\beta_2=0.531,\,0.567,\,0.589$. Two independently constructed estimators thus
+give the same drift.
+
 \paragraph{A derivation: $\beta_2\to1$ with an $\mathbf{1/\log\log N}$ deficit.}
 The drift is not arbitrary. By the channel cancellation of \S\ref{sec:identity}
 (Lemma~\ref{lem:sing}), the main-term ratio is the Mertens channel sum $W_f(N)$ of
@@ -604,6 +615,32 @@ $R_2/R_1$ on $3\mid N$---but it accounts for a tenth of the deficit, not the bul
 negativity of $\beta_2-1$ is genuinely a \emph{sum over channels} $r=3,5,7,\dots$, each
 blocked on the sparse set $r\mid N$, exactly as $A(X)=\sum_r(\cdots)$ in
 \eqref{eq:betalaw}; it is not the signature of a single residue class.
+
+\paragraph{From $\beta_2\to1$ to a precise conjecture.}
+The derivation and its validation show $1-\beta_2$ vanishing, but turning the \emph{almost-all}
+$\beta_2(N)\to1$ into a theorem needs one input beyond the unconditional second moment. We isolate
+it as a conjecture and state it in the four-part form a reader needs.
+
+\begin{conjecture}[Lower-tail hypothesis]\label{conj:lowertail}
+For every $\delta>0$, the density of even $N\in(X,2X]$ with $R_2(N)/R_1(N)\le\delta\,W_f(N)$ tends
+to $0$ as $\delta\downarrow0$, uniformly in $X$.
+\end{conjecture}
+
+\noindent\emph{(i) Why it matters.} This is precisely the gap between what we prove and the
+headline: by Corollary~\ref{cor:beta-aa} it upgrades the \emph{unconditional} linear asymptotic
+$R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}) to the log-regression statement
+$\beta_2(N)\to1$. \emph{(ii) Proved cases.} The linear almost-all asymptotic itself is
+unconditional (Theorem~\ref{thm:aa}), and the $L^2$ second moment (Prop.~\ref{prop:var}) already
+bounds how often $R_2$ is \emph{large}; only the one-sided lower tail---how often $R_2/R_1$ is
+anomalously \emph{small}---is open. \emph{(iii) Prior work, and why the natural attack fails.} The
+hypothesis is a lower-tail control beyond $L^2$. The natural route---a Chen-type lower bound on
+$R_{\le2}$ minus the Montgomery--Vaughan value of $R_1$~\citep{chen1973,montgomeryvaughan1975}---provably
+does \emph{not} suffice: the unconditional Chen bound lies at the scale of $R_1$, a factor
+$\log\log N$ below the semiprime main term (\S\ref{sec:variance}), so subtracting $R_1$ is vacuous.
+What is needed is a lower bound on the \emph{semiprime} channel at the correct $\log\log N$ scale,
+which the sieve does not currently supply. \emph{(iv) What the data say.} The exceptional set is
+empirically \emph{empty} at the $5\%$ level up to $5\cdot10^{8}$ (Table~\ref{tab:conc}): in the
+computed range no even $N$ has $R_2/R_1$ anywhere near the tail the conjecture forbids.
 
 \subsection{The singular exponent across arithmetic-complexity layers}
 \label{sec:layers-emp}
@@ -818,15 +855,12 @@ carries ($+0.97$). Right: the carry excess is positive in every base.}
 We isolate, as precisely as the evidence allows, what an interested reader could try to settle.
 
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-\item \textbf{The lower-tail hypothesis} (\S\ref{sec:variance}). Prove that, for every
-$\delta>0$, the density of even $N\in(X,2X]$ with $R_2(N)/R_1(N)\le\delta\,W_f(N)$ tends to $0$
-as $\delta\downarrow0$. By Corollary~\ref{cor:beta-aa} this upgrades the linear almost-all
-asymptotic to the log-regression statement $\beta_2(N)\to1$. The natural attempt---a Chen-type
-lower bound on $R_{\le2}$ minus the Montgomery--Vaughan value of $R_1$---provably does \emph{not}
-suffice (the unconditional Chen bound is a factor $\log\log N$ below the semiprime main term;
-Remark in \S\ref{sec:variance}). What is needed is a lower bound on the \emph{semiprime} channel
-at the correct $\log\log N$ scale. The empirical exceptional set is \emph{empty} at the $5\%$
-level up to $5\cdot10^{8}$.
+\item \textbf{The lower-tail hypothesis} (Conjecture~\ref{conj:lowertail}). Prove it---a one-sided
+lower-tail bound on $R_2/R_1$, beyond the unconditional $L^2$ control---and, by
+Corollary~\ref{cor:beta-aa}, the log-regression statement $\beta_2(N)\to1$ follows. The four-part
+case (why it matters, what is proved, why the Chen$-$Montgomery--Vaughan attack provably fails,
+and the empirical support) is laid out at Conjecture~\ref{conj:lowertail}; what is needed is a
+lower bound on the \emph{semiprime} channel at the correct $\log\log N$ scale.
 \item \textbf{The limiting constant} (\S\ref{sec:confirm}). The order $1-\beta_2\asymp1/\log\log X$
 is robust, but the limiting constant of $(1-\beta_2)\langle R_2/R_1\rangle$ is correction-dominated
 and \emph{not} determinable from data up to $10^{9}$ (it is normalisation-dependent, $\approx0.5$--$0.7$).
@@ -1296,7 +1330,8 @@ Intersecting with the full-density set on which $R_1(N)=2C_2\sing(N)I_1(N)(1+o(1
 \end{proof}
 
 \paragraph{Lower-tail hypothesis.}
-For every $\delta>0$,
+The corollary below is conditional on the lower-tail hypothesis stated in the body as
+Conjecture~\ref{conj:lowertail}: for every $\delta>0$,
 \[
   \frac1X\,\#\Big\{X<N\le2X,\ 2\mid N:\ \frac{R_2(N)}{R_1(N)}\le\delta\,W_f(N)\Big\}\longrightarrow0
   \qquad(\delta\downarrow0,\ X\to\infty).
@@ -1305,7 +1340,7 @@ This is a one-sided control of the lower tail of $R_2/R_1$; it is strictly weake
 asymptotic but is \emph{not} implied by the $L^2$ bound of Proposition~\ref{prop:var}.
 
 \begin{corollary}[$\beta_2\to1$, conditional on the lower-tail hypothesis]\label{cor:beta-aa}
-Under the lower-tail hypothesis above, the exceptional set $\mathcal E_X$ of
+Under the lower-tail hypothesis (Conjecture~\ref{conj:lowertail}), the exceptional set $\mathcal E_X$ of
 Theorem~\ref{thm:aa} contributes $o(1)$ to the covariance \eqref{eq:beta-def}; the raw slope
 $m_2$ is then computed off $\mathcal E_X$, where $R_2/R_1=W_f(1+o(1))$, so $m_2\to0$ and
 $\beta_2(X)\to1$. Without
