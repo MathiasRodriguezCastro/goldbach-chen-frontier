@@ -536,6 +536,21 @@ decisive. The drift is the empirical core; the limiting constant (\S\ref{sec:con
 \label{tab:bootstrap}
 \end{table}
 
+\paragraph{A Cram\'er null control.}
+Is the drift a property of the local blocking structure, or of subtler arithmetic correlations
+among the actual primes? A matched-density surrogate decides. Replace the true counts by
+independent Poisson variables with the singular-series-matched local means
+$\mathbb E R_1(N)=2C_2\sing(N)N/\log^2N$ and $\mathbb E R_2(N)=\mathbb E R_1(N)\cdot W_f(N)$, where
+$W_f$ is the \emph{blocked} channel sum \eqref{eq:Wtilde} (the $r\mid N$ exclusion is the only
+arithmetic input), and rerun the identical $\beta_2$ regression
+(\texttt{run\_nullcontrol.py}; no sieve to $X$ is needed, as $\sing,W_f$ depend only on the small
+divisors of $N$). The surrogate reproduces the drift: $\beta_2^{\mathrm{Cram\acute er}}(X)$ rises
+$0.568\to0.624$ over $[6\cdot10^{6},10^{9}]$, tracking the measured $0.548\to0.614$
+(Table~\ref{tab:bootstrap}) to within $\approx0.02$ and matching its slope. The drift is therefore
+a deterministic consequence of the local blocking encoded in $W_f$, not of higher-order
+correlations among the primes; the small residual offset is the elementary-weight/Jensen gap
+between $W_f$ and the true channel counts.
+
 \paragraph{A derivation: $\beta_2\to1$ with an $\mathbf{1/\log\log N}$ deficit.}
 The drift is not arbitrary. By the channel cancellation of \S\ref{sec:identity}
 (Lemma~\ref{lem:sing}), the main-term ratio is the Mertens channel sum $W_f(N)$ of
@@ -1598,6 +1613,25 @@ itself uncertain) lies far below it and is \emph{not reliably determinable} from
 up to $10^{9}$. (Our two back-of-envelope analytic estimates, $1.0$ and $1.8$, bracket
 the difficulty rather than resolve it.) Only the order $1-\beta_2\asymp1/\log\log X$,
 and hence $\beta_2\to1$, is robust---which is all Theorem~\ref{thm:beta} asserts.
+
+\paragraph{Model comparison: what the range can and cannot separate.}
+The same caution applies to the functional form, and a direct model comparison on the eight
+$\beta_2(X)$ makes it quantitative (\texttt{run\_nullcontrol.py}). Over the computed range
+$\log\log X$ moves only from $2.76$ to $3.03$, so fitting $\beta_2$ against it does \emph{not} pin
+the form: the one-parameter law $\beta_2=1-c/\log\log X$ (rms $0.009$) is the worst of the
+candidates, a free limit $\beta_2=\beta_\infty-c/\log\log X$ gives $\beta_\infty=1.28(1)$ (rms
+$0.0006$), and a free power $\beta_2=1-c/(\log\log X)^p$ gives $p=1.67(1)$ (rms $0.0004$). The last
+two both say the deficit shrinks \emph{faster} than $1/\log\log X$ here, with no sign of a
+plateau---so the data are consistent with $\beta_2\to1$ and show \emph{no} evidence for a finite
+limit $\beta_\infty<1$ (the unphysical $\beta_\infty=1.28>1$ is the artifact of forcing a
+linear-in-$1/\log\log X$ form on a faster decay)---but the precise form is genuinely
+underdetermined by this fit, which is why we do not extrapolate it. The firmer statement is the
+\emph{clock}: $\langle R_2/R_1\rangle$, not $\log\log X$, is the precise normalisation, and
+$(1-\beta_2)\langle R_2/R_1\rangle$ has coefficient of variation $1.1\%$ across the eight windows
+versus $2.2\%$ for $(1-\beta_2)\log\log X$. The two parametrisations \eqref{eq:beta-loglog} and
+\eqref{eq:betalaw} are one law on a coarse and a fine clock, tied only by
+$\langle R_2/R_1\rangle\sim\log\log X$; separating the $\log\log X$ forms directly would require
+$\log\log X\sim3.4$, i.e.\ $X\sim10^{13}$, beyond the block-convolution sieve's reach here.
 
 \begin{figure}[h]
 \centering

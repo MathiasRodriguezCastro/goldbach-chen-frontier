@@ -38,6 +38,7 @@ DRIVERS = [
     ("run_bases.py",           [],          "Fig 24, bases.json",                True,  False),
     ("run_scaling.py",         [],          "Fig 9, scaling.json (sieve to 1e9)",True,  False),
     ("run_bootstrap.py",       [],          "block-bootstrap CIs, bootstrap.json",True,  False),
+    ("run_nullcontrol.py",     [],          "Cramer null control + model comparison",False, False),
     ("run_betalaw.py",         [],          "Fig 12, betalaw.json",              True,  False),
     ("run_constant.py",        [],          "Fig 16, constant",                  True,  False),
     # supplement figures
