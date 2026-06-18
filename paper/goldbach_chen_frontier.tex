@@ -575,6 +575,48 @@ steadily above $1/2$ without sign of leveling off, consistent with $\beta_2\to1$
 \label{fig:scaling}
 \end{figure}
 
+\paragraph{Statistical significance of the drift (block bootstrap).}
+The inferential claim is the \emph{slope}, not its absolute value, so we attach error bars that
+respect the arithmetic dependence of consecutive $N$ (an i.i.d.\ bootstrap would understate it).
+A moving-block bootstrap over each window---blocks of $L=10^{3}$ consecutive even integers,
+$B=10^{3}$ resamples (\texttt{run\_bootstrap.py})---determines $\beta_2(X)$ to four significant
+figures: the $95\%$ interval has half-width below $10^{-4}$ at \emph{every} window
+(Table~\ref{tab:bootstrap}), widening only to $\sim3\cdot10^{-4}$ as $L$ ranges over
+$250$--$2000$, because each window holds $\sim10^{6}$ integers. Refitting the $\log\log X$ trend
+on each resample gives a drift slope that is positive with a $95\%$ interval of width $<10^{-3}$,
+excluding $0$ by thousands of standard errors: the upward drift is statistically certain, not an
+artifact of the fit. The measurement error in $\beta_2$ is therefore negligible; the only genuine
+uncertainty is the long extrapolation of the functional form, which we do not perform
+(\S\ref{sec:confirm}). The non-circular product $(1-\beta_2)\langle R_2/R_1\rangle$ decreases
+monotonically and smoothly from $1.111$ to $1.074$ across $[6\cdot10^{6},10^{9}]$, again with
+negligible within-window CI---confirming \emph{to $10^{9}$} (the previous validation stopped at
+$2\cdot10^{8}$) the bounded, slowly varying behaviour on which the derivation below rests.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rcc}
+\toprule
+$X$ & $\beta_2(X)$ & $(1-\beta_2)\,\langle R_2/R_1\rangle$\\
+\midrule
+$6\cdot10^{6}$ & $0.5483$ & $1.1105$\\
+$1\cdot10^{7}$ & $0.5564$ & $1.1061$\\
+$2\cdot10^{7}$ & $0.5670$ & $1.1002$\\
+$5\cdot10^{7}$ & $0.5800$ & $1.0930$\\
+$1\cdot10^{8}$ & $0.5890$ & $1.0882$\\
+$2\cdot10^{8}$ & $0.5974$ & $1.0835$\\
+$5\cdot10^{8}$ & $0.6074$ & $1.0780$\\
+$1\cdot10^{9}$ & $0.6143$ & $1.0742$\\
+\bottomrule
+\end{tabular}
+\caption{Local effective exponent $\beta_2(X)$ (window of $2\cdot10^{6}$ even integers) and the
+non-circular product, to $X=10^{9}$. Each entry is a $95\%$ moving-block bootstrap estimate
+(block length $10^{3}$, $B=10^{3}$, \texttt{run\_bootstrap.py}); the CI half-width is below
+$10^{-4}$ for $\beta_2$ and below $3\cdot10^{-4}$ for the product at every window, so the
+monotone upward drift of $\beta_2$ and the slow decrease of the product are both statistically
+decisive. The drift is the empirical core; the limiting constant (\S\ref{sec:confirm}) is not.}
+\label{tab:bootstrap}
+\end{table}
+
 \paragraph{A derivation: $\beta_2\to1$ with an $\mathbf{1/\log\log N}$ deficit.}
 The drift is not arbitrary. Writing $q=N-p=rs$ and summing over the small factor
 $r$, each channel is a Goldbach count for the linear form $(s,N-rs)$, whose
