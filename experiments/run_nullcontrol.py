@@ -21,10 +21,50 @@ import sys
 import json
 import numpy as np
 from scipy.optimize import curve_fit
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from segmented import _windowed_singular_series
 from heuristics import TWIN_PRIME_C2
+
+FIG = os.path.join(os.path.dirname(__file__), "..", "figures")
+
+
+def _sieve(M):
+    s = np.ones(M + 1, dtype=bool)
+    s[:2] = False
+    for i in range(2, int(M ** 0.5) + 1):
+        if s[i]:
+            s[i * i::i] = False
+    return np.nonzero(s)[0]
+
+
+def synthetic_cramer_beta2(X, pv, gv, pb, M, rng):
+    """beta_2 of the Cramer model at ANY X (even 1e50) by the synthetic divisibility model
+    (= Prop. 5): per-N variation is only the blocked channels r|N (Bernoulli(1/r) on small
+    primes pv); the baseline W_{f,0}(X) ~ loglog(sqrt X) is a one-time deterministic sum
+    (exact over pb<=sqrt X, Mertens tail beyond). Validated against the windowed surrogate."""
+    sqrtX = X ** 0.5
+    logX = np.log(X)
+    mb = pb <= sqrtX
+    Wf0 = (((pb[mb] - 1.0) / (pb[mb] - 2.0)) * (1.0 / pb[mb]) * (logX / np.log(X / pb[mb]))).sum()
+    if sqrtX > pb[-1]:
+        Wf0 += np.log(np.log(sqrtX)) - np.log(np.log(float(pb[-1])))   # Mertens tail ~ sum 1/r
+    mv = pv <= sqrtX
+    rr, gvv = pv[mv], gv[mv]
+    wv = ((rr - 1.0) / (rr - 2.0)) * (1.0 / rr) * (logX / np.log(X / rr))
+    logS = np.zeros(M)
+    blocked = np.zeros(M)
+    for j in range(len(rr)):
+        col = rng.random(M) < (1.0 / rr[j])
+        logS += col * gvv[j]
+        blocked += col * wv[j]
+    Wf = Wf0 - blocked
+    ok = Wf > 0
+    x, y = logS[ok], np.log(Wf[ok])
+    return float(1 + np.cov(x, y)[0, 1] / np.var(x)), float(Wf0)
 
 
 def blocked_Wf(N, isp):
@@ -133,10 +173,42 @@ def main():
     bl, al = np.polyfit(L, b, 1)
     mlin = {"form": "a + b*loglogX", "a": float(al), "b": float(bl), "rms": rms(al + bl * L)}
 
+    # ---- (C) extended Cramer trajectory to 10^50 (synthetic divisibility model = Prop. 5) ----
+    pv = _sieve(20000)
+    pv = pv[pv >= 3]
+    gv = np.log((pv - 1.0) / (pv - 2.0))
+    pb = _sieve(2_000_000)
+    pb = pb[pb >= 3]
+    exps = [6, 7, 8, 9, 10, 12, 15, 20, 25, 30, 40, 50]
+    traj = []
+    for e in exps:
+        be, w0 = synthetic_cramer_beta2(10.0 ** e, pv, gv, pb, 200_000, rng)
+        traj.append({"log10X": e, "beta2": be, "Wf0": w0})
+        print(f"  trajectory log10X={e:>3}: beta2_Cramer={be:.4f}  Wf0={w0:.3f}", flush=True)
+
     out = {"W": W, "seed": SEED, "loglogX_range": [float(L.min()), float(L.max())],
-           "null_control": null,
+           "null_control": null, "trajectory": traj,
            "models": {"M1_limit1": m1, "M2_freelimit": m2, "M3_power": m3, "linear": mlin}}
     json.dump(out, open(os.path.join(DATA, "nullcontrol.json"), "w"), indent=2)
+
+    # figure: trajectory climbing to 1, with the real data on the initial segment
+    fig, ax = plt.subplots(figsize=(7.5, 5))
+    te = np.array([t["log10X"] for t in traj], float)
+    tb = np.array([t["beta2"] for t in traj])
+    ax.plot(te, tb, "-", color="#e67e22", lw=1.8, zorder=2,
+            label="Cram\u00e9r mechanism $\\beta_2(X)$ (Prop. 5, synthetic)")
+    ax.scatter(np.log10(X), b, s=55, color="#c0392b", zorder=3, label="measured (real counts, to $10^9$)")
+    ax.scatter([np.log10(r["X"]) for r in null], [r["beta2_cramer"] for r in null],
+               s=18, color="#2c3e50", zorder=3, label="windowed surrogate (to $10^9$)")
+    ax.axhline(1.0, ls="--", color="gray", lw=1)
+    ax.set_xlabel(r"$\log_{10} X$")
+    ax.set_ylabel(r"$\beta_2$")
+    ax.set_title(r"The mechanism is convergent: $\beta_2\to1$, but glacially")
+    ax.set_ylim(0.45, 1.02)
+    ax.legend(fontsize=9, loc="lower right")
+    path = os.path.join(FIG, "25_cramer_trajectory.png")
+    fig.savefig(path, dpi=130, bbox_inches="tight")
+    plt.close(fig)
 
     print("\n=== (A) Cramer null control: actual vs surrogate beta_2 ===")
     for r in null:

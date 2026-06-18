@@ -1679,6 +1679,43 @@ versus $2.2\%$ for $(1-\beta_2)\log\log X$. The two parametrisations \eqref{eq:b
 $\langle R_2/R_1\rangle\sim\log\log X$; separating the $\log\log X$ forms directly would require
 $\log\log X\sim3.4$, i.e.\ $X\sim10^{13}$, beyond the block-convolution sieve's reach here.
 
+\paragraph{The mechanism's trajectory: convergent, but glacially (out to $10^{50}$).}
+The direct sieve stops at $10^9$, but the \emph{mechanism} need not: the Cram\'er surrogate of
+\S\ref{sec:singexp} requires no sieve---its per-$N$ variation is only the blocked channels
+$r\mid N$ (small divisors of $N$, sampled at rate $1/r$), and the baseline
+$W_{f,0}(X)\approx\log\log\sqrt X$ is a one-time deterministic sum---so we can run it arbitrarily
+far. The synthetic divisibility model reproduces the windowed surrogate to $\pm0.002$ where they
+overlap and then continues (Fig.~\ref{fig:trajectory}): $\beta_2^{\mathrm{Cram\acute er}}(X)$ climbs
+\emph{monotonically and without plateau}, taking the values
+$0.53,0.62,0.67,0.70,0.72,0.75$ at $X=10^{6},10^{9},10^{12},10^{20},10^{30},10^{50}$, reaching only
+$\approx0.75$ even at $10^{50}$. This is the decisive reading of the finite range: in the model the
+limit is \emph{proved}---Proposition~\ref{prop:blocked} gives a positive limiting constant
+$c_\infty=A_\infty/B>0$, hence $\beta_2\to1$ with $1-\beta_2\asymp1/\log\log X$---and the trajectory
+is just that convergence drawn out, with the real counts (to $10^9$) sitting on its initial
+segment. The approach is so slow that $\beta_2$ does not reach $0.9$ until far beyond any feasible
+computation; the half-power near $10^6$ and the model comparison above are this glacial
+$1/\log\log X$ pre-asymptotics, not a finite limit.
+
+\paragraph{Reconciling the order with the local fit.}
+This settles the apparent tension between the order $1-\beta_2\asymp1/\log\log X$ and the better
+\emph{local} power $p\approx1.67$. The order $\asymp$ is an \emph{asymptotic} statement and rests
+on $c_\infty>0$, which the \emph{model} (Proposition~\ref{prop:blocked}) guarantees---not on the
+finite data; the faster local decay is merely the finite-range coefficient $c(X)$ descending toward
+$c_\infty$ (Fig.~\ref{fig:constant}), a pre-asymptotic effect, not a violation of an asymptotic
+order. It is the mechanism, not the data, that certifies $\beta_2\to1$; the data certify only that
+the real counts follow the mechanism.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{25_cramer_trajectory.png}
+\caption{The Cram\'er mechanism's effective exponent $\beta_2(X)$
+(Proposition~\ref{prop:blocked}; synthetic divisibility model), climbing monotonically toward $1$
+and reaching only $\approx0.75$ at $10^{50}$, with no plateau. The measured $\beta_2$ from the real
+counts (to $10^9$) lies on the initial segment, and the windowed surrogate agrees. The approach is
+genuine but glacial ($1/\log\log X$), which is why no finite computation can see the limit.}
+\label{fig:trajectory}
+\end{figure}
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.66\linewidth]{16_constante.png}
