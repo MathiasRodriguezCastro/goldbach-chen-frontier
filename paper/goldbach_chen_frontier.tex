@@ -123,7 +123,7 @@ Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implem
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
 \item \textbf{One identity behind the picture (\S\ref{sec:identity}, \S\ref{sec:singexp}).} The organizing fact is an elementary, unconditional Euler-product identity: the per-channel singular series factorizes (Lemma~\ref{lem:sing}), so $\sing(N)$ \emph{cancels exactly} in the main-term ratio $R_2/R_1$, leaving the Mertens channel sum $W_f(N)\sim\log\log N$ with $R_2/R_1=W_f(N)(1+o(1))$. This one cancellation governs the channel ratio, the layer sign reversal (\S\ref{sec:layers-emp}), the residual collapse, and the Chen-rescue threshold. Its most visible consequence resolves a finite-range puzzle. Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve: a finite-range log--log fit assigns the semiprime channel an apparent exponent $\beta_2\approx\tfrac12$, unlike the $\beta_1=1$ of the prime channel, yet scaling to $10^{9}$ shows this is \emph{not} structural ($\sing(N)$ enters $R_2$ with exponent $1$). The effective exponent drifts to $1$ as $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$; block bootstrap decisive); the deficit is multi-channel---deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ (\S\ref{sec:singexp}), refuting a single-atom reading. What we record is this cancellation of $\sing(N)$ in the ratio, which the existence-oriented sieve and shifted-correlation literature has had no reason to isolate (Remark~\ref{rem:identity-novelty}).
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the effective exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
-\item \textbf{Diagnostics (\S\ref{sec:diag-emp}, \S\ref{sec:balance-emp}).} Goldbach fragility is rare and always Chen-rescued; the semiprime factor geometry favours unbalanced semiprimes with a small prime factor; and the residual Goldbach--Chen balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$. (Further selection/continuity/transport diagnostics are in the supplement.)
+\item \textbf{Diagnostics (\S\ref{sec:diag-emp}, \S\ref{sec:balance-emp}).} Goldbach fragility is rare and always Chen-rescued; the semiprime factor geometry favours unbalanced semiprimes with a small prime factor; and the residual Goldbach--Chen balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$. (Further location-law and valley diagnostics are in the supplement.)
 \item \textbf{An unconditional almost-all asymptotic (Appendix~\ref{app:uncond}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve (Prop.~\ref{prop:var})---together with the major-arc evaluation (Lemma~\ref{lem:s2ap}, the equidistribution of semiprimes in progressions, proved from Siegel--Walfisz) gives the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, \emph{unconditionally} (Theorem~\ref{thm:aa}). Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
 \item \textbf{A confirming experiment (\S\ref{sec:two-experiments}).} The empirical circle method---the comet power spectrum as an empirical shadow of the major arcs---earns a place in the body by yielding a \emph{new computation}; a smaller observation records a digit/Kummer carry signature of primality. The frontier admits a few further cross-disciplinary recastings (thermodynamic ground state, adversarial network, control problem, information channel, discrete surface); we are explicit that these are \emph{one} finding---$\sing(N)$ sets the local densities---seen in several mirrors, not independent results, and we collect them, with the one structural negative, in the accompanying supplement rather than the body.
 \end{enumerate}
@@ -741,7 +741,7 @@ $\sing(N)$ (positive correlation).}
 
 The full geometry of the Chen surface $p+rs=N$ on which the exponent $a_{\rm Res}$ lives---a
 $2$D cloud of solutions organised by the small prime factor $r$, with mass against the
-Goldbach edge---is developed in the supplement.
+Goldbach edge---is sketched in the supplement.
 
 \section{A confirming experiment: the empirical circle method}
 \label{sec:two-experiments}
@@ -751,7 +751,7 @@ One further experiment yields a genuinely \emph{new} measurement and ties direct
 circle-method backbone: the power spectrum of the comet is an empirical shadow of the major
 arcs. (A second, smaller probe---a carry geometry---is recorded as an observation below; the
 many cross-disciplinary recastings of the frontier re-express the same singular-series
-governance and are developed, with the honest negatives, in the supplement.)
+governance and are noted, with the one structural negative, in the supplement.)
 
 The circle method decomposes additive problems into major arcs (rationals $a/q$ with small $q$,
 carrying the singular series) and minor arcs (the pseudorandom remainder). One sees this
@@ -846,7 +846,6 @@ logarithmic statistic and the model proves the $1/\log\log X$ deficit, while onl
 untruncated log-regression still requires lower-tail input.
 
 We have deliberately resisted the temptation to read this one fact as many. The
-optimization formulations (supplement) give a language, not a proof strategy; the
 cross-disciplinary reframings are, except for the empirical circle method kept in the body (with
 a smaller carry-signature observation), the same singular-series governance re-photographed in
 different filters, and we have said so rather than count them as separate findings. The one
@@ -925,8 +924,8 @@ Chen's theorem (Pan and Pan \citep{panpan}, and the tradition of Cai and L\"u), 
 prime/almost-prime correlation literature---the same singular-series machinery and the same
 local densities. Closest in spirit is the latter: Evans \citep{evans2021} proves
 Hardy--Littlewood asymptotics for the shifted correlation between primes $n$ and almost-primes
-$n+h$ with $\OmegaF(n+h)=2$, valid for almost all shifts $h$, by exactly the Euler-product
-computation behind Lemma~\ref{lem:sing}. The crucial distinction is the \emph{object}: a shifted
+$n+h$ with $\OmegaF(n+h)=2$, valid for almost all shifts $h$ (by dispersion/Bombieri--Vinogradov
+machinery), whose singular series is the same Euler-product object as in Lemma~\ref{lem:sing}. The crucial distinction is the \emph{object}: a shifted
 correlation fixes a gap $h$ and averages over $n$, so the two singular series do \emph{not}
 cancel; our object fixes the sum $N=p+q$ and forms the channel \emph{ratio} $R_2/R_1$, in which
 $\sing(N)$ cancels exactly---and that cancellation is the whole point. What none of the
@@ -1759,7 +1758,7 @@ function. For an even integer $N$, define
 Then $[z^k]Z_N(z)$ is the number of representations $N=p+q$ with $p$ prime and
 $\OmegaF(q)=k$; in particular $[z]Z_N(z)=R_1(N)$ and $[z^2]Z_N(z)=R_2(N)$. For $z=e^{-\beta}$
 this is the one-sided arithmetic partition function for the $\OmegaF$-energy of the second
-summand (its two-sided analogue is the energy reframing in the supplement).
+summand (its two-sided analogue is the energy reframing noted in the supplement).
 
 The following is a \emph{model} statement, not a theorem about the primes: it is exact in the
 local blocked-channel model of \S\ref{sec:truncated}, and it explains why a large singular
@@ -1975,7 +1974,7 @@ distribution of $r_\star$ follow from a clean local-obstruction argument.
 \label{sec:availability}
 Every figure, table, and quoted number in this paper is reproduced by the accompanying
 open-source repository (Python; \texttt{numpy}/\texttt{scipy}/\texttt{matplotlib}, with
-\texttt{gurobipy} only for the optional selection MIP, now in the supplement). Each
+\texttt{gurobipy} only for the optional selection-MIP driver, kept in the repository only). Each
 \texttt{src/} module carries a self-test (\texttt{python3 src/<module>.py}) and each
 figure is regenerated by its \texttt{experiments/run\_*.py} driver; the central results
 use \texttt{run\_counts.py} (FFT counts to $2\cdot10^{6}$), \texttt{run\_scaling.py}
