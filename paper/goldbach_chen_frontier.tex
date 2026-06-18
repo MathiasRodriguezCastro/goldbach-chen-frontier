@@ -54,7 +54,7 @@
   keepspaces=true
 }
 
-\title{The Goldbach--Chen Frontier, Experimentally: A Singular-Series Cancellation and the Finite-Range Half-Power Artifact}
+\title{A Finite-Range Half-Power Artifact at the Goldbach--Chen Frontier}
 \author{Mathias Rodr\'iguez Castro\thanks{ORCID: \href{https://orcid.org/0009-0002-7235-7677}{0009-0002-7235-7677}}}
 \date{June 2026}
 
@@ -69,20 +69,21 @@ log--log regression against the Hardy--Littlewood singular series $\sing(N)$ ass
 semiprime channel an apparent singular exponent $\beta_2\approx\tfrac12$, strikingly unlike the
 $\beta_1=1$ of the prime channel. Computing $R_1,R_2$ to $10^{9}$ by a block-convolution sieve
 shows this is \emph{not} a structural half-power: the effective exponent drifts upward like
-$\log\log X$. The explanation is an elementary, unconditional Euler-product identity ---
-decomposing $q=rs$ by its small prime factor $r$, each channel carries the \emph{same} singular
-series $\sing(N)$, which \emph{cancels} in the ratio of Hardy--Littlewood main terms, leaving a
-Mertens channel sum $W_f(N)\sim\log\log N$ (hence $R_2/R_1=W_f(N)(1+o(1))$ under the stated
-major-arc input). Thus $\sing(N)$ enters $R_2$ with exponent $1$, exactly as in $R_1$, and the
-``half power'' is a finite-range effective exponent inferred from the regression slope
-$m_2=\beta_2-1$, obeying $\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ with deficit
-$\sim1/\log\log N$. A Vaughan--Parseval minor-arc second moment (no sieve), together with the equidistribution of
-semiprimes in arithmetic progressions, makes the \emph{linear} almost-all asymptotic
-$R_2(N)=\mathrm{main}(N)(1+o(1))$ \emph{unconditional}; the passage to the untruncated
-log-regression statement $\beta_2\to1$ is isolated as an explicit lower-tail hypothesis. The
-goal is not a proof of Goldbach but an explicit cancellation identity, reproducible evidence,
-and an unconditional almost-all asymptotic. Additional cross-disciplinary reframings, which
-re-express the same singular-series governance, are developed in the supplement.
+$\log\log X$, and a moving-block bootstrap makes the drift statistically decisive. The
+resolution is a singular-series cancellation that we isolate and put to use: decomposing
+$q=rs$ by its small prime factor $r$, each channel carries the \emph{same} $\sing(N)$ (an
+elementary Euler-product identity), which \emph{cancels} in the ratio of Hardy--Littlewood
+main terms and leaves a Mertens channel sum $W_f(N)\sim\log\log N$, so $R_2/R_1=W_f(N)(1+o(1))$
+under the major-arc input. Hence $\sing(N)$ enters $R_2$ with exponent $1$, exactly as in
+$R_1$, and the ``half power'' is a finite-range effective exponent with
+$\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ and deficit $\sim1/\log\log N$. The paper's
+verifiable theorem is \emph{unconditional}: a Vaughan--Parseval minor-arc second moment,
+together with the equidistribution of semiprimes in arithmetic progressions, gives the
+\emph{linear} almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even
+$N$; only the passage to the untruncated statement $\beta_2\to1$ is isolated as an explicit,
+unproven lower-tail hypothesis. The goal is not a proof of Goldbach but a reproducible
+artifact, the cancellation that explains it, and an unconditional almost-all asymptotic;
+cross-disciplinary reframings are recorded in the supplement.
 \end{abstract}
 
 \paragraph{\textit{2020 Mathematics Subject Classification.}} 11P32 (primary); 11N36, 11A41, 11Y35, 11-04 (secondary).
@@ -159,7 +160,8 @@ $\beta_2\approx\tfrac12$ is a numerical observation; the structural exponent is 
 \label{tab:status}
 \end{table}
 
-\section{Basic notation}
+\section{Definitions and the singular-series identity}
+\label{sec:defs}
 
 Let $\PP$ denote the set of primes. For an integer $n\ge2$, let $\OmegaF(n)$ be the number of prime factors of $n$ counted with multiplicity. Thus $\OmegaF(12)=3$ because $12=2^2\cdot 3$.
 
@@ -197,6 +199,58 @@ Finally, define the Chen count
 \begin{remark}
 The binary Goldbach conjecture is equivalent to $R_1(N)>0$ for every even $N>2$. Chen's theorem implies $R_{\le2}(N)>0$ for all sufficiently large even $N$.
 \end{remark}
+
+\subsection{The singular-series identity}
+\label{sec:identity}
+
+The Hardy--Littlewood singular series of $N$ is
+\[
+  \sing(N)=\prod_{p\mid N,\,p>2}\frac{p-1}{p-2},
+\]
+which governs the local density of Goldbach representations: the conjectural main term is
+$R_{1,\mathrm{main}}(N)=2C_2\,\sing(N)\,I_1(N)$, with $C_2=\prod_{p>2}\big(1-(p-1)^{-2}\big)$ the
+twin-prime constant and $I_1(N)$ the archimedean factor. The organising fact of this paper is
+that the \emph{semiprime} channel inherits the \emph{same} $\sing(N)$. Decompose a semiprime
+second summand by its smaller prime factor, $q=rs$ with $r\le s$ prime; each $r$ defines a
+\emph{channel}, a Goldbach-type count for the linear form $(s,\,N-rs)$ with its own two-form
+singular series.
+
+\begin{lemma}[Singular series of a channel]\label{lem:sing}
+Let $r$ be an odd prime and $N$ even. The singular series of the pair of linear forms
+$s\mapsto(s,\,N-rs)$ is
+\[
+  \sing_2(r,N)=\prod_{\ell}\frac{1-\nu_r(\ell)/\ell}{(1-1/\ell)^2},
+  \qquad \nu_r(\ell)=\#\{s\bmod\ell:\ s(N-rs)\equiv0\},
+\]
+and equals
+\[
+  \sing_2(r,N)=
+  \begin{cases}
+   2C_2\,\sing(N)\,\dfrac{r-1}{r-2}, & r\nmid N,\\[2mm]
+   0, & r\mid N.
+  \end{cases}
+\]
+\end{lemma}
+
+\noindent The proof is an elementary local computation (Appendix~\ref{app:rigorous}). Two
+features matter: every \emph{unblocked} channel ($r\nmid N$) carries the same $\sing(N)$ as
+$R_1$---not a smaller quantity, and not a fractional power of it; and the channels with $r\mid N$
+are \emph{identically blocked} ($\sing_2=0$), since $p=N-rs\equiv0\pmod r$ would force $p=r$.
+Summing the unblocked channel main terms and dividing by $R_{1,\mathrm{main}}$, the singular
+series \emph{cancels exactly}:
+\begin{equation}
+  \frac{R_{2,\mathrm{main}}(N)}{R_{1,\mathrm{main}}(N)}
+  =W_f(N):=\sum_{\substack{3\le r\le\sqrt N\\ r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
+  \qquad w_r(N)=\frac1r\frac{\log N}{\log(N/r)},
+  \label{eq:Wtilde}
+\end{equation}
+a pure Mertens channel sum with $W_f(N)\sim\log\log N$. Under the major-arc input established
+unconditionally in Appendix~\ref{app:rigorous}, the identity passes to the actual counts,
+$R_2(N)/R_1(N)=W_f(N)(1+o(1))$. This is the explanatory backbone of the paper: $\sing(N)$ enters
+$R_2$ with exponent $1$, exactly as in $R_1$, so the ``half power'' $\beta_2\approx\tfrac12$ that
+a finite-range regression reports (\S\ref{sec:singexp}) is an effective exponent inferred from
+the blocked channels, \emph{not} a structural one. What we record is the \emph{use} of this
+cancellation; the local computation itself is classical (Remark~\ref{rem:identity-novelty}).
 
 \section{The Goldbach--Chen frontier}
 
@@ -618,26 +672,10 @@ decisive. The drift is the empirical core; the limiting constant (\S\ref{sec:con
 \end{table}
 
 \paragraph{A derivation: $\beta_2\to1$ with an $\mathbf{1/\log\log N}$ deficit.}
-The drift is not arbitrary. Writing $q=N-p=rs$ and summing over the small factor
-$r$, each channel is a Goldbach count for the linear form $(s,N-rs)$, whose
-two-form singular series factorizes as
-\begin{equation}
-  \sing_2(r,N)=
-  \begin{cases}2C_2\,\sing(N)\,\dfrac{r-1}{r-2},&r\nmid N,\\[1mm]0,&r\mid N\end{cases}
-  \label{eq:S2factor}
-\end{equation}
-(Lemma~\ref{lem:sing}; the $r\mid N$ channel is identically blocked). The Hardy--Littlewood
-main terms are $R_{1,\mathrm{main}}=2C_2\sing(N)I_1$ and
-$R_{2,\mathrm{main}}=2C_2\sing(N)\sum_{r\nmid N}\frac{r-1}{r-2}I_r$, so the singular series
-\emph{cancels exactly} between them,
-\begin{equation}
-  \frac{R_{2,\mathrm{main}}(N)}{R_{1,\mathrm{main}}(N)}=W_f(N):=\sum_{\substack{3\le r\le\sqrt N\\r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
-  \qquad w_r=\frac1r\frac{\log N}{\log(N/r)} ,
-  \label{eq:Wtilde}
-\end{equation}
-and hence $R_2(N)/R_1(N)=W_f(N)(1+o(1))$ for the actual counts under the per-channel
-asymptotic.
-Hence the raw regression slope is
+The drift is not arbitrary. By the channel cancellation of \S\ref{sec:identity}
+(Lemma~\ref{lem:sing}), the main-term ratio is the Mertens channel sum $W_f(N)$ of
+\eqref{eq:Wtilde}, so $R_2(N)/R_1(N)=W_f(N)(1+o(1))$ for the actual counts under the per-channel
+asymptotic. Hence the raw regression slope is
 $m_2=\beta_2-1=\operatorname{Cov}(\log W_f,\log\sing)/\operatorname{Var}(\log\sing)$,
 and the only coupling to $\sing(N)$ comes from the blocked channels $r\mid N$, each
 \emph{removed} from $W_f$. Modelling $\mathbf 1[\ell\mid N]$ as independent
@@ -1000,26 +1038,10 @@ exponent through the (least-squares) regression slope
 
 \subsection{Unconditional lemmas}
 
-\begin{lemma}[Singular series of a channel]\label{lem:sing}
-Let $r$ be an odd prime and $N$ even. The singular series of the pair of linear
-forms $s\mapsto(s,\,N-rs)$ is
-\[
-  \sing_2(r,N)=\prod_{\ell}\frac{1-\nu_r(\ell)/\ell}{(1-1/\ell)^2},
-  \qquad \nu_r(\ell)=\#\{s\bmod\ell:\ s(N-rs)\equiv0\},
-\]
-and equals
-\[
-  \sing_2(r,N)=
-  \begin{cases}
-   2C_2\,\sing(N)\,\dfrac{r-1}{r-2}, & r\nmid N,\\[2mm]
-   0, & r\mid N,
-  \end{cases}
-  \qquad C_2=\prod_{p>2}\Big(1-\tfrac1{(p-1)^2}\Big).
-\]
-\end{lemma}
-
-\begin{proof}
-Compute $\nu_r(\ell)$. For $\ell=2$: as $s$ and $N-rs$ are both odd exactly when
+\begin{proof}[Proof of Lemma~\ref{lem:sing} (\S\ref{sec:identity})]
+Recall $\sing_2(r,N)=\prod_{\ell}(1-\nu_r(\ell)/\ell)/(1-1/\ell)^2$ with
+$\nu_r(\ell)=\#\{s\bmod\ell:s(N-rs)\equiv0\}$, and $C_2=\prod_{p>2}(1-(p-1)^{-2})$. Compute
+$\nu_r(\ell)$. For $\ell=2$: as $s$ and $N-rs$ are both odd exactly when
 $s$ is odd, $\nu_r(2)=1$ and the factor is $(1-\tfrac12)/(1-\tfrac12)^2=2$. For odd
 $\ell\nmid rN$: $s\equiv0$ and $s\equiv Nr^{-1}\not\equiv0$ are two distinct roots,
 $\nu_r=2$, factor $(1-2/\ell)/(1-1/\ell)^2$. For odd $\ell\mid N$, $\ell\nmid r$:
@@ -1041,7 +1063,7 @@ forms is the Hardy--Littlewood computation \citep{hardylittlewood1923} (see also
 \citep{vaughan1997}), and the decomposition of a semiprime by its prime factors is the staple
 device of the $E_2$ sieve \citep{halberstamrichert}; for a single fixed channel $(s,\,N-rs)$
 the evaluation of $\sing_2(r,N)$ is therefore routine, and a reader familiar with the prime
-$k$-tuple heuristic will reconstruct \eqref{eq:S2factor} without difficulty. What we wish to
+$k$-tuple heuristic will reconstruct Lemma~\ref{lem:sing} without difficulty. What we wish to
 record is not this local computation but its global consequence, which to our knowledge is not
 stated explicitly in the literature: that every unblocked channel inherits the \emph{same}
 Goldbach singular series $\sing(N)$ that governs $R_1$---not a smaller quantity, and not a
@@ -1056,7 +1078,7 @@ bounds forcing $R_{\le2}(N)>0$, and upper bounds within a constant of the Hardy-
 prediction. The conjectural prime--semiprime main term itself (the Hardy--Littlewood asymptotic
 for $R_{\le2}$ and for $R_2$) is implicit in these heuristics and in the refinements of Chen's
 theorem developed by the school of Cai, L\"u and Pan among others; the local computation
-underlying \eqref{eq:S2factor} is exactly there. What none of these works isolates is the
+underlying Lemma~\ref{lem:sing} is exactly there. What none of these works isolates is the
 \emph{ratio} $R_2/R_1$ and the exact cancellation of $\sing(N)$ in it: for the existence and
 upper-bound aims the singular-series content of $R_2/R_1$ is irrelevant and is never separated
 out. It becomes the natural object only once one asks how the relative semiprime
