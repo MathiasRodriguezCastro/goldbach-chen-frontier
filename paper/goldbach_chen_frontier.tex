@@ -124,7 +124,7 @@ Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implem
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the effective exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics (\S\ref{sec:diag-emp}, \S\ref{sec:balance-emp}).} Goldbach fragility is rare and always Chen-rescued; the semiprime factor geometry favours unbalanced semiprimes with a small prime factor; and the residual Goldbach--Chen balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$. (Further selection/continuity/transport diagnostics are in the supplement.)
 \item \textbf{An unconditional almost-all asymptotic (Appendix~\ref{app:rigorous}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve (Prop.~\ref{prop:var})---together with the major-arc evaluation (Lemma~\ref{lem:s2ap}, the equidistribution of semiprimes in progressions, proved from Siegel--Walfisz) gives the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, \emph{unconditionally} (Theorem~\ref{thm:aa}). Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
-\item \textbf{Two confirming experiments (\S\ref{sec:spectral-emp}--\ref{sec:bases-emp}).} Two further experiments earn a place in the body by yielding a \emph{new computation}: the empirical circle method (\S\ref{sec:spectral-emp}), whose comet power spectrum is an empirical shadow of the major arcs, and the carry geometry (\S\ref{sec:bases-emp}), which surfaces a digit/Kummer signature of primality. The frontier admits several further cross-disciplinary recastings (thermodynamic ground state, adversarial network, liquidity market, control problem, information channel, discrete surface); we are explicit that these are \emph{one} finding---$\sing(N)$ sets the local densities---seen in several mirrors, not independent results, and we collect them, with the honest negatives, in the accompanying supplement rather than the body.
+\item \textbf{A confirming experiment (\S\ref{sec:two-experiments}).} The empirical circle method---the comet power spectrum as an empirical shadow of the major arcs---earns a place in the body by yielding a \emph{new computation}; a smaller observation records a digit/Kummer carry signature of primality. The frontier admits several further cross-disciplinary recastings (thermodynamic ground state, adversarial network, liquidity market, control problem, information channel, discrete surface); we are explicit that these are \emph{one} finding---$\sing(N)$ sets the local densities---seen in several mirrors, not independent results, and we collect them, with the honest negatives, in the accompanying supplement rather than the body.
 \end{enumerate}
 
 \paragraph{Status of the results: proven, conditional, conjectural.}
@@ -150,7 +150,7 @@ Non-circular validation $(1-\beta_2)\langle R_2/R_1\rangle\approx\mathrm{const}$
 Linear almost-all $R_2=\mathrm{main}(1+o(1))$ (Theorem~\ref{thm:aa}) & \emph{Proved}, unconditionally (Vaughan minor arc + semiprimes in progressions, Lemma~\ref{lem:s2ap}); a standard circle-method consequence (Remark~\ref{rem:literature}) \\
 $\beta_2\to1$ for almost all $N$ (Corollary~\ref{cor:beta-aa}) & \emph{Conditional} on the lower-tail hypothesis \\
 Lower-tail hypothesis & \emph{Conjecture}, stated precisely (\S\ref{sec:variance}) \\
-Diagnostics of \S\ref{sec:diag-emp} (fragility, factor balance) and the two experiments of \S\ref{sec:two-experiments} (spectrum, carry geometry) & \emph{Numerical observations} \\
+Diagnostics of \S\ref{sec:diag-emp} (fragility, factor balance) and the circle-method experiment of \S\ref{sec:two-experiments} (spectrum, carry signature) & \emph{Numerical observations} \\
 Model statements in Appendix~A (blocked channel, weak uniformity, least-unblocked prime, carry excess) & \emph{Proved in the stated model} \\
 \bottomrule
 \end{tabular}
@@ -867,41 +867,29 @@ The full geometry of the Chen surface $p+rs=N$ on which the exponent $a_{\rm Res
 $2$D cloud of solutions organised by the small prime factor $r$, with mass against the
 Goldbach edge---is developed in the supplement.
 
-\section{Two further experiments}
+\section{A confirming experiment: the empirical circle method}
 \label{sec:two-experiments}
-Beyond the singular-series regularity, two further computational experiments produce a
-genuinely \emph{new} measurement rather than a restatement: an empirical circle method (the
-power spectrum of the comet) and a carry geometry (a digit/Kummer signature of primality). We
-report each as an experiment---what was measured, over what range, against what random
-control. Many further cross-disciplinary reframings of the frontier (an arithmetic
-ground-state energy, the adversarial robustness of the Goldbach graph, a market/liquidity
-reading, a simplicial-topology probe, a control policy, an information budget, and the discrete
-geometry of the Chen surface) re-express the same singular-series governance rather than
-constitute independent findings; they are developed, with the honest negatives, in the
-accompanying supplement.
-
-\subsection{An empirical circle method: the spectrum of the comet}
 \label{sec:spectral-emp}
 
-The circle method decomposes additive problems by Fourier analysis into major arcs
-(rationals $a/q$ with small $q$, carrying the singular series) and minor arcs (the
-pseudorandom remainder). One can see this decomposition \emph{empirically}. Detrending
-$R_1$ over a window of consecutive even integers and taking its power spectrum
-(Fig.~\ref{fig:spectral}, left) reveals a forest of sharp lines exactly at the arithmetic
-frequencies: the dominant peak is at $\tfrac13$ (period $T_N=6$, the modulus $3$), followed
-by $\tfrac15,\tfrac25$ (modulus $5$), with heights that decay across primes in step with the
-singular-series factors $(\ell-1)/(\ell-2)$. These are the major-arc frequencies made visible empirically.
+One further experiment yields a genuinely \emph{new} measurement and ties directly to the
+circle-method backbone: the power spectrum of the comet is an empirical shadow of the major
+arcs. (A second, smaller probe---a carry geometry---is recorded as an observation below; the
+many cross-disciplinary recastings of the frontier re-express the same singular-series
+governance and are developed, with the honest negatives, in the supplement.)
 
-Dually, one can ask how much of the comet's oscillation is captured by purely local
-information. Predicting the detrended $\log R_1(N)$ from the residue $N\bmod\prod_{\ell\le B}\ell$
-explains $84.6\%$ of the variance at $B=3$ (i.e.\ $N\bmod6$ alone), $95.0\%$ at $B=5$, and
-saturates toward the singular-series ceiling $R^2_{\mathrm{OLS}}=0.999$ (Fig.~\ref{fig:spectral}, right).
-The comet is, to first order, a \emph{modulo-$6$ phenomenon}: the prime $3$ supplies $85\%$
-of all explainable structure, and successive primes contribute the rapidly shrinking
-remainder predicted by $\sing(N)$. (These percentages are descriptive $R^2_{\mathrm{OLS}}$
-values---a partition of the within-window variance of an arithmetically dependent sequence by
-residue class---not i.i.d.\ goodness-of-fit statistics; they are stable across windows but
-should be read as effect directions, not inferential fits.)
+The circle method decomposes additive problems into major arcs (rationals $a/q$ with small $q$,
+carrying the singular series) and minor arcs (the pseudorandom remainder). One sees this
+\emph{empirically}: detrending $R_1$ over a window of consecutive even integers and taking its
+power spectrum (Fig.~\ref{fig:spectral}, left) reveals sharp lines exactly at the arithmetic
+frequencies---the dominant peak at $\tfrac13$ (period $6$, the modulus $3$), then
+$\tfrac15,\tfrac25$ (modulus $5$), with heights decaying across primes in step with the
+singular-series factors $(\ell-1)/(\ell-2)$. These are the major-arc frequencies made visible.
+Dually, predicting the detrended $\log R_1(N)$ from the residue $N\bmod\prod_{\ell\le B}\ell$
+explains $84.6\%$ of the variance at $B=3$ ($N\bmod6$ alone), $95.0\%$ at $B=5$, and saturates
+toward the singular-series ceiling $R^2_{\mathrm{OLS}}=0.999$ (Fig.~\ref{fig:spectral}, right):
+the comet is, to first order, a modulo-$6$ phenomenon, the prime $3$ supplying $85\%$ of all
+explainable structure. (These are descriptive $R^2_{\mathrm{OLS}}$ values over an arithmetically
+dependent window---a partition of within-window variance by residue class---not i.i.d.\ fits.)
 
 \begin{figure}[h]
 \centering
@@ -913,39 +901,17 @@ small primes, saturating at the singular-series ceiling; $N\bmod6$ already gives
 \label{fig:spectral}
 \end{figure}
 
-\subsection{Primorial bases and carry geometry}
-\label{sec:bases-emp}
-
-Two further reframings come from writing integers in a base. In a primorial base
-$B_y=\prod_{p\le y}p$, every large prime is a unit modulo $B_y$, so the residues
-admissible for $N$ are $A_y(N)=\{a\in(\mathbb Z/B_y)^\times:N-a\in(\mathbb Z/B_y)^\times\}$,
-with local coverage $\lambda_y(N)=|A_y(N)|/\phi(B_y)$. By the Chinese remainder theorem this
-factorises, and the \emph{relative} coverage is precisely the truncated singular series,
-\[
-  \frac{\lambda_y(N)}{\lambda_y(\text{generic})}
-  =\prod_{\substack{p\mid N\\3\le p\le y}}\frac{p-1}{p-2}=\sing_y(N).
-\]
-So primorial coverage \emph{is} the singular series, viewed as accumulated local
-obstructions; predicting $\log R_1$ from $\sing_y$ explains $84.6\%$ of the comet's
-oscillation at $y=3$ ($B_3=6$), rising to $99.8\%$ by $y=30$---the same saturation as
-\S\ref{sec:spectral-emp}, now read as ``the comet is the shadow of primorial local
-coverage''.
-
-The freshest object here is the \emph{carry geometry}. Adding $p+q=N$ in base $b$ produces
-carries $c_i\in\{0,1\}$, and their number is fixed by the digit sums,
-$\#\text{carries}(p,N-p)=\big(S_b(p)+S_b(N-p)-S_b(N)\big)/(b-1)$; in base $2$ this is
-$v_2\binom{N}{p}$ (Kummer). Comparing Goldbach representations to random pairs $a+(N-a)=N$
-reveals a systematic \emph{carry excess}: Goldbach pairs carry more (Fig.~\ref{fig:bases}).
-In base $2$ the excess is $+0.97$ carries (Goldbach $9.9$ versus $8.9$), and a positive
-excess persists in every base tested ($b=2,\dots,16$), largest in the small bases. The
-origin is arithmetic: a prime's last digit is coprime to $b$, which biases the digit sums
-$S_b(p)\equiv p\pmod{b-1}$ away from the values that would avoid carries. Thus the same
-local constraints that produce the singular series leave a \emph{digital signature}:
-Goldbach decompositions are, bit for bit, slightly carry-heavier than chance---a
-statistical-mechanical fingerprint of primality in the geometry of addition. A local model
-theorem in Appendix~\ref{sec:carry-model} shows that restricting both terminal digits to
-reduced residue classes already increases the least-digit carry probability relative to
-unrestricted random summands.
+\begin{observation}[A digital signature of primality]\label{sec:bases-emp}
+A second, smaller probe records a genuinely new statistic. Adding $p+q=N$ in base $b$ produces
+$\#\mathrm{carries}(p,N-p)=\big(S_b(p)+S_b(N-p)-S_b(N)\big)/(b-1)$, which in base $2$ is
+$v_2\binom{N}{p}$ (Kummer). Goldbach pairs carry \emph{more} than random pairs $a+(N-a)=N$: in
+base $2$ the excess is $+0.97$ carries ($9.9$ versus $8.9$), positive in every base tested
+($b=2,\dots,16$) and largest in small bases (Fig.~\ref{fig:bases}). The origin is local---a
+prime's last digit is coprime to $b$, biasing $S_b(p)\equiv p\pmod{b-1}$ away from
+carry-avoiding values---so the same constraints that produce the singular series leave a digital
+fingerprint; a local model in the supplement shows that restricting both terminal digits to
+reduced classes already raises the least-digit carry probability.
+\end{observation}
 
 \begin{figure}[h]
 \centering
