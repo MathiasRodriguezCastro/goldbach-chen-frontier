@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite the work below."
-title: "A Finite-Range Half-Power Artifact at the Goldbach–Chen Frontier"
+title: "The Goldbach–Chen Frontier: A Singular-Series Cancellation behind a Finite-Range Half-Power"
 abstract: >-
   Computational and analytic study of how the Goldbach (R1) and Chen-surplus (R2)
   representation counts respond to the Hardy–Littlewood singular series. Central result:

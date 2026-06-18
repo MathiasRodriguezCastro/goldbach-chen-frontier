@@ -54,7 +54,7 @@
   keepspaces=true
 }
 
-\title{A Finite-Range Half-Power Artifact at the Goldbach--Chen Frontier}
+\title{The Goldbach--Chen Frontier: A Singular-Series Cancellation behind a Finite-Range Half-Power}
 \author{Mathias Rodr\'iguez Castro\thanks{ORCID: \href{https://orcid.org/0009-0002-7235-7677}{0009-0002-7235-7677}}}
 \date{June 2026}
 
@@ -62,28 +62,29 @@
 \maketitle
 
 \begin{abstract}
-The binary Goldbach conjecture asks whether every even $N>2$ is a sum of two primes;
-Chen's theorem replaces the second prime by a prime or semiprime. Separating the Goldbach
-count $R_1(N)$ (prime $q$) from the semiprime Chen-surplus count $R_2(N)$, a finite-range
-log--log regression against the Hardy--Littlewood singular series $\sing(N)$ assigns the
-semiprime channel an apparent singular exponent $\beta_2\approx\tfrac12$, strikingly unlike the
-$\beta_1=1$ of the prime channel. Computing $R_1,R_2$ to $10^{9}$ by a block-convolution sieve
-shows this is \emph{not} a structural half-power: the effective exponent drifts upward like
-$\log\log X$, and a moving-block bootstrap makes the drift statistically decisive. The
-resolution is a singular-series cancellation that we isolate and put to use: decomposing
-$q=rs$ by its small prime factor $r$, each channel carries the \emph{same} $\sing(N)$ (an
-elementary Euler-product identity), which \emph{cancels} in the ratio of Hardy--Littlewood
-main terms and leaves a Mertens channel sum $W_f(N)\sim\log\log N$, so $R_2/R_1=W_f(N)(1+o(1))$
-under the major-arc input. Hence $\sing(N)$ enters $R_2$ with exponent $1$, exactly as in
-$R_1$, and the ``half power'' is a finite-range effective exponent with
-$\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle\to1$ and deficit $\sim1/\log\log N$. The paper's
-verifiable theorem is \emph{unconditional}: a Vaughan--Parseval minor-arc second moment,
-together with the equidistribution of semiprimes in arithmetic progressions, gives the
-\emph{linear} almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even
-$N$; only the passage to the untruncated statement $\beta_2\to1$ is isolated as an explicit,
-unproven lower-tail hypothesis. The goal is not a proof of Goldbach but a reproducible
-artifact, the cancellation that explains it, and an unconditional almost-all asymptotic;
-cross-disciplinary reframings are recorded in the supplement.
+The binary Goldbach conjecture asks whether every even $N>2$ is a sum of two primes; Chen's
+theorem replaces the second prime by a prime or semiprime. We isolate an elementary
+singular-series cancellation that governs the Goldbach--Chen frontier and put it to use.
+Decomposing a semiprime second summand $q=rs$ by its small prime factor $r$, each channel
+carries the \emph{same} Hardy--Littlewood singular series $\sing(N)$ that governs the Goldbach
+count $R_1(N)$ (an Euler-product identity), so $\sing(N)$ \emph{cancels exactly} in the ratio of
+main terms of $R_1$ and the semiprime Chen-surplus count $R_2(N)$, leaving a pure Mertens channel
+sum $W_f(N)\sim\log\log N$ with $R_2/R_1=W_f(N)(1+o(1))$ under the major-arc input. This single
+identity organizes the whole picture---the channel ratio, the sign reversal of the effective
+exponent across $\OmegaF$-layers, the residual collapse, and the Chen-rescue threshold. Its most
+visible corollary resolves a finite-range puzzle: a log--log regression of $R_2/R_1$ against
+$\sing(N)$ assigns the semiprime channel an apparent exponent $\beta_2\approx\tfrac12$, strikingly
+unlike the $\beta_1=1$ of the prime channel; yet computing $R_1,R_2$ to $10^{9}$ by a
+block-convolution sieve shows this is \emph{not} a structural half-power, since $\sing(N)$ enters
+$R_2$ with exponent $1$ exactly as in $R_1$. The effective exponent instead drifts to $1$ like
+$\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle$ with deficit $\sim1/\log\log N$, a drift a moving-block
+bootstrap makes statistically decisive. The paper's verifiable theorem is \emph{unconditional}: a
+Vaughan--Parseval minor-arc second moment together with the equidistribution of semiprimes in
+arithmetic progressions gives the \emph{linear} almost-all asymptotic
+$R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$; only the passage to the untruncated
+statement $\beta_2\to1$ is isolated as an explicit, unproven lower-tail hypothesis. The goal is
+not a proof of Goldbach but the cancellation identity, a reproducible artifact it explains, and an
+unconditional almost-all asymptotic; cross-disciplinary reframings are recorded in the supplement.
 \end{abstract}
 
 \paragraph{\textit{2020 Mathematics Subject Classification.}} 11P32 (primary); 11N36, 11A41, 11Y35, 11-04 (secondary).
@@ -120,7 +121,7 @@ This is a discrete object, so it is not continuous in the ordinary analytic sens
 \paragraph{Summary of findings.}
 Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implementing this program; all numbers are reproducible from the accompanying code. The main outcomes are:
 \begin{enumerate}[leftmargin=2em,itemsep=2pt]
-\item \textbf{The finite-range half-power, and the cancellation that explains it (\S\ref{sec:singexp}).} Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve. A finite-range log--log fit assigns the semiprime channel an apparent singular exponent $\beta_2\approx\tfrac12$, unlike the $\beta_1=1$ of the prime channel---but scaling to $10^{9}$ shows this is \emph{not} structural: the effective exponent drifts upward like $\log\log X$. The explanation is an elementary, unconditional Euler-product identity: the per-channel singular series factorizes (Lemma~\ref{lem:sing}), so $\sing(N)$ \emph{cancels} in the main-term ratio, leaving $R_2/R_1=W_f(N)(1+o(1))$ with the Mertens channel sum $W_f(N)\sim\log\log N$. Hence $\beta_2$ is a finite-range effective exponent inferred from the regression slope $m_2=\beta_2-1$, with $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N\to1$ and an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$); the deficit is multi-channel---deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ (\S\ref{sec:singexp}), refuting a single-atom reading. What we record is the consequence---the cancellation of $\sing(N)$ in the main-term ratio---which the existence-oriented sieve literature has had no reason to isolate (Remark~\ref{rem:identity-novelty}).
+\item \textbf{One identity behind the picture (\S\ref{sec:identity}, \S\ref{sec:singexp}).} The organizing fact is an elementary, unconditional Euler-product identity: the per-channel singular series factorizes (Lemma~\ref{lem:sing}), so $\sing(N)$ \emph{cancels exactly} in the main-term ratio $R_2/R_1$, leaving the Mertens channel sum $W_f(N)\sim\log\log N$ with $R_2/R_1=W_f(N)(1+o(1))$. This one cancellation governs the channel ratio, the layer sign reversal (\S\ref{sec:layers-emp}), the residual collapse, and the Chen-rescue threshold. Its most visible consequence resolves a finite-range puzzle. Counts are computed for all $N\le2\cdot10^{6}$ by FFT and locally in windows up to $10^{9}$ by a block-convolution sieve: a finite-range log--log fit assigns the semiprime channel an apparent exponent $\beta_2\approx\tfrac12$, unlike the $\beta_1=1$ of the prime channel, yet scaling to $10^{9}$ shows this is \emph{not} structural ($\sing(N)$ enters $R_2$ with exponent $1$). The effective exponent drifts to $1$ as $\beta_2(N)=1-c/\langle R_2/R_1\rangle_N$ with an $\mathcal O(1/\log\log N)$ deficit (validation $(1-\beta_2)\langle R_2/R_1\rangle\approx1.09$ to $1\%$; block bootstrap decisive); the deficit is multi-channel---deleting the heaviest channel ($3\mid N$) removes only $\sim10\%$ (\S\ref{sec:singexp}), refuting a single-atom reading. What we record is this cancellation of $\sing(N)$ in the ratio, which the existence-oriented sieve and shifted-correlation literature has had no reason to isolate (Remark~\ref{rem:identity-novelty}).
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the effective exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics (\S\ref{sec:diag-emp}, \S\ref{sec:balance-emp}).} Goldbach fragility is rare and always Chen-rescued; the semiprime factor geometry favours unbalanced semiprimes with a small prime factor; and the residual Goldbach--Chen balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$. (Further selection/continuity/transport diagnostics are in the supplement.)
 \item \textbf{An unconditional almost-all asymptotic (Appendix~\ref{app:uncond}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve (Prop.~\ref{prop:var})---together with the major-arc evaluation (Lemma~\ref{lem:s2ap}, the equidistribution of semiprimes in progressions, proved from Siegel--Walfisz) gives the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, \emph{unconditionally} (Theorem~\ref{thm:aa}). Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
