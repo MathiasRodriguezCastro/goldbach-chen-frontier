@@ -875,6 +875,12 @@ $0$ error). Findings (Fig.~\ref{fig:balexp}, $N\ge1000$):
 with $X$ ($1.115\to1.099\to1.088$ at $X=10^5,5\cdot10^5,2\cdot10^6$), with
 $p_{99}=1.182$ and a finite-range maximum of $1.385$ -- far below the Li--Liu
 threshold $1.9$. The worst case is pinned by a few small ``hard'' $N$.
+In Li--Liu's terms this is a worst-case versus typical contrast: their theorem
+\emph{guarantees} a representation with exponent $a\le1.9$ for every large $N$, whereas the
+\emph{typical} $N$ sits far inside that bound---the median Chen solution has $a\approx1.30$
+(supplement) and the \emph{best} exponent per $N$ is $a_{\rm Res}\approx1.09$. For almost all
+$N$ the $(1+a)$ interpolation is therefore very close to Goldbach $(a=1)$, not to the proven
+upper bound.
 \item \textbf{The minimal multiplier is tiny.} $r_\star=3$ for $68\%$ of $N$ and the
 dictionary $\{2,3,5,7\}$ already covers $99.7\%$; $\{2,\dots,11\}$ covers
 $99.99\%$. This settles the multiplier-dictionary question empirically.
@@ -1062,9 +1068,11 @@ We isolate, as precisely as the evidence allows, what an interested reader could
 \item \textbf{The lower-tail hypothesis} (\S\ref{sec:variance}). Prove that, for every
 $\delta>0$, the density of even $N\in(X,2X]$ with $R_2(N)/R_1(N)\le\delta\,W_f(N)$ tends to $0$
 as $\delta\downarrow0$. By Corollary~\ref{cor:beta-aa} this upgrades the linear almost-all
-asymptotic to the log-regression statement $\beta_2(N)\to1$. It would follow from a Chen-type
-lower bound on $R_{\le2}$ paired with a Montgomery--Vaughan upper bound on $R_1$
-(Remark in \S\ref{sec:variance}); the empirical exceptional set is \emph{empty} at the $5\%$
+asymptotic to the log-regression statement $\beta_2(N)\to1$. The natural attempt---a Chen-type
+lower bound on $R_{\le2}$ minus the Montgomery--Vaughan value of $R_1$---provably does \emph{not}
+suffice (the unconditional Chen bound is a factor $\log\log N$ below the semiprime main term;
+Remark in \S\ref{sec:variance}). What is needed is a lower bound on the \emph{semiprime} channel
+at the correct $\log\log N$ scale. The empirical exceptional set is \emph{empty} at the $5\%$
 level up to $5\cdot10^{8}$.
 \item \textbf{The limiting constant} (\S\ref{sec:confirm}). The order $1-\beta_2\asymp1/\log\log X$
 is robust, but the limiting constant of $(1-\beta_2)\langle R_2/R_1\rangle$ is correction-dominated
@@ -1189,8 +1197,13 @@ singular-series cancellation seems not to have been written down is a matter of 
 difficulty. The sieve literature on Chen's theorem and on the $(1+a)$
 interpolation \citep{chen1973,halberstamrichert,li2026} is directed at \emph{existence}---lower
 bounds forcing $R_{\le2}(N)>0$, and upper bounds within a constant of the Hardy--Littlewood
-prediction; for those ends the singular-series content of the ratio $R_2/R_1$ is irrelevant and
-is never isolated. It becomes the natural object only once one asks how the relative semiprime
+prediction. The conjectural prime--semiprime main term itself (the Hardy--Littlewood asymptotic
+for $R_{\le2}$ and for $R_2$) is implicit in these heuristics and in the refinements of Chen's
+theorem developed by the school of Cai, L\"u and Pan among others; the local computation
+underlying \eqref{eq:S2factor} is exactly there. What none of these works isolates is the
+\emph{ratio} $R_2/R_1$ and the exact cancellation of $\sing(N)$ in it: for the existence and
+upper-bound aims the singular-series content of $R_2/R_1$ is irrelevant and is never separated
+out. It becomes the natural object only once one asks how the relative semiprime
 share responds to $\sing(N)$, as the empirical regression of \S\ref{sec:singexp} forces. The
 identity is precisely what shows that the reproducible finite-range value
 $\beta_2\approx\tfrac12$ is not a structural half-power but an effective exponent inferred from
@@ -1661,13 +1674,19 @@ it carries a genuine extra hypothesis. The gap is precisely the lower tail of $R
 $L^2$ concentration of $R_2-\mathrm{main}$ bounds how often $R_2$ is \emph{large}, but the
 log-regression that defines $\beta_2$ also weights $N$ where $R_2$ is \emph{small}, and a
 sparse set with $R_2$ very small could in principle skew the covariance. The required
-one-sided bound is mild but does not come directly from Chen's theorem: Chen's method
-lower-bounds the \emph{combined} count $R_{\le2}=R_1+R_2$ (every large even $N$ has a
-prime-or-semiprime partner), not the semiprime-only $R_2$ in isolation. To extract
-$R_2\gg\mathrm{main}(N)$ one would pair such a lower bound on $R_{\le2}$ with an
-\emph{upper} bound on $R_1$, which holds for all but $O(X^{1-\delta})$ even $N$ by
-Montgomery--Vaughan~\cite{montgomeryvaughan1975}; the combination is reasonable but we do
-not prove it here. The hypothesis is amply confirmed empirically---the exceptional set is
+one-sided lower-tail bound does not come from Chen's theorem, and we record \emph{why} the
+natural attempt fails. Chen's method lower-bounds the \emph{combined} count $R_{\le2}=R_1+R_2$,
+not the semiprime-only $R_2$; one would therefore try to extract $R_2=R_{\le2}-R_1$ from a
+Chen-type lower bound on $R_{\le2}$ and the Montgomery--Vaughan value of
+$R_1$~\cite{montgomeryvaughan1975}. Carrying this out, it does \emph{not} close: the
+unconditional Chen-type lower bound has the shape $R_{\le2}(N)\ge c\,2C_2\sing(N)N/\log^2N$ with
+$c<1$, i.e.\ at the \emph{scale of $R_1$}, whereas the semiprime main term is
+$\mathrm{main}(N)\asymp2C_2\sing(N)\,W_f(N)\,N/\log^2N$ with $W_f\sim\log\log N$. Subtracting
+$R_1=(1+o(1))\,2C_2\sing(N)N/\log^2N$ from a quantity a factor $\log\log N$ \emph{smaller} is
+vacuous; it does not even yield $R_2\gg R_1$. The genuine obstruction is thus a lower bound on
+the \emph{semiprime channel} at the correct $\log\log N$ scale (capturing $W_f$), which the
+sieve does not currently supply, and we leave it open. The hypothesis is amply confirmed
+empirically---the exceptional set is
 \emph{empty} at the $5\%$ level up to $5\cdot10^{8}$ (Table~\ref{tab:conc}), so in the
 computed range no $N$ has $R_2/R_1$ even near the tail---but we flag it rather than claim
 it.
