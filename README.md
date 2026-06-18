@@ -127,10 +127,17 @@ python3 run_all.py --with-gurobi   # además la MIP de selección (requiere lice
 ```
 
 `run_all.py` contiene el **mapa figura/tabla → driver** (la tabla `DRIVERS`): p.ej. Fig. 9 →
-`run_scaling.py`, Fig. 12 → `run_betalaw.py`, Fig. 24 → `run_bases.py`. Todo corre **sin
-Gurobi** salvo la MIP opcional (`run_mip.py`, detrás de `--with-gurobi`). Cada `src/<mod>.py`
-tiene un self-test (`python3 src/<mod>.py`); las semillas de criba y tablas derivadas están
-versionadas en `data/`. Snapshot citable: [`10.5281/zenodo.20725701`](https://doi.org/10.5281/zenodo.20725701).
+`run_scaling.py`, Fig. 12 → `run_betalaw.py`, Fig. 24 → `run_bases.py`, CIs block-bootstrap →
+`run_bootstrap.py`. Todo corre **sin Gurobi** salvo la MIP opcional (`run_mip.py`, detrás de
+`--with-gurobi`). Cada `src/<mod>.py` tiene un self-test (`python3 src/<mod>.py`); las semillas
+de criba y tablas derivadas están versionadas en `data/`.
+
+**Entorno y tiempos.** Probado con **Python 3.10** y las versiones exactas de
+`requirements.txt` (numpy 2.2.6, scipy 1.15.3, matplotlib 3.10.9, sympy 1.14.0, pandas 2.3.3);
+verificado clone-and-run en un *venv* limpio. Tiempos de referencia en un Intel **i7-13620H (16
+núcleos, 16 GB)**: la criba por bloques escala ~lineal en `X` (~2 min por ventana de 2·10⁶ en
+`X=2·10⁸`, ~10 min en `X=10⁹`); `run_all.py --fast` ~minutos, la pasada completa a 10⁹ < 1 hora.
+Snapshot citable: [`10.5281/zenodo.20725701`](https://doi.org/10.5281/zenodo.20725701).
 
 ## Uso
 

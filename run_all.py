@@ -37,6 +37,7 @@ DRIVERS = [
     ("run_spectral.py",        [],          "Fig 21, spectral.json",             False, False),
     ("run_bases.py",           [],          "Fig 24, bases.json",                True,  False),
     ("run_scaling.py",         [],          "Fig 9, scaling.json (sieve to 1e9)",True,  False),
+    ("run_bootstrap.py",       [],          "block-bootstrap CIs, bootstrap.json",True,  False),
     ("run_betalaw.py",         [],          "Fig 12, betalaw.json",              True,  False),
     ("run_constant.py",        [],          "Fig 16, constant",                  True,  False),
     # supplement figures

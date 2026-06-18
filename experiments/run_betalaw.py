@@ -27,7 +27,7 @@ FIG = os.path.join(os.path.dirname(__file__), "..", "figures")
 
 def main():
     W = 2_000_000
-    Xs = [int(v) for v in (6e6, 1e7, 2e7, 5e7, 1e8, 2e8)]
+    Xs = [int(v) for v in (6e6, 1e7, 2e7, 5e7, 1e8, 2e8, 5e8, 1e9)]
     betas, meanW = [], []
     for X in Xs:
         N, R1, R2, S = windowed_counts(X, W)

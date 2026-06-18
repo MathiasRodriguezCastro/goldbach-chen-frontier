@@ -767,7 +767,10 @@ mean $r_\star$ is $4.59$ for $3\mid N$ versus $2.94$ otherwise.
 of $N$ by small primes that enlarges $\sing(N)$ (boosting Goldbach) also blocks the
 small-$r$ Chen channels, so the residual balance is \emph{worst exactly where
 Goldbach is locally richest}. This ties the balance exponent to the singular-series
-theme of \S\ref{sec:layers-emp}.
+theme of \S\ref{sec:layers-emp}. (The correlation $+0.59$ is a descriptive within-window
+statistic over consecutive even $N$, which are arithmetically dependent; it quantifies a
+direction and a rough strength, not an i.i.d.\ effect size. The analogous dependence for the
+central exponent $\beta_2$ is controlled by the block bootstrap of \S\ref{sec:singexp}.)
 \end{itemize}
 
 \begin{figure}[h]
@@ -815,7 +818,10 @@ explains $84.6\%$ of the variance at $B=3$ (i.e.\ $N\bmod6$ alone), $95.0\%$ at 
 saturates toward the singular-series ceiling $R^2_{\mathrm{OLS}}=0.999$ (Fig.~\ref{fig:spectral}, right).
 The comet is, to first order, a \emph{modulo-$6$ phenomenon}: the prime $3$ supplies $85\%$
 of all explainable structure, and successive primes contribute the rapidly shrinking
-remainder predicted by $\sing(N)$.
+remainder predicted by $\sing(N)$. (These percentages are descriptive $R^2_{\mathrm{OLS}}$
+values---a partition of the within-window variance of an arithmetically dependent sequence by
+residue class---not i.i.d.\ goodness-of-fit statistics; they are stable across windows but
+should be read as effect directions, not inferential fits.)
 
 \begin{figure}[h]
 \centering
@@ -1542,8 +1548,9 @@ its $L^2$ norm alone, with no bilinear or sieve input---makes the argument, if a
 \emph{easier} than for $R_1$. Strong unconditional results on Goldbach-type counts, and the
 $(1+a)$ interpolation between Goldbach and Chen \citep{li2026}, already operate in this
 regime; we claim no improvement on them, and the linear almost-all asymptotic for $R_2$
-should be regarded as a standard consequence of the classical circle-method framework, with the
-major-arc input supplied unconditionally in \S\ref{sec:majorarc}. What is specific here is the
+should be regarded as a standard consequence of the classical circle-method framework
+\citep[Ch.~3]{vaughan1997}, with the major-arc input supplied unconditionally in
+\S\ref{sec:majorarc}. What is specific here is the
 singular-series cancellation of Lemma~\ref{lem:sing}, which exhibits
 $\mathrm{main}(N)=2C_2\,\sing(N)\,W_f(N)\,J(N)$ explicitly and is the reason $\sing$
 disappears from the ratio $R_2/R_1$. The contribution of this appendix is the explicit
@@ -2030,7 +2037,13 @@ about the empirical carry law.
 
 Here we supply the one routine ingredient left open in Theorem~\ref{thm:aa}: the
 evaluation of $\mathrm{main}(N)=\int_{\mathfrak M}S_\PP S_{\SSemi}e(-N\alpha)$, which rests
-on the distribution of semiprimes in progressions. Write
+on the distribution of semiprimes in progressions. So that the reader may check the
+``standard'' label against the literature rather than against this sketch, we name the three
+checkable inputs: the major-arc template for a binary additive problem is
+\citet[Ch.~3]{vaughan1997}; the count of integers with $\OmegaF(n)=2$ (Selberg--Sath\'e) is
+\citet[\S II.6]{tenenbaum}; and the distribution of $E_2$-numbers (products of two primes) in
+arithmetic progressions is the almost-prime theory of \citet{halberstamrichert}. The lemma
+below assembles the first two; the only nonclassical step is bookkeeping. Write
 $\pi_2(x;q,a)=\#\{n\le x:n\in\SSemi,\ n\equiv a\ (q)\}$ and
 $\SSemi^*(x;q)=\#\{n\le x:n\in\SSemi,\ (n,q)=1\}$.
 
@@ -2164,8 +2177,16 @@ use \texttt{run\_counts.py} (FFT counts to $2\cdot10^{6}$), \texttt{run\_scaling
 (block-convolution sieve to $10^{9}$), \texttt{run\_betalaw.py} (the law
 \eqref{eq:betalaw}), \texttt{run\_estimator\_audit.py} (the estimator reconciliation and
 the $3\mid N$ atom of \S\ref{sec:singexp}), and \texttt{run\_exceptional.py} (the
-concentration of Table~\ref{tab:conc}). Derived tables and the sieve seeds are stored in
-\texttt{data/}. The repository is available at
+concentration of Table~\ref{tab:conc}). The block-bootstrap confidence intervals of
+\S\ref{sec:singexp} are produced by \texttt{run\_bootstrap.py}. Derived tables and the sieve
+seeds are stored in \texttt{data/}. Dependencies are pinned in \texttt{requirements.txt}
+(tested with Python~3.10); a single \texttt{run\_all.py} regenerates everything, with
+\texttt{--with-gurobi} gating the only license-dependent driver. Runtimes are reported for a
+$16$-core Intel i7-13620H with $16$\,GB RAM: the FFT counts to $2\cdot10^{6}$ take seconds, the
+block-convolution sieve scales roughly linearly in $X$ (about $2$~minutes per
+$2\cdot10^{6}$-window at $X=2\cdot10^{8}$, about $10$~minutes at $X=10^{9}$), and the full
+bootstrap-and-scaling pass to $10^{9}$ completes in well under an hour. The repository is
+available at
 \url{https://github.com/MathiasRodriguezCastro/goldbach-chen-frontier}, and a versioned
 snapshot is archived on Zenodo,
 \href{https://doi.org/10.5281/zenodo.20725701}{doi:10.5281/zenodo.20725701} (citation
