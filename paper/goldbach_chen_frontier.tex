@@ -241,10 +241,14 @@ series \emph{cancels exactly}:
 \begin{equation}
   \frac{R_{2,\mathrm{main}}(N)}{R_{1,\mathrm{main}}(N)}
   =W_f(N):=\sum_{\substack{3\le r\le\sqrt N\\ r\nmid N}}\frac{r-1}{r-2}\,w_r(N),
-  \qquad w_r(N)=\frac1r\frac{\log N}{\log(N/r)},
+  \qquad w_r(N)=\frac{I_r(N)}{I_1(N)},
   \label{eq:Wtilde}
 \end{equation}
-a pure Mertens channel sum with $W_f(N)\sim\log\log N$. Under the major-arc input established
+with the exact archimedean channel weight $w_r=I_r/I_1$ (the ratio of the channel integral to
+the Goldbach one), for which the cancellation is exact and which is what Appendix~\ref{app:uncond}
+establishes; the elementary approximation $w_r\approx\frac1r\frac{\log N}{\log(N/r)}$ suffices for
+back-of-envelope estimates. This is a pure Mertens channel sum with $W_f(N)\sim\log\log N$. Under
+the major-arc input established
 unconditionally in Appendix~\ref{app:uncond}, the identity passes to the actual counts,
 $R_2(N)/R_1(N)=W_f(N)(1+o(1))$. This is the explanatory backbone of the paper: $\sing(N)$ enters
 $R_2$ with exponent $1$, exactly as in $R_1$, so the ``half power'' $\beta_2\approx\tfrac12$ that
@@ -842,8 +846,8 @@ untruncated log-regression still requires lower-tail input.
 
 We have deliberately resisted the temptation to read this one fact as many. The
 optimization formulations (supplement) give a language, not a proof strategy; the
-cross-disciplinary reframings are, with two exceptions kept in the body (the empirical circle
-method and the carry geometry), the same singular-series governance re-photographed in
+cross-disciplinary reframings are, except for the empirical circle method kept in the body (with
+a smaller carry-signature observation), the same singular-series governance re-photographed in
 different filters, and we have said so rather than count them as separate findings. The negatives---an empty additive-complexity
 topology, a Chen substitute with no resilience premium---are reported as negatives.
 
@@ -1207,11 +1211,12 @@ This is the circle-method major-arc evaluation carried out in \S\ref{sec:majorar
 arithmetic ingredient is the equidistribution of semiprimes in progressions of moduli
 $q_0\le Q=(\log X)^{C}$, supplied \emph{unconditionally} by Lemma~\ref{lem:s2ap}
 (Siegel--Walfisz); integrating $S_\PP S_{\SSemi}$ over $\mathfrak M$ then gives
-$M^{(\le Y)}(N)=\mathfrak S_2(N;Q)\,J(N)(1+o(1))$ with truncated singular series
-$\mathfrak S_2(N;Q)$. By the per-channel Euler-product identity of Lemma~\ref{lem:sing} the
-local factors assemble, channel by channel, into $2C_2\sing(N)\frac{r-1}{r-2}$ for $r\nmid N$
-(and $0$ for $r\mid N$); summing against the archimedean weights $I_r(N)$ over $3\le r\le Y$
-gives the displayed sum, the completion $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$ being
+$M^{(\le Y)}(N)=\mathfrak S_2(N;Q)\,J(N)(1+o(1))$ with the \emph{pure arithmetic} singular series
+$\mathfrak S_2(N;Q)=2C_2\sing(N)+O(Q^{-1})$ and the archimedean channel factor
+$J(N)=\sum_{3\le r\le Y,\,r\nmid N}\frac{r-1}{r-2}I_r(N)$. By the per-channel Euler-product
+identity of Lemma~\ref{lem:sing}, each unblocked channel contributes
+$2C_2\sing(N)\frac{r-1}{r-2}I_r(N)$ (and $r\mid N$ contributes $0$), so $\mathfrak S_2(N;Q)\,J(N)$
+is exactly the displayed sum; the completion $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$ is
 the absolutely convergent tail.
 \end{proof}
 
@@ -1318,8 +1323,8 @@ Theorem~\ref{thm:aa} is unconditional. The minor-arc variance estimate
 standard Hardy--Littlewood evaluation for the channel forms $s$ and $N-rs$
 (Proposition~\ref{prop:major}, \S\ref{sec:majorarc}), whose one arithmetic input---the
 equidistribution of semiprimes in progressions---is supplied unconditionally by
-Lemma~\ref{lem:s2ap} (Selberg--Sath\'e convolution of Siegel--Walfisz,
-\citealp{selberg1954,sathe1953}), and whose singular series is the \emph{unconditional}
+Lemma~\ref{lem:s2ap} (the Selberg--Sath\'e convolution of Siegel--Walfisz
+\citep{selberg1954,sathe1953}), and whose singular series is the \emph{unconditional}
 Euler product of Lemma~\ref{lem:sing}. Every ingredient---Vaughan's minor-arc bound
 \citep{vaughan1997}, Siegel--Walfisz, Montgomery--Vaughan, and Lemma~\ref{lem:sing}---is
 classical; the singular-series bookkeeping is presented at the level of detail standard for
@@ -1344,8 +1349,8 @@ should be regarded as a standard consequence of the classical circle-method fram
 \citep[Ch.~3]{vaughan1997}, with the major-arc input supplied unconditionally in
 \S\ref{sec:majorarc}. What is specific here is the
 singular-series cancellation of Lemma~\ref{lem:sing}, which exhibits
-$\mathrm{main}(N)=2C_2\,\sing(N)\,W_f(N)\,J(N)$ explicitly and is the reason $\sing$
-disappears from the ratio $R_2/R_1$. The contribution of this appendix is the explicit
+$\mathrm{main}(N)=2C_2\,\sing(N)\,J(N)=W_f(N)\,[2C_2\,\sing(N)\,I_1(N)]$ explicitly and is the
+reason $\sing$ disappears from the ratio $R_2/R_1$. The contribution of this appendix is the explicit
 bookkeeping and its consequences for the effective exponent $\beta_2$, not the almost-all
 asymptotic itself.
 \end{remark}
@@ -1423,11 +1428,18 @@ $\ell\mid N$ removed and the suppression at $\ell=r\mid N$---i.e.\ the singular 
 Lemma~\ref{lem:sing}. Hence
 \[
   \mathrm{main}(N)=\mathfrak S_2(N;Q)\,J(N)\big(1+o(1)\big),
-  \quad \mathfrak S_2(N;Q)=2C_2\,\sing(N)\,W_f(N)+O(Q^{-1}),
-  \quad J(N)\asymp\frac{X\log\log X}{\log^2 X},
+  \quad \mathfrak S_2(N;Q)=2C_2\,\sing(N)+O(Q^{-1}),
+  \quad J(N):=\!\!\sum_{\substack{3\le r\le Y\\ r\nmid N}}\!\!\frac{r-1}{r-2}\,I_r(N),
 \]
-the tail $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$ being the standard
-absolutely-convergent completion of the singular series.
+where $\mathfrak S_2$ is the \emph{pure arithmetic} Euler product (the conventional singular
+series, with tail $\mathfrak S_2(N)-\mathfrak S_2(N;Q)\ll Q^{-1}$) and $J(N)$ is the archimedean
+channel factor. The Mertens channel sum lives entirely in $J$: since $W_f(N)=J(N)/I_1(N)$ and
+$I_1(N)\asymp N/\log^2N$, one has $J(N)\asymp X\log\log X/\log^2X$, and
+\[
+  \mathrm{main}(N)=2C_2\,\sing(N)\,J(N)(1+o(1))=W_f(N)\,\big[2C_2\,\sing(N)\,I_1(N)\big](1+o(1)),
+\]
+exactly the form of Theorem~\ref{thm:aa} (the singular series is counted once, in
+$\mathfrak S_2$; $W_f$ is not folded into it).
 
 \paragraph{No per-channel uniformity is needed.}
 It is worth being precise about the logic, since the channel sum over $r$ might suggest a
