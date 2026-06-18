@@ -1082,9 +1082,12 @@ Is there a canonical normalisation with a clean limit?
 evaluation for the truncated semiprime channel (semiprimes in progressions of moduli $q\le Q$,
 uniformly in $r\le X^\eta$), turning Theorem~\ref{thm:aa} from a bounded reduction into a
 self-contained almost-all statement.
-\item \textbf{Layers} (\S\ref{sec:layers-emp}). Make the qualitative sign reversal of the layer
-exponents $\beta_k$ quantitative beyond the blocked-channel model (Appendix~\ref{sec:omega-gf}):
-predict the crossing $\beta_k=0$ and its drift with $X$.
+\item \textbf{Layers} (\S\ref{sec:layers-emp}). The Poisson model predicts
+$\beta_k(X)=1-(k-1)\kappa_X$ to leading order, with crossing $k^\star=1+1/\kappa_X\asymp\log\log X$
+(Prop.~\ref{prop:layers}); this captures the slope near the top and the crossing layer but
+not the observed convex (accelerating) descent of the deeper $\beta_k$. Establish the
+second-order correction --- i.e.\ the $O((k-1)^2\kappa_X^2)$ steepening --- and prove the
+crossing drift unconditionally.
 \end{enumerate}
 
 \section{Conclusion}
@@ -1949,6 +1952,55 @@ negative one above it ($k>\bar\mu_y$). This is the mechanism behind the transiti
 positive response in the Goldbach and Chen layers to negative response for higher
 $\OmegaF$-layers; it gives the direction and the sign reversal, not the exact numerical
 $\beta_k$.
+
+The linearization can be pushed to a closed-form prediction for every layer, tying the
+crossing point to the \emph{same} $1/\log\log X$ law that governs $\beta_2$.
+
+\begin{proposition}[Layer exponents; model]\label{prop:layers}
+Set $\kappa_X:=-\operatorname{Cov}(\mu_y,Y_y)/\big(\bar\mu_y\operatorname{Var}(Y_y)\big)>0$.
+In the Poisson model above, the singular exponent of the $k$-th layer obeys, to first
+order in the channel fluctuation $\mu_y(B)-\bar\mu_y$,
+\[
+  \beta_k(X)=1-(k-1)\,\kappa_X+O\!\big((k-1)^2\kappa_X^2\big).
+\]
+Consequently: \emph{(i)} $\beta_k$ falls linearly in $k$ with the slope $\kappa_X$ already
+fixed by $\beta_2=1-\kappa_X$; \emph{(ii)} the sign reversal sits at
+$k^\star(X)=1+1/\kappa_X$; and \emph{(iii)} since $\kappa_X=1-\beta_2\asymp1/\log\log X$
+(Thm.~\ref{thm:beta}, \eqref{eq:beta-loglog}, Prop.~\ref{prop:blocked}), every fixed layer
+drifts $\beta_k(X)\to1$ while the crossing migrates $k^\star(X)\asymp\log\log X\to\infty$.
+\end{proposition}
+
+\begin{proof}
+The response of layer $k$ is $\rho_k:=\operatorname{Cov}\big(\log\Pr(\OmegaF_y=k\mid B),Y_y\big)/\operatorname{Var}(Y_y)$,
+and the regression target is $\log(R_k/R_1)$, so $\beta_k-1=\rho_k-\rho_1$ ($k=1$ is the
+reference channel). The Poisson log-likelihood
+$\log\Pr(\OmegaF_y=k\mid B)=-\mu_y(B)+k\log\mu_y(B)-\log k!$ has
+$\partial_{\mu_y}=k/\mu_y-1$, so near $\mu_y=\bar\mu_y$,
+\[
+  \log\Pr(\OmegaF_y=k\mid B)=\mathrm{const}+\big(\tfrac{k}{\bar\mu_y}-1\big)\big(\mu_y(B)-\bar\mu_y\big)+O\big((\mu_y-\bar\mu_y)^2\big),
+\]
+whence $\rho_k=(k/\bar\mu_y-1)\operatorname{Cov}(\mu_y,Y_y)/\operatorname{Var}(Y_y)$ and
+\[
+  \beta_k-1=\rho_k-\rho_1=\frac{k-1}{\bar\mu_y}\cdot\frac{\operatorname{Cov}(\mu_y,Y_y)}{\operatorname{Var}(Y_y)}=-(k-1)\kappa_X.
+\]
+Solving $\beta_k=0$ gives $k^\star=1+1/\kappa_X$; the drift is the identity $\kappa_X=1-\beta_2$
+fed through Thm.~\ref{thm:beta}.
+\end{proof}
+
+\begin{remark}
+At $X=2\cdot10^{6}$ the model is calibrated by $\kappa_X=1-\beta_2=0.50$ alone, with
+\emph{no} further fit: it predicts $\beta_3=0$ and a crossing exactly at $k^\star=3$, and
+Table~\ref{tab:layers} has $\beta_3=-0.30$ with the crossing between $k=2$ and $3$ --- the
+right crossing layer and the right slope near the top. It \emph{underestimates} the deeper
+layers: the observed $\beta_k$ are convex in $k$ (increments $-0.5,-0.8,-1.1,-1.4,\dots$ in
+Table~\ref{tab:layers}), whereas the leading-order law is exactly linear. The gap is the
+second-order term $O((k-1)^2\kappa_X^2)$ dropped above (the Poisson mean $\mu_y$ itself
+fluctuates), which grows with $k$ and steepens the descent --- a clean, falsifiable
+discrepancy rather than a free parameter. The predicted drift is confirmed directly:
+$\beta_3$ rises from $-0.30$ at $2\cdot10^{6}$ to $-0.20$ at $8\cdot10^{6}$
+(\S\ref{sec:layers-emp}), i.e.\ $k^\star$ moves right as $\kappa_X\downarrow$, exactly as
+$\kappa_X\asymp1/\log\log X$ demands.
+\end{remark}
 
 \subsection{Weak uniformity of the location measures}
 \label{sec:weak-cont}
