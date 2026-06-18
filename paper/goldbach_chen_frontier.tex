@@ -124,7 +124,7 @@ Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implem
 \item \textbf{Layers and sign reversal (\S\ref{sec:layers-emp}).} For $\OmegaF(q)=k$, the effective exponent $\beta_k$ falls through $1,\tfrac12,\dots$ and becomes negative for $k\ge3$: $\sing(N)$ enhances low-complexity and suppresses high-complexity channels.
 \item \textbf{Diagnostics (\S\ref{sec:diag-emp}, \S\ref{sec:balance-emp}).} Goldbach fragility is rare and always Chen-rescued; the semiprime factor geometry favours unbalanced semiprimes with a small prime factor; and the residual Goldbach--Chen balance exponent $a_{\rm Res}(N)$ correlates positively with $\sing(N)$. (Further selection/continuity/transport diagnostics are in the supplement.)
 \item \textbf{An unconditional almost-all asymptotic (Appendix~\ref{app:uncond}).} The cancellation identity (Lemma~\ref{lem:sing}) is unconditional. A circle-method second-moment estimate---Vaughan's classical \emph{prime} minor-arc bound plus the trivial $L^2$ size of the semiprime sum, no sieve (Prop.~\ref{prop:var})---together with the major-arc evaluation (Lemma~\ref{lem:s2ap}, the equidistribution of semiprimes in progressions, proved from Siegel--Walfisz) gives the \emph{linear} asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, \emph{unconditionally} (Theorem~\ref{thm:aa}). Upgrading to the log-regression statement $\beta_2(N)\to1$ needs one further input (an explicit lower-tail hypothesis on $R_2/R_1$, beyond $L^2$); we state that gap rather than claim past it.
-\item \textbf{A confirming experiment (\S\ref{sec:two-experiments}).} The empirical circle method---the comet power spectrum as an empirical shadow of the major arcs---earns a place in the body by yielding a \emph{new computation}; a smaller observation records a digit/Kummer carry signature of primality. The frontier admits several further cross-disciplinary recastings (thermodynamic ground state, adversarial network, liquidity market, control problem, information channel, discrete surface); we are explicit that these are \emph{one} finding---$\sing(N)$ sets the local densities---seen in several mirrors, not independent results, and we collect them, with the honest negatives, in the accompanying supplement rather than the body.
+\item \textbf{A confirming experiment (\S\ref{sec:two-experiments}).} The empirical circle method---the comet power spectrum as an empirical shadow of the major arcs---earns a place in the body by yielding a \emph{new computation}; a smaller observation records a digit/Kummer carry signature of primality. The frontier admits a few further cross-disciplinary recastings (thermodynamic ground state, adversarial network, control problem, information channel, discrete surface); we are explicit that these are \emph{one} finding---$\sing(N)$ sets the local densities---seen in several mirrors, not independent results, and we collect them, with the one structural negative, in the accompanying supplement rather than the body.
 \end{enumerate}
 
 \paragraph{Status of the results: proven, conditional, conjectural.}
@@ -848,8 +848,8 @@ We have deliberately resisted the temptation to read this one fact as many. The
 optimization formulations (supplement) give a language, not a proof strategy; the
 cross-disciplinary reframings are, except for the empirical circle method kept in the body (with
 a smaller carry-signature observation), the same singular-series governance re-photographed in
-different filters, and we have said so rather than count them as separate findings. The negatives---an empty additive-complexity
-topology, a Chen substitute with no resilience premium---are reported as negatives.
+different filters, and we have said so rather than count them as separate findings. The one
+structural negative---an empty additive-complexity topology---is reported as such.
 
 This is not a proof of Goldbach. It is reproducible evidence, one cancellation identity made
 explicit, and an unconditional almost-all asymptotic for the semiprime channel, at the boundary
@@ -918,11 +918,19 @@ singular-series cancellation seems not to have been written down is a matter of 
 difficulty. The sieve literature on Chen's theorem and on the $(1+a)$
 interpolation \citep{chen1973,halberstamrichert,li2026} is directed at \emph{existence}---lower
 bounds forcing $R_{\le2}(N)>0$, and upper bounds within a constant of the Hardy--Littlewood
-prediction. The conjectural prime--semiprime main term itself (the Hardy--Littlewood asymptotic
-for $R_{\le2}$ and for $R_2$) is implicit in these heuristics and in the refinements of Chen's
-theorem developed by the school of Cai, L\"u and Pan among others; the local computation
-underlying Lemma~\ref{lem:sing} is exactly there. What none of these works isolates is the
-\emph{ratio} $R_2/R_1$ and the exact cancellation of $\sing(N)$ in it: for the existence and
+prediction. The conjectural prime--semiprime main term itself (the Hardy--Littlewood asymptotic for
+$R_{\le2}$ and for $R_2$) is implicit in these heuristics, in the Chinese-school refinements of
+Chen's theorem (Pan and Pan \citep{panpan}, and the tradition of Cai and L\"u), and in the
+prime/almost-prime correlation literature---the same singular-series machinery and the same
+local densities. Closest in spirit is the latter: Evans \citep{evans2021} proves
+Hardy--Littlewood asymptotics for the shifted correlation between primes $n$ and almost-primes
+$n+h$ with $\OmegaF(n+h)=2$, valid for almost all shifts $h$, by exactly the Euler-product
+computation behind Lemma~\ref{lem:sing}. The crucial distinction is the \emph{object}: a shifted
+correlation fixes a gap $h$ and averages over $n$, so the two singular series do \emph{not}
+cancel; our object fixes the sum $N=p+q$ and forms the channel \emph{ratio} $R_2/R_1$, in which
+$\sing(N)$ cancels exactly---and that cancellation is the whole point. What none of the
+existence/lower-bound or shifted-correlation works isolates is this ratio and the exact
+cancellation of $\sing(N)$ in it: for the existence and
 upper-bound aims the singular-series content of $R_2/R_1$ is irrelevant and is never separated
 out. It becomes the natural object only once one asks how the relative semiprime
 share responds to $\sing(N)$, as the empirical regression of \S\ref{sec:singexp} forces. The
@@ -1995,6 +2003,11 @@ Chen, J. R. (1973).
 \newblock On the representation of a larger even integer as the sum of a prime and the product of at most two primes.
 \newblock \emph{Scientia Sinica}, 16, 157--176.
 
+\bibitem[Evans(2021)]{evans2021}
+Evans, N. (2021).
+\newblock Correlations of almost primes.
+\newblock \emph{Bulletin of the London Mathematical Society}, 53(3), 906--922.
+
 \bibitem[Halberstam and Richert(1974)]{halberstamrichert}
 Halberstam, H. and Richert, H.-E. (1974).
 \newblock \emph{Sieve Methods}.
@@ -2034,6 +2047,11 @@ Nathanson, M. B. (1996).
 Oliveira e Silva, T., Herzog, S., and Pardi, S. (2014).
 \newblock Empirical verification of the even Goldbach conjecture and computation of prime gaps up to $4\cdot10^{18}$.
 \newblock \emph{Mathematics of Computation}, 83(288), 2033--2060.
+
+\bibitem[Pan and Pan(1992)]{panpan}
+Pan, C. D. and Pan, C. B. (1992).
+\newblock \emph{Goldbach Conjecture}.
+\newblock Science Press, Beijing.
 
 \bibitem[Sath\'e(1953)]{sathe1953}
 Sath\'e, L. G. (1953).
