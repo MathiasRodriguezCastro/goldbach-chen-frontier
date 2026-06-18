@@ -775,9 +775,20 @@ $\beta_k=0$ moves slowly to the right. We also find that the strongest
 ``rescue'' channel, $q=$ composite$\times$composite (both factors composite), is
 available for \emph{every} even $N$ in the range with on average $\sim1.8\cdot10^{4}$
 representations: the additive hierarchy is extremely redundant below the prime
-layer. The whole sign reversal is the coefficient-level shadow of a single
-generating-function response in the blocked-channel model, made precise in
-Appendix~\ref{sec:omega-gf}.
+layer.
+
+\paragraph{The generating-function mechanism.}
+The whole pattern is one generating-function response. Encode the layers by
+$Z_N(z)=\sum_{p<N}\ones_\PP(p)\,z^{\OmegaF(N-p)}$, so that $[z^k]Z_N(z)=R_k(N)$ and $z=1$
+recovers the Chen count. In the blocked-channel model the log-density of the $\OmegaF=k$ layer
+is, to first order, linear in the channel fluctuation, and its singular-series response is
+$\beta_k(X)-1\approx-(k-1)\,\kappa_X$ with a single positive slope $\kappa_X=1-\beta_2$
+(Prop.~\ref{prop:layers}): positive below the typical factor count and negative above it, so
+$\beta_k$ falls linearly through $1,\tfrac12,\dots$ and crosses zero near
+$k^\star=1+1/\kappa_X\asymp\log\log X$. This is why a large $\sing(N)$ enhances the
+low-complexity channels and suppresses the high-complexity ones. The precise statement and the
+$\OmegaF$-generating function are in Appendix~\ref{sec:omega-gf}; no correlation-inequality
+machinery is needed---a Poisson linearization of the same blocked-channel model suffices.
 
 \subsection{Diagnostics}
 \label{sec:diag-emp}
