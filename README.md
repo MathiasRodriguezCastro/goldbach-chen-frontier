@@ -137,6 +137,13 @@ de criba y tablas derivadas están versionadas en `data/`.
 verificado clone-and-run en un *venv* limpio. Tiempos de referencia en un Intel **i7-13620H (16
 núcleos, 16 GB)**: la criba por bloques escala ~lineal en `X` (~2 min por ventana de 2·10⁶ en
 `X=2·10⁸`, ~10 min en `X=10⁹`); `run_all.py --fast` ~minutos, la pasada completa a 10⁹ < 1 hora.
+
+**Reproducción independiente.** `reproduce.py` y `reproduce_suppl.py` (raíz del repo) son
+implementaciones **desde cero** (solo numpy/FFT, sin compartir código con `src/`) que recuperan el
+núcleo empírico —π(X), conteos primo/semiprimo, control de serie singular de R₁, deriva de β₂,
+reversión de signo por capas, y las sondas del suplemento— a la precisión citada (~3 s cada una a
+X=2·10⁶). Sirven como control externo del resultado central.
+
 Snapshot citable: [`10.5281/zenodo.20725701`](https://doi.org/10.5281/zenodo.20725701).
 
 ## Uso

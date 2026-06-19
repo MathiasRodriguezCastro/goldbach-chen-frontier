@@ -63,29 +63,35 @@
 
 \begin{abstract}
 The binary Goldbach conjecture asks whether every even $N>2$ is a sum of two primes; Chen's
-theorem replaces the second prime by a prime or semiprime. We isolate an elementary
-singular-series cancellation that governs the Goldbach--Chen frontier and put it to use.
-Decomposing a semiprime second summand $q=rs$ by its small prime factor $r$, each channel
-carries the \emph{same} Hardy--Littlewood singular series $\sing(N)$ that governs the Goldbach
-count $R_1(N)$ (an \emph{unconditional} Euler-product identity), so $\sing(N)$ \emph{cancels
-exactly} in the ratio of main terms of $R_1$ and the semiprime Chen-surplus count $R_2(N)$,
-leaving a pure Mertens channel sum $W_f(N)\sim\log\log N$ with $R_2/R_1=W_f(N)(1+o(1))$ under the
-major-arc input. This single
-identity organizes the whole picture---the channel ratio, the sign reversal of the effective
-exponent across $\OmegaF$-layers, the residual collapse, and the Chen-rescue threshold. Its most
-visible corollary resolves a finite-range puzzle: a log--log regression of $R_2/R_1$ against
-$\sing(N)$ assigns the semiprime channel an apparent exponent $\beta_2\approx\tfrac12$, strikingly
-unlike the $\beta_1=1$ of the prime channel; yet computing $R_1,R_2$ to $10^{9}$ by a
-block-convolution sieve shows this is \emph{not} a structural half-power, since $\sing(N)$ enters
-$R_2$ with exponent $1$ exactly as in $R_1$. The effective exponent instead drifts to $1$ like
-$\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle$ with deficit $\sim1/\log\log N$, a drift a moving-block
-bootstrap makes statistically decisive. The paper's verifiable theorem is \emph{unconditional}: a
+theorem allows the second summand to be a prime or a semiprime. Writing $R_1(N)$ and $R_2(N)$ for
+the number of representations $N=p+q$ with $q$ prime and with $q$ a semiprime, a log--log
+regression of $R_2/R_1$ against the Hardy--Littlewood singular series $\sing(N)$ assigns the
+semiprime channel an apparent exponent $\beta_2\approx\tfrac12$, strikingly unlike the $\beta_1=1$
+of the prime channel. We show this half-power is an artifact of finite range, not of structure.
+Decomposing a semiprime $q=rs$ by its smaller prime factor, each channel inherits the same
+singular series $\sing(N)$ that governs $R_1$ (an elementary Euler-product identity), so $\sing(N)$
+enters $R_2$ with exponent $1$---exactly as in $R_1$---and cancels in the ratio of main terms,
+leaving a pure Mertens channel sum $W_f(N)\sim\log\log N$ with $R_2/R_1=W_f(N)(1+o(1))$. The
+contribution is the object, not the local computation: forming the channel ratio $R_2/R_1$ at
+fixed $N$, in which $\sing(N)$ cancels exactly, in contrast to the shifted-correlation literature,
+which fixes a gap and averages over the summand, where the two singular series do not cancel. This
+single cancellation organizes the whole picture---the channel ratio, the sign reversal of the
+effective exponent across arithmetic-complexity layers, the residual collapse, and the Chen-rescue
+threshold. Computing $R_1,R_2$ to $10^{9}$ by a block-convolution sieve shows the effective
+exponent is not fixed: it drifts upward as $\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle$ with deficit
+$\sim1/\log\log N$, a drift a moving-block bootstrap makes statistically decisive and a
+singular-series-matched Cram\'er surrogate reproduces.
+
+We are explicit about status. Unconditional are (i) the cancellation identity, and (ii) a linear
+almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, from a
 Vaughan--Parseval minor-arc second moment together with the equidistribution of semiprimes in
-arithmetic progressions gives the \emph{linear} almost-all asymptotic
-$R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$; only the passage to the untruncated
-statement $\beta_2\to1$ is isolated as an explicit, unproven lower-tail hypothesis. The goal is
-not a proof of Goldbach but the cancellation identity, a reproducible artifact it explains, and an
-unconditional almost-all asymptotic; cross-disciplinary reframings are recorded in the supplement.
+arithmetic progressions (Siegel--Walfisz). Upgrading this to the log-regression statement
+$\beta_2(N)\to1$ requires one further input, isolated as an explicit, unproven lower-tail
+hypothesis on $R_2/R_1$; the functional form $1-\beta_2\asymp1/\log\log N$ is proved in the
+Cram\'er model and, for the primes, conditionally on a quantitative Hardy--Littlewood input. The
+goal is not a proof of Goldbach but the cancellation identity, a reproducible artifact it explains,
+and an unconditional almost-all asymptotic for the semiprime channel; cross-disciplinary reframings
+are recorded in a supplement.
 \end{abstract}
 
 \paragraph{\textit{2020 Mathematics Subject Classification.}} 11P32 (primary); 11N36, 11A41, 11Y35, 11-04 (secondary).
@@ -2154,8 +2160,12 @@ use \texttt{run\_counts.py} (FFT counts to $2\cdot10^{6}$), \texttt{run\_scaling
 \eqref{eq:betalaw}), \texttt{run\_estimator\_audit.py} (the estimator reconciliation and
 the $3\mid N$ atom of \S\ref{sec:singexp}), and \texttt{run\_exceptional.py} (the
 concentration of Table~\ref{tab:conc}). The block-bootstrap confidence intervals of
-\S\ref{sec:singexp} are produced by \texttt{run\_bootstrap.py}. Derived tables and the sieve
-seeds are stored in \texttt{data/}. Dependencies are pinned in \texttt{requirements.txt}
+\S\ref{sec:singexp} are produced by \texttt{run\_bootstrap.py}, and the Cram\'er null control and
+trajectory by \texttt{run\_nullcontrol.py}. The empirical core was \emph{independently reproduced}
+by a separate from-scratch implementation (\texttt{reproduce.py}, \texttt{reproduce\_suppl.py};
+numpy/FFT only, no shared code), recovering $\pi(X)$, the prime/semiprime counts, the $R_1$
+singular-series control, the $\beta_2$ drift, the layer sign reversal, and the supplement probes to
+the quoted precision. Derived tables and the sieve seeds are stored in \texttt{data/}. Dependencies are pinned in \texttt{requirements.txt}
 (tested with Python~3.10); a single \texttt{run\_all.py} regenerates everything, with
 \texttt{--with-gurobi} gating the only license-dependent driver. Runtimes are reported for a
 $16$-core Intel i7-13620H with $16$\,GB RAM: the FFT counts to $2\cdot10^{6}$ take seconds, the
