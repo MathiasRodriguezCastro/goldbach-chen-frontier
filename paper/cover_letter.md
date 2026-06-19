@@ -50,7 +50,7 @@ claim to be.
 
 **Reproducibility, and an external check.** Every figure, table, and quoted number is regenerated
 by an open-source repository (`run_all.py`; pinned `requirements.txt`; per-module self-tests),
-public on GitHub and archived on Zenodo (doi:10.5281/zenodo.20725701). In addition, the empirical
+public on GitHub and archived on Zenodo (doi:10.5281/zenodo.20756546). In addition, the empirical
 core was *independently reproduced* by a separate from-scratch implementation (`reproduce.py`,
 numpy/FFT only, no shared code), recovering the prime/semiprime counts, the $R_1$ singular-series
 control, the $\beta_2$ drift, and the layer sign reversal to the quoted precision.

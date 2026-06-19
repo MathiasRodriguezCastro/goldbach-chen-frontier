@@ -144,7 +144,7 @@ núcleo empírico —π(X), conteos primo/semiprimo, control de serie singular d
 reversión de signo por capas, y las sondas del suplemento— a la precisión citada (~3 s cada una a
 X=2·10⁶). Sirven como control externo del resultado central.
 
-Snapshot citable: [`10.5281/zenodo.20725701`](https://doi.org/10.5281/zenodo.20725701).
+Snapshot citable: [`10.5281/zenodo.20756546`](https://doi.org/10.5281/zenodo.20756546).
 
 ## Uso
 

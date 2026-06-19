@@ -21,11 +21,11 @@ keywords:
   - experimental number theory
   - semiprimes
 license: MIT
-version: "1.0.0"
-date-released: 2026-06-17
+version: "1.0.1"
+date-released: 2026-06-19
 repository-code: "https://github.com/MathiasRodriguezCastro/goldbach-chen-frontier"
-doi: "10.5281/zenodo.20725701"
+doi: "10.5281/zenodo.20756546"
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.20725701"
+    value: "10.5281/zenodo.20756546"
     description: "Zenodo archive of the code and derived tables."
