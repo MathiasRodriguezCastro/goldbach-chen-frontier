@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{mathtools}
+\usepackage{array}
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage{listings}
@@ -278,7 +279,7 @@ cancellation; the local computation itself is classical (Remark~\ref{rem:identit
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{ll}
+\begin{tabular}{@{}l >{\raggedright\arraybackslash}p{8.6cm}@{}}
 \toprule
 Symbol & Meaning\\
 \midrule
@@ -412,14 +413,14 @@ they are not confused.
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{lll}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.7cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{4.3cm}@{}}
 \toprule
 Estimator & Definition & Representative values\\
 \midrule
-$\beta_2$ (cumulative) & $1+$ OLS slope of $\log(R_2/R_1)$ on $\log\sing$, even $N\in[5000,X]$ & $0.45,0.48,0.50$ ($X=5\!\cdot\!10^5,10^6,2\!\cdot\!10^6$; Tab.~\ref{tab:beta})\\
-$\beta_2$ (local) & same slope over the window $N\in[X,X+2\!\cdot\!10^6]$ & $0.55\!\to\!0.61$ ($X=6\!\cdot\!10^6\!\to\!10^9$; Tab.~\ref{tab:bootstrap})\\
-$\beta_2^{(1)}$ (first moment) & from the conditional responses $A_\ell,B_\ell$ (\S\ref{sec:singexp}) & $0.53,0.56,0.59$ ($X=2\!\cdot\!10^6,2\!\cdot\!10^7,10^8$)\\
-$\beta_2^{\mathrm{Cram\acute er}}$ (surrogate) & $\beta_2$ of the matched-density Poisson model & $0.53\!\to\!0.75$ ($X=10^6\!\to\!10^{50}$; Fig.~\ref{fig:trajectory})\\
+$\beta_2$ (cumulative) & $1+$ OLS slope of $\log(R_2/R_1)$ on $\log\sing$, even $N\in[5000,X]$ & $0.45,0.48,0.50$ at $X=5\!\cdot\!10^5,10^6,2\!\cdot\!10^6$ (Tab.~\ref{tab:beta})\\[2pt]
+$\beta_2$ (local) & same slope over the window $N\in[X,X+2\!\cdot\!10^6]$ & $0.55\!\to\!0.61$, $X=6\!\cdot\!10^6\!\to\!10^9$ (Tab.~\ref{tab:bootstrap})\\[2pt]
+$\beta_2^{(1)}$ (first moment) & from the conditional responses $A_\ell,B_\ell$ (\S\ref{sec:singexp}) & $0.53,0.56,0.59$ at $X=2\!\cdot\!10^6,2\!\cdot\!10^7,10^8$\\[2pt]
+$\beta_2^{\mathrm{Cram\acute er}}$ (surrogate) & $\beta_2$ of the matched-density Poisson model & $0.53\!\to\!0.75$, $X=10^6\!\to\!10^{50}$ (Fig.~\ref{fig:trajectory})\\[2pt]
 $\beta_k$ (layers) & $1+$ slope of $\log(R_k/R_1)$ on $\log\sing$ & $1.0,0.5,-0.3,\dots$ (Tab.~\ref{tab:layers})\\
 \bottomrule
 \end{tabular}
