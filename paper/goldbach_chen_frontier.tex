@@ -1,18 +1,21 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[]{interact}% Taylor & Francis Interact layout, NLM (numbered) reference style
 
+% interact.cls already loads amsmath, amssymb, amsfonts, amsbsy, amsthm, booktabs,
+% epsfig, graphicx, rotating and geometry, so those are not re-loaded here.
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{booktabs}
+\usepackage{mathtools}
 \usepackage{enumitem}
 \usepackage{xcolor}
-\usepackage{hyperref}
-\usepackage[numbers,sort&compress]{natbib}
 \usepackage{listings}
 \usepackage{microtype}
-\usepackage{graphicx}
+\usepackage[numbers,sort&compress]{natbib}% NLM numbered citations
+\bibpunct[, ]{[}{]}{,}{n}{,}{,}
+\makeatletter
+\def\NAT@def@citea{\def\@citea{\NAT@separator}}% suppress spaces between citations
+\makeatother
+\usepackage{hyperref}
 \graphicspath{{../figures/}}
 
 \hypersetup{
@@ -57,14 +60,17 @@
 }
 
 \title{The Goldbach--Chen Frontier: A Singular-Series Cancellation behind a Finite-Range Half-Power}
-\author{Mathias Rodr\'iguez Castro\thanks{Correspondence: \texttt{mrodriguezcastro24@gmail.com}. ORCID: \href{https://orcid.org/0009-0002-7235-7677}{0009-0002-7235-7677}.}}
-% TODO (T&F title page): add institutional affiliation and full postal address.
-\date{June 2026}
+
+\author{
+\name{Mathias Rodr\'iguez Castro\textsuperscript{a}\thanks{CONTACT Mathias Rodr\'iguez Castro. Email: mathiasr@fing.edu.uy. ORCID: 0009-0002-7235-7677.}}
+\affil{\textsuperscript{a}Facultad de Ingenier\'ia, Universidad de la Rep\'ublica, Montevideo, Uruguay}
+}
 
 \begin{document}
+
+\articletype{Research Article}
+
 \maketitle
-\pagestyle{myheadings}
-\markboth{The Goldbach--Chen Frontier}{M.\ Rodr\'iguez Castro}
 
 \begin{abstract}
 The binary Goldbach conjecture asks whether every even $N>2$ is a sum of two primes; Chen's
@@ -99,9 +105,11 @@ and an unconditional almost-all asymptotic for the semiprime channel; cross-disc
 are recorded in a supplement.
 \end{abstract}
 
-\paragraph{\textit{2020 Mathematics Subject Classification.}} 11P32 (primary); 11N36, 11A41, 11Y35, 11-04 (secondary).
+\begin{keywords}
+Goldbach--Chen frontier; Hardy--Littlewood singular series; semiprimes; circle method; experimental number theory; almost-all asymptotics
+\end{keywords}
 
-\paragraph{\textit{Keywords.}} Goldbach--Chen frontier; Hardy--Littlewood singular series; semiprimes; circle method; experimental number theory; almost-all asymptotics.
+\medskip\noindent\textit{2020 Mathematics Subject Classification:} 11P32 (primary); 11N36, 11A41, 11Y35, 11-04 (secondary).
 
 \section{Introduction}
 
