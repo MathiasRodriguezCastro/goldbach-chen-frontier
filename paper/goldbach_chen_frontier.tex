@@ -67,9 +67,10 @@ theorem replaces the second prime by a prime or semiprime. We isolate an element
 singular-series cancellation that governs the Goldbach--Chen frontier and put it to use.
 Decomposing a semiprime second summand $q=rs$ by its small prime factor $r$, each channel
 carries the \emph{same} Hardy--Littlewood singular series $\sing(N)$ that governs the Goldbach
-count $R_1(N)$ (an Euler-product identity), so $\sing(N)$ \emph{cancels exactly} in the ratio of
-main terms of $R_1$ and the semiprime Chen-surplus count $R_2(N)$, leaving a pure Mertens channel
-sum $W_f(N)\sim\log\log N$ with $R_2/R_1=W_f(N)(1+o(1))$ under the major-arc input. This single
+count $R_1(N)$ (an \emph{unconditional} Euler-product identity), so $\sing(N)$ \emph{cancels
+exactly} in the ratio of main terms of $R_1$ and the semiprime Chen-surplus count $R_2(N)$,
+leaving a pure Mertens channel sum $W_f(N)\sim\log\log N$ with $R_2/R_1=W_f(N)(1+o(1))$ under the
+major-arc input. This single
 identity organizes the whole picture---the channel ratio, the sign reversal of the effective
 exponent across $\OmegaF$-layers, the residual collapse, and the Chen-rescue threshold. Its most
 visible corollary resolves a finite-range puzzle: a log--log regression of $R_2/R_1$ against
@@ -116,7 +117,7 @@ For each even $N$, define the number of representations with $q$ prime and with 
 \[
   N \longmapsto \{(p,q): p+q=N,\ p\in\PP,\ q\in \PP\cup\SSemi\}.
 \]
-This is a discrete object, so it is not continuous in the ordinary analytic sense. Nevertheless, one can ask whether the induced empirical measures converge weakly, whether normalized counts have stable asymptotics, and whether a mixed-integer model can select one representation per even integer with small variation. This gives a precise mathematical language for the intuition that the representation may ``jump'' between prime and semiprime behavior.
+This is a discrete object, so it is not continuous in the ordinary analytic sense. Nevertheless, one can ask whether the induced empirical measures converge weakly and whether normalized counts have stable asymptotics. This gives a precise mathematical language for the intuition that the representation may ``jump'' between prime and semiprime behavior.
 
 \paragraph{Summary of findings.}
 Sections \ref{sec:empirical}--\ref{sec:balance-emp} report the results of implementing this program; all numbers are reproducible from the accompanying code. The main outcomes are:
@@ -257,6 +258,28 @@ a finite-range regression reports (\S\ref{sec:singexp}) is an effective exponent
 the blocked channels, \emph{not} a structural one. What we record is the \emph{use} of this
 cancellation; the local computation itself is classical (Remark~\ref{rem:identity-novelty}).
 
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{ll}
+\toprule
+Symbol & Meaning\\
+\midrule
+$\PP,\ \SSemi,\ \OmegaF(n)$ & primes; semiprimes ($\OmegaF=2$); number of prime factors with multiplicity\\
+$R_1(N),\ R_2(N)$ & ordered counts of $N=p+q$ with $q$ prime, resp.\ semiprime \eqref{eq:R1}--\eqref{eq:R2}\\
+$R_{\le2}=R_1+R_2$ & Chen count\\
+$\sing(N)=\prod_{p\mid N,p>2}\frac{p-1}{p-2}$ & Hardy--Littlewood singular series; $C_2$ the twin-prime constant\\
+$\sing_2(r,N)$ & channel singular series of $(s,N-rs)$ (Lemma~\ref{lem:sing})\\
+$I_r(N),\ I_1(N)$ & archimedean (channel / Goldbach) integrals; $w_r=I_r/I_1$\\
+$W_f(N)=\sum_{r\nmid N}\frac{r-1}{r-2}w_r$ & blocked Mertens channel sum, $\sim\log\log N$ \eqref{eq:Wtilde}\\
+$\beta_2,\ \beta_k$ & effective singular exponents (Table~\ref{tab:estimators})\\
+$\theta(N),\ C(N)$ & prime share $R_1/R_{\le2}$; Chen surplus $R_2/(R_1+1)$\\
+\bottomrule
+\end{tabular}
+\caption{Notation.}
+\label{tab:notation}
+\end{table}
+
 \section{The Goldbach--Chen frontier and its classical heuristic}
 \label{sec:frontier}
 
@@ -265,8 +288,10 @@ genuinely semiprime representations. We track a few statistics. The \emph{Chen s
 $C(N)=R_2(N)/(R_1(N)+1)$ measures how far semiprime representations outnumber prime ones; the
 \emph{prime share} $\theta(N)=R_1(N)/(R_1(N)+R_2(N))$ is the complementary ratio; and, for a
 threshold $k$, the \emph{$k$-fragile} integers
-$\mathcal F_k(X)=\{N\le X\ \mathrm{even}:R_1(N)\le k,\ R_2(N)>0\}$ are those for which Goldbach
-is sparse while Chen still rescues. For a semiprime $q=ab$ with $a\le b$ prime, the \emph{factor
+$\mathcal F_k(X)=\{4\le N\le X\ \mathrm{even}:R_1(N)\le k,\ R_2(N)>0\}$ are those for which Goldbach
+is sparse while Chen still rescues. (Here $R_1$ is the \emph{ordered} count \eqref{eq:R1}, so the
+counts $|\mathcal F_k|$ are convention-dependent---an unordered $R_1$, or dropping the $R_2>0$
+condition, changes them; with this convention $|\mathcal F_1|=1$, the integer being $N=6$.) For a semiprime $q=ab$ with $a\le b$ prime, the \emph{factor
 balance} $B(q)=\log a/\log q\in(0,\tfrac12]$ is near $0$ when $q$ has a small prime factor and
 near $\tfrac12$ when $q$ is balanced.
 
@@ -356,13 +381,37 @@ $\sing(N)$ enters $R_2$ with exponent $1$ (exactly as in $R_1$) and \emph{cancel
 ratio $R_2/R_1$, so $R_2/R_1$ is not a power of $\sing$ and the value $\beta_2\approx\tfrac12$
 reported in finite ranges is a finite-size correction, not a structural exponent (developed
 after Table~\ref{tab:beta}). All tables below report $\beta_2$, not the raw slope $m_2$, using
-one estimator throughout: ordinary least squares, cumulative over all even $5000\le N\le X$.
-The reported OLS standard errors are descriptive only, since consecutive even integers are
-arithmetically dependent; a block-bootstrap robustness check is left as a diagnostic in the
-replication code, and the present tables report descriptive OLS uncertainty only. The appendix
-(\S\ref{sec:variance}) instead uses a \emph{local} window centred at $X$, which runs
-$\approx0.02$--$0.03$ higher at the same $X$---the distinction is between an average over
-$[5000,X]$ and a measurement at the leading edge.
+one estimator: ordinary least squares, cumulative over all even $5000\le N\le X$.
+The OLS standard errors quoted are \emph{descriptive only}---consecutive even integers are
+arithmetically dependent, so no inferential claim rests on them; the inferential basis is the
+moving-block bootstrap of \S\ref{sec:singexp} (Table~\ref{tab:bootstrap}), which respects that
+dependence. The variance appendix (\S\ref{sec:variance}) uses instead a \emph{local} window
+centred at $X$, running $\approx0.02$--$0.03$ higher at the same $X$---the distinction is between
+an average over $[5000,X]$ and a measurement at the leading edge. Several exponents appear below
+(cumulative, local, first-moment, Cram\'er, and the layered $\beta_k$); they are all the
+\emph{same} regression read on different data, and Table~\ref{tab:estimators} collects them so
+they are not confused.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+Estimator & Definition & Representative values\\
+\midrule
+$\beta_2$ (cumulative) & $1+$ OLS slope of $\log(R_2/R_1)$ on $\log\sing$, even $N\in[5000,X]$ & $0.45,0.48,0.50$ ($X=5\!\cdot\!10^5,10^6,2\!\cdot\!10^6$; Tab.~\ref{tab:beta})\\
+$\beta_2$ (local) & same slope over the window $N\in[X,X+2\!\cdot\!10^6]$ & $0.55\!\to\!0.61$ ($X=6\!\cdot\!10^6\!\to\!10^9$; Tab.~\ref{tab:bootstrap})\\
+$\beta_2^{(1)}$ (first moment) & from the conditional responses $A_\ell,B_\ell$ (\S\ref{sec:singexp}) & $0.53,0.56,0.59$ ($X=2\!\cdot\!10^6,2\!\cdot\!10^7,10^8$)\\
+$\beta_2^{\mathrm{Cram\acute er}}$ (surrogate) & $\beta_2$ of the matched-density Poisson model & $0.53\!\to\!0.75$ ($X=10^6\!\to\!10^{50}$; Fig.~\ref{fig:trajectory})\\
+$\beta_k$ (layers) & $1+$ slope of $\log(R_k/R_1)$ on $\log\sing$ & $1.0,0.5,-0.3,\dots$ (Tab.~\ref{tab:layers})\\
+\bottomrule
+\end{tabular}
+\caption{The several exponents, all the same regression read on different data or by a different
+functional. The cumulative $\beta_2$ is the headline; the local, first-moment, and Cram\'er
+versions are independent cross-checks of the same drift, and $\beta_k$ is the layered
+generalization.}
+\label{tab:estimators}
+\end{table}
 
 \begin{table}[h]
 \centering
@@ -601,8 +650,10 @@ constant. Measured over windows from $6\cdot10^{6}$ to $10^{9}$ it equals
 $1.11,1.11,1.10,1.09,1.09,1.08,1.08,1.07$ (Table~\ref{tab:bootstrap}), a coefficient of
 variation of $1.1\%$ (versus $2.2\%$ for $(1-\beta_2)\log\log N$): the correct ``clock'' is
 $\langle R_2/R_1\rangle$, exactly as \eqref{eq:betalaw} requires
-(Fig.~\ref{fig:betalaw}). This is non-circular because $\beta_2$ (a covariance/variance
-slope) and $\langle R_2/R_1\rangle$ (a mean) are \emph{a priori} independent statistics.
+(Fig.~\ref{fig:betalaw}). This is non-circular in the sense that no algebraic identity forces the
+product $(1-\beta_2)\langle R_2/R_1\rangle$ to be constant: $\beta_2$ is a covariance/variance
+slope and $\langle R_2/R_1\rangle$ a mean (both functionals of the same window), and their product
+holding to $1\%$ is a property of the data, not a tautology.
 \end{observation}
 
 \begin{figure}[h]
@@ -890,9 +941,9 @@ The organizing observation of this study is a single Euler-product identity and 
 consequence: decomposing the semiprime channel by its small prime factor shows that the
 Goldbach singular series $\sing(N)$ enters the main term of $R_2$ with exponent $1$, exactly as
 it enters $R_1$ (Lemma~\ref{lem:sing}), so $\sing(N)$ \emph{cancels} in the main-term ratio and
-$R_2/R_1=W_f(N)(1+o(1))$ under the stated major-arc input. The local factorization and
-cancellation are elementary sieve bookkeeping; our contribution is
-to write them down explicitly and to follow their consequences. The first is that the
+$R_2/R_1=W_f(N)(1+o(1))$ under the stated major-arc input. The local factorization is an
+elementary computation; our contribution is to isolate the cancellation, write it down
+explicitly, and follow its consequences. The first is that the
 naturally read ``$\beta_2\approx\tfrac12$'' of a finite-range fit is not a structural exponent
 but a finite-range effective exponent inferred from the regression slope $m_2=\beta_2-1$,
 drifting to $1$ like $1-c/\log\log N$; we
@@ -913,7 +964,7 @@ structural negative---an empty additive-complexity topology---is reported as suc
 
 This is not a proof of Goldbach. It is reproducible evidence, one cancellation identity made
 explicit, and an unconditional almost-all asymptotic for the semiprime channel, at the boundary
-between additive number theory, computational experimentation, and discrete optimization.
+between additive number theory and computational experimentation.
 
 \appendix
 
@@ -965,7 +1016,7 @@ Each ingredient of Lemma~\ref{lem:sing} is classical. The singular series of a s
 forms is the Hardy--Littlewood computation \citep{hardylittlewood1923} (see also
 \citep{vaughan1997}), and the decomposition of a semiprime by its prime factors is the staple
 device of the $E_2$ sieve \citep{halberstamrichert}; for a single fixed channel $(s,\,N-rs)$
-the evaluation of $\sing_2(r,N)$ is therefore routine, and a reader familiar with the prime
+the evaluation of $\sing_2(r,N)$ is therefore elementary, and a reader familiar with the prime
 $k$-tuple heuristic will reconstruct Lemma~\ref{lem:sing} without difficulty. What we wish to
 record is not this local computation but its global consequence, which to our knowledge is not
 stated explicitly in the literature: that every unblocked channel inherits the \emph{same}
@@ -997,10 +1048,12 @@ share responds to $\sing(N)$, as the empirical regression of \S\ref{sec:singexp}
 identity is precisely what shows that the reproducible finite-range value
 $\beta_2\approx\tfrac12$ is not a structural half-power but an effective exponent inferred from
 the covariance between the blocked channels $r\mid N$ and $\sing(N)$ (Theorem~\ref{thm:beta}):
-$\sing(N)$ enters $R_2$ with exponent $1$, exactly as it does $R_1$. The contribution of
-Lemma~\ref{lem:sing} is thus expository in form and diagnostic in use, not a new sieve estimate.
-(This is a novelty claim about the \emph{identity}; for the separate almost-all reduction,
-a standard consequence of the classical circle-method framework, cf.\ Remark~\ref{rem:literature}.)
+$\sing(N)$ enters $R_2$ with exponent $1$, exactly as it does $R_1$. The new object is therefore
+the \emph{ratio} $R_2/R_1$ and the exact cancellation of $\sing(N)$ in it. The local computation
+of $\sing_2(r,N)$ is, by itself, classical; what is new is isolating this cancellation and putting
+it to use---something the existence/upper-bound and shifted-correlation literatures had no reason
+to do. (For the almost-all asymptotic, obtained by classical means but not previously stated for
+the semiprime channel, see Remark~\ref{rem:literature}.)
 \end{remark}
 
 \begin{lemma}[Moments of $\log\sing$]\label{lem:moments}
@@ -1396,47 +1449,42 @@ Lemma~\ref{lem:s2ap} (the Selberg--Sath\'e convolution of Siegel--Walfisz
 \citep{selberg1954,sathe1953}), and whose singular series is the \emph{unconditional}
 Euler product of Lemma~\ref{lem:sing}. Every ingredient---Vaughan's minor-arc bound
 \citep{vaughan1997}, Siegel--Walfisz, Montgomery--Vaughan, and Lemma~\ref{lem:sing}---is
-classical; the singular-series bookkeeping is presented at the level of detail standard for
-the circle method, and the one thing we make genuinely \emph{explicit} is the cancellation of
-$\sing(N)$ in the ratio (Lemma~\ref{lem:sing}). This is in sharp contrast to the pointwise
+classical; the singular-series assembly is carried out in full (\S\ref{sec:majorarc}), and the
+one thing we make genuinely \emph{explicit} is the cancellation of $\sing(N)$ in the ratio
+(Lemma~\ref{lem:sing}). This is in sharp contrast to the pointwise
 Assumption~\ref{ass:HL}, which lies beyond current technology, and to the log-regression
 statement $\beta_2\to1$, which needs the lower-tail hypothesis of Corollary~\ref{cor:beta-aa}:
 those are the genuine conditional steps, not Theorem~\ref{thm:aa}.
 \end{remark}
 
 \begin{remark}[Relation to the literature]\label{rem:literature}
-We stress that Theorem~\ref{thm:aa} is not a new estimate (a novelty claim about the
-\emph{reduction}, to be kept distinct from the novelty claim about the \emph{identity} in
-Remark~\ref{rem:identity-novelty}). The exceptional-set bound it rests
-on is the Montgomery--Vaughan template for the binary Goldbach asymptotic
-\citep{montgomeryvaughan1975}, and the only departure---that the semiprime sum enters through
-its $L^2$ norm alone, with no bilinear or sieve input---makes the argument, if anything,
-\emph{easier} than for $R_1$. Strong unconditional results on Goldbach-type counts, and the
-$(1+a)$ interpolation between Goldbach and Chen \citep{li2026}, already operate in this
-regime; we claim no improvement on them, and the linear almost-all asymptotic for $R_2$
-should be regarded as a standard consequence of the classical circle-method framework
-\citep[Ch.~3]{vaughan1997}, with the major-arc input supplied unconditionally in
-\S\ref{sec:majorarc}. What is specific here is the
-singular-series cancellation of Lemma~\ref{lem:sing}, which exhibits
-$\mathrm{main}(N)=2C_2\,\sing(N)\,J(N)=W_f(N)\,[2C_2\,\sing(N)\,I_1(N)]$ explicitly and is the
-reason $\sing$ disappears from the ratio $R_2/R_1$. The contribution of this appendix is the explicit
-bookkeeping and its consequences for the effective exponent $\beta_2$, not the almost-all
-asymptotic itself.
+We are precise about what is and is not new. The \emph{method} is entirely classical: the
+exceptional-set bound rests on the Montgomery--Vaughan template for the binary Goldbach asymptotic
+\citep{montgomeryvaughan1975}, and the one departure---that the semiprime sum enters through its
+$L^2$ norm alone, with no bilinear or sieve input---makes the argument, if anything, \emph{easier}
+than for $R_1$. The \emph{result}, however, we have not found in the literature: an unconditional
+almost-all asymptotic for the \emph{semiprime} channel $R_2$ with its singular series isolated.
+Strong unconditional results on Goldbach-type counts and the $(1+a)$ interpolation between Goldbach
+and Chen \citep{li2026} operate in the same regime, but none separates $R_2$ alone, nor its
+singular-series content. We therefore present Theorem~\ref{thm:aa} as a (modest) result of the
+paper, obtained by classical means, with
+$\mathrm{main}(N)=2C_2\,\sing(N)\,J(N)=W_f(N)\,[2C_2\,\sing(N)\,I_1(N)]$ exhibited explicitly via
+Lemma~\ref{lem:sing}---the cancellation of $\sing$ in the ratio $R_2/R_1$ being the point.
 \end{remark}
 
 \subsection{The major arcs: semiprimes in progressions}
 \label{sec:majorarc}
 
-Here we supply the one routine ingredient left open in Theorem~\ref{thm:aa}: the
-evaluation of $\mathrm{main}(N)=\int_{\mathfrak M}S_\PP S_{\SSemi}e(-N\alpha)$, which rests
-on the distribution of semiprimes in progressions. So that the reader may check the
-``standard'' label against the literature rather than against this sketch, we name the three
-checkable inputs: the major-arc template for a binary additive problem is
-\citet[Ch.~3]{vaughan1997}; the count of integers with $\OmegaF(n)=2$ (Selberg--Sath\'e) is
-\citet[\S II.6]{tenenbaum}; and the distribution of $E_2$-numbers (products of two primes) in
-arithmetic progressions is the almost-prime theory of \citet{halberstamrichert}. The lemma
-below assembles the first two; the only nonclassical step is bookkeeping. Write
-$\pi_2(x;q,a)=\#\{n\le x:n\in\SSemi,\ n\equiv a\ (q)\}$ and
+Here we supply the major-arc evaluation of
+$\mathrm{main}(N)=\int_{\mathfrak M}S_\PP S_{\SSemi}e(-N\alpha)$, which rests on the distribution
+of semiprimes in progressions. The \emph{ingredients} are classical, and we name them so that a
+reader can verify each against the literature: the major-arc template for a binary additive
+problem is \citet[Ch.~3]{vaughan1997}; the count of integers with $\OmegaF(n)=2$
+(Selberg--Sath\'e) is \citet[\S II.6]{tenenbaum}; and the distribution of $E_2$-numbers (products
+of two primes) in arithmetic progressions is the almost-prime theory of \citet{halberstamrichert}.
+What we have not found assembled anywhere is the \emph{combination}---an unconditional almost-all
+asymptotic for the \emph{semiprime} channel $R_2$, with its singular series made explicit---so we
+carry it out here in full. Write $\pi_2(x;q,a)=\#\{n\le x:n\in\SSemi,\ n\equiv a\ (q)\}$ and
 $\SSemi^*(x;q)=\#\{n\le x:n\in\SSemi,\ (n,q)=1\}$.
 
 \begin{lemma}[Selberg--Sath\'e in progressions]\label{lem:s2ap}
@@ -1702,8 +1750,15 @@ This settles the apparent tension between the order $1-\beta_2\asymp1/\log\log X
 on $c_\infty>0$, which the \emph{model} (Proposition~\ref{prop:blocked}) guarantees---not on the
 finite data; the faster local decay is merely the finite-range coefficient $c(X)$ descending toward
 $c_\infty$ (Fig.~\ref{fig:constant}), a pre-asymptotic effect, not a violation of an asymptotic
-order. It is the mechanism, not the data, that certifies $\beta_2\to1$; the data certify only that
-the real counts follow the mechanism.
+order. Two cautions keep this honest. First, the convergence is proved \emph{in the model}: the
+Cram\'er/Kubilius surrogate assumes independent small-prime divisibility and matched local
+densities, which the true primes satisfy only up to the correlations that Assumption~\ref{ass:HL}
+(and the lower-tail Conjecture~\ref{conj:lowertail}) would control---so the model proves
+$\beta_2\to1$ for the surrogate, and the passage to the real primes is exactly the conditional
+step, not something the trajectory settles. Second, what the data \emph{do} establish is strong
+and unconditional in its own right: the real counts track the mechanism's curve to $10^9$
+(Fig.~\ref{fig:trajectory}), so the finite-range half-power is a pre-asymptotic effect of a
+demonstrably convergent model, not evidence of a structural exponent or a finite limit.
 
 \begin{figure}[h]
 \centering
