@@ -54,7 +54,7 @@ def main():
     b_all, se_all, r2_all, n_all = beta2(N, R1, R2, S, base)
     print("R5  Estimador canónico: OLS de log(R2/R1) ~ log S(N), acumulado sobre [Nmin,X]")
     print(f"    beta_2 = {b_all:.4f} +/- {se_all:.4f} (SE)   R^2={r2_all:.3f}   n={n_all:,}")
-    print(f"    -> el '0.497' de la Tabla 1 es ESटE estimador (acumulado).")
+    print(f"    -> el '0.497' de la Tabla 1 es este estimador (acumulado).")
 
     # comparar con la mediana de pendientes locales en ventanas de 2e5
     win = 200_000
