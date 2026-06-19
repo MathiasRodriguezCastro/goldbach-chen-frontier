@@ -23,13 +23,15 @@
 \date{June 2026}
 \begin{document}
 \maketitle
-\noindent This supplement records, in compact form, the cross-disciplinary reframings of the
-main paper, \emph{The Goldbach--Chen Frontier: A Singular-Series Cancellation behind a Finite-Range Half-Power}, together
-with the empirical probes moved out of the body. Each reframing recasts the \emph{same}
-singular-series governance in a different external language; we keep them for the individual
-vocabularies and the one honest (structural) negative, not as independent results. ``The main text'' refers
-to that paper, and every number is reproducible from the \texttt{run\_*.py} drivers in the
-repository.
+\noindent This supplement to \emph{The Goldbach--Chen Frontier: A Singular-Series Cancellation
+behind a Finite-Range Half-Power} has three parts. Section~\ref{sec:reframings-brief} distils, from
+the paper's cross-disciplinary reframings, the one part with genuine mathematical content---a
+structural \emph{negative}---and disposes of the rest in a sentence. Section~\ref{sec:moved-probes}
+collects the empirical probes moved out of the body for length. Section~\ref{sec:deferred-models}
+gives two \emph{deferred analytic models}---conditional propositions, with proofs---that explain two
+of those probes. ``The main paper'' refers to the article above; because it is a separate document,
+cross-references to it are made by name (e.g.\ ``Theorem~2 of the main paper''), and every number
+here is reproducible from the \texttt{run\_*.py} drivers in the repository.
 \medskip
 
 \section{An honest structural negative}
@@ -37,14 +39,30 @@ repository.
 
 The frontier admits many external recastings---thermodynamic (an arithmetic ground state),
 network (adversarial robustness), control (value of information), information-theoretic, and
-geometric. Each is the same fact---$\sing(N)$ sets the local densities---seen in a different
-mirror, with no mathematical content of its own, so we do not develop them (they are reproducible
-from the \texttt{run\_*.py} drivers). One recasting, however, returns a genuine \emph{structural}
-negative worth recording, because it bounds what the additive structure does \emph{not} buy.
-\emph{Persistent topology:} for the binary problem the additive-complexity sublevel filtration is a
-disjoint matching, so its $0$-dimensional persistence is just the energy spectrum and all higher
-homology vanishes---genuine higher-order topological structure appears only at the ternary level,
-which is anti-clustered.
+geometric---but each is the same fact, that $\sing(N)$ sets the local densities, seen in a
+different mirror, with no result of its own; we do not develop them (all are reproducible from the
+\texttt{run\_*.py} drivers). One recasting does return a genuine \emph{structural negative}, worth
+recording because it bounds what the additive structure does \emph{not} buy, and we give it in full
+so the claim can be checked.
+
+\paragraph{Persistent topology of additive decompositions.}
+Filter the binary decompositions of $N$ by \emph{arithmetic complexity}: form the simplicial
+complex
+\[
+  K_N^{(k)}=\big\{\,\{a,b\}\ :\ a+b=N,\ \ \OmegaF(a)+\OmegaF(b)\le k\,\big\},\qquad k=2,3,\dots,
+\]
+whose vertices are the summands $a$ and whose edges are the decompositions admitted once their
+total complexity $\OmegaF(a)+\OmegaF(b)$ is at most $k$; growing $k$ gives the sublevel filtration.
+Because each integer $a$ with $0<a<N$ lies in \emph{exactly one} pair $\{a,N-a\}$, every $K_N^{(k)}$
+is a \emph{disjoint matching} (every vertex has degree $\le1$): it contains no path of length two,
+hence no $1$-cycle and no higher simplex, so $H_i\big(K_N^{(k)}\big)=0$ for all $i\ge1$ and all $k$.
+Its $0$-dimensional persistence is therefore exactly the energy spectrum---each pair $\{a,N-a\}$ is
+a connected component born at its energy $\OmegaF(a)+\OmegaF(N-a)$ and never merging with another.
+The complexity filtration thus adds \emph{nothing} beyond the spectrum; we record it as a clean
+negative. Genuine higher-dimensional structure appears only at the \emph{ternary} level---the graph
+on primes $p,q<N$ with an edge whenever $N-p-q$ is prime is connected (a graph form of Helfgott's
+ternary theorem) but strongly \emph{anti}-clustered, with far fewer triangles than a random graph
+of equal density, so even there the representations do not aggregate into higher simplices.
 
 \section{Further empirical probes (moved from the main text)}
 \label{sec:moved-probes}
@@ -142,17 +160,19 @@ residual autocorrelation, small and non-white.}
 \end{figure}
 
 
-\section{Deferred analytic models (from the main appendix)}
+\section{Deferred analytic models}
 \label{sec:deferred-models}
 
-These two model/conditional results were moved here from the main appendix to keep it to
-three parts; they explain, respectively, the weak-continuity probe and the carry signature
-of the main text.
+These two conditional model statements were moved out of the main paper's appendix---which it keeps
+to three parts (the identity, the unconditional almost-all asymptotic, and the conditional program
+$\beta_2\to1$)---into this supplement. They explain, respectively, the weak-continuity probe of
+\S\ref{sec:moved-cont} and the carry signature of the main paper. Like the model statements that
+remain in the main paper's Appendix~C, each holds in a stated model, not unconditionally.
 
 \subsection{Weak uniformity of the location measures}
 \label{sec:weak-cont}
 
-The continuity experiments (supplement) suggest that the representation clouds become
+The continuity experiments of \S\ref{sec:moved-cont} suggest that the representation clouds become
 continuous after normalization: the empirical laws of $q/N$ for both prime and semiprime $q$
 approach the uniform law on $(0,1)$, up to small endpoint effects. This is what the weighted
 Hardy--Littlewood heuristic predicts. For a bounded $C^1$ test function
@@ -211,14 +231,15 @@ This explains why the discontinuous pointwise representation sets nonetheless pr
 limiting clouds: the singular series governs the local \emph{density} of representations, but
 after normalizing each measure it cancels---together with the Mertens channel sum in the
 semiprime case---leaving the uniform spatial law. It is the conditional counterpart of the
-weak-continuity diagnostics (supplement), and like the other appendix results it is
-conditional on the stated weighted asymptotics, not an unconditional theorem about primes.
+weak-continuity diagnostics of \S\ref{sec:moved-cont}, and like the carry model of
+\S\ref{sec:carry-model} below it is conditional on the stated weighted asymptotics, not an
+unconditional theorem about primes.
 
 
 \subsection{A last-digit model for the carry excess}
 \label{sec:carry-model}
 
-The carry geometry of the carry observation in the main text can be partly explained by a local digit
+The carry geometry observed in the main paper can be partly explained by a local digit
 calculation: prime-like summands are not uniform among terminal digits but restricted to
 reduced residue classes, and this restriction alone creates a positive carry bias in the least
 significant digit. Fix a base $b\ge2$ and let $U_b:=\{1\le u\le b-1:(u,b)=1\}$ be the reduced
@@ -251,16 +272,17 @@ Goldbach pairs, nor assume independence of higher digits. It shows that the most
 residue restriction already pushes the carry count up. In base $2$ both odd prime summands end
 in $1$, so the least digit always carries; in larger bases the effect survives after averaging
 over reduced classes. Since the total carry count obeys the Kummer--Legendre identity
-$\#\mathrm{carries}_b(a,q)=(S_b(a)+S_b(q)-S_b(N))/(b-1)$ (the carry observation in the main text), the
-proposition is a positive \emph{local} contribution to it, and the empirical excess of
-the carry observation in the main text reads as its multi-digit continuation.
+$\#\mathrm{carries}_b(a,q)=(S_b(a)+S_b(q)-S_b(N))/(b-1)$ (here $S_b$ is the base-$b$ digit sum, as
+in the main paper's carry observation), the proposition is a positive \emph{local} contribution to
+it, and the empirical carry excess reported in the main paper reads as its multi-digit
+continuation.
 
 \begin{remark}[Fixed-$N$ caveat]
 For a fixed terminal digit $N\bmod b$ the carry bias can depend on the residue class and need
 not be positive in every class; the proposition is an averaged local-prime model, explaining
 why a positive excess is natural \emph{on average} while the full statistic remains a global
-multi-digit measurement. Like the other appendix results it is model-based, not a theorem
-about the empirical carry law.
+multi-digit measurement. Like the weak-uniformity model of \S\ref{sec:weak-cont} above, it is
+model-based, not a theorem about the empirical carry law.
 \end{remark}
 
 \end{document}
