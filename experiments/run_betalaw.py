@@ -57,7 +57,7 @@ def main():
     ax.set_title(r"Derived law: $\beta_2=1-c/\langle R_2/R_1\rangle\to1$")
     ax.legend(fontsize=9)
     path = os.path.join(FIG, "12_betalaw.png")
-    fig.savefig(path, dpi=130, bbox_inches="tight"); plt.close(fig)
+    fig.savefig(path, dpi=300, bbox_inches="tight"); fig.savefig(os.path.splitext(path)[0]+".pdf", bbox_inches="tight"); plt.close(fig)
 
     json.dump({"X": Xs, "beta2": betas.tolist(), "meanW": meanW.tolist(),
                "c": float(c), "rms": rms,

@@ -65,7 +65,7 @@ def main():
     ax.set_ylabel(r"local regression slope $\beta_2$")
     ax.set_title(r"Does $\beta_2$ of $R_2$ stabilize? (windows of $2\cdot10^6$)")
     ax.legend()
-    fig.savefig(os.path.join(FIG, "09_beta_scaling.png"), dpi=130, bbox_inches="tight")
+    fig.savefig(os.path.join(FIG, "09_beta_scaling.png"), dpi=300, bbox_inches="tight"); fig.savefig(os.path.join(FIG, "09_beta_scaling.pdf"), bbox_inches="tight")
     print("figure:", os.path.relpath(os.path.join(FIG, "09_beta_scaling.png")))
 
 

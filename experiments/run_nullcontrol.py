@@ -207,7 +207,8 @@ def main():
     ax.set_ylim(0.45, 1.02)
     ax.legend(fontsize=9, loc="lower right")
     path = os.path.join(FIG, "25_cramer_trajectory.png")
-    fig.savefig(path, dpi=130, bbox_inches="tight")
+    fig.savefig(path, dpi=300, bbox_inches="tight")
+    fig.savefig(os.path.splitext(path)[0] + ".pdf", bbox_inches="tight")
     plt.close(fig)
 
     print("\n=== (A) Cramer null control: actual vs surrogate beta_2 ===")

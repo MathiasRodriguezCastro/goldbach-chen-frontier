@@ -15,7 +15,8 @@ os.makedirs(FIGDIR, exist_ok=True)
 
 def _save(fig, name):
     path = os.path.join(FIGDIR, name)
-    fig.savefig(path, dpi=130, bbox_inches="tight")
+    fig.savefig(path, dpi=300, bbox_inches="tight")               # high-res raster (PNG)
+    fig.savefig(os.path.splitext(path)[0] + ".pdf", bbox_inches="tight")  # vector (PDF)
     plt.close(fig)
     return path
 

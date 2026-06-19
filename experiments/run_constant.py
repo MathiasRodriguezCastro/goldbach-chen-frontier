@@ -49,7 +49,7 @@ def main():
     ax.set_xlabel(r"$1/\log\log X$"); ax.set_ylabel("rate constant")
     ax.set_title(r"Rate constant: the $\sim2/\log\log X$ correction dominates; limit $\sim0.5$-$0.7$")
     ax.legend(fontsize=9)
-    fig.savefig(os.path.join(FIG, "16_constante.png"), dpi=130, bbox_inches="tight")
+    fig.savefig(os.path.join(FIG, "16_constante.png"), dpi=300, bbox_inches="tight"); fig.savefig(os.path.join(FIG, "16_constante.pdf"), bbox_inches="tight")
     json.dump({"X": Xs, "kappa": kappa, "c": c},
               open(os.path.join(DATA, "constant.json"), "w"), indent=2)
 
