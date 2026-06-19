@@ -1545,13 +1545,24 @@ non-reduced classes) yields
   G_2(a,q_0)=\sum_{b\,(q_0)}e_{q_0}(ab)\,\gamma_{q_0}(b),
 \]
 where $\gamma_{q_0}(b)$ is the local density of semiprimes in class $b$ and
-$v_2(\beta)=\int e(t\beta)\,d\Pi_2(t)$, $\Pi_2$ the smooth semiprime count. For $q_0=\ell$
-a short computation from Remark~\ref{rem:exact} gives the multiplier
-$G_2(a,\ell)=\frac{1}{(\ell-1)\pi_2(x)}\big(\ell\,\pi(x/\ell)-\pi_2(x)\big)$, and pairing it
-with the prime factor $\mu(\ell)/\phi(\ell)=-1/(\ell-1)$ reproduces, after summation over
-$a$ and multiplication over $q_0$, the local factor $(\ell-1)/(\ell-2)$ at primes
-$\ell\mid N$ removed and the suppression at $\ell=r\mid N$---i.e.\ the singular series of
-Lemma~\ref{lem:sing}. Hence
+$v_2(\beta)=\int e(t\beta)\,d\Pi_2(t)$, $\Pi_2$ the smooth semiprime count. For $q_0=\ell$ prime
+the local densities are exact (Remark~\ref{rem:exact}): the semiprimes $n\le x$ with $\ell\mid n$
+are precisely $\{\ell m:m\in\PP,\ m\le x/\ell\}$, so the class $b\equiv0$ carries weight
+$\gamma_\ell(0)=\pi(x/\ell)/\pi_2(x)$, while the $\ell-1$ reduced classes share the remainder
+equally, $\gamma_\ell(b)=(\pi_2(x)-\pi(x/\ell))/\big((\ell-1)\pi_2(x)\big)$ for $b\not\equiv0$.
+Since $\sum_{b\,(\ell)}e_\ell(ab)=0$ for $(a,\ell)=1$, hence $\sum_{b\not\equiv0}e_\ell(ab)=-1$,
+\[
+  G_2(a,\ell)=\gamma_\ell(0)-\gamma_\ell(\mathrm{red.})
+  =\frac{\ell\,\pi(x/\ell)-\pi_2(x)}{(\ell-1)\,\pi_2(x)}\qquad((a,\ell)=1).
+\]
+Pairing this with the prime factor $\mu(\ell)/\phi(\ell)=-1/(\ell-1)$ and summing over the reduced
+$a$ against $e_\ell(-aN)$ produces the local factor of the major-arc singular series at $\ell$.
+That local factor is the \emph{same} quantity as the per-channel computation of
+Lemma~\ref{lem:sing}, which evaluates it \emph{unconditionally}: $(\ell-1)/(\ell-2)$ for the
+primes $\ell\mid N$ (the singular series $\sing(N)$, with the base $2C_2$ at the remaining primes),
+and the vanishing at $\ell=r\mid N$ that blocks that channel. The global Euler product is therefore
+the singular series of Lemma~\ref{lem:sing}, term by term---an identification we make by comparison
+with that independent, unconditional computation rather than by re-deriving the product here. Hence
 \[
   \mathrm{main}(N)=\mathfrak S_2(N;Q)\,J(N)\big(1+o(1)\big),
   \quad \mathfrak S_2(N;Q)=2C_2\,\sing(N)+O(Q^{-1}),
