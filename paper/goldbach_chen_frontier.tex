@@ -75,35 +75,23 @@
 
 \begin{abstract}
 The binary Goldbach conjecture asks whether every even $N>2$ is a sum of two primes; Chen's
-theorem allows the second summand to be a prime or a semiprime. Writing $R_1(N)$ and $R_2(N)$ for
-the number of representations $N=p+q$ with $q$ prime and with $q$ a semiprime, a log--log
-regression of $R_2/R_1$ against the Hardy--Littlewood singular series $\sing(N)$ assigns the
-semiprime channel an apparent exponent $\beta_2\approx\tfrac12$, strikingly unlike the $\beta_1=1$
-of the prime channel. We show this half-power is an artifact of finite range, not of structure.
-Decomposing a semiprime $q=rs$ by its smaller prime factor, each channel inherits the same
-singular series $\sing(N)$ that governs $R_1$ (an elementary Euler-product identity), so $\sing(N)$
-enters $R_2$ with exponent $1$---exactly as in $R_1$---and cancels in the ratio of main terms,
-leaving a pure Mertens channel sum $W_f(N)\sim\log\log N$ with $R_2/R_1=W_f(N)(1+o(1))$. The
-contribution is the object, not the local computation: forming the channel ratio $R_2/R_1$ at
-fixed $N$, in which $\sing(N)$ cancels exactly, in contrast to the shifted-correlation literature,
-which fixes a gap and averages over the summand, where the two singular series do not cancel. This
-single cancellation organizes the whole picture---the channel ratio, the sign reversal of the
-effective exponent across arithmetic-complexity layers, the residual collapse, and the Chen-rescue
-threshold. Computing $R_1,R_2$ to $10^{9}$ by a block-convolution sieve shows the effective
-exponent is not fixed: it drifts upward as $\beta_2(N)=1-c(N)/\langle R_2/R_1\rangle$ with deficit
-$\sim1/\log\log N$, a drift a moving-block bootstrap makes statistically decisive and a
-singular-series-matched Cram\'er surrogate reproduces.
-
-We are explicit about status. Unconditional are (i) the cancellation identity, and (ii) a linear
-almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all but $o(X)$ even $N$, from a
-Vaughan--Parseval minor-arc second moment together with the equidistribution of semiprimes in
-arithmetic progressions (Siegel--Walfisz). Upgrading this to the log-regression statement
-$\beta_2(N)\to1$ requires one further input, isolated as an explicit, unproven lower-tail
-hypothesis on $R_2/R_1$; the functional form $1-\beta_2\asymp1/\log\log N$ is proved in the
-Cram\'er model and, for the primes, conditionally on a quantitative Hardy--Littlewood input. The
-goal is not a proof of Goldbach but the cancellation identity, a reproducible artifact it explains,
-and an unconditional almost-all asymptotic for the semiprime channel; cross-disciplinary reframings
-are recorded in a supplement.
+theorem allows the second summand to be prime or semiprime. Let $R_1(N),R_2(N)$ count
+representations $N=p+q$ with $q$ prime and with $q$ semiprime. A finite-range log--log regression
+of $R_2/R_1$ against the Hardy--Littlewood singular series $\sing(N)$ assigns the semiprime channel
+an apparent exponent $\beta_2\approx\tfrac12$, unlike the $\beta_1=1$ of the prime channel. We show
+this half-power is an artifact of finite range, not of structure. Decomposing a semiprime $q=rs$ by
+its smaller prime factor, each channel inherits the same singular series $\sing(N)$ that governs
+$R_1$ (an elementary Euler-product identity); $\sing(N)$ therefore enters $R_2$ with exponent $1$
+and cancels in the ratio of main terms, leaving a pure Mertens channel sum $W_f(N)\sim\log\log N$
+with $R_2/R_1=W_f(N)(1+o(1))$. A block-convolution sieve to $10^{9}$ shows the effective exponent
+drifts upward with deficit $1-\beta_2\asymp1/\log\log N$, made decisive by a moving-block bootstrap
+and reproduced by a matched Cram\'er surrogate. We are explicit about status: unconditional are the
+cancellation identity and a linear almost-all asymptotic $R_2(N)=\mathrm{main}(N)(1+o(1))$ for all
+but $o(X)$ even $N$, from a Vaughan--Parseval minor-arc second moment together with the
+equidistribution of semiprimes in progressions. Upgrading to $\beta_2(N)\to1$ requires one further
+input, isolated as an explicit lower-tail hypothesis. The goal is not a proof of Goldbach but the
+cancellation identity, a reproducible artifact it explains, and an unconditional almost-all
+asymptotic for the semiprime channel.
 \end{abstract}
 
 \begin{keywords}
@@ -2178,13 +2166,12 @@ The author reports no competing interests.
 This research received no specific grant from any funding agency in the public, commercial, or
 not-for-profit sectors.
 
-%% --------------------------------------------------------------------------------------------
-%% T&F SUBMISSION TODO --- statement on the use of AI / generative tools.
-%% Taylor & Francis requires authors to declare any use of AI/LLM assistance in preparing the
-%% manuscript (it cannot be listed as an author). This is the author's decision and is left
-%% blank deliberately: insert here the statement that truthfully reflects your process, e.g. a
-%% short sentence in this section or an acknowledgement. Do not leave it unaddressed at submission.
-%% --------------------------------------------------------------------------------------------
+\section*{Use of generative AI}
+During the preparation of this manuscript, the author, who is not a native English speaker, used
+ChatGPT (OpenAI, GPT~5.5) and Claude (Anthropic, Opus~4.8) to improve the English language and
+readability of the text. After using these tools, the author reviewed and edited the content as
+needed and takes full responsibility for the content of the publication. These tools were not used
+to generate or alter any research results, data, figures, or mathematical content.
 
 \section*{Data and code availability}
 \label{sec:availability}
@@ -2223,10 +2210,10 @@ Chen, J. R. (1973).
 \newblock On the representation of a larger even integer as the sum of a prime and the product of at most two primes.
 \newblock \emph{Scientia Sinica}, 16, 157--176.
 
-\bibitem[Evans(2021)]{evans2021}
-Evans, N. (2021).
+\bibitem[Evans(2023)]{evans2021}
+Evans, N. (2023).
 \newblock Correlations of almost primes.
-\newblock \emph{Bulletin of the London Mathematical Society}, 53(3), 906--922.
+\newblock \emph{Mathematical Proceedings of the Cambridge Philosophical Society}, 174(2), 301--344.
 
 \bibitem[Halberstam and Richert(1974)]{halberstamrichert}
 Halberstam, H. and Richert, H.-E. (1974).
@@ -2238,10 +2225,10 @@ Hardy, G. H. and Littlewood, J. E. (1923).
 \newblock Some problems of `Partitio Numerorum'; III: On the expression of a number as a sum of primes.
 \newblock \emph{Acta Mathematica}, 44, 1--70.
 
-\bibitem[Helfgott(2014)]{helf2014ternary}
-Helfgott, H. A. (2014).
-\newblock The ternary Goldbach problem.
-\newblock \emph{arXiv preprint arXiv:1404.2224}.
+\bibitem[Helfgott(2013)]{helf2014ternary}
+Helfgott, H. A. (2013).
+\newblock The ternary Goldbach conjecture is true.
+\newblock \emph{arXiv preprint arXiv:1312.7748}.
 
 \bibitem[Landau(1909)]{landau1909}
 Landau, E. (1909).
